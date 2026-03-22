@@ -1,0 +1,29 @@
+[
+  {
+    "id": "remix-neon-auth",
+    "name": "Remix Neon Auth",
+    "slug": "remix-neon-auth",
+    "path": "./remix-neon-auth",
+    "framework": "Remix",
+    "description": "Production-ready Remix starter with email verification auth, Neon PostgreSQL, JWT, and Tailwind CSS.",
+    "tags": ["remix", "auth", "neon", "postgres", "tailwind"]
+  },
+  {
+    "id": "sui-nextjs-auth-template",
+    "name": "Sui Next.js Auth Template",
+    "slug": "sui-nextjs-auth-template",
+    "path": "./sui-nextjs-auth-template",
+    "framework": "Next.js",
+    "description": "Sui ecosystem starter template with wallet authentication, frontend and backend packages, and Vercel deployment support.",
+    "tags": ["nextjs", "sui", "wallet", "auth", "vercel"]
+  },
+  {
+    "id": "html-template",
+    "name": "HTML Template",
+    "slug": "html-template",
+    "path": "./html-template",
+    "framework": "HTML",
+    "description": "Basic static HTML starter template for simple pages or quick prototypes.",
+    "tags": ["html", "static", "starter", "prototype"]
+  }
+]
