@@ -84,12 +84,12 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - Evidence: added `AGENTS.md` to `html-template` and `sui-nextjs-auth-template`; kept `sui-nextjs-auth-template/AGENT.md` as a compatibility pointer; updated ignore rules in every existing template
   - Risk / Notes: the HTML template intentionally uses a lighter verification model because it has no formal build or typecheck pipeline
 
-- [ ] Publish the root `d1v-templates` registry repository baseline to `d1v-community`
+- [x] Publish the root `d1v-templates` registry repository baseline to `d1v-community`
   - Owner: main agent, validated by `@entry-shell-qa`
   - Verification: root repo status is clean for intended files, secrets are not staged, remote push succeeds, published branch reflects workflow docs and metadata changes
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: the root repo currently tracks only registry-level files, not the nested template repositories
+  - Status: done
+  - Evidence: committed and pushed root workflow files, registry metadata updates, and gitlink pointers to `d1v-community/d1v-templates`; confirmed the repo remains public on branch `main`
+  - Risk / Notes: the root repo currently tracks nested template repos as gitlinks rather than normal directories, so the future `foundations/` + `industries/` migration still needs a deliberate repository-layout change
 
 - [x] Publish `html-template` to `d1v-community/html-template` and enable GitHub template mode
   - Owner: main agent, validated by `@ux-quality-qa`
@@ -133,12 +133,12 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - Evidence: pending
   - Risk / Notes: downstream consumers may still depend on current `path`-only shape
 
-- [ ] Clean foundation templates for open-source publication
+- [x] Clean foundation templates for open-source publication
   - Owner: main agent, validated by `@ux-quality-qa`
   - Verification: remove local-only artifacts from tracked template output and confirm safe `.env.example` usage
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: nested `.git`, local caches, build artifacts, and lockfile strategy need review
+  - Status: done
+  - Evidence: added publication-safe ignore rules at the root and template levels; verified no `.env`, `node_modules`, `.pnpm-store`, `.vercel`, `build`, `dist`, `.cache`, or `.claude` entries appear in template `git status`; confirmed only `.env.example` remains tracked in the Remix foundations
+  - Risk / Notes: local cache directories still exist on disk for development, but they are now excluded from publication by ignore rules
 
 - [ ] Raise `remix-neon-auth` to a stronger auth-only foundation
   - Owner: main agent, validated by `@context-auth-qa` and `@ux-quality-qa`
