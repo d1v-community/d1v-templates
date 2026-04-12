@@ -11,16 +11,16 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 
 ## Current Decisions
 
-- The repository will separate `foundations/` from `industries/`.
+- The repository now separates `foundations/` from `industries/`.
 - `remix-neon-auth` and `remix-neon-auth-pay` are the two foundation templates.
 - Industry templates should derive from one of those foundations rather than becoming independent bases.
-- Template metadata should eventually move beyond local-only `path` values toward repo-aware fields such as `repo`, `ref`, `path`, `category`, and `baseTemplate`.
+- The registry metadata now uses repo-aware fields such as repository URL, ref, path, category, kind, and `baseTemplateId`.
 - The current execution order is:
   1. align root and template-level workflow files
   2. publish the root registry repo to `d1v-community`
   3. publish each existing template repo safely and set it as a GitHub template
   4. continue the structural `foundations/` + `industries/` migration on top of the published baseline
-- Existing template directories are still nested git repositories today; publication work must respect that layout until a later consolidation step.
+- Foundations remain nested git repositories inside the root registry repository. This is an accepted interim constraint after the path migration.
 
 ## Sub-Agent Registry
 
@@ -71,7 +71,7 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 
 - [x] Align foundation-template `AGENTS.md` files with the new repository workflow
   - Owner: main agent, validated by `@entry-shell-qa`
-  - Verification: compare root rules against `remix-neon-auth/AGENTS.md` and `remix-neon-auth-pay/AGENTS.md`; update conflicting defaults and confirm consistency
+  - Verification: compare root rules against `foundations/remix-neon-auth/AGENTS.md` and `foundations/remix-neon-auth-pay/AGENTS.md`; update conflicting defaults and confirm consistency
   - Status: done
   - Evidence: both template-local `AGENTS.md` files were rewritten to use direct DB workflow by default and to require plan-driven execution, structured sub-agent handoff, and verification-before-complete behavior
   - Risk / Notes: future template-specific exceptions must still be documented explicitly when they differ from the root workflow
@@ -80,7 +80,7 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - Owner: main agent, validated by `@entry-shell-qa`
   - Verification: each current template directory has an `AGENTS.md` aligned with the root workflow or an explicitly documented equivalent; naming mismatches such as `AGENT.md` are resolved
   - Status: done
-  - Evidence: added `AGENTS.md` to `html-template` and `sui-nextjs-auth-template`; kept `sui-nextjs-auth-template/AGENT.md` as a compatibility pointer; updated ignore rules in every existing template
+  - Evidence: added `AGENTS.md` to `foundations/html-template` and `foundations/sui-nextjs-auth-template`; kept `foundations/sui-nextjs-auth-template/AGENT.md` as a compatibility pointer; updated ignore rules in every existing template
   - Risk / Notes: the HTML template intentionally uses a lighter verification model because it has no formal build or typecheck pipeline
 
 - [x] Publish the root `d1v-templates` registry repository baseline to `d1v-community`
@@ -118,19 +118,19 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - Evidence: added canonical `AGENTS.md`, converted `AGENT.md` into a compatibility pointer, expanded ignore rules, pushed `main`, and confirmed `isTemplate: true`
   - Risk / Notes: monorepo verification remains environment-dependent because local Sui/Suibase tooling may not exist everywhere
 
-- [ ] Design the final repository directory migration from flat layout to `foundations/` + `industries/`
+- [x] Design and apply the root repository migration from flat layout to `foundations/` + `industries/`
   - Owner: main agent, validated by `@entry-shell-qa`
   - Verification: migration spec written, target paths listed, template IDs and slugs mapped, backward-compatibility notes recorded
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: existing local tooling may assume current flat paths
+  - Status: done
+  - Evidence: moved all current template gitlinks under `foundations/`; added `foundations/README.md` and `industries/README.md`; root `README.md` and `templates.json` now reference the new layout
+  - Risk / Notes: any downstream tooling that assumed flat root paths must now be updated to use the new registry structure
 
-- [ ] Upgrade `templates.json` into a public-registry-friendly schema
+- [x] Upgrade `templates.json` into a public-registry-friendly schema
   - Owner: main agent, validated by `@entry-shell-qa`
   - Verification: schema fields defined and applied consistently to all templates
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: downstream consumers may still depend on current `path`-only shape
+  - Status: done
+  - Evidence: replaced the old flat array with a `registryVersion` object and repo-aware records covering foundations plus industry blueprints; JSON parsing verification passed
+  - Risk / Notes: downstream consumers that still expect the old array shape must be updated before they can read the new registry format
 
 - [x] Clean foundation templates for open-source publication
   - Owner: main agent, validated by `@ux-quality-qa`
@@ -139,27 +139,27 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - Evidence: added publication-safe ignore rules at the root and template levels; verified no `.env`, `node_modules`, `.pnpm-store`, `.vercel`, `build`, `dist`, `.cache`, or `.claude` entries appear in template `git status`; confirmed only `.env.example` remains tracked in the Remix foundations
   - Risk / Notes: local cache directories still exist on disk for development, but they are now excluded from publication by ignore rules
 
-- [ ] Raise `remix-neon-auth` to a stronger auth-only foundation
+- [x] Raise `remix-neon-auth` to a stronger auth-only foundation
   - Owner: main agent, validated by `@context-auth-qa` and `@ux-quality-qa`
   - Verification: auth flow review, setup review, naming cleanup, package metadata review
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: current package identity and onboarding quality are still template-generic
+  - Status: done
+  - Evidence: aligned workflow rules, improved ignore rules, renamed `package.json` identity to `d1v-remix-neon-auth`, added template description, and verified `pnpm run typecheck` passes
+  - Risk / Notes: future work can still modernize README tone and onboarding copy further, but the foundation is no longer template-generic at the package level
 
-- [ ] Raise `remix-neon-auth-pay` to a stronger payment foundation
+- [x] Raise `remix-neon-auth-pay` to a stronger payment foundation
   - Owner: main agent, validated by `@commerce-flow-qa`, `@context-auth-qa`, and `@ux-quality-qa`
   - Verification: payment flow review, fulfillment placeholders review, setup review, naming cleanup
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: checkout entry exists, but standard order/subscription/webhook primitives still need a clean foundation story
+  - Status: done
+  - Evidence: published the pricing/auth/doc improvements, aligned workflow rules, renamed `package.json` identity to `d1v-remix-neon-auth-pay`, added template description, and verified `pnpm run typecheck` passes
+  - Risk / Notes: checkout and pricing are in good shape, but a later maturity pass should still add stronger order/subscription/webhook primitives
 
-- [ ] Define the first wave of industry templates
+- [x] Define the first wave of industry templates
   - Owner: main agent, validated by `@entry-shell-qa` and `@ux-quality-qa`
   - Verification: starter list finalized with category, base template, and business model fit
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: avoid overproducing low-differentiation templates before the foundations are stable
+  - Status: done
+  - Evidence: added 12 industry blueprint directories across `ai-tools`, `business`, `commerce`, `creator`, `education`, and `local`; each blueprint now documents its base foundation, product surface, and follow-up work
+  - Risk / Notes: these are blueprint templates rather than standalone repos today, so the next promotion decision should focus on which blueprints deserve their own published repositories
 
 ## Immediate Next Step
 
-Design the flat-to-`foundations/` + `industries/` migration and upgrade `templates.json` to a repo-aware public registry schema.
+Decide which industry blueprints should be promoted into standalone published template repositories and which should remain registry-only blueprints.

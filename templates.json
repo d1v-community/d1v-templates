@@ -1,38 +1,313 @@
-[
-  {
-    "id": "remix-neon-auth-pay",
-    "name": "Remix Neon Auth Pay",
-    "slug": "remix-neon-auth-pay",
-    "path": "./remix-neon-auth-pay",
-    "framework": "Remix",
-    "description": "Production-ready Remix starter with passwordless auth, Neon PostgreSQL, hosted checkout, and Payment Hub product listing.",
-    "tags": ["remix", "auth", "neon", "postgres", "payments", "tailwind"]
+{
+  "registryVersion": 2,
+  "repository": {
+    "url": "https://github.com/d1v-community/d1v-templates",
+    "ref": "main"
   },
-  {
-    "id": "remix-neon-auth",
-    "name": "Remix Neon Auth",
-    "slug": "remix-neon-auth",
-    "path": "./remix-neon-auth",
-    "framework": "Remix",
-    "description": "Production-ready Remix starter with email verification auth, Neon PostgreSQL, JWT, and Tailwind CSS.",
-    "tags": ["remix", "auth", "neon", "postgres", "tailwind"]
-  },
-  {
-    "id": "sui-nextjs-auth-template",
-    "name": "Sui Next.js Auth Template",
-    "slug": "sui-nextjs-auth-template",
-    "path": "./sui-nextjs-auth-template",
-    "framework": "Next.js",
-    "description": "Sui ecosystem starter template with wallet authentication, frontend and backend packages, and Vercel deployment support.",
-    "tags": ["nextjs", "sui", "wallet", "auth", "vercel"]
-  },
-  {
-    "id": "html-template",
-    "name": "HTML Template",
-    "slug": "html-template",
-    "path": "./html-template",
-    "framework": "HTML",
-    "description": "Basic static HTML starter template for simple pages or quick prototypes.",
-    "tags": ["html", "static", "starter", "prototype"]
-  }
-]
+  "templates": [
+    {
+      "id": "foundation-remix-neon-auth-pay",
+      "kind": "foundation",
+      "name": "Remix Neon Auth Pay",
+      "slug": "remix-neon-auth-pay",
+      "category": "foundation",
+      "framework": "Remix",
+      "status": "published",
+      "baseTemplateId": null,
+      "repository": {
+        "url": "https://github.com/d1v-community/remix-neon-auth-pay",
+        "ref": "main",
+        "path": ".",
+        "isTemplateRepository": true
+      },
+      "description": "Production-ready Remix starter with passwordless auth, Neon PostgreSQL, hosted checkout, and Payment Hub product listing.",
+      "features": ["passwordless-auth", "postgres", "pricing", "hosted-checkout", "tailwind"],
+      "tags": ["remix", "auth", "neon", "postgres", "payments", "tailwind"]
+    },
+    {
+      "id": "foundation-remix-neon-auth",
+      "kind": "foundation",
+      "name": "Remix Neon Auth",
+      "slug": "remix-neon-auth",
+      "category": "foundation",
+      "framework": "Remix",
+      "status": "published",
+      "baseTemplateId": null,
+      "repository": {
+        "url": "https://github.com/d1v-community/remix-neon-auth-template",
+        "ref": "main",
+        "path": ".",
+        "isTemplateRepository": true
+      },
+      "description": "Production-ready Remix starter with email verification auth, Neon PostgreSQL, JWT, and Tailwind CSS.",
+      "features": ["passwordless-auth", "postgres", "jwt", "tailwind"],
+      "tags": ["remix", "auth", "neon", "postgres", "tailwind"]
+    },
+    {
+      "id": "foundation-sui-nextjs-auth",
+      "kind": "foundation",
+      "name": "Sui Next.js Auth Template",
+      "slug": "sui-nextjs-auth-template",
+      "category": "foundation",
+      "framework": "Next.js",
+      "status": "published",
+      "baseTemplateId": null,
+      "repository": {
+        "url": "https://github.com/d1v-community/sui-nextjs-auth-template",
+        "ref": "main",
+        "path": ".",
+        "isTemplateRepository": true
+      },
+      "description": "Sui ecosystem starter template with wallet authentication, frontend and backend packages, and Vercel deployment support.",
+      "features": ["wallet-auth", "monorepo", "sui", "vercel"],
+      "tags": ["nextjs", "sui", "wallet", "auth", "vercel"]
+    },
+    {
+      "id": "foundation-html-template",
+      "kind": "foundation",
+      "name": "HTML Template",
+      "slug": "html-template",
+      "category": "foundation",
+      "framework": "HTML",
+      "status": "published",
+      "baseTemplateId": null,
+      "repository": {
+        "url": "https://github.com/d1v-community/html-template",
+        "ref": "main",
+        "path": ".",
+        "isTemplateRepository": true
+      },
+      "description": "Basic static HTML starter template for simple pages or quick prototypes.",
+      "features": ["static-site", "no-framework", "fast-prototype"],
+      "tags": ["html", "static", "starter", "prototype"]
+    },
+    {
+      "id": "ai-assistant-saas",
+      "kind": "industry-blueprint",
+      "name": "AI Assistant SaaS",
+      "slug": "assistant-saas",
+      "category": "ai-tools",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth-pay",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/ai-tools/assistant-saas",
+        "isTemplateRepository": false
+      },
+      "description": "Subscription AI assistant product blueprint with pricing, workspace onboarding, and gated tool access.",
+      "features": ["subscription", "assistant-ui", "workspace-access"],
+      "tags": ["ai", "saas", "assistant", "membership"]
+    },
+    {
+      "id": "ai-prompt-library-membership",
+      "kind": "industry-blueprint",
+      "name": "Prompt Library Membership",
+      "slug": "prompt-library-membership",
+      "category": "ai-tools",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth-pay",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/ai-tools/prompt-library-membership",
+        "isTemplateRepository": false
+      },
+      "description": "Paid prompt, workflow, and content library blueprint with gated browsing and purchase entry.",
+      "features": ["membership", "content-library", "gated-access"],
+      "tags": ["ai", "prompts", "membership", "content"]
+    },
+    {
+      "id": "business-internal-dashboard",
+      "kind": "industry-blueprint",
+      "name": "Internal Dashboard",
+      "slug": "internal-dashboard",
+      "category": "business",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/business/internal-dashboard",
+        "isTemplateRepository": false
+      },
+      "description": "Operations dashboard blueprint for authenticated internal teams, admin workflows, and status tracking.",
+      "features": ["auth-only", "dashboard", "operations"],
+      "tags": ["business", "internal", "dashboard", "ops"]
+    },
+    {
+      "id": "business-client-portal",
+      "kind": "industry-blueprint",
+      "name": "Client Portal",
+      "slug": "client-portal",
+      "category": "business",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/business/client-portal",
+        "isTemplateRepository": false
+      },
+      "description": "Authenticated client portal blueprint for project status, files, updates, and account access.",
+      "features": ["client-access", "project-status", "files"],
+      "tags": ["business", "portal", "client", "service"]
+    },
+    {
+      "id": "commerce-digital-downloads",
+      "kind": "industry-blueprint",
+      "name": "Digital Downloads",
+      "slug": "digital-downloads",
+      "category": "commerce",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth-pay",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/commerce/digital-downloads",
+        "isTemplateRepository": false
+      },
+      "description": "Paid digital-product storefront blueprint with checkout, entitlement delivery, and gated downloads.",
+      "features": ["checkout", "digital-goods", "entitlements"],
+      "tags": ["commerce", "downloads", "digital", "payments"]
+    },
+    {
+      "id": "commerce-preorder-launch",
+      "kind": "industry-blueprint",
+      "name": "Preorder Launch",
+      "slug": "preorder-launch",
+      "category": "commerce",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth-pay",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/commerce/preorder-launch",
+        "isTemplateRepository": false
+      },
+      "description": "Single-offer preorder blueprint with a focused landing page, checkout, and post-purchase confirmation flow.",
+      "features": ["landing-page", "single-product", "preorder"],
+      "tags": ["commerce", "launch", "preorder", "payments"]
+    },
+    {
+      "id": "creator-community-membership",
+      "kind": "industry-blueprint",
+      "name": "Creator Community Membership",
+      "slug": "community-membership",
+      "category": "creator",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth-pay",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/creator/community-membership",
+        "isTemplateRepository": false
+      },
+      "description": "Paid creator membership blueprint for gated community access, member onboarding, and subscription entry.",
+      "features": ["membership", "community", "gated-content"],
+      "tags": ["creator", "community", "membership", "subscription"]
+    },
+    {
+      "id": "creator-paid-newsletter",
+      "kind": "industry-blueprint",
+      "name": "Paid Newsletter",
+      "slug": "paid-newsletter",
+      "category": "creator",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth-pay",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/creator/paid-newsletter",
+        "isTemplateRepository": false
+      },
+      "description": "Newsletter subscription blueprint with member login, subscriber gating, and paid publication entry.",
+      "features": ["newsletter", "subscription", "gated-posts"],
+      "tags": ["creator", "newsletter", "subscription", "content"]
+    },
+    {
+      "id": "education-cohort-course",
+      "kind": "industry-blueprint",
+      "name": "Cohort Course",
+      "slug": "cohort-course",
+      "category": "education",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth-pay",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/education/cohort-course",
+        "isTemplateRepository": false
+      },
+      "description": "Fixed-window paid cohort course blueprint with application, purchase, and enrolled-student entry points.",
+      "features": ["cohort", "education", "enrollment"],
+      "tags": ["education", "cohort", "course", "payments"]
+    },
+    {
+      "id": "education-online-course-membership",
+      "kind": "industry-blueprint",
+      "name": "Online Course Membership",
+      "slug": "online-course-membership",
+      "category": "education",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth-pay",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/education/online-course-membership",
+        "isTemplateRepository": false
+      },
+      "description": "Always-on course membership blueprint with paid access, lesson library, and member dashboard framing.",
+      "features": ["membership", "lessons", "library"],
+      "tags": ["education", "courses", "membership", "content"]
+    },
+    {
+      "id": "local-clinic-booking",
+      "kind": "industry-blueprint",
+      "name": "Clinic Booking",
+      "slug": "clinic-booking",
+      "category": "local",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/local/clinic-booking",
+        "isTemplateRepository": false
+      },
+      "description": "Patient login and booking workflow blueprint for clinics, consult scheduling, and account history.",
+      "features": ["appointments", "portal", "healthcare"],
+      "tags": ["local", "clinic", "booking", "portal"]
+    },
+    {
+      "id": "local-gym-membership",
+      "kind": "industry-blueprint",
+      "name": "Gym Membership",
+      "slug": "gym-membership",
+      "category": "local",
+      "framework": "Remix",
+      "status": "blueprint",
+      "baseTemplateId": "foundation-remix-neon-auth-pay",
+      "repository": {
+        "url": "https://github.com/d1v-community/d1v-templates",
+        "ref": "main",
+        "path": "industries/local/gym-membership",
+        "isTemplateRepository": false
+      },
+      "description": "Gym membership blueprint with plan selection, recurring purchase entry, and member account access.",
+      "features": ["membership", "local-business", "renewal-entry"],
+      "tags": ["local", "gym", "membership", "payments"]
+    }
+  ]
+}
