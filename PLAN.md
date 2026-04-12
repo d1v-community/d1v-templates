@@ -69,7 +69,6 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - Evidence: files created in repository root; repository-level rules now explicitly cover planning, sub-agent usage, and verification-first execution; validator review confirmed the root files capture the requested workflow model
   - Risk / Notes: template-local `AGENTS.md` files still use older defaults and must be aligned in a later phase
 
-- [ ] Align foundation-template `AGENTS.md` files with the new repository workflow
 - [x] Align foundation-template `AGENTS.md` files with the new repository workflow
   - Owner: main agent, validated by `@entry-shell-qa`
   - Verification: compare root rules against `remix-neon-auth/AGENTS.md` and `remix-neon-auth-pay/AGENTS.md`; update conflicting defaults and confirm consistency
@@ -163,4 +162,4 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 
 ## Immediate Next Step
 
-Normalize `AGENTS.md` coverage across all existing templates, then publish the root registry baseline before pushing the individual template repositories.
+Design the flat-to-`foundations/` + `industries/` migration and upgrade `templates.json` to a repo-aware public registry schema.
