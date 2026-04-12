@@ -1,0 +1,29 @@
+# Root-local caches and editor state
+.DS_Store
+.claude/
+.vscode/
+.idea/
+
+# Nested template local artifacts
+**/.env
+**/.env.local
+**/.env.*.local
+!**/.env.example
+**/node_modules/
+**/.pnpm-store/
+**/.cache/
+**/.next/
+**/.nuxt/
+**/.svelte-kit/
+**/.vercel/
+**/build/
+**/dist/
+**/coverage/
+**/.turbo/
+
+# Logs
+**/npm-debug.log*
+**/pnpm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+

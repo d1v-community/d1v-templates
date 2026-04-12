@@ -1,5 +1,14 @@
 [
   {
+    "id": "remix-neon-auth-pay",
+    "name": "Remix Neon Auth Pay",
+    "slug": "remix-neon-auth-pay",
+    "path": "./remix-neon-auth-pay",
+    "framework": "Remix",
+    "description": "Production-ready Remix starter with passwordless auth, Neon PostgreSQL, hosted checkout, and Payment Hub product listing.",
+    "tags": ["remix", "auth", "neon", "postgres", "payments", "tailwind"]
+  },
+  {
     "id": "remix-neon-auth",
     "name": "Remix Neon Auth",
     "slug": "remix-neon-auth",
