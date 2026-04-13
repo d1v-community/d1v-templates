@@ -267,3 +267,90 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 ## Immediate Next Step
 
 Start a third-wave pass that adds real route-level product surfaces on top of the new design matrix, beginning with account-area dashboards, entitlement-aware post-purchase screens, and domain data schemas for each category.
+
+## Product-System Expansion Roadmap
+
+- [ ] Add a shared post-purchase activation system across all paid templates
+  - Owner: main agent, validated by `@commerce-flow-qa`, `@context-auth-qa`, and `@ux-quality-qa`
+  - Verification: every payment-enabled template routes the buyer from checkout success into an activation state with account creation confirmation, plan-specific next steps, and a first meaningful action instead of a static thank-you page
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: this is the highest-leverage cross-template product improvement because it raises conversion-to-activation quality without requiring category-specific complexity first
+
+- [ ] Add a shared entitlement and account-state layer to the foundations
+  - Owner: main agent, validated by `@commerce-flow-qa` and `@context-auth-qa`
+  - Verification: the foundations expose starter primitives for plan status, trial/paid state, entitlement checks, and upgrade prompts so downstream templates do not need to invent those rules repeatedly
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: many later product improvements depend on a first-class entitlement layer; without it, dashboards, archives, bookings, and member areas remain mostly cosmetic
+
+- [ ] Add a category-specific authenticated home/dashboard for every template family
+  - Owner: main agent, validated by `@entry-shell-qa`, `@desktop-adaptive-qa`, and `@ux-quality-qa`
+  - Verification: logged-in users no longer land on a public marketing page only; each category provides an account-area route with role-appropriate orientation, recent activity, and the next core action
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: top-tier products are judged by the first logged-in screen more than by the landing page, so this should outrank further brochure-level polish
+
+- [ ] Build a reusable onboarding-state machine for new accounts and teams
+  - Owner: main agent, validated by `@ux-quality-qa` and `@context-auth-qa`
+  - Verification: new accounts can move through a structured onboarding checklist with persisted completion state, deferred setup, and category-aware first-run prompts
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: onboarding is where templates most often feel fake; a shared but configurable onboarding state machine would materially improve perceived product maturity
+
+- [ ] Define and ship the first real domain schemas per category
+  - Owner: main agent, validated by `@context-auth-qa`, `@commerce-flow-qa`, and `@ux-quality-qa`
+  - Verification: each category has at least one concrete Drizzle schema pack plus seed data that powers the authenticated dashboard and core workflow surfaces
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: schema packs should be category-level first, then template-specific overrides can layer on top; this keeps regeneration practical while moving templates beyond static placeholders
+
+- [ ] Add product-analytics instrumentation and event taxonomy to the foundations
+  - Owner: main agent, validated by `@account-service-qa`, `@commerce-flow-qa`, and `@ux-quality-qa`
+  - Verification: templates expose a consistent starter event model for acquisition, pricing engagement, checkout start, activation completion, and category-specific core actions
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: from a product-manager perspective, templates that cannot measure funnel health are strategically weak no matter how polished the UI is
+
+- [ ] Add monetization expansion surfaces beyond one default offer
+  - Owner: main agent, validated by `@commerce-flow-qa` and `@ui-consistency-qa`
+  - Verification: templates support starter patterns for upgrades, seat expansion, add-ons, bundles, retention offers, or annual plans where category-appropriate
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: most serious products win on expansion revenue, not only first checkout; these surfaces should be designed into the account experience, not only pricing pages
+
+- [ ] Build retention-oriented member/account modules for content and membership templates
+  - Owner: main agent, validated by `@ux-quality-qa`, `@commerce-flow-qa`, and `@ui-consistency-qa`
+  - Verification: creator, education, and community-oriented templates include archive state, recent drops, progress/history, saved items, and re-engagement surfaces after login
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: these templates currently sell the promise well, but long-term value depends on a visible retention loop after purchase
+
+- [ ] Build operations and support modules for service and B2B templates
+  - Owner: main agent, validated by `@context-auth-qa`, `@desktop-adaptive-qa`, and `@ux-quality-qa`
+  - Verification: business and local-service templates include queues, timelines, schedule/status boards, support routing, and operational empty states instead of marketing-only logged-in views
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: this is where these templates can start to resemble top-tier operational products rather than premium landing pages with login
+
+- [ ] Add AI-assisted product workflows that go beyond a homepage concierge
+  - Owner: main agent, validated by `@assistant-flow-qa`, `@ux-quality-qa`, and `@context-auth-qa`
+  - Verification: AI-enabled templates gain at least one workflow-native AI use case such as content recommendation, support triage, onboarding help, prompt selection, or intake assistance inside the authenticated product
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: the homepage concierge is now a strong top-of-funnel differentiator, but top products use AI deeper in the workflow where it saves time or increases conversion
+
+- [ ] Build template-level benchmark docs that explain the product strategy of each starter
+  - Owner: main agent, validated by `@entry-shell-qa` and `@ux-quality-qa`
+  - Verification: every industry template README and metadata describe the intended buyer, core loop, monetization path, activation moment, and likely expansion path in clear product terms
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: open-source templates compete partly on clarity of product thinking; sharper benchmark docs will help users choose the right foundation and customize it correctly
+
+## Suggested Execution Order
+
+1. Shared activation + entitlement layer
+2. Authenticated dashboards + onboarding state machine
+3. Category schema packs + seeded core workflows
+4. Retention and expansion modules by category
+5. Workflow-native AI and analytics instrumentation
