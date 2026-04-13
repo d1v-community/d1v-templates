@@ -216,16 +216,16 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 - [ ] Publish the regenerated foundation and industry repos after the AI runtime fix
   - Owner: main agent, validated by `@entry-shell-qa`, `@ux-quality-qa`, and `@ui-consistency-qa`
   - Verification: `foundations/remix-neon-auth-pay` is committed and pushed first; root `d1v-templates` updates the gitlink plus regenerated industry files; all touched published repos stay free of local secrets and match the verified local source
-  - Status: in_progress
-  - Evidence: pending
-  - Risk / Notes: publication must happen in dependency order because the root registry points at the foundation gitlink; `.env` must remain untracked across the entire release pass
+  - Status: done
+  - Evidence: committed and pushed `foundations/remix-neon-auth-pay` with `971dd8f Add category-driven template theming`; committed and pushed root `d1v-templates` with `c32f129 Differentiate industry template design systems`; synchronized all 12 published industry template repos under `d1v-community/*-template` from the regenerated local directories using an exclude-safe rsync flow that kept `.env`, `node_modules`, `build`, `.vercel`, and other local artifacts out of version control
+  - Risk / Notes: publication now depends on the root generator plus the foundation template staying in sync; future regeneration passes should continue to treat the root registry as the source of truth
 
 - [ ] Run an AI runtime verification and publication sweep for every AI-enabled template
   - Owner: main agent, validated by `@context-auth-qa`, `@desktop-adaptive-qa`, and `@ux-quality-qa`
   - Verification: each AI-enabled template starts with its bootstrapped `.env`, returns success from `POST /api/ai/chat`, and is then published so the remote repo matches the working local copy
-  - Status: in_progress
-  - Evidence: regenerated the six AI-enabled templates with the category-specific surfaces and rebuilt them after restoring fresh `.env` files; direct runtime verification now returns `HOME=200`, `PRICING=200`, and `AI=200` for `assistant-saas`, `prompt-library-membership`, `client-portal`, `cohort-course`, `online-course-membership`, and `clinic-booking`; increased the shared `https.request` timeout from `30000` to `90000` after catching intermittent upstream timeouts during the first verification pass
-  - Risk / Notes: `pai` upstream still shows occasional transient `504` or slow responses on some requests, so publication should happen only after the verified local source is committed and the timeout increase is pushed everywhere
+  - Status: done
+  - Evidence: restored fresh `.env` files into all 12 industry templates via real `create-with-integrations` + env export, rebuilt the six AI-enabled templates after increasing the shared `https.request` timeout from `30000` to `90000`, and verified runtime `HOME=200`, `PRICING=200`, and `AI=200` for `assistant-saas`, `prompt-library-membership`, `client-portal`, `cohort-course`, `online-course-membership`, and `clinic-booking`; then pushed the updated local sources to each corresponding `d1v-community/*-template` repository
+  - Risk / Notes: `pai` upstream still has occasional transient latency or `504` behavior, but the verified local source and published template repos now both include the longer timeout and successful runtime path
 
 ## Next-Phase Industry Optimization Map
 
@@ -266,4 +266,4 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 
 ## Immediate Next Step
 
-Commit and push the AI-capable foundation plus regenerated root registry changes, then run the AI-enabled template runtime/publication sweep before starting category-by-category design and functionality divergence.
+Start a third-wave pass that adds real route-level product surfaces on top of the new design matrix, beginning with account-area dashboards, entitlement-aware post-purchase screens, and domain data schemas for each category.
