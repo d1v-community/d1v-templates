@@ -18,6 +18,31 @@ Cohort course starter with payments, auth, and Neon-backed enrollment data.
 - Repository template path: `d1v-community/cohort-course-template`
 - Default prompt: `Create a cohort course product with database support, email login, and hosted checkout.`
 
+## Design Direction
+
+- Visual thesis: A structured learning experience that emphasizes progression, schedules, and instructional trust.
+- Content plan:
+  - Hero: outcome, cadence, and access path
+  - Support: curriculum, milestones, and learner guidance
+  - Detail: show how the student moves through the product
+  - Final CTA: enroll, log in, or review pricing
+- Interaction thesis:
+  - Progress surfaces should feel calm and instructional.
+  - Sequence and milestones should be more visible than visual effects.
+  - Trust comes from structure and clarity, not hype.
+
+## Product Modules
+
+- Showcase headline: Give the course a cadence, not just a checkout link.
+- Workflow headline: Enrollment is only the start of the learning product.
+- Starter modules:
+  - Week-by-week syllabus: Expose module outcomes, assignments, and live touchpoints.
+  - Progress tracking: Track attendance, completion, and deliverables through the cohort.
+  - Support rhythm: Keep office hours, group reviews, and feedback windows visible.
+  - Cohort timing: Lead with next start date, session cadence, and seat cap.
+  - Outcome framing: Promise concrete transformation tied to the syllabus.
+  - Post-payment path: Move learners into prep, orientation, and goal-setting fast.
+
 ## Local Setup
 
 ```bash

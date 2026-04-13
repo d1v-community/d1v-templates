@@ -1,6 +1,47 @@
+export type SiteThemeFamily =
+  | "ai"
+  | "business"
+  | "commerce"
+  | "creator"
+  | "education"
+  | "local";
+
+export type SiteThemeLayout =
+  | "command"
+  | "operations"
+  | "editorial"
+  | "academy"
+  | "service";
+
+export type SiteMetric = {
+  value: string;
+  label: string;
+  detail: string;
+};
+
+export type SiteExperiencePanel = {
+  title: string;
+  value: string;
+  detail: string;
+  meta: string;
+};
+
+export type SiteExperienceItem = {
+  title: string;
+  description: string;
+  meta?: string;
+};
+
 export type SiteConfig = {
   appTitle: string;
   siteDescription: string;
+  theme: {
+    family: SiteThemeFamily;
+    layout: SiteThemeLayout;
+    visualThesis: string;
+    contentPlan: string[];
+    interactionThesis: string[];
+  };
   navigation: {
     pricingLabel: string;
     loginLabel: string;
@@ -46,6 +87,29 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  heroMetrics: SiteMetric[];
+  showcase: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    panels: SiteExperiencePanel[];
+  };
+  workflow: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    steps: SiteExperienceItem[];
+  };
+  featureSections: Array<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: SiteExperienceItem[];
+  }>;
+  faq: Array<{
+    question: string;
+    answer: string;
+  }>;
   aiAssistant?: {
     enabled: boolean;
     badge: string;
@@ -83,6 +147,22 @@ export type SiteConfig = {
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "ClientRoom",
   "siteDescription": "Client portal for agencies and service businesses with member access and project data.",
+  "theme": {
+    "family": "business",
+    "layout": "operations",
+    "visualThesis": "A quiet enterprise workstation with clear hierarchy, strong tables, and no marketing-heavy chrome.",
+    "contentPlan": [
+      "Hero: orient the operator around the workspace value immediately",
+      "Support: show queues, milestones, and KPI surfaces",
+      "Detail: map the service workflow and account operations model",
+      "Final CTA: push the buyer into secure access or paid seats"
+    ],
+    "interactionThesis": [
+      "Panels should behave like dashboards, not promo cards.",
+      "Density should increase confidence without becoming noisy.",
+      "The page should reward scanning headings, labels, and states."
+    ]
+  },
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
@@ -136,6 +216,133 @@ export const SITE_CONFIG: SiteConfig = {
       "Replace placeholder blocks with project dashboards"
     ]
   },
+  "heroMetrics": [
+    {
+      "value": "Shared",
+      "label": "Project visibility",
+      "detail": "Clients should see progress without asking."
+    },
+    {
+      "value": "1 hub",
+      "label": "Files and milestones",
+      "detail": "Keep delivery artifacts in one account surface."
+    },
+    {
+      "value": "Retainer",
+      "label": "Payment mode",
+      "detail": "Use paid access as part of the service package."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Client workspace",
+    "title": "Turn service delivery into a portal clients actually want to log into.",
+    "description": "Move project updates, files, approvals, and support questions out of email and into a paid client room.",
+    "panels": [
+      {
+        "title": "Current milestone",
+        "value": "Design review",
+        "detail": "Give the client one obvious place to understand progress.",
+        "meta": "Live project"
+      },
+      {
+        "title": "Pending approvals",
+        "value": "3",
+        "detail": "Highlight where the client is blocking the timeline.",
+        "meta": "Client action"
+      },
+      {
+        "title": "Deliverable vault",
+        "value": "26 files",
+        "detail": "Keep every artifact versioned and visible.",
+        "meta": "Files"
+      },
+      {
+        "title": "Support desk",
+        "value": "AI + human",
+        "detail": "Answer routine client questions before they become meetings.",
+        "meta": "Service"
+      }
+    ]
+  },
+  "workflow": {
+    "eyebrow": "Delivery system",
+    "title": "Use the portal to reduce chaos, not to mirror your inbox.",
+    "description": "The best client portals clarify status, next approvals, and what the buyer is paying for every month.",
+    "steps": [
+      {
+        "title": "Model client-facing entities",
+        "description": "Projects, milestones, files, comments, and approvals need first-class records."
+      },
+      {
+        "title": "Map plan to access",
+        "description": "Use payments to control client seats, portal depth, or support SLAs."
+      },
+      {
+        "title": "Automate routine support",
+        "description": "Let the assistant answer portal access and project status questions by default."
+      }
+    ]
+  },
+  "featureSections": [
+    {
+      "eyebrow": "Portal modules",
+      "title": "Show the service, not just the invoice.",
+      "description": "A strong client portal proves value between meetings.",
+      "items": [
+        {
+          "title": "Milestone timeline",
+          "description": "Display current phase, dependencies, and blockers in one view.",
+          "meta": "Visibility"
+        },
+        {
+          "title": "Deliverable browser",
+          "description": "Organize files, drafts, approvals, and final assets cleanly.",
+          "meta": "Fulfillment"
+        },
+        {
+          "title": "Request queue",
+          "description": "Track client asks so scope and response time stay visible.",
+          "meta": "Support"
+        }
+      ]
+    },
+    {
+      "eyebrow": "Service economics",
+      "title": "Make retainers and premium access feel coherent.",
+      "description": "The portal should explain why the paid relationship continues month after month.",
+      "items": [
+        {
+          "title": "Retainer framing",
+          "description": "Tie portal access to ongoing updates, file history, and support continuity.",
+          "meta": "Offer"
+        },
+        {
+          "title": "Client onboarding",
+          "description": "Use payment success to trigger account setup and project intake.",
+          "meta": "Activation"
+        },
+        {
+          "title": "Expansion path",
+          "description": "Add new projects, seats, or premium support over time.",
+          "meta": "Growth"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "What should new clients see right away?",
+      "answer": "Current milestone, latest files, next action, and how to request support or approvals."
+    },
+    {
+      "question": "How does AI fit in a portal?",
+      "answer": "Use it to answer routine access questions, explain project states, and route common support tickets."
+    },
+    {
+      "question": "What data model matters first?",
+      "answer": "Clients, projects, milestones, uploads, approvals, and support conversations are the best starting set."
+    }
+  ],
   "paymentSuccess": {
     "eyebrow": "Payment completed",
     "title": "Payment received",

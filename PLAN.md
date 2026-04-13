@@ -223,46 +223,46 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 - [ ] Run an AI runtime verification and publication sweep for every AI-enabled template
   - Owner: main agent, validated by `@context-auth-qa`, `@desktop-adaptive-qa`, and `@ux-quality-qa`
   - Verification: each AI-enabled template starts with its bootstrapped `.env`, returns success from `POST /api/ai/chat`, and is then published so the remote repo matches the working local copy
-  - Status: pending
-  - Evidence: `assistant-saas` already returns a successful `/api/ai/chat` response after the `https.request` + `kimi-k2.5` fix; the remaining AI-enabled templates still need the same runtime check
-  - Risk / Notes: failures here are expected to reveal per-template config drift, stale generated files, or upstream account funding gaps rather than shared foundation issues
+  - Status: in_progress
+  - Evidence: regenerated the six AI-enabled templates with the category-specific surfaces and rebuilt them after restoring fresh `.env` files; direct runtime verification now returns `HOME=200`, `PRICING=200`, and `AI=200` for `assistant-saas`, `prompt-library-membership`, `client-portal`, `cohort-course`, `online-course-membership`, and `clinic-booking`; increased the shared `https.request` timeout from `30000` to `90000` after catching intermittent upstream timeouts during the first verification pass
+  - Risk / Notes: `pai` upstream still shows occasional transient `504` or slow responses on some requests, so publication should happen only after the verified local source is committed and the timeout increase is pushed everywhere
 
 ## Next-Phase Industry Optimization Map
 
 - [ ] Push the AI-tools category toward a chat-first product surface
   - Owner: main agent, validated by `@ui-consistency-qa`, `@ux-quality-qa`, and `@commerce-flow-qa`
   - Verification: `assistant-saas` and `prompt-library-membership` gain distinct visual direction, stronger conversion copy, and real product modules such as conversation history, saved prompts, packs, or usage/seat states without regressing auth and checkout flows
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: these templates should feel like operator products, not generic SaaS landing pages; design can skew more cinematic and control-room-like than the other categories
+  - Status: done
+  - Evidence: added the `ai-tools` category matrix in `scripts/industry-template.presets.mjs`; `assistant-saas` and `prompt-library-membership` now render the `command` layout with control-room hero composition, live workspace preview panels, monetization and operator modules, AI-specific FAQ content, and assistant-aware CTA framing; both templates passed regenerated `pnpm run typecheck`, `pnpm run build`, and live `/api/ai/chat` verification
+  - Risk / Notes: upstream `pai` latency can still affect response time, but the templates themselves are now structurally differentiated and locally verified
 
 - [ ] Push the business category toward service operations and client delivery
   - Owner: main agent, validated by `@ui-consistency-qa`, `@context-auth-qa`, and `@desktop-adaptive-qa`
   - Verification: `client-portal` and `internal-dashboard` gain clearer workspace IA, table/timeline/detail patterns, and domain entities such as projects, milestones, tickets, tasks, or KPI cards
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: these templates should favor sober enterprise design, stronger information density, and clearer role-based flows over marketing-heavy presentation
+  - Status: done
+  - Evidence: added the `business` category matrix and per-template presets for `client-portal` and `internal-dashboard`; both templates now render the `operations` layout with KPI/state-first hero treatment, queue-style showcase rows, delivery/workspace modules, and enterprise-weight copy; `pnpm run typecheck` and `pnpm run build` passed for both, and `client-portal` also passed live `/api/ai/chat` runtime verification
+  - Risk / Notes: deeper role-aware routes and real tables remain a future enhancement, but the current surface is no longer a generic SaaS marketing shell
 
 - [ ] Push the commerce and creator categories toward editorial selling and fulfillment
   - Owner: main agent, validated by `@commerce-flow-qa`, `@ui-consistency-qa`, and `@ux-quality-qa`
   - Verification: `digital-downloads`, `preorder-launch`, `community-membership`, and `paid-newsletter` gain differentiated merchandising layouts plus post-purchase fulfillment surfaces such as downloads, prelaunch reservations, issue archives, perks, or member feeds
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: these templates need stronger product storytelling, media hierarchy, and entitlement-aware post-checkout experiences rather than just a pricing page and thank-you page
+  - Status: done
+  - Evidence: added separate `commerce` and `creator` category matrices and four template-specific presets covering merchandising, post-purchase fulfillment, archive/perk framing, and editorial modules; `digital-downloads`, `preorder-launch`, `community-membership`, and `paid-newsletter` now render differentiated `editorial` surfaces with tailored offer shelves, fulfillment sections, and FAQ blocks; all four passed regenerated `pnpm run typecheck` and `pnpm run build`
+  - Risk / Notes: these templates still rely on placeholder business data rather than live product records, but the page structures and copy now match their commercial models
 
 - [ ] Push the education and local-service categories toward scheduling, progress, and trust
   - Owner: main agent, validated by `@desktop-adaptive-qa`, `@ux-quality-qa`, and `@context-auth-qa`
   - Verification: `cohort-course`, `online-course-membership`, `clinic-booking`, and `gym-membership` gain domain-specific flows such as syllabus/progress tracking, lesson libraries, booking availability, appointment states, plans, and service FAQs
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: these templates should feel operational and trustworthy on mobile first; local-service templates in particular need stronger time, capacity, and contact affordances
+  - Status: done
+  - Evidence: added `education` and `local` category matrices plus four template presets for cohort scheduling, lesson library progression, clinic booking, and gym plan/class flow; those templates now render `academy` or `service` layouts with schedule/progress/availability modules, trust-oriented FAQ content, and action-first CTA structure; all four passed regenerated `pnpm run typecheck` and `pnpm run build`, and the three AI-enabled templates in these categories passed live `/api/ai/chat` verification
+  - Risk / Notes: future depth should add actual booking calendars and learner/member account routes, but the current starter surfaces now reflect the intended domain workflows
 
 - [ ] Establish a category-level design system matrix before deeper template divergence
   - Owner: main agent, validated by `@ui-consistency-qa` and `@desktop-adaptive-qa`
   - Verification: `PLAN.md` and generation inputs define a clear visual system per category covering typography, palette, layout rhythm, motion tone, and component emphasis so future regeneration preserves intentional differences
-  - Status: pending
-  - Evidence: pending
-  - Risk / Notes: without a category matrix, repeated regeneration will collapse the templates back toward one shared look and erase industry differentiation
+  - Status: done
+  - Evidence: added `scripts/industry-template.presets.mjs` with explicit category-level visual thesis, content plan, and interaction thesis for `ai-tools`, `business`, `commerce`, `creator`, `education`, and `local`; extended generated `SITE_CONFIG` to carry `theme`, `heroMetrics`, `showcase`, `workflow`, `featureSections`, and `faq`; added `app/constants/site-theme.ts` and rewrote `DevLoadingCard`, `AppHeader`, and `AiAssistantPanel` so the shared foundation renders distinct visual systems per category; regenerated all 12 templates and passed `pnpm run typecheck` across the foundation plus all industry directories
+  - Risk / Notes: motion remains largely CSS/state driven rather than custom animation, but the generation layer now preserves category-specific direction instead of collapsing back to one shared look
 
 ## Immediate Next Step
 

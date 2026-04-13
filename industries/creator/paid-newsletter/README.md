@@ -17,6 +17,31 @@ Paid newsletter starter with authentication, checkout, and Neon-backed subscribe
 - Repository template path: `d1v-community/paid-newsletter-template`
 - Default prompt: `Create a paid newsletter membership product with database support and hosted checkout.`
 
+## Design Direction
+
+- Visual thesis: A creator-led publishing surface with stronger voice, membership cues, and media-led storytelling.
+- Content plan:
+  - Hero: creator promise and member access hook
+  - Support: show the cadence, archive, and premium perks
+  - Detail: make post-purchase community or content access tangible
+  - Final CTA: push the visitor into a simple paid join flow
+- Interaction thesis:
+  - Treat content and community as the product, not as filler around checkout.
+  - Visual rhythm should feel more like a publication than a dashboard.
+  - Use contrast and spacing to create taste instead of loud gradients.
+
+## Product Modules
+
+- Showcase headline: Make the newsletter feel like a publication with a clean member archive and sharp offer.
+- Workflow headline: The archive is part of the product, not an afterthought.
+- Starter modules:
+  - Lead issue: Feature one standout issue and one short reason to care.
+  - Archive browser: Browse by topic, date, or series once the member is inside.
+  - Format clarity: Tell readers whether they get text, audio, downloads, or all three.
+  - Paid-only archive: Position the archive as the compounding reason to stay subscribed.
+  - Member extras: Add occasional downloads, notes, or Q&A without bloating the core offer.
+  - Renewal signal: Show issue cadence and editorial consistency clearly.
+
 ## Local Setup
 
 ```bash

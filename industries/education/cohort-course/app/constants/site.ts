@@ -1,6 +1,47 @@
+export type SiteThemeFamily =
+  | "ai"
+  | "business"
+  | "commerce"
+  | "creator"
+  | "education"
+  | "local";
+
+export type SiteThemeLayout =
+  | "command"
+  | "operations"
+  | "editorial"
+  | "academy"
+  | "service";
+
+export type SiteMetric = {
+  value: string;
+  label: string;
+  detail: string;
+};
+
+export type SiteExperiencePanel = {
+  title: string;
+  value: string;
+  detail: string;
+  meta: string;
+};
+
+export type SiteExperienceItem = {
+  title: string;
+  description: string;
+  meta?: string;
+};
+
 export type SiteConfig = {
   appTitle: string;
   siteDescription: string;
+  theme: {
+    family: SiteThemeFamily;
+    layout: SiteThemeLayout;
+    visualThesis: string;
+    contentPlan: string[];
+    interactionThesis: string[];
+  };
   navigation: {
     pricingLabel: string;
     loginLabel: string;
@@ -46,6 +87,29 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  heroMetrics: SiteMetric[];
+  showcase: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    panels: SiteExperiencePanel[];
+  };
+  workflow: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    steps: SiteExperienceItem[];
+  };
+  featureSections: Array<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: SiteExperienceItem[];
+  }>;
+  faq: Array<{
+    question: string;
+    answer: string;
+  }>;
   aiAssistant?: {
     enabled: boolean;
     badge: string;
@@ -83,6 +147,22 @@ export type SiteConfig = {
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "CohortOS",
   "siteDescription": "Paid cohort course starter for enrollment, session access, and student onboarding.",
+  "theme": {
+    "family": "education",
+    "layout": "academy",
+    "visualThesis": "A structured learning experience that emphasizes progression, schedules, and instructional trust.",
+    "contentPlan": [
+      "Hero: outcome, cadence, and access path",
+      "Support: curriculum, milestones, and learner guidance",
+      "Detail: show how the student moves through the product",
+      "Final CTA: enroll, log in, or review pricing"
+    ],
+    "interactionThesis": [
+      "Progress surfaces should feel calm and instructional.",
+      "Sequence and milestones should be more visible than visual effects.",
+      "Trust comes from structure and clarity, not hype."
+    ]
+  },
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
@@ -136,6 +216,133 @@ export const SITE_CONFIG: SiteConfig = {
       "Replace placeholder content with curriculum and session views"
     ]
   },
+  "heroMetrics": [
+    {
+      "value": "6 weeks",
+      "label": "Cadence",
+      "detail": "Make time commitment obvious from the first screen."
+    },
+    {
+      "value": "Live",
+      "label": "Delivery mode",
+      "detail": "Highlight sessions, office hours, and cohort rhythm."
+    },
+    {
+      "value": "Small",
+      "label": "Seat model",
+      "detail": "Use scarcity and support quality together."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Learning system",
+    "title": "Give the course a cadence, not just a checkout link.",
+    "description": "Use the starter for cohort experiences where schedule, accountability, and live instruction are part of the product promise.",
+    "panels": [
+      {
+        "title": "Current cohort",
+        "value": "Spring 2026",
+        "detail": "Anchor the page around the next active intake.",
+        "meta": "Enrollment"
+      },
+      {
+        "title": "Session plan",
+        "value": "12 live calls",
+        "detail": "Show the rhythm clearly so buyers understand the commitment.",
+        "meta": "Structure"
+      },
+      {
+        "title": "Assignments",
+        "value": "Weekly",
+        "detail": "Progress feels real when the learner sees the pace.",
+        "meta": "Accountability"
+      },
+      {
+        "title": "Support layer",
+        "value": "Office hours",
+        "detail": "Position access to feedback as part of the premium offer.",
+        "meta": "Instruction"
+      }
+    ]
+  },
+  "workflow": {
+    "eyebrow": "Course operations",
+    "title": "Enrollment is only the start of the learning product.",
+    "description": "A cohort course needs schedule clarity, learner progress states, and post-payment onboarding that feels instructional.",
+    "steps": [
+      {
+        "title": "Model cohorts and sessions",
+        "description": "Store cohort start dates, lesson schedule, and live-session records."
+      },
+      {
+        "title": "Map payment to enrollment",
+        "description": "Successful checkout should create or confirm the learner's seat."
+      },
+      {
+        "title": "Guide the first week",
+        "description": "Use onboarding to collect goals, unlock prep work, and clarify attendance rhythm."
+      }
+    ]
+  },
+  "featureSections": [
+    {
+      "eyebrow": "Learner experience",
+      "title": "Show the path through the program.",
+      "description": "Students trust structured progression more than broad promises.",
+      "items": [
+        {
+          "title": "Week-by-week syllabus",
+          "description": "Expose module outcomes, assignments, and live touchpoints.",
+          "meta": "Curriculum"
+        },
+        {
+          "title": "Progress tracking",
+          "description": "Track attendance, completion, and deliverables through the cohort.",
+          "meta": "Progress"
+        },
+        {
+          "title": "Support rhythm",
+          "description": "Keep office hours, group reviews, and feedback windows visible.",
+          "meta": "Coaching"
+        }
+      ]
+    },
+    {
+      "eyebrow": "Enrollment design",
+      "title": "Sell the structure and support.",
+      "description": "The strongest cohort pages clarify exactly what the learner joins and when.",
+      "items": [
+        {
+          "title": "Cohort timing",
+          "description": "Lead with next start date, session cadence, and seat cap.",
+          "meta": "Urgency"
+        },
+        {
+          "title": "Outcome framing",
+          "description": "Promise concrete transformation tied to the syllabus.",
+          "meta": "Offer"
+        },
+        {
+          "title": "Post-payment path",
+          "description": "Move learners into prep, orientation, and goal-setting fast.",
+          "meta": "Onboarding"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "What should the pricing page emphasize?",
+      "answer": "Seat access, cohort timing, live support, and the depth of the program are the key purchase drivers."
+    },
+    {
+      "question": "What data model belongs first?",
+      "answer": "Cohorts, sessions, learners, assignments, attendance, and enrollment status are the right foundation."
+    },
+    {
+      "question": "How should onboarding feel?",
+      "answer": "Like the start of a guided program, with next session timing and prep work visible immediately after payment."
+    }
+  ],
   "paymentSuccess": {
     "eyebrow": "Payment completed",
     "title": "Payment received",

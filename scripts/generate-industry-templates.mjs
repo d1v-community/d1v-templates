@@ -3,6 +3,10 @@
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  CATEGORY_DESIGN_MATRIX,
+  TEMPLATE_EXPERIENCES,
+} from "./industry-template.presets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -44,11 +48,22 @@ function deepMerge(base, override) {
 function buildSiteConfig(template) {
   const pricingLabel = template.pricing?.badge || "Membership";
   const aiAssistant = template.aiAssistant ?? null;
+  const categoryTheme = CATEGORY_DESIGN_MATRIX[template.category];
+  const templateExperience = TEMPLATE_EXPERIENCES[template.id];
+
+  if (!categoryTheme) {
+    throw new Error(`Missing category design matrix for ${template.category}.`);
+  }
+
+  if (!templateExperience) {
+    throw new Error(`Missing template experience preset for ${template.id}.`);
+  }
 
   return deepMerge(
     {
       appTitle: template.appTitle,
       siteDescription: template.siteDescription,
+      theme: categoryTheme,
       navigation: {
         pricingLabel: "Pricing",
         loginLabel: "Login",
@@ -107,6 +122,11 @@ function buildSiteConfig(template) {
           "Replace placeholder sections with your core workflow",
         ],
       },
+      heroMetrics: templateExperience.heroMetrics,
+      showcase: templateExperience.showcase,
+      workflow: templateExperience.workflow,
+      featureSections: templateExperience.featureSections,
+      faq: templateExperience.faq,
       paymentSuccess: {
         eyebrow: "Payment completed",
         title: "Payment received",
@@ -139,10 +159,16 @@ function buildSiteConfig(template) {
       },
     },
     {
+      theme: template.theme,
       navigation: template.navigation,
       home: template.home,
       pricing: template.pricing,
       templateSurface: template.templateSurface,
+      heroMetrics: template.heroMetrics,
+      showcase: template.showcase,
+      workflow: template.workflow,
+      featureSections: template.featureSections,
+      faq: template.faq,
       aiAssistant: template.aiAssistant,
       paymentSuccess: template.paymentSuccess,
       paymentCancel: template.paymentCancel,
@@ -152,6 +178,8 @@ function buildSiteConfig(template) {
 
 function buildReadme(template) {
   const templateRepo = `d1v-community/${template.repositoryName}`;
+  const categoryTheme = CATEGORY_DESIGN_MATRIX[template.category];
+  const templateExperience = TEMPLATE_EXPERIENCES[template.id];
   const baseFeatures = [
     "- Remix + Tailwind application based on `remix-neon-auth-pay`",
     "- Passwordless email login",
@@ -197,6 +225,23 @@ ${baseFeatures.join("\n")}
 - Category: \`${template.category}\`
 - Repository template path: \`${templateRepo}\`
 - Default prompt: \`${template.prompt}\`
+
+## Design Direction
+
+- Visual thesis: ${categoryTheme.visualThesis}
+- Content plan:
+${categoryTheme.contentPlan.map((item) => `  - ${item}`).join("\n")}
+- Interaction thesis:
+${categoryTheme.interactionThesis.map((item) => `  - ${item}`).join("\n")}
+
+## Product Modules
+
+- Showcase headline: ${templateExperience.showcase.title}
+- Workflow headline: ${templateExperience.workflow.title}
+- Starter modules:
+${templateExperience.featureSections
+  .flatMap((section) => section.items.map((item) => `  - ${item.title}: ${item.description}`))
+  .join("\n")}
 
 ## Local Setup
 

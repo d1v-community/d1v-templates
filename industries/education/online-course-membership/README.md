@@ -18,6 +18,31 @@ Course membership starter with auth, billing, and Neon-backed student progress d
 - Repository template path: `d1v-community/online-course-membership-template`
 - Default prompt: `Create an online course membership product with database support and hosted checkout.`
 
+## Design Direction
+
+- Visual thesis: A structured learning experience that emphasizes progression, schedules, and instructional trust.
+- Content plan:
+  - Hero: outcome, cadence, and access path
+  - Support: curriculum, milestones, and learner guidance
+  - Detail: show how the student moves through the product
+  - Final CTA: enroll, log in, or review pricing
+- Interaction thesis:
+  - Progress surfaces should feel calm and instructional.
+  - Sequence and milestones should be more visible than visual effects.
+  - Trust comes from structure and clarity, not hype.
+
+## Product Modules
+
+- Showcase headline: Package lessons, progress, and member access like a real learning product.
+- Workflow headline: Build for progression, not just content storage.
+- Starter modules:
+  - Learning tracks: Group lessons by outcome, difficulty, or role.
+  - Progress state: Persist watched, completed, and next-up lesson states.
+  - Resource shelf: Bundle worksheets, links, or downloads into each track.
+  - Core library: Use the archive as the main reason to subscribe.
+  - New lesson drops: Signal freshness with a predictable release rhythm.
+  - Upgrade ladder: Add coaching or cohort layers later without rebuilding the foundation.
+
 ## Local Setup
 
 ```bash

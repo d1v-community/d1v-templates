@@ -18,6 +18,31 @@ Client portal starter with passwordless login, Neon persistence, and hosted port
 - Repository template path: `d1v-community/client-portal-template`
 - Default prompt: `Create a client portal product with database support, project updates, and paid portal access.`
 
+## Design Direction
+
+- Visual thesis: A quiet enterprise workstation with clear hierarchy, strong tables, and no marketing-heavy chrome.
+- Content plan:
+  - Hero: orient the operator around the workspace value immediately
+  - Support: show queues, milestones, and KPI surfaces
+  - Detail: map the service workflow and account operations model
+  - Final CTA: push the buyer into secure access or paid seats
+- Interaction thesis:
+  - Panels should behave like dashboards, not promo cards.
+  - Density should increase confidence without becoming noisy.
+  - The page should reward scanning headings, labels, and states.
+
+## Product Modules
+
+- Showcase headline: Turn service delivery into a portal clients actually want to log into.
+- Workflow headline: Use the portal to reduce chaos, not to mirror your inbox.
+- Starter modules:
+  - Milestone timeline: Display current phase, dependencies, and blockers in one view.
+  - Deliverable browser: Organize files, drafts, approvals, and final assets cleanly.
+  - Request queue: Track client asks so scope and response time stay visible.
+  - Retainer framing: Tie portal access to ongoing updates, file history, and support continuity.
+  - Client onboarding: Use payment success to trigger account setup and project intake.
+  - Expansion path: Add new projects, seats, or premium support over time.
+
 ## Local Setup
 
 ```bash

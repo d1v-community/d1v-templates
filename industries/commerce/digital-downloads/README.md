@@ -17,6 +17,31 @@ Digital download starter with auth, Neon data, and hosted checkout.
 - Repository template path: `d1v-community/digital-downloads-template`
 - Default prompt: `Create a digital downloads storefront with database support, member login, and hosted checkout.`
 
+## Design Direction
+
+- Visual thesis: An editorial product drop surface with strong merchandising, tighter copy, and entitlement-aware fulfillment cues.
+- Content plan:
+  - Hero: the offer and why it deserves attention now
+  - Support: product framing, packaging, and drop mechanics
+  - Detail: what the buyer gets after checkout
+  - Final CTA: convert with one clear purchase path
+- Interaction thesis:
+  - The first viewport should feel like a campaign poster with utility underneath.
+  - Merchandising details should read like product direction, not filler bullets.
+  - Fulfillment language should reassure the buyer immediately.
+
+## Product Modules
+
+- Showcase headline: Stage digital goods like a premium catalog, then deliver them cleanly after checkout.
+- Workflow headline: The product page matters, but the download experience closes the trust loop.
+- Starter modules:
+  - Flagship bundle: Use one dominant product story to anchor the page.
+  - What is included: Spell out file types, templates, and bonus assets clearly.
+  - Usage rights: Make licensing simple to scan before purchase.
+  - Download locker: Give buyers a clean history of purchases and files.
+  - Update feed: Ship revised files or new bonus assets without manual support.
+  - Cross-sell logic: Suggest bundles or memberships after a successful purchase.
+
 ## Local Setup
 
 ```bash

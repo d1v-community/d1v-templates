@@ -18,6 +18,31 @@ Subscription AI assistant starter with passwordless auth, Neon data, and hosted 
 - Repository template path: `d1v-community/assistant-saas-template`
 - Default prompt: `Create an AI assistant SaaS with database support, member login, and hosted checkout.`
 
+## Design Direction
+
+- Visual thesis: A luminous command surface that feels like operating a live intelligence product, not browsing a generic SaaS landing page.
+- Content plan:
+  - Hero: operator-grade promise plus immediate paid access CTA
+  - Support: live signal, memory, and usage guardrails
+  - Detail: workspace modules that show how the product gets used every day
+  - Final CTA: move the visitor into pricing or login without friction
+- Interaction thesis:
+  - Telemetry panels should feel layered and live, not boxed and static.
+  - Accent motion should suggest streaming data rather than decorative glow.
+  - Assistant prompts should feel operational and specific to the offer.
+
+## Product Modules
+
+- Showcase headline: Turn pricing, onboarding, and live assistance into one operator surface.
+- Workflow headline: Structure the product like an assistant business, not a demo bot.
+- Starter modules:
+  - Conversation history: Recent threads, owner assignment, and unresolved flags.
+  - Usage guardrails: Seat limits, credit burn, and model policy snapshots.
+  - Prompt operations: Starter prompt packs, onboarding scripts, and fallback replies.
+  - Plan framing: Describe exactly what a paid workspace unlocks.
+  - Activation handoff: Route successful buyers into setup, imports, or kickoff questions.
+  - Team expansion: Show how admins can add seats and credits over time.
+
 ## Local Setup
 
 ```bash

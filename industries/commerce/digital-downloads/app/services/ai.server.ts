@@ -112,7 +112,7 @@ async function aiAssistantRequest<T>(
 							"Content-Length": Buffer.byteLength(body),
 						}
 					: headers,
-				timeout: 30000,
+				timeout: 90000,
 			},
 			(response) => {
 				let text = "";

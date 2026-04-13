@@ -17,6 +17,31 @@ Creator membership starter with login, payments, and Neon-backed member records.
 - Repository template path: `d1v-community/community-membership-template`
 - Default prompt: `Create a creator community membership product with login, database support, and hosted checkout.`
 
+## Design Direction
+
+- Visual thesis: A creator-led publishing surface with stronger voice, membership cues, and media-led storytelling.
+- Content plan:
+  - Hero: creator promise and member access hook
+  - Support: show the cadence, archive, and premium perks
+  - Detail: make post-purchase community or content access tangible
+  - Final CTA: push the visitor into a simple paid join flow
+- Interaction thesis:
+  - Treat content and community as the product, not as filler around checkout.
+  - Visual rhythm should feel more like a publication than a dashboard.
+  - Use contrast and spacing to create taste instead of loud gradients.
+
+## Product Modules
+
+- Showcase headline: Make the membership feel like an active club with rhythm, archive, and perks.
+- Workflow headline: Belonging needs structure or the membership will feel empty.
+- Starter modules:
+  - Ritual calendar: Show office hours, live sessions, or recurring member moments.
+  - Archive depth: Make premium posts, replays, and downloads easy to browse.
+  - Perk delivery: Bundle templates, chat access, or discounts into the account area.
+  - Founding member angle: Use limited-time positioning without overcomplicating the offer.
+  - Upgrade path: Introduce higher tiers later through coaching or small-group access.
+  - Community support: Blend AI answers with creator touchpoints for routine questions.
+
 ## Local Setup
 
 ```bash

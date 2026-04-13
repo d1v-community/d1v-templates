@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import { ThemeToggleButton } from "~/components/ThemeToggleButton";
 import { APP_TITLE } from "~/constants/app";
 import { SITE_CONFIG } from "~/constants/site";
+import { getSiteThemeClasses } from "~/constants/site-theme";
 
 export type AppHeaderUser = {
   displayName: string | null;
@@ -16,14 +17,15 @@ interface AppHeaderProps {
 
 export function AppHeader({ user, onLogout }: AppHeaderProps) {
   const displayName = user?.displayName || user?.username || user?.email;
+  const theme = getSiteThemeClasses(SITE_CONFIG.theme.family);
 
   return (
-    <header className="w-full border-b border-slate-200 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/80">
+    <header className={`w-full ${theme.headerShell}`}>
       <div className="mx-auto max-w-7xl px-4 py-3">
         <div className="flex items-center justify-between gap-3">
           <Link
             to="/"
-            className="text-base font-semibold tracking-tight text-slate-900 transition-colors hover:text-slate-700 dark:text-slate-100 dark:hover:text-white"
+            className={`text-base font-semibold tracking-tight transition-colors ${theme.logo}`}
           >
             {APP_TITLE}
           </Link>
@@ -33,14 +35,14 @@ export function AppHeader({ user, onLogout }: AppHeaderProps) {
               {SITE_CONFIG.aiAssistant?.enabled ? (
                 <Link
                   to="/#assistant"
-                  className="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                  className={`text-sm font-medium transition-colors ${theme.navLink}`}
                 >
                   {SITE_CONFIG.navigation.assistantLabel ?? "AI Concierge"}
                 </Link>
               ) : null}
               <Link
                 to="/pricing"
-                className="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                className={`text-sm font-medium transition-colors ${theme.navLink}`}
               >
                 {SITE_CONFIG.navigation.pricingLabel}
               </Link>
@@ -50,13 +52,13 @@ export function AppHeader({ user, onLogout }: AppHeaderProps) {
 
             {user ? (
               <div className="relative group">
-                <div className="text-sm text-gray-700 group-hover:text-gray-900 cursor-default dark:text-slate-200 dark:group-hover:text-white">
+                <div className={`cursor-default text-sm transition-colors ${theme.navLink}`}>
                   {displayName}
                 </div>
                 <div className="absolute right-0 mt-2 hidden group-hover:block">
                   <button
                     onClick={onLogout}
-                    className="px-3 py-1 text-sm text-white bg-gray-800 rounded shadow hover:bg-gray-900 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-white"
+                    className="rounded px-3 py-1 text-sm text-white shadow transition hover:bg-slate-900 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-white"
                   >
                     Logout
                   </button>
@@ -65,7 +67,7 @@ export function AppHeader({ user, onLogout }: AppHeaderProps) {
             ) : (
               <Link
                 to="/login"
-                className="text-sm text-gray-700 hover:text-gray-900 dark:text-slate-200 dark:hover:text-white"
+                className={`text-sm transition-colors ${theme.navLink}`}
               >
                 {SITE_CONFIG.navigation.loginLabel}
               </Link>

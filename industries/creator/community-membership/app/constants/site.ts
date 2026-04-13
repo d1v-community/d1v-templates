@@ -1,6 +1,47 @@
+export type SiteThemeFamily =
+  | "ai"
+  | "business"
+  | "commerce"
+  | "creator"
+  | "education"
+  | "local";
+
+export type SiteThemeLayout =
+  | "command"
+  | "operations"
+  | "editorial"
+  | "academy"
+  | "service";
+
+export type SiteMetric = {
+  value: string;
+  label: string;
+  detail: string;
+};
+
+export type SiteExperiencePanel = {
+  title: string;
+  value: string;
+  detail: string;
+  meta: string;
+};
+
+export type SiteExperienceItem = {
+  title: string;
+  description: string;
+  meta?: string;
+};
+
 export type SiteConfig = {
   appTitle: string;
   siteDescription: string;
+  theme: {
+    family: SiteThemeFamily;
+    layout: SiteThemeLayout;
+    visualThesis: string;
+    contentPlan: string[];
+    interactionThesis: string[];
+  };
   navigation: {
     pricingLabel: string;
     loginLabel: string;
@@ -46,6 +87,29 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  heroMetrics: SiteMetric[];
+  showcase: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    panels: SiteExperiencePanel[];
+  };
+  workflow: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    steps: SiteExperienceItem[];
+  };
+  featureSections: Array<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: SiteExperienceItem[];
+  }>;
+  faq: Array<{
+    question: string;
+    answer: string;
+  }>;
   aiAssistant?: {
     enabled: boolean;
     badge: string;
@@ -83,6 +147,22 @@ export type SiteConfig = {
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "InnerCircle",
   "siteDescription": "Creator membership app for private communities, perks, and paid access.",
+  "theme": {
+    "family": "creator",
+    "layout": "editorial",
+    "visualThesis": "A creator-led publishing surface with stronger voice, membership cues, and media-led storytelling.",
+    "contentPlan": [
+      "Hero: creator promise and member access hook",
+      "Support: show the cadence, archive, and premium perks",
+      "Detail: make post-purchase community or content access tangible",
+      "Final CTA: push the visitor into a simple paid join flow"
+    ],
+    "interactionThesis": [
+      "Treat content and community as the product, not as filler around checkout.",
+      "Visual rhythm should feel more like a publication than a dashboard.",
+      "Use contrast and spacing to create taste instead of loud gradients."
+    ]
+  },
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login"
@@ -135,6 +215,133 @@ export const SITE_CONFIG: SiteConfig = {
       "Replace the starter surface with your member hub"
     ]
   },
+  "heroMetrics": [
+    {
+      "value": "Members",
+      "label": "Core audience",
+      "detail": "Sell belonging and continuity, not just access."
+    },
+    {
+      "value": "Weekly",
+      "label": "Cadence",
+      "detail": "Use rituals and recurring drops to anchor the product."
+    },
+    {
+      "value": "Private",
+      "label": "Access model",
+      "detail": "Gate the archive, perks, and discussion surface."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Community surface",
+    "title": "Make the membership feel like an active club with rhythm, archive, and perks.",
+    "description": "Use the starter for private communities, premium circles, or niche memberships that combine access, ritual, and belonging.",
+    "panels": [
+      {
+        "title": "This week's drop",
+        "value": "Workshop replay",
+        "detail": "Use fresh moments to signal that the membership is alive.",
+        "meta": "Cadence"
+      },
+      {
+        "title": "Member archive",
+        "value": "94 posts",
+        "detail": "Give paid members a reason to stay for the back catalog.",
+        "meta": "Library"
+      },
+      {
+        "title": "Upcoming ritual",
+        "value": "Friday office hours",
+        "detail": "Recurring touchpoints build retention.",
+        "meta": "Community"
+      },
+      {
+        "title": "Perk stack",
+        "value": "Templates + chat",
+        "detail": "Bundle tangible value with access and belonging.",
+        "meta": "Offer"
+      }
+    ]
+  },
+  "workflow": {
+    "eyebrow": "Membership design",
+    "title": "Belonging needs structure or the membership will feel empty.",
+    "description": "A good community product makes the rhythm, archive, and premium access path obvious from the homepage onward.",
+    "steps": [
+      {
+        "title": "Define content and ritual objects",
+        "description": "Store sessions, posts, perks, events, and member perks separately."
+      },
+      {
+        "title": "Map payment to status",
+        "description": "Successful checkout should unlock archive access, event rights, and private perks."
+      },
+      {
+        "title": "Keep the room active",
+        "description": "Use weekly rituals, office hours, or member prompts to sustain value."
+      }
+    ]
+  },
+  "featureSections": [
+    {
+      "eyebrow": "Member experience",
+      "title": "Give people reasons to return every week.",
+      "description": "Retention comes from rhythm plus compounding archive value.",
+      "items": [
+        {
+          "title": "Ritual calendar",
+          "description": "Show office hours, live sessions, or recurring member moments.",
+          "meta": "Cadence"
+        },
+        {
+          "title": "Archive depth",
+          "description": "Make premium posts, replays, and downloads easy to browse.",
+          "meta": "Value"
+        },
+        {
+          "title": "Perk delivery",
+          "description": "Bundle templates, chat access, or discounts into the account area.",
+          "meta": "Benefits"
+        }
+      ]
+    },
+    {
+      "eyebrow": "Growth loops",
+      "title": "Keep the offer compact and personal.",
+      "description": "The strongest memberships usually sell one clear room for one clear audience.",
+      "items": [
+        {
+          "title": "Founding member angle",
+          "description": "Use limited-time positioning without overcomplicating the offer.",
+          "meta": "Conversion"
+        },
+        {
+          "title": "Upgrade path",
+          "description": "Introduce higher tiers later through coaching or small-group access.",
+          "meta": "Expansion"
+        },
+        {
+          "title": "Community support",
+          "description": "Blend AI answers with creator touchpoints for routine questions.",
+          "meta": "Support"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "What should the member get right away?",
+      "answer": "Immediate access to the archive, current rituals, and any promised perks or downloads."
+    },
+    {
+      "question": "How should the homepage feel?",
+      "answer": "More like a private publication or club invitation than a generic SaaS pricing page."
+    },
+    {
+      "question": "What data model matters first?",
+      "answer": "Members, posts, sessions, events, perks, and entitlement history create a solid base."
+    }
+  ],
   "paymentSuccess": {
     "eyebrow": "Payment completed",
     "title": "Payment received",

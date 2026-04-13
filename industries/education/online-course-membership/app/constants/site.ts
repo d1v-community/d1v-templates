@@ -1,6 +1,47 @@
+export type SiteThemeFamily =
+  | "ai"
+  | "business"
+  | "commerce"
+  | "creator"
+  | "education"
+  | "local";
+
+export type SiteThemeLayout =
+  | "command"
+  | "operations"
+  | "editorial"
+  | "academy"
+  | "service";
+
+export type SiteMetric = {
+  value: string;
+  label: string;
+  detail: string;
+};
+
+export type SiteExperiencePanel = {
+  title: string;
+  value: string;
+  detail: string;
+  meta: string;
+};
+
+export type SiteExperienceItem = {
+  title: string;
+  description: string;
+  meta?: string;
+};
+
 export type SiteConfig = {
   appTitle: string;
   siteDescription: string;
+  theme: {
+    family: SiteThemeFamily;
+    layout: SiteThemeLayout;
+    visualThesis: string;
+    contentPlan: string[];
+    interactionThesis: string[];
+  };
   navigation: {
     pricingLabel: string;
     loginLabel: string;
@@ -46,6 +87,29 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  heroMetrics: SiteMetric[];
+  showcase: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    panels: SiteExperiencePanel[];
+  };
+  workflow: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    steps: SiteExperienceItem[];
+  };
+  featureSections: Array<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: SiteExperienceItem[];
+  }>;
+  faq: Array<{
+    question: string;
+    answer: string;
+  }>;
   aiAssistant?: {
     enabled: boolean;
     badge: string;
@@ -83,6 +147,22 @@ export type SiteConfig = {
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "LessonLoop",
   "siteDescription": "Online course membership app with paid access, login, and student data.",
+  "theme": {
+    "family": "education",
+    "layout": "academy",
+    "visualThesis": "A structured learning experience that emphasizes progression, schedules, and instructional trust.",
+    "contentPlan": [
+      "Hero: outcome, cadence, and access path",
+      "Support: curriculum, milestones, and learner guidance",
+      "Detail: show how the student moves through the product",
+      "Final CTA: enroll, log in, or review pricing"
+    ],
+    "interactionThesis": [
+      "Progress surfaces should feel calm and instructional.",
+      "Sequence and milestones should be more visible than visual effects.",
+      "Trust comes from structure and clarity, not hype."
+    ]
+  },
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
@@ -136,6 +216,133 @@ export const SITE_CONFIG: SiteConfig = {
       "Replace placeholder content with student dashboard surfaces"
     ]
   },
+  "heroMetrics": [
+    {
+      "value": "Library",
+      "label": "Core asset",
+      "detail": "Evergreen lessons should feel browsable and current."
+    },
+    {
+      "value": "Self-paced",
+      "label": "Learning mode",
+      "detail": "Students need progress cues even without live cohorts."
+    },
+    {
+      "value": "Recurring",
+      "label": "Offer shape",
+      "detail": "Use membership to keep the library growing."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Course library",
+    "title": "Package lessons, progress, and member access like a real learning product.",
+    "description": "Use this template for paid lesson libraries, academy memberships, or evergreen learning products that need structure and retention.",
+    "panels": [
+      {
+        "title": "Featured track",
+        "value": "Launch systems",
+        "detail": "Lead with one high-value learning path rather than a flat course list.",
+        "meta": "Path"
+      },
+      {
+        "title": "Lesson depth",
+        "value": "86 lessons",
+        "detail": "Make the library feel substantial without becoming cluttered.",
+        "meta": "Library"
+      },
+      {
+        "title": "Progress",
+        "value": "Trackable",
+        "detail": "Learners should always know what to watch next.",
+        "meta": "Retention"
+      },
+      {
+        "title": "Member updates",
+        "value": "Monthly drops",
+        "detail": "Recurring content keeps the membership alive.",
+        "meta": "Lifecycle"
+      }
+    ]
+  },
+  "workflow": {
+    "eyebrow": "Learning product flow",
+    "title": "Build for progression, not just content storage.",
+    "description": "A paid lesson library wins when the path through the material is clear and the membership promise keeps growing.",
+    "steps": [
+      {
+        "title": "Model tracks and lessons",
+        "description": "Store tracks, lessons, resources, and learner completion state."
+      },
+      {
+        "title": "Unlock by plan",
+        "description": "Use successful payment to open the lesson library or premium tracks."
+      },
+      {
+        "title": "Surface momentum",
+        "description": "Show progress, next lessons, and update cadence clearly after login."
+      }
+    ]
+  },
+  "featureSections": [
+    {
+      "eyebrow": "Student experience",
+      "title": "Make the library feel like a path, not a folder.",
+      "description": "Structure is what turns content into a learning product.",
+      "items": [
+        {
+          "title": "Learning tracks",
+          "description": "Group lessons by outcome, difficulty, or role.",
+          "meta": "IA"
+        },
+        {
+          "title": "Progress state",
+          "description": "Persist watched, completed, and next-up lesson states.",
+          "meta": "Engagement"
+        },
+        {
+          "title": "Resource shelf",
+          "description": "Bundle worksheets, links, or downloads into each track.",
+          "meta": "Depth"
+        }
+      ]
+    },
+    {
+      "eyebrow": "Membership economics",
+      "title": "Keep the recurring offer simple and compounding.",
+      "description": "The value comes from library access plus ongoing additions.",
+      "items": [
+        {
+          "title": "Core library",
+          "description": "Use the archive as the main reason to subscribe.",
+          "meta": "Offer"
+        },
+        {
+          "title": "New lesson drops",
+          "description": "Signal freshness with a predictable release rhythm.",
+          "meta": "Retention"
+        },
+        {
+          "title": "Upgrade ladder",
+          "description": "Add coaching or cohort layers later without rebuilding the foundation.",
+          "meta": "Expansion"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "What should happen after purchase?",
+      "answer": "Create the learner account, unlock the library, and route the student straight into a recommended track."
+    },
+    {
+      "question": "What tables matter first?",
+      "answer": "Tracks, lessons, resources, enrollments, and lesson progress are the strongest base layer."
+    },
+    {
+      "question": "How should the homepage feel?",
+      "answer": "Structured and instructional, with the path through the content clearer than the marketing language."
+    }
+  ],
   "paymentSuccess": {
     "eyebrow": "Payment completed",
     "title": "Payment received",

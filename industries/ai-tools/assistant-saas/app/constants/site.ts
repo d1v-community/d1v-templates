@@ -1,6 +1,47 @@
+export type SiteThemeFamily =
+  | "ai"
+  | "business"
+  | "commerce"
+  | "creator"
+  | "education"
+  | "local";
+
+export type SiteThemeLayout =
+  | "command"
+  | "operations"
+  | "editorial"
+  | "academy"
+  | "service";
+
+export type SiteMetric = {
+  value: string;
+  label: string;
+  detail: string;
+};
+
+export type SiteExperiencePanel = {
+  title: string;
+  value: string;
+  detail: string;
+  meta: string;
+};
+
+export type SiteExperienceItem = {
+  title: string;
+  description: string;
+  meta?: string;
+};
+
 export type SiteConfig = {
   appTitle: string;
   siteDescription: string;
+  theme: {
+    family: SiteThemeFamily;
+    layout: SiteThemeLayout;
+    visualThesis: string;
+    contentPlan: string[];
+    interactionThesis: string[];
+  };
   navigation: {
     pricingLabel: string;
     loginLabel: string;
@@ -46,6 +87,29 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  heroMetrics: SiteMetric[];
+  showcase: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    panels: SiteExperiencePanel[];
+  };
+  workflow: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    steps: SiteExperienceItem[];
+  };
+  featureSections: Array<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: SiteExperienceItem[];
+  }>;
+  faq: Array<{
+    question: string;
+    answer: string;
+  }>;
   aiAssistant?: {
     enabled: boolean;
     badge: string;
@@ -83,6 +147,22 @@ export type SiteConfig = {
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "SignalDesk AI",
   "siteDescription": "AI assistant membership app with login, workspace billing, and paid access.",
+  "theme": {
+    "family": "ai",
+    "layout": "command",
+    "visualThesis": "A luminous command surface that feels like operating a live intelligence product, not browsing a generic SaaS landing page.",
+    "contentPlan": [
+      "Hero: operator-grade promise plus immediate paid access CTA",
+      "Support: live signal, memory, and usage guardrails",
+      "Detail: workspace modules that show how the product gets used every day",
+      "Final CTA: move the visitor into pricing or login without friction"
+    ],
+    "interactionThesis": [
+      "Telemetry panels should feel layered and live, not boxed and static.",
+      "Accent motion should suggest streaming data rather than decorative glow.",
+      "Assistant prompts should feel operational and specific to the offer."
+    ]
+  },
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
@@ -136,6 +216,133 @@ export const SITE_CONFIG: SiteConfig = {
       "Swap the placeholder UI for your chat workspace"
     ]
   },
+  "heroMetrics": [
+    {
+      "value": "24/7",
+      "label": "Copilot availability",
+      "detail": "Serve paid members without a support queue."
+    },
+    {
+      "value": "3",
+      "label": "Revenue levers",
+      "detail": "Seats, credits, and premium workflows."
+    },
+    {
+      "value": "<90s",
+      "label": "Checkout latency",
+      "detail": "Move a signed-in user from pitch to payment fast."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Workspace preview",
+    "title": "Turn pricing, onboarding, and live assistance into one operator surface.",
+    "description": "Use the starter to stage product demos, qualify buyers, and unlock paid assistant access without rebuilding auth or billing.",
+    "panels": [
+      {
+        "title": "Conversation queue",
+        "value": "18",
+        "detail": "Threads waiting for follow-up or automation review.",
+        "meta": "Live queue"
+      },
+      {
+        "title": "Seat coverage",
+        "value": "41",
+        "detail": "Active member seats with room for team expansion.",
+        "meta": "Paid workspaces"
+      },
+      {
+        "title": "Credit policy",
+        "value": "Usage caps",
+        "detail": "Gate heavier flows behind credits or premium tiers.",
+        "meta": "Monetization"
+      },
+      {
+        "title": "Handoff flow",
+        "value": "Ops ready",
+        "detail": "Escalate account issues into human support only when needed.",
+        "meta": "Support"
+      }
+    ]
+  },
+  "workflow": {
+    "eyebrow": "Launch flow",
+    "title": "Structure the product like an assistant business, not a demo bot.",
+    "description": "The starter already covers login and checkout. Focus the next pass on the commercial model around the assistant.",
+    "steps": [
+      {
+        "title": "Model workspace entitlements",
+        "description": "Tie seats, credits, and premium tools to successful checkout states."
+      },
+      {
+        "title": "Store threads and context",
+        "description": "Persist conversations, feedback, and tool usage for member workspaces."
+      },
+      {
+        "title": "Instrument support handoff",
+        "description": "Track when the assistant should escalate into humans or premium service."
+      }
+    ]
+  },
+  "featureSections": [
+    {
+      "eyebrow": "Product modules",
+      "title": "Give operators real surfaces to work from.",
+      "description": "These modules make the template feel like a paid AI product immediately.",
+      "items": [
+        {
+          "title": "Conversation history",
+          "description": "Recent threads, owner assignment, and unresolved flags.",
+          "meta": "Core workspace"
+        },
+        {
+          "title": "Usage guardrails",
+          "description": "Seat limits, credit burn, and model policy snapshots.",
+          "meta": "Billing aware"
+        },
+        {
+          "title": "Prompt operations",
+          "description": "Starter prompt packs, onboarding scripts, and fallback replies.",
+          "meta": "Admin tools"
+        }
+      ]
+    },
+    {
+      "eyebrow": "Go-to-market",
+      "title": "Make the purchase path feel inevitable.",
+      "description": "The paid offer should read as operationally mature from the first screen.",
+      "items": [
+        {
+          "title": "Plan framing",
+          "description": "Describe exactly what a paid workspace unlocks.",
+          "meta": "Conversion"
+        },
+        {
+          "title": "Activation handoff",
+          "description": "Route successful buyers into setup, imports, or kickoff questions.",
+          "meta": "Onboarding"
+        },
+        {
+          "title": "Team expansion",
+          "description": "Show how admins can add seats and credits over time.",
+          "meta": "Retention"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "What should happen after checkout?",
+      "answer": "Activate the workspace, issue starting credits or seats, and move the buyer into a first-run setup flow."
+    },
+    {
+      "question": "What should the database model first?",
+      "answer": "Threads, workspace memberships, credit balances, and support escalations are the fastest path to a real product."
+    },
+    {
+      "question": "Where does the AI concierge fit?",
+      "answer": "Use it as presales and onboarding support while the product workspace matures behind the paywall."
+    }
+  ],
   "paymentSuccess": {
     "eyebrow": "Payment completed",
     "title": "Payment received",

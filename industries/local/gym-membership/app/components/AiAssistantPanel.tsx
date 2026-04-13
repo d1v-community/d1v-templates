@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { SITE_CONFIG } from "~/constants/site";
+import { getSiteThemeClasses } from "~/constants/site-theme";
 
 type ChatMessage = {
 	role: "user" | "assistant";
@@ -14,6 +15,7 @@ export function AiAssistantPanel({
 	warningMessage = null,
 }: AiAssistantPanelProps) {
 	const assistant = SITE_CONFIG.aiAssistant;
+	const theme = getSiteThemeClasses(SITE_CONFIG.theme.family);
 	const [messages, setMessages] = useState<ChatMessage[]>([]);
 	const [input, setInput] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -96,11 +98,11 @@ export function AiAssistantPanel({
 	return (
 		<section
 			id="assistant"
-			className="border-t border-slate-200 bg-slate-50 py-16 dark:border-slate-800 dark:bg-slate-950"
+			className={`py-16 ${theme.assistantSection}`}
 		>
 			<div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:px-8">
 				<div className="space-y-6">
-					<div className="inline-flex w-fit items-center rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 dark:border-sky-500/30 dark:bg-sky-500/10 dark:text-sky-200">
+					<div className={`inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] ${theme.assistantBadge}`}>
 						{assistant.badge}
 					</div>
 					<div>
@@ -111,7 +113,7 @@ export function AiAssistantPanel({
 							{assistant.description}
 						</p>
 					</div>
-					<div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+					<div className={`rounded-3xl p-5 shadow-sm ${theme.assistantShell}`}>
 						<p className="text-xs uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
 							Ask about
 						</p>
@@ -122,7 +124,7 @@ export function AiAssistantPanel({
 									type="button"
 									onClick={() => handlePromptClick(prompt)}
 									disabled={loading || disabled}
-									className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-left text-sm text-slate-700 transition hover:border-sky-300 hover:text-sky-700 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200 dark:hover:border-sky-500/40 dark:hover:text-sky-200"
+									className="rounded-full border border-current/10 bg-white/70 px-3 py-2 text-left text-sm text-slate-700 transition hover:border-current/30 hover:text-slate-950 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-950 dark:text-slate-200 dark:hover:text-white"
 								>
 									{prompt}
 								</button>
@@ -131,7 +133,7 @@ export function AiAssistantPanel({
 					</div>
 				</div>
 
-				<div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-200/60 dark:border-slate-800 dark:bg-slate-900 dark:shadow-black/20">
+				<div className={`overflow-hidden rounded-[2rem] shadow-xl ${theme.assistantShell}`}>
 					<div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 dark:border-slate-800">
 						<div>
 							<p className="text-sm font-medium text-slate-950 dark:text-white">
@@ -171,7 +173,7 @@ export function AiAssistantPanel({
 											className={`max-w-[85%] rounded-3xl px-4 py-3 text-sm leading-6 ${
 												isAssistant
 													? "border border-slate-200 bg-white text-slate-700 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
-													: "bg-slate-950 text-white dark:bg-sky-500 dark:text-slate-950"
+													: theme.assistantUserBubble
 											}`}
 										>
 											{message.content}
@@ -207,12 +209,12 @@ export function AiAssistantPanel({
 								placeholder={assistant.placeholder}
 								rows={3}
 								disabled={loading || disabled}
-								className="min-h-[92px] flex-1 resize-none rounded-3xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-sky-500 dark:focus:bg-slate-900 dark:focus:ring-sky-500/20"
+								className={`min-h-[92px] flex-1 resize-none rounded-3xl border px-4 py-3 text-sm outline-none transition disabled:cursor-not-allowed disabled:opacity-60 ${theme.assistantInput}`}
 							/>
 							<button
 								type="submit"
 								disabled={loading || disabled || !input.trim()}
-								className="inline-flex min-w-[11rem] items-center justify-center rounded-full bg-slate-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400"
+								className={`inline-flex min-w-[11rem] items-center justify-center rounded-full px-5 py-3 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 ${theme.assistantAction}`}
 							>
 								{loading ? "Working..." : assistant.submitLabel}
 							</button>

@@ -1,6 +1,47 @@
+export type SiteThemeFamily =
+  | "ai"
+  | "business"
+  | "commerce"
+  | "creator"
+  | "education"
+  | "local";
+
+export type SiteThemeLayout =
+  | "command"
+  | "operations"
+  | "editorial"
+  | "academy"
+  | "service";
+
+export type SiteMetric = {
+  value: string;
+  label: string;
+  detail: string;
+};
+
+export type SiteExperiencePanel = {
+  title: string;
+  value: string;
+  detail: string;
+  meta: string;
+};
+
+export type SiteExperienceItem = {
+  title: string;
+  description: string;
+  meta?: string;
+};
+
 export type SiteConfig = {
   appTitle: string;
   siteDescription: string;
+  theme: {
+    family: SiteThemeFamily;
+    layout: SiteThemeLayout;
+    visualThesis: string;
+    contentPlan: string[];
+    interactionThesis: string[];
+  };
   navigation: {
     pricingLabel: string;
     loginLabel: string;
@@ -46,6 +87,29 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  heroMetrics: SiteMetric[];
+  showcase: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    panels: SiteExperiencePanel[];
+  };
+  workflow: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    steps: SiteExperienceItem[];
+  };
+  featureSections: Array<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: SiteExperienceItem[];
+  }>;
+  faq: Array<{
+    question: string;
+    answer: string;
+  }>;
   aiAssistant?: {
     enabled: boolean;
     badge: string;
@@ -83,6 +147,22 @@ export type SiteConfig = {
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "BriefClub",
   "siteDescription": "Paid newsletter product for premium posts, member access, and subscriber billing.",
+  "theme": {
+    "family": "creator",
+    "layout": "editorial",
+    "visualThesis": "A creator-led publishing surface with stronger voice, membership cues, and media-led storytelling.",
+    "contentPlan": [
+      "Hero: creator promise and member access hook",
+      "Support: show the cadence, archive, and premium perks",
+      "Detail: make post-purchase community or content access tangible",
+      "Final CTA: push the visitor into a simple paid join flow"
+    ],
+    "interactionThesis": [
+      "Treat content and community as the product, not as filler around checkout.",
+      "Visual rhythm should feel more like a publication than a dashboard.",
+      "Use contrast and spacing to create taste instead of loud gradients."
+    ]
+  },
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login"
@@ -135,6 +215,133 @@ export const SITE_CONFIG: SiteConfig = {
       "Replace the starter surface with archive and issue routes"
     ]
   },
+  "heroMetrics": [
+    {
+      "value": "Issue-led",
+      "label": "Product shape",
+      "detail": "Sell paid perspective through a clean archive."
+    },
+    {
+      "value": "Archive",
+      "label": "Retention asset",
+      "detail": "Older issues compound the membership value."
+    },
+    {
+      "value": "Simple",
+      "label": "Offer design",
+      "detail": "One paid plan is often enough to start."
+    }
+  ],
+  "showcase": {
+    "eyebrow": "Editorial surface",
+    "title": "Make the newsletter feel like a publication with a clean member archive and sharp offer.",
+    "description": "Use the template for premium essays, niche analysis, or operator briefings where issue cadence and archive access drive the business.",
+    "panels": [
+      {
+        "title": "Latest issue",
+        "value": "No. 128",
+        "detail": "Lead with the freshest paid thinking or briefing.",
+        "meta": "Front page"
+      },
+      {
+        "title": "Archive depth",
+        "value": "3 years",
+        "detail": "The archive should feel like an asset, not a forgotten list.",
+        "meta": "Value"
+      },
+      {
+        "title": "Member note",
+        "value": "Audio + text",
+        "detail": "Layer formats without complicating the offer.",
+        "meta": "Format"
+      },
+      {
+        "title": "Subscriber path",
+        "value": "Join in one step",
+        "detail": "Keep the conversion flow simple and immediate.",
+        "meta": "Checkout"
+      }
+    ]
+  },
+  "workflow": {
+    "eyebrow": "Publishing flow",
+    "title": "The archive is part of the product, not an afterthought.",
+    "description": "A paid newsletter should make the latest issue, archive depth, and member value obvious before the paywall.",
+    "steps": [
+      {
+        "title": "Model issues and access",
+        "description": "Store issues, excerpts, formats, and archive visibility rules."
+      },
+      {
+        "title": "Tie checkout to archive entitlement",
+        "description": "Successful payment should unlock the issue archive instantly."
+      },
+      {
+        "title": "Preserve editorial clarity",
+        "description": "Keep the page spare, fast to scan, and centered on the publication itself."
+      }
+    ]
+  },
+  "featureSections": [
+    {
+      "eyebrow": "Publication design",
+      "title": "Let the issue and archive do the selling.",
+      "description": "Good editorial products feel composed, not busy.",
+      "items": [
+        {
+          "title": "Lead issue",
+          "description": "Feature one standout issue and one short reason to care.",
+          "meta": "Attention"
+        },
+        {
+          "title": "Archive browser",
+          "description": "Browse by topic, date, or series once the member is inside.",
+          "meta": "Depth"
+        },
+        {
+          "title": "Format clarity",
+          "description": "Tell readers whether they get text, audio, downloads, or all three.",
+          "meta": "Offer"
+        }
+      ]
+    },
+    {
+      "eyebrow": "Membership value",
+      "title": "Keep the subscription promise clean.",
+      "description": "One concise promise beats a stack of generic perks.",
+      "items": [
+        {
+          "title": "Paid-only archive",
+          "description": "Position the archive as the compounding reason to stay subscribed.",
+          "meta": "Retention"
+        },
+        {
+          "title": "Member extras",
+          "description": "Add occasional downloads, notes, or Q&A without bloating the core offer.",
+          "meta": "Perks"
+        },
+        {
+          "title": "Renewal signal",
+          "description": "Show issue cadence and editorial consistency clearly.",
+          "meta": "Trust"
+        }
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "What should the pricing promise be?",
+      "answer": "A short explanation of what readers get every issue plus archive access is usually enough."
+    },
+    {
+      "question": "What should happen after checkout?",
+      "answer": "Confirm the subscription and route the user into the archive or the latest premium issue immediately."
+    },
+    {
+      "question": "How should the page look?",
+      "answer": "More like a publication front page than a startup marketing site. Keep it spare and editorial."
+    }
+  ],
   "paymentSuccess": {
     "eyebrow": "Payment completed",
     "title": "Payment received",
