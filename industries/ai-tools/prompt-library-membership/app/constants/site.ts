@@ -4,6 +4,7 @@ export type SiteConfig = {
   navigation: {
     pricingLabel: string;
     loginLabel: string;
+    assistantLabel?: string;
   };
   footer: {
     line: string;
@@ -45,6 +46,20 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  aiAssistant?: {
+    enabled: boolean;
+    badge: string;
+    title: string;
+    description: string;
+    assistantName: string;
+    welcomeMessage: string;
+    placeholder: string;
+    submitLabel: string;
+    resetLabel: string;
+    suggestedPrompts: string[];
+    systemPrompt: string;
+    model?: string;
+  };
   paymentSuccess: {
     eyebrow: string;
     title: string;
@@ -70,7 +85,8 @@ export const SITE_CONFIG: SiteConfig = {
   "siteDescription": "Prompt membership app with gated content access and recurring billing.",
   "navigation": {
     "pricingLabel": "Pricing",
-    "loginLabel": "Login"
+    "loginLabel": "Login",
+    "assistantLabel": "Guide"
   },
   "footer": {
     "line": "Built with D1V"
@@ -147,5 +163,23 @@ export const SITE_CONFIG: SiteConfig = {
     ],
     "primaryButtonLabel": "Return to pricing",
     "secondaryButtonLabel": "Go to homepage"
+  },
+  "aiAssistant": {
+    "enabled": true,
+    "badge": "Member guide",
+    "title": "Turn your prompt catalog into a guided buying experience.",
+    "description": "Give visitors a short, strong assistant that recommends packs, explains access, and helps members find the right workflows.",
+    "assistantName": "PromptVault Guide",
+    "welcomeMessage": "I can help visitors understand the library, recommend prompt packs, and explain membership access.",
+    "placeholder": "Ask which prompts fit your workflow or what membership includes...",
+    "submitLabel": "Ask guide",
+    "resetLabel": "Clear thread",
+    "suggestedPrompts": [
+      "What kinds of prompt packs should I launch first?",
+      "How can I explain membership value quickly?",
+      "What content should be free vs members-only?"
+    ],
+    "systemPrompt": "You are PromptVault Guide, a concise assistant for a paid prompt library. Help users understand pack structure, membership value, and discovery strategy. Keep answers practical, concise, and grounded in the visible template.",
+    "model": "kimi-k2.5"
   }
 };

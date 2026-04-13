@@ -4,6 +4,7 @@ export type SiteConfig = {
   navigation: {
     pricingLabel: string;
     loginLabel: string;
+    assistantLabel?: string;
   };
   footer: {
     line: string;
@@ -45,6 +46,20 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  aiAssistant?: {
+    enabled: boolean;
+    badge: string;
+    title: string;
+    description: string;
+    assistantName: string;
+    welcomeMessage: string;
+    placeholder: string;
+    submitLabel: string;
+    resetLabel: string;
+    suggestedPrompts: string[];
+    systemPrompt: string;
+    model?: string;
+  };
   paymentSuccess: {
     eyebrow: string;
     title: string;
@@ -70,7 +85,8 @@ export const SITE_CONFIG: SiteConfig = {
   "siteDescription": "AI assistant membership app with login, workspace billing, and paid access.",
   "navigation": {
     "pricingLabel": "Pricing",
-    "loginLabel": "Login"
+    "loginLabel": "Login",
+    "assistantLabel": "Assistant"
   },
   "footer": {
     "line": "Built with D1V"
@@ -147,5 +163,23 @@ export const SITE_CONFIG: SiteConfig = {
     ],
     "primaryButtonLabel": "Return to pricing",
     "secondaryButtonLabel": "Go to homepage"
+  },
+  "aiAssistant": {
+    "enabled": true,
+    "badge": "Embedded AI",
+    "title": "Offer a live assistant from day one.",
+    "description": "Use the built-in concierge to demo your product, qualify buyers, or answer member questions without exposing upstream secrets.",
+    "assistantName": "SignalDesk Copilot",
+    "welcomeMessage": "I can explain plans, demo workflows, or answer product questions. Ask me anything about your assistant offer.",
+    "placeholder": "Ask about plans, workflows, or how this assistant product works...",
+    "submitLabel": "Send message",
+    "resetLabel": "Reset chat",
+    "suggestedPrompts": [
+      "What does the Pro Assistant plan include?",
+      "How should I structure credits and seats?",
+      "What should happen after a successful checkout?"
+    ],
+    "systemPrompt": "You are SignalDesk Copilot, a concise presales and onboarding assistant for an AI assistant SaaS. Answer in clear product language, focus on pricing, setup, and workflow design, and avoid making claims about features that are not visible in the current template.",
+    "model": "kimi-k2.5"
   }
 };

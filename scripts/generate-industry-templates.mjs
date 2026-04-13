@@ -43,6 +43,7 @@ function deepMerge(base, override) {
 
 function buildSiteConfig(template) {
   const pricingLabel = template.pricing?.badge || "Membership";
+  const aiAssistant = template.aiAssistant ?? null;
 
   return deepMerge(
     {
@@ -51,6 +52,7 @@ function buildSiteConfig(template) {
       navigation: {
         pricingLabel: "Pricing",
         loginLabel: "Login",
+        assistantLabel: aiAssistant?.assistantName ? "AI Concierge" : undefined,
       },
       footer: {
         line: "Built with D1V",
@@ -137,9 +139,11 @@ function buildSiteConfig(template) {
       },
     },
     {
+      navigation: template.navigation,
       home: template.home,
       pricing: template.pricing,
       templateSurface: template.templateSurface,
+      aiAssistant: template.aiAssistant,
       paymentSuccess: template.paymentSuccess,
       paymentCancel: template.paymentCancel,
     },
@@ -148,6 +152,36 @@ function buildSiteConfig(template) {
 
 function buildReadme(template) {
   const templateRepo = `d1v-community/${template.repositoryName}`;
+  const baseFeatures = [
+    "- Remix + Tailwind application based on `remix-neon-auth-pay`",
+    "- Passwordless email login",
+    "- Neon / PostgreSQL + Drizzle ORM",
+    "- Hosted checkout and pricing page",
+    "- Local bootstrap script for pulling project env vars into `.env`",
+  ];
+
+  if (template.aiAssistant?.enabled) {
+    baseFeatures.splice(
+      4,
+      0,
+      "- Optional on-page AI concierge powered by `D1V_PAI_*`",
+    );
+  }
+
+  const aiSetupBlock = template.aiAssistant?.enabled
+    ? `
+Optional AI assistant env:
+
+\`\`\`bash
+D1V_PAI_BASE_URL=https://pai.d1v.ai/v1
+D1V_PAI_API_KEY=your_project_level_pai_api_key
+\`\`\`
+`
+    : "";
+
+  const aiNextStep = template.aiAssistant?.enabled
+    ? `- Tune the built-in AI concierge prompt and connect it to your product workflow\n`
+    : "";
 
   return `# ${template.name}
 
@@ -155,11 +189,7 @@ ${template.description}
 
 ## What You Start With
 
-- Remix + Tailwind application based on \`remix-neon-auth-pay\`
-- Passwordless email login
-- Neon / PostgreSQL + Drizzle ORM
-- Hosted checkout and pricing page
-- Local bootstrap script for pulling project env vars into \`.env\`
+${baseFeatures.join("\n")}
 
 ## Product Direction
 
@@ -184,6 +214,7 @@ AUTH_TOKEN=your_token \\
 BACKEND_ADMIN_API_BASE=http://localhost:8999 \\
 node scripts/bootstrap-local-env.mjs --template-repo ${templateRepo} --write-path .env
 \`\`\`
+${aiSetupBlock}
 
 ## Suggested Next Build Steps
 
@@ -191,7 +222,7 @@ node scripts/bootstrap-local-env.mjs --template-repo ${templateRepo} --write-pat
 - Extend the Drizzle schema for your product entities
 - Map successful checkout to entitlements, seats, bookings, or premium access
 - Add success-state fulfillment beyond the hosted checkout return pages
-`;
+${aiNextStep}`;
 }
 
 async function main() {

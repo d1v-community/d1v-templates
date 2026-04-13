@@ -182,23 +182,88 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - Owner: main agent, validated by `@entry-shell-qa` and `@commerce-flow-qa`
   - Verification: `backend_admin` template catalog includes `d1v-community/remix-neon-auth-pay` plus promoted industry repos; tests for `/api/projects/templates` and explicit template creation pass
   - Status: in_progress
-  - Evidence: updated `backend_admin/utils/quickly_llm/project_meta_generator.py` to include the payment foundation plus 12 industry repos; changed `DEFAULT_TEMPLATE_REPO` to `d1v-community/remix-neon-auth-pay`; updated the template-list API tests to compare against `TEMPLATE_CATALOG`
-  - Risk / Notes: `python3 -m pytest ...` could not be completed in the current shell because `pytest` is unavailable, so automated backend verification is still incomplete even though the code changes are in place
+  - Evidence: updated `backend_admin/utils/quickly_llm/project_meta_generator.py` to include the payment foundation plus 12 industry repos; changed `DEFAULT_TEMPLATE_REPO` to `d1v-community/remix-neon-auth-pay`; updated the template-list API tests to compare against `TEMPLATE_CATALOG`; live `GET /api/projects/templates` verification with a real JWT returned `code: 0` and `count: 16`; `poetry run pytest backend_admin/tests/test_project_templates_api.py -q` passed
+  - Risk / Notes: `backend_admin/tests/test_user_project_apis.py` still contains broader expectation drift unrelated to the new template catalog (for example legacy `code == 200` assertions, routes that now 404, and balance-guard failures in create-project tests), so the backend catalog work is verified for template discovery but not yet for the entire legacy user-project test suite
 
 - [ ] Promote the first batch of industry blueprints into runnable templates
   - Owner: main agent, validated by `@ui-consistency-qa`, `@commerce-flow-qa`, and `@desktop-adaptive-qa`
   - Verification: each current industry directory contains a runnable Remix app, template-local `AGENTS.md`, industry-specific copy, and passes `pnpm run typecheck`
   - Status: done
-  - Evidence: generated 12 runnable directories under `industries/`; each now contains app code, docs, `AGENTS.md`, `.d1v-template.json`, and package metadata; `pnpm install --frozen-lockfile` + `pnpm run typecheck` passed in all 12 industry directories; each directory was published to `d1v-community/<name>-template` and GitHub template mode was enabled
+  - Evidence: generated 12 runnable directories under `industries/`; each now contains app code, docs, `AGENTS.md`, `.d1v-template.json`, and package metadata; the initial promotion wave passed `pnpm install --frozen-lockfile` + `pnpm run typecheck` in all 12 industry directories; each directory was published to `d1v-community/<name>-template` and GitHub template mode was enabled; a later regeneration pass deepened the shared landing surface so every template now exposes offer shape, shipped starter capabilities, workflow/data hooks, and fulfillment-path blocks derived from its site config
   - Risk / Notes: local directory copies and published repos must be kept in sync on future updates, so follow-up automation should treat the root registry as the source of truth for regeneration
 
 - [ ] Verify local database-backed setup flow for promoted templates
   - Owner: main agent, validated by `@context-auth-qa` and `@ux-quality-qa`
   - Verification: at least one promoted template completes the documented flow of project creation, env export to local `.env`, migration, seed, and app startup without manual secret editing beyond user auth token and server base URL
+  - Status: done
+  - Evidence: patched `opcode-api/src/services/github.rs` so GitHub template clones tolerate propagation delay; rebuilt and restarted the local `opcode-container`; real `POST /api/projects/create-with-integrations` succeeded for `template_repo: d1v-community/assistant-saas-template` and produced backend project `ai_commerce_platform_5spkc00512` plus GitHub repo `d1v-community/ai_commerce_platform_736139`; exported env vars into `industries/ai-tools/assistant-saas/.env` via `pnpm run env:bootstrap`; ran `pnpm run db:migrate`, `pnpm run db:seed`, `pnpm run typecheck`, and `pnpm run build`; started the app with `pnpm exec remix vite:dev --host 127.0.0.1 --port 4273` and confirmed `GET /` and `GET /pricing` both returned `200`
+  - Risk / Notes: the local Docker run currently needs `OPCODE__SERVER__IP_WHITELIST=all` to allow host-to-container traffic on macOS Docker Desktop; if local-hardening remains important, that whitelist behavior should be revisited separately from template generation
+
+- [x] Add reusable AI concierge/chat support to relevant industry templates
+  - Owner: main agent, validated by `@ui-consistency-qa`, `@ux-quality-qa`, and `@desktop-adaptive-qa`
+  - Verification: `foundations/remix-neon-auth-pay` exposes an OpenAI-compatible server route backed by `D1V_PAI_*`, relevant industry configs enable the feature with domain-specific copy, regenerated templates compile, and targeted chat-related tests/type checks pass
+  - Status: done
+  - Evidence: added optional `D1V_PAI_BASE_URL` / `D1V_PAI_API_KEY` handling plus `/api/ai/chat`, `AiAssistantPanel`, and homepage/header wiring in `foundations/remix-neon-auth-pay`; updated `.env.example` and `README.md`; extended `scripts/generate-industry-templates.mjs` to pass through `aiAssistant` and AI-aware README content; enabled domain-specific AI assistant configs for `assistant-saas`, `prompt-library-membership`, `client-portal`, `cohort-course`, `online-course-membership`, and `clinic-booking`; regenerated all 12 industry templates; `pnpm run typecheck` passed in `foundations/remix-neon-auth-pay` and in the six AI-enabled generated templates after fresh `pnpm install --frozen-lockfile`
+  - Risk / Notes: the feature should not force AI UI onto every industry template; first-sync behavior must avoid charging historical upstream logs and docs must explain optional `D1V_PAI_*` setup clearly
+
+- [ ] Bootstrap real project envs into every industry template and verify local full-stack flows
+  - Owner: main agent, validated by `@context-auth-qa`, `@commerce-flow-qa`, and `@ux-quality-qa`
+  - Verification: each `industries/*/*` template writes a fresh `.env` via `scripts/bootstrap-local-env.mjs` backed by a real `create-with-integrations` project, then passes `pnpm run db:migrate`, `pnpm run db:seed`, `pnpm run build`, and targeted HTTP smoke checks for `/`, `/pricing`, and auth/payment-related routes where applicable
+  - Status: done
+  - Evidence: minted a local JWT for the funded test user `template.e2e@example.com`; used each template-local `scripts/bootstrap-local-env.mjs` against real `POST /api/projects/create-with-integrations` + env export to write fresh `.env` files into all 12 `industries/*/*` directories; transient opcode 500s affected `prompt-library-membership` and `digital-downloads` on the first pass but both succeeded on retry; all 12 templates then passed `pnpm install --frozen-lockfile`, `pnpm run db:migrate`, `pnpm run db:seed`, and `pnpm run build`; runtime smoke using `remix-serve` with dotenv-loaded `.env` returned `200` for `/` and `/pricing` plus successful `POST /api/auth/send-code` in all 12 templates; direct upstream checks confirmed `GET /v1/models` and `POST /v1/chat/completions` work with project-level `D1V_PAI_API_KEY`; switching the shared AI client from server `fetch` to `https.request` and standardizing AI-enabled templates on `kimi-k2.5` restored successful `/api/ai/chat` responses in runtime verification for `assistant-saas`
+  - Risk / Notes: requires a valid user JWT with positive balance; project creation consumes upstream integrations and may hit provider-side rate limits; the remaining AI-enabled templates still need the same runtime route sweep before publication so template repos and root-generated copies stay in lockstep
+
+- [ ] Publish the regenerated foundation and industry repos after the AI runtime fix
+  - Owner: main agent, validated by `@entry-shell-qa`, `@ux-quality-qa`, and `@ui-consistency-qa`
+  - Verification: `foundations/remix-neon-auth-pay` is committed and pushed first; root `d1v-templates` updates the gitlink plus regenerated industry files; all touched published repos stay free of local secrets and match the verified local source
+  - Status: in_progress
+  - Evidence: pending
+  - Risk / Notes: publication must happen in dependency order because the root registry points at the foundation gitlink; `.env` must remain untracked across the entire release pass
+
+- [ ] Run an AI runtime verification and publication sweep for every AI-enabled template
+  - Owner: main agent, validated by `@context-auth-qa`, `@desktop-adaptive-qa`, and `@ux-quality-qa`
+  - Verification: each AI-enabled template starts with its bootstrapped `.env`, returns success from `POST /api/ai/chat`, and is then published so the remote repo matches the working local copy
   - Status: pending
-  - Evidence: sub-agent review confirmed the minimal live path is `POST /api/projects/create-with-integrations` -> `GET /api/projects/{project_id}/env-vars/export` -> local `.env` write, and the bootstrap script now implements that protocol
-  - Risk / Notes: live verification still requires a valid user bearer token with positive balance plus a reachable backend API, so this step remains open until an end-to-end run is executed
+  - Evidence: `assistant-saas` already returns a successful `/api/ai/chat` response after the `https.request` + `kimi-k2.5` fix; the remaining AI-enabled templates still need the same runtime check
+  - Risk / Notes: failures here are expected to reveal per-template config drift, stale generated files, or upstream account funding gaps rather than shared foundation issues
+
+## Next-Phase Industry Optimization Map
+
+- [ ] Push the AI-tools category toward a chat-first product surface
+  - Owner: main agent, validated by `@ui-consistency-qa`, `@ux-quality-qa`, and `@commerce-flow-qa`
+  - Verification: `assistant-saas` and `prompt-library-membership` gain distinct visual direction, stronger conversion copy, and real product modules such as conversation history, saved prompts, packs, or usage/seat states without regressing auth and checkout flows
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: these templates should feel like operator products, not generic SaaS landing pages; design can skew more cinematic and control-room-like than the other categories
+
+- [ ] Push the business category toward service operations and client delivery
+  - Owner: main agent, validated by `@ui-consistency-qa`, `@context-auth-qa`, and `@desktop-adaptive-qa`
+  - Verification: `client-portal` and `internal-dashboard` gain clearer workspace IA, table/timeline/detail patterns, and domain entities such as projects, milestones, tickets, tasks, or KPI cards
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: these templates should favor sober enterprise design, stronger information density, and clearer role-based flows over marketing-heavy presentation
+
+- [ ] Push the commerce and creator categories toward editorial selling and fulfillment
+  - Owner: main agent, validated by `@commerce-flow-qa`, `@ui-consistency-qa`, and `@ux-quality-qa`
+  - Verification: `digital-downloads`, `preorder-launch`, `community-membership`, and `paid-newsletter` gain differentiated merchandising layouts plus post-purchase fulfillment surfaces such as downloads, prelaunch reservations, issue archives, perks, or member feeds
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: these templates need stronger product storytelling, media hierarchy, and entitlement-aware post-checkout experiences rather than just a pricing page and thank-you page
+
+- [ ] Push the education and local-service categories toward scheduling, progress, and trust
+  - Owner: main agent, validated by `@desktop-adaptive-qa`, `@ux-quality-qa`, and `@context-auth-qa`
+  - Verification: `cohort-course`, `online-course-membership`, `clinic-booking`, and `gym-membership` gain domain-specific flows such as syllabus/progress tracking, lesson libraries, booking availability, appointment states, plans, and service FAQs
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: these templates should feel operational and trustworthy on mobile first; local-service templates in particular need stronger time, capacity, and contact affordances
+
+- [ ] Establish a category-level design system matrix before deeper template divergence
+  - Owner: main agent, validated by `@ui-consistency-qa` and `@desktop-adaptive-qa`
+  - Verification: `PLAN.md` and generation inputs define a clear visual system per category covering typography, palette, layout rhythm, motion tone, and component emphasis so future regeneration preserves intentional differences
+  - Status: pending
+  - Evidence: pending
+  - Risk / Notes: without a category matrix, repeated regeneration will collapse the templates back toward one shared look and erase industry differentiation
 
 ## Immediate Next Step
 
-Implement the generator/bootstrap toolchain first so the 12 industry directories can be promoted consistently instead of being hand-maintained copies.
+Commit and push the AI-capable foundation plus regenerated root registry changes, then run the AI-enabled template runtime/publication sweep before starting category-by-category design and functionality divergence.

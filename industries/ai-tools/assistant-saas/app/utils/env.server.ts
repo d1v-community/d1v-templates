@@ -14,6 +14,8 @@ const envSchema = z.object({
 	PAY_API_TOKEN: z.string().optional(),
 	PAY_SUCCESS_URL: z.string().url().optional(),
 	PAY_CANCEL_URL: z.string().url().optional(),
+	D1V_PAI_BASE_URL: z.string().url().optional(),
+	D1V_PAI_API_KEY: z.string().optional(),
 });
 
 const parsed = envSchema.safeParse(process.env);
@@ -31,6 +33,13 @@ function normalizePayBaseUrl(value?: string | null): string {
 	const normalized = (value ?? "").replace(/\/+$/, "");
 	if (!normalized) return "https://pay.d1v.ai/api";
 	return normalized.endsWith("/api") ? normalized : `${normalized}/api`;
+}
+
+function normalizePaiBaseUrl(value?: string | null): string {
+	const normalized = (value ?? "").replace(/\/+$/, "");
+	if (!normalized) return "https://pai.d1v.ai/v1";
+	if (normalized.endsWith("/v1")) return normalized;
+	return `${normalized}/v1`;
 }
 
 export const env = {
@@ -62,6 +71,14 @@ export const env = {
 	PAY_CANCEL_URL: parsed.success
 		? parsed.data.PAY_CANCEL_URL
 		: process.env.PAY_CANCEL_URL,
+	D1V_PAI_BASE_URL: normalizePaiBaseUrl(
+		parsed.success
+			? parsed.data.D1V_PAI_BASE_URL
+			: process.env.D1V_PAI_BASE_URL,
+	),
+	D1V_PAI_API_KEY: parsed.success
+		? parsed.data.D1V_PAI_API_KEY
+		: process.env.D1V_PAI_API_KEY,
 };
 
 export const isProd = env.NODE_ENV === "production";
@@ -109,4 +126,27 @@ export function getPaymentSuccessUrl(): string {
 
 export function getPaymentCancelUrl(): string {
 	return env.PAY_CANCEL_URL ?? `${env.APP_URL}/pay/cancel`;
+}
+
+export function hasAiAssistantConfig(): boolean {
+	return Boolean(env.D1V_PAI_API_KEY);
+}
+
+export function getAiAssistantConfigWarningMessage(
+	isAiAssistantEnabled: boolean,
+): string | null {
+	if (!isAiAssistantEnabled) return null;
+
+	const missing: string[] = [];
+
+	if (!process.env.D1V_PAI_BASE_URL) {
+		missing.push("D1V_PAI_BASE_URL");
+	}
+	if (!env.D1V_PAI_API_KEY) {
+		missing.push("D1V_PAI_API_KEY");
+	}
+
+	if (missing.length === 0) return null;
+
+	return `⚠️ AI assistant is not fully configured. Missing environment variables: ${missing.join(", ")}.`;
 }

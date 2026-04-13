@@ -39,6 +39,27 @@
         "Grant assistant entitlements after successful checkout",
         "Swap the placeholder UI for your chat workspace"
       ]
+    },
+    "navigation": {
+      "assistantLabel": "Assistant"
+    },
+    "aiAssistant": {
+      "enabled": true,
+      "badge": "Embedded AI",
+      "title": "Offer a live assistant from day one.",
+      "description": "Use the built-in concierge to demo your product, qualify buyers, or answer member questions without exposing upstream secrets.",
+      "assistantName": "SignalDesk Copilot",
+      "welcomeMessage": "I can explain plans, demo workflows, or answer product questions. Ask me anything about your assistant offer.",
+      "placeholder": "Ask about plans, workflows, or how this assistant product works...",
+      "submitLabel": "Send message",
+      "resetLabel": "Reset chat",
+      "suggestedPrompts": [
+        "What does the Pro Assistant plan include?",
+        "How should I structure credits and seats?",
+        "What should happen after a successful checkout?"
+      ],
+      "systemPrompt": "You are SignalDesk Copilot, a concise presales and onboarding assistant for an AI assistant SaaS. Answer in clear product language, focus on pricing, setup, and workflow design, and avoid making claims about features that are not visible in the current template.",
+      "model": "kimi-k2.5"
     }
   },
   {
@@ -81,6 +102,27 @@
         "Map paid members to content entitlements",
         "Replace placeholder sections with searchable library pages"
       ]
+    },
+    "navigation": {
+      "assistantLabel": "Guide"
+    },
+    "aiAssistant": {
+      "enabled": true,
+      "badge": "Member guide",
+      "title": "Turn your prompt catalog into a guided buying experience.",
+      "description": "Give visitors a short, strong assistant that recommends packs, explains access, and helps members find the right workflows.",
+      "assistantName": "PromptVault Guide",
+      "welcomeMessage": "I can help visitors understand the library, recommend prompt packs, and explain membership access.",
+      "placeholder": "Ask which prompts fit your workflow or what membership includes...",
+      "submitLabel": "Ask guide",
+      "resetLabel": "Clear thread",
+      "suggestedPrompts": [
+        "What kinds of prompt packs should I launch first?",
+        "How can I explain membership value quickly?",
+        "What content should be free vs members-only?"
+      ],
+      "systemPrompt": "You are PromptVault Guide, a concise assistant for a paid prompt library. Help users understand pack structure, membership value, and discovery strategy. Keep answers practical, concise, and grounded in the visible template.",
+      "model": "kimi-k2.5"
     }
   },
   {
@@ -165,6 +207,27 @@
         "Map successful payments to active portal accounts",
         "Replace placeholder blocks with project dashboards"
       ]
+    },
+    "navigation": {
+      "assistantLabel": "Support"
+    },
+    "aiAssistant": {
+      "enabled": true,
+      "badge": "Client support",
+      "title": "Add a smart support desk to the client experience.",
+      "description": "Use the built-in assistant to answer project questions, route common support requests, and reduce manual client handoffs.",
+      "assistantName": "ClientRoom Support",
+      "welcomeMessage": "I can help with portal access, project updates, and common delivery questions.",
+      "placeholder": "Ask about portal access, milestones, files, or support requests...",
+      "submitLabel": "Ask support",
+      "resetLabel": "New thread",
+      "suggestedPrompts": [
+        "How should a client portal handle milestones and files?",
+        "What support questions should be automated first?",
+        "How do I map payment to portal access?"
+      ],
+      "systemPrompt": "You are ClientRoom Support, a concise assistant for a premium client portal. Focus on client access, delivery visibility, and support triage. Offer practical guidance and keep answers aligned with the current starter's capabilities.",
+      "model": "kimi-k2.5"
     }
   },
   {
@@ -375,6 +438,27 @@
         "Grant student access after successful payment",
         "Replace placeholder content with curriculum and session views"
       ]
+    },
+    "navigation": {
+      "assistantLabel": "Advisor"
+    },
+    "aiAssistant": {
+      "enabled": true,
+      "badge": "Enrollment AI",
+      "title": "Answer enrollment questions before a human has to.",
+      "description": "Use the assistant to handle curriculum fit, session timing, and payment questions so interested students move faster.",
+      "assistantName": "CohortOS Advisor",
+      "welcomeMessage": "I can help students understand cohort fit, enrollment steps, and what happens after payment.",
+      "placeholder": "Ask about enrollment, curriculum fit, sessions, or onboarding...",
+      "submitLabel": "Ask advisor",
+      "resetLabel": "Reset advisor",
+      "suggestedPrompts": [
+        "What should happen after a student pays?",
+        "How do I present cohort dates and seat limits?",
+        "What student onboarding data should I store?"
+      ],
+      "systemPrompt": "You are CohortOS Advisor, a concise enrollment assistant for a cohort-based course business. Help with seat reservation, onboarding, curriculum questions, and payment flow expectations. Do not invent unsupported operational details.",
+      "model": "kimi-k2.5"
     }
   },
   {
@@ -417,6 +501,27 @@
         "Gate learning routes by active membership",
         "Replace placeholder content with student dashboard surfaces"
       ]
+    },
+    "navigation": {
+      "assistantLabel": "Coach"
+    },
+    "aiAssistant": {
+      "enabled": true,
+      "badge": "Learning concierge",
+      "title": "Add an AI coach to your course membership template.",
+      "description": "Use a built-in assistant to guide students to the right lessons, answer access questions, and keep the product feeling active.",
+      "assistantName": "LessonLoop Coach",
+      "welcomeMessage": "I can recommend lessons, explain membership access, and help students understand how to use this course product.",
+      "placeholder": "Ask about lessons, student access, progress, or course structure...",
+      "submitLabel": "Ask coach",
+      "resetLabel": "Reset coach",
+      "suggestedPrompts": [
+        "How should I structure courses and modules?",
+        "What should members see after checkout?",
+        "How can an AI coach improve retention?"
+      ],
+      "systemPrompt": "You are LessonLoop Coach, a concise assistant for an online course membership product. Help with lesson discovery, access questions, onboarding, and retention-oriented product guidance. Stay grounded in the current template surface.",
+      "model": "kimi-k2.5"
     }
   },
   {
@@ -459,6 +564,27 @@
         "Map deposits to confirmed bookings",
         "Replace placeholder content with scheduling and patient portal views"
       ]
+    },
+    "navigation": {
+      "assistantLabel": "Assistant"
+    },
+    "aiAssistant": {
+      "enabled": true,
+      "badge": "Patient concierge",
+      "title": "Use AI to answer booking questions before the front desk does.",
+      "description": "Give patients a fast booking concierge for deposits, appointment prep, and portal access while keeping your API key server-side.",
+      "assistantName": "ClinicFlow Concierge",
+      "welcomeMessage": "I can help with booking steps, deposits, intake expectations, and common patient access questions.",
+      "placeholder": "Ask about appointments, deposits, intake, or patient portal access...",
+      "submitLabel": "Ask concierge",
+      "resetLabel": "Reset chat",
+      "suggestedPrompts": [
+        "How should I handle booking deposits?",
+        "What should patients see after they book?",
+        "Which questions can AI answer before a visit?"
+      ],
+      "systemPrompt": "You are ClinicFlow Concierge, a concise booking and support assistant for a clinic booking product. Help with scheduling flow, deposits, intake expectations, and patient portal questions. Avoid medical advice and keep answers operational.",
+      "model": "kimi-k2.5"
     }
   },
   {

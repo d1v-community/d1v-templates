@@ -4,6 +4,7 @@ export type SiteConfig = {
   navigation: {
     pricingLabel: string;
     loginLabel: string;
+    assistantLabel?: string;
   };
   footer: {
     line: string;
@@ -45,6 +46,20 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  aiAssistant?: {
+    enabled: boolean;
+    badge: string;
+    title: string;
+    description: string;
+    assistantName: string;
+    welcomeMessage: string;
+    placeholder: string;
+    submitLabel: string;
+    resetLabel: string;
+    suggestedPrompts: string[];
+    systemPrompt: string;
+    model?: string;
+  };
   paymentSuccess: {
     eyebrow: string;
     title: string;
@@ -70,7 +85,8 @@ export const SITE_CONFIG: SiteConfig = {
   "siteDescription": "Client portal for agencies and service businesses with member access and project data.",
   "navigation": {
     "pricingLabel": "Pricing",
-    "loginLabel": "Login"
+    "loginLabel": "Login",
+    "assistantLabel": "Support"
   },
   "footer": {
     "line": "Built with D1V"
@@ -147,5 +163,23 @@ export const SITE_CONFIG: SiteConfig = {
     ],
     "primaryButtonLabel": "Return to pricing",
     "secondaryButtonLabel": "Go to homepage"
+  },
+  "aiAssistant": {
+    "enabled": true,
+    "badge": "Client support",
+    "title": "Add a smart support desk to the client experience.",
+    "description": "Use the built-in assistant to answer project questions, route common support requests, and reduce manual client handoffs.",
+    "assistantName": "ClientRoom Support",
+    "welcomeMessage": "I can help with portal access, project updates, and common delivery questions.",
+    "placeholder": "Ask about portal access, milestones, files, or support requests...",
+    "submitLabel": "Ask support",
+    "resetLabel": "New thread",
+    "suggestedPrompts": [
+      "How should a client portal handle milestones and files?",
+      "What support questions should be automated first?",
+      "How do I map payment to portal access?"
+    ],
+    "systemPrompt": "You are ClientRoom Support, a concise assistant for a premium client portal. Focus on client access, delivery visibility, and support triage. Offer practical guidance and keep answers aligned with the current starter's capabilities.",
+    "model": "kimi-k2.5"
   }
 };

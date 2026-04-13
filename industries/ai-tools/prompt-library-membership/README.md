@@ -8,6 +8,7 @@ Paid prompt library starter with auth, Neon persistence, and member checkout.
 - Passwordless email login
 - Neon / PostgreSQL + Drizzle ORM
 - Hosted checkout and pricing page
+- Optional on-page AI concierge powered by `D1V_PAI_*`
 - Local bootstrap script for pulling project env vars into `.env`
 
 ## Product Direction
@@ -34,9 +35,18 @@ BACKEND_ADMIN_API_BASE=http://localhost:8999 \
 node scripts/bootstrap-local-env.mjs --template-repo d1v-community/prompt-library-membership-template --write-path .env
 ```
 
+Optional AI assistant env:
+
+```bash
+D1V_PAI_BASE_URL=https://pai.d1v.ai/v1
+D1V_PAI_API_KEY=your_project_level_pai_api_key
+```
+
+
 ## Suggested Next Build Steps
 
 - Replace the starter landing sections with the real prompt library membership workflow
 - Extend the Drizzle schema for your product entities
 - Map successful checkout to entitlements, seats, bookings, or premium access
 - Add success-state fulfillment beyond the hosted checkout return pages
+- Tune the built-in AI concierge prompt and connect it to your product workflow

@@ -4,6 +4,7 @@ export type SiteConfig = {
   navigation: {
     pricingLabel: string;
     loginLabel: string;
+    assistantLabel?: string;
   };
   footer: {
     line: string;
@@ -44,6 +45,20 @@ export type SiteConfig = {
     headline: string;
     description: string;
     bullets: string[];
+  };
+  aiAssistant?: {
+    enabled: boolean;
+    badge: string;
+    title: string;
+    description: string;
+    assistantName: string;
+    welcomeMessage: string;
+    placeholder: string;
+    submitLabel: string;
+    resetLabel: string;
+    suggestedPrompts: string[];
+    systemPrompt: string;
+    model?: string;
   };
   paymentSuccess: {
     eyebrow: string;

@@ -4,6 +4,7 @@ export type SiteConfig = {
   navigation: {
     pricingLabel: string;
     loginLabel: string;
+    assistantLabel?: string;
   };
   footer: {
     line: string;
@@ -45,6 +46,20 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  aiAssistant?: {
+    enabled: boolean;
+    badge: string;
+    title: string;
+    description: string;
+    assistantName: string;
+    welcomeMessage: string;
+    placeholder: string;
+    submitLabel: string;
+    resetLabel: string;
+    suggestedPrompts: string[];
+    systemPrompt: string;
+    model?: string;
+  };
   paymentSuccess: {
     eyebrow: string;
     title: string;
@@ -70,7 +85,8 @@ export const SITE_CONFIG: SiteConfig = {
   "siteDescription": "Online course membership app with paid access, login, and student data.",
   "navigation": {
     "pricingLabel": "Pricing",
-    "loginLabel": "Login"
+    "loginLabel": "Login",
+    "assistantLabel": "Coach"
   },
   "footer": {
     "line": "Built with D1V"
@@ -147,5 +163,23 @@ export const SITE_CONFIG: SiteConfig = {
     ],
     "primaryButtonLabel": "Return to pricing",
     "secondaryButtonLabel": "Go to homepage"
+  },
+  "aiAssistant": {
+    "enabled": true,
+    "badge": "Learning concierge",
+    "title": "Add an AI coach to your course membership template.",
+    "description": "Use a built-in assistant to guide students to the right lessons, answer access questions, and keep the product feeling active.",
+    "assistantName": "LessonLoop Coach",
+    "welcomeMessage": "I can recommend lessons, explain membership access, and help students understand how to use this course product.",
+    "placeholder": "Ask about lessons, student access, progress, or course structure...",
+    "submitLabel": "Ask coach",
+    "resetLabel": "Reset coach",
+    "suggestedPrompts": [
+      "How should I structure courses and modules?",
+      "What should members see after checkout?",
+      "How can an AI coach improve retention?"
+    ],
+    "systemPrompt": "You are LessonLoop Coach, a concise assistant for an online course membership product. Help with lesson discovery, access questions, onboarding, and retention-oriented product guidance. Stay grounded in the current template surface.",
+    "model": "kimi-k2.5"
   }
 };

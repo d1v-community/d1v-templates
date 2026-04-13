@@ -4,6 +4,7 @@ export type SiteConfig = {
   navigation: {
     pricingLabel: string;
     loginLabel: string;
+    assistantLabel?: string;
   };
   footer: {
     line: string;
@@ -45,6 +46,20 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  aiAssistant?: {
+    enabled: boolean;
+    badge: string;
+    title: string;
+    description: string;
+    assistantName: string;
+    welcomeMessage: string;
+    placeholder: string;
+    submitLabel: string;
+    resetLabel: string;
+    suggestedPrompts: string[];
+    systemPrompt: string;
+    model?: string;
+  };
   paymentSuccess: {
     eyebrow: string;
     title: string;
@@ -70,7 +85,8 @@ export const SITE_CONFIG: SiteConfig = {
   "siteDescription": "Paid cohort course starter for enrollment, session access, and student onboarding.",
   "navigation": {
     "pricingLabel": "Pricing",
-    "loginLabel": "Login"
+    "loginLabel": "Login",
+    "assistantLabel": "Advisor"
   },
   "footer": {
     "line": "Built with D1V"
@@ -147,5 +163,23 @@ export const SITE_CONFIG: SiteConfig = {
     ],
     "primaryButtonLabel": "Return to pricing",
     "secondaryButtonLabel": "Go to homepage"
+  },
+  "aiAssistant": {
+    "enabled": true,
+    "badge": "Enrollment AI",
+    "title": "Answer enrollment questions before a human has to.",
+    "description": "Use the assistant to handle curriculum fit, session timing, and payment questions so interested students move faster.",
+    "assistantName": "CohortOS Advisor",
+    "welcomeMessage": "I can help students understand cohort fit, enrollment steps, and what happens after payment.",
+    "placeholder": "Ask about enrollment, curriculum fit, sessions, or onboarding...",
+    "submitLabel": "Ask advisor",
+    "resetLabel": "Reset advisor",
+    "suggestedPrompts": [
+      "What should happen after a student pays?",
+      "How do I present cohort dates and seat limits?",
+      "What student onboarding data should I store?"
+    ],
+    "systemPrompt": "You are CohortOS Advisor, a concise enrollment assistant for a cohort-based course business. Help with seat reservation, onboarding, curriculum questions, and payment flow expectations. Do not invent unsupported operational details.",
+    "model": "kimi-k2.5"
   }
 };

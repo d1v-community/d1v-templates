@@ -30,6 +30,14 @@ export function AppHeader({ user, onLogout }: AppHeaderProps) {
 
           <div className="flex items-center gap-5">
             <nav className="hidden items-center gap-4 sm:flex">
+              {SITE_CONFIG.aiAssistant?.enabled ? (
+                <Link
+                  to="/#assistant"
+                  className="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                >
+                  {SITE_CONFIG.navigation.assistantLabel ?? "AI Concierge"}
+                </Link>
+              ) : null}
               <Link
                 to="/pricing"
                 className="text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"

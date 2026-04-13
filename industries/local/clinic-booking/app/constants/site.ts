@@ -4,6 +4,7 @@ export type SiteConfig = {
   navigation: {
     pricingLabel: string;
     loginLabel: string;
+    assistantLabel?: string;
   };
   footer: {
     line: string;
@@ -45,6 +46,20 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  aiAssistant?: {
+    enabled: boolean;
+    badge: string;
+    title: string;
+    description: string;
+    assistantName: string;
+    welcomeMessage: string;
+    placeholder: string;
+    submitLabel: string;
+    resetLabel: string;
+    suggestedPrompts: string[];
+    systemPrompt: string;
+    model?: string;
+  };
   paymentSuccess: {
     eyebrow: string;
     title: string;
@@ -70,7 +85,8 @@ export const SITE_CONFIG: SiteConfig = {
   "siteDescription": "Clinic booking and patient portal starter with protected access and hosted checkout.",
   "navigation": {
     "pricingLabel": "Pricing",
-    "loginLabel": "Login"
+    "loginLabel": "Login",
+    "assistantLabel": "Assistant"
   },
   "footer": {
     "line": "Built with D1V"
@@ -147,5 +163,23 @@ export const SITE_CONFIG: SiteConfig = {
     ],
     "primaryButtonLabel": "Return to pricing",
     "secondaryButtonLabel": "Go to homepage"
+  },
+  "aiAssistant": {
+    "enabled": true,
+    "badge": "Patient concierge",
+    "title": "Use AI to answer booking questions before the front desk does.",
+    "description": "Give patients a fast booking concierge for deposits, appointment prep, and portal access while keeping your API key server-side.",
+    "assistantName": "ClinicFlow Concierge",
+    "welcomeMessage": "I can help with booking steps, deposits, intake expectations, and common patient access questions.",
+    "placeholder": "Ask about appointments, deposits, intake, or patient portal access...",
+    "submitLabel": "Ask concierge",
+    "resetLabel": "Reset chat",
+    "suggestedPrompts": [
+      "How should I handle booking deposits?",
+      "What should patients see after they book?",
+      "Which questions can AI answer before a visit?"
+    ],
+    "systemPrompt": "You are ClinicFlow Concierge, a concise booking and support assistant for a clinic booking product. Help with scheduling flow, deposits, intake expectations, and patient portal questions. Avoid medical advice and keep answers operational.",
+    "model": "kimi-k2.5"
   }
 };
