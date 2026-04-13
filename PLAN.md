@@ -213,14 +213,14 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - Evidence: minted a local JWT for the funded test user `template.e2e@example.com`; used each template-local `scripts/bootstrap-local-env.mjs` against real `POST /api/projects/create-with-integrations` + env export to write fresh `.env` files into all 12 `industries/*/*` directories; transient opcode 500s affected `prompt-library-membership` and `digital-downloads` on the first pass but both succeeded on retry; all 12 templates then passed `pnpm install --frozen-lockfile`, `pnpm run db:migrate`, `pnpm run db:seed`, and `pnpm run build`; runtime smoke using `remix-serve` with dotenv-loaded `.env` returned `200` for `/` and `/pricing` plus successful `POST /api/auth/send-code` in all 12 templates; direct upstream checks confirmed `GET /v1/models` and `POST /v1/chat/completions` work with project-level `D1V_PAI_API_KEY`; switching the shared AI client from server `fetch` to `https.request` and standardizing AI-enabled templates on `kimi-k2.5` restored successful `/api/ai/chat` responses in runtime verification for `assistant-saas`
   - Risk / Notes: requires a valid user JWT with positive balance; project creation consumes upstream integrations and may hit provider-side rate limits; the remaining AI-enabled templates still need the same runtime route sweep before publication so template repos and root-generated copies stay in lockstep
 
-- [ ] Publish the regenerated foundation and industry repos after the AI runtime fix
+- [x] Publish the regenerated foundation and industry repos after the AI runtime fix
   - Owner: main agent, validated by `@entry-shell-qa`, `@ux-quality-qa`, and `@ui-consistency-qa`
   - Verification: `foundations/remix-neon-auth-pay` is committed and pushed first; root `d1v-templates` updates the gitlink plus regenerated industry files; all touched published repos stay free of local secrets and match the verified local source
   - Status: done
   - Evidence: committed and pushed `foundations/remix-neon-auth-pay` with `971dd8f Add category-driven template theming`; committed and pushed root `d1v-templates` with `c32f129 Differentiate industry template design systems`; synchronized all 12 published industry template repos under `d1v-community/*-template` from the regenerated local directories using an exclude-safe rsync flow that kept `.env`, `node_modules`, `build`, `.vercel`, and other local artifacts out of version control
   - Risk / Notes: publication now depends on the root generator plus the foundation template staying in sync; future regeneration passes should continue to treat the root registry as the source of truth
 
-- [ ] Run an AI runtime verification and publication sweep for every AI-enabled template
+- [x] Run an AI runtime verification and publication sweep for every AI-enabled template
   - Owner: main agent, validated by `@context-auth-qa`, `@desktop-adaptive-qa`, and `@ux-quality-qa`
   - Verification: each AI-enabled template starts with its bootstrapped `.env`, returns success from `POST /api/ai/chat`, and is then published so the remote repo matches the working local copy
   - Status: done
@@ -229,35 +229,35 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 
 ## Next-Phase Industry Optimization Map
 
-- [ ] Push the AI-tools category toward a chat-first product surface
+- [x] Push the AI-tools category toward a chat-first product surface
   - Owner: main agent, validated by `@ui-consistency-qa`, `@ux-quality-qa`, and `@commerce-flow-qa`
   - Verification: `assistant-saas` and `prompt-library-membership` gain distinct visual direction, stronger conversion copy, and real product modules such as conversation history, saved prompts, packs, or usage/seat states without regressing auth and checkout flows
   - Status: done
   - Evidence: added the `ai-tools` category matrix in `scripts/industry-template.presets.mjs`; `assistant-saas` and `prompt-library-membership` now render the `command` layout with control-room hero composition, live workspace preview panels, monetization and operator modules, AI-specific FAQ content, and assistant-aware CTA framing; both templates passed regenerated `pnpm run typecheck`, `pnpm run build`, and live `/api/ai/chat` verification
   - Risk / Notes: upstream `pai` latency can still affect response time, but the templates themselves are now structurally differentiated and locally verified
 
-- [ ] Push the business category toward service operations and client delivery
+- [x] Push the business category toward service operations and client delivery
   - Owner: main agent, validated by `@ui-consistency-qa`, `@context-auth-qa`, and `@desktop-adaptive-qa`
   - Verification: `client-portal` and `internal-dashboard` gain clearer workspace IA, table/timeline/detail patterns, and domain entities such as projects, milestones, tickets, tasks, or KPI cards
   - Status: done
   - Evidence: added the `business` category matrix and per-template presets for `client-portal` and `internal-dashboard`; both templates now render the `operations` layout with KPI/state-first hero treatment, queue-style showcase rows, delivery/workspace modules, and enterprise-weight copy; `pnpm run typecheck` and `pnpm run build` passed for both, and `client-portal` also passed live `/api/ai/chat` runtime verification
   - Risk / Notes: deeper role-aware routes and real tables remain a future enhancement, but the current surface is no longer a generic SaaS marketing shell
 
-- [ ] Push the commerce and creator categories toward editorial selling and fulfillment
+- [x] Push the commerce and creator categories toward editorial selling and fulfillment
   - Owner: main agent, validated by `@commerce-flow-qa`, `@ui-consistency-qa`, and `@ux-quality-qa`
   - Verification: `digital-downloads`, `preorder-launch`, `community-membership`, and `paid-newsletter` gain differentiated merchandising layouts plus post-purchase fulfillment surfaces such as downloads, prelaunch reservations, issue archives, perks, or member feeds
   - Status: done
   - Evidence: added separate `commerce` and `creator` category matrices and four template-specific presets covering merchandising, post-purchase fulfillment, archive/perk framing, and editorial modules; `digital-downloads`, `preorder-launch`, `community-membership`, and `paid-newsletter` now render differentiated `editorial` surfaces with tailored offer shelves, fulfillment sections, and FAQ blocks; all four passed regenerated `pnpm run typecheck` and `pnpm run build`
   - Risk / Notes: these templates still rely on placeholder business data rather than live product records, but the page structures and copy now match their commercial models
 
-- [ ] Push the education and local-service categories toward scheduling, progress, and trust
+- [x] Push the education and local-service categories toward scheduling, progress, and trust
   - Owner: main agent, validated by `@desktop-adaptive-qa`, `@ux-quality-qa`, and `@context-auth-qa`
   - Verification: `cohort-course`, `online-course-membership`, `clinic-booking`, and `gym-membership` gain domain-specific flows such as syllabus/progress tracking, lesson libraries, booking availability, appointment states, plans, and service FAQs
   - Status: done
   - Evidence: added `education` and `local` category matrices plus four template presets for cohort scheduling, lesson library progression, clinic booking, and gym plan/class flow; those templates now render `academy` or `service` layouts with schedule/progress/availability modules, trust-oriented FAQ content, and action-first CTA structure; all four passed regenerated `pnpm run typecheck` and `pnpm run build`, and the three AI-enabled templates in these categories passed live `/api/ai/chat` verification
   - Risk / Notes: future depth should add actual booking calendars and learner/member account routes, but the current starter surfaces now reflect the intended domain workflows
 
-- [ ] Establish a category-level design system matrix before deeper template divergence
+- [x] Establish a category-level design system matrix before deeper template divergence
   - Owner: main agent, validated by `@ui-consistency-qa` and `@desktop-adaptive-qa`
   - Verification: `PLAN.md` and generation inputs define a clear visual system per category covering typography, palette, layout rhythm, motion tone, and component emphasis so future regeneration preserves intentional differences
   - Status: done
