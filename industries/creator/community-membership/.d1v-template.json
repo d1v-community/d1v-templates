@@ -1,0 +1,7 @@
+{
+  "templateId": "creator-community-membership",
+  "templateRepo": "d1v-community/community-membership-template",
+  "prompt": "Create a creator community membership product with login, database support, and hosted checkout.",
+  "category": "creator",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

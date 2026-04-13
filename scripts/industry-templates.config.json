@@ -1,0 +1,506 @@
+[
+  {
+    "id": "ai-assistant-saas",
+    "slug": "assistant-saas",
+    "category": "ai-tools",
+    "name": "AI Assistant SaaS",
+    "repositoryName": "assistant-saas-template",
+    "packageName": "d1v-assistant-saas-template",
+    "appTitle": "SignalDesk AI",
+    "description": "Subscription AI assistant starter with passwordless auth, Neon data, and hosted checkout.",
+    "siteDescription": "AI assistant membership app with login, workspace billing, and paid access.",
+    "prompt": "Create an AI assistant SaaS with database support, member login, and hosted checkout.",
+    "home": {
+      "badge": "AI tools",
+      "headline": "Charge for your assistant before you scale your agent stack.",
+      "description": "SignalDesk AI is a payment-ready SaaS shell for private assistants, premium copilots, and member-only workflows.",
+      "proofPoints": [
+        "Email login for paid assistant accounts",
+        "Hosted checkout for monthly or annual access",
+        "Neon-backed schema layer for threads, credits, and seats"
+      ]
+    },
+    "pricing": {
+      "badge": "Pro assistant",
+      "headline": "Unlock the assistant for",
+      "description": "One subscription. Faster answers. Team-ready workflows.",
+      "featuredLabel": "Assistant access",
+      "accessLabel": "Unlimited prompts and workspace history",
+      "defaultProductName": "Pro Assistant",
+      "defaultProductDescription": "Unlimited assistant access for your team."
+    },
+    "templateSurface": {
+      "templateId": "assistant-saas-template",
+      "badge": "Launch checklist",
+      "headline": "Turn this starter into a paid assistant product.",
+      "description": "Replace the marketing layer with your workflow, then connect billing events to credits, seats, or premium tools.",
+      "bullets": [
+        "Model conversations, credits, and tool runs in your database",
+        "Grant assistant entitlements after successful checkout",
+        "Swap the placeholder UI for your chat workspace"
+      ]
+    }
+  },
+  {
+    "id": "ai-prompt-library-membership",
+    "slug": "prompt-library-membership",
+    "category": "ai-tools",
+    "name": "Prompt Library Membership",
+    "repositoryName": "prompt-library-membership-template",
+    "packageName": "d1v-prompt-library-membership-template",
+    "appTitle": "PromptVault",
+    "description": "Paid prompt library starter with auth, Neon persistence, and member checkout.",
+    "siteDescription": "Prompt membership app with gated content access and recurring billing.",
+    "prompt": "Create a paid prompt library membership product with database support and hosted checkout.",
+    "home": {
+      "badge": "AI library",
+      "headline": "Package your best prompts like a premium product.",
+      "description": "PromptVault gives creators a clean paid-access shell for prompt packs, workflows, and member-only resources.",
+      "proofPoints": [
+        "Member login for gated prompt access",
+        "Recurring checkout for library subscriptions",
+        "Database foundation for packs, tags, and unlock history"
+      ]
+    },
+    "pricing": {
+      "badge": "Library access",
+      "headline": "Join the vault for",
+      "description": "One plan. Every prompt pack. New drops included.",
+      "featuredLabel": "Vault access",
+      "accessLabel": "Prompt packs, updates, and premium workflows",
+      "defaultProductName": "PromptVault Membership",
+      "defaultProductDescription": "Get every prompt pack and member-only update."
+    },
+    "templateSurface": {
+      "templateId": "prompt-library-membership-template",
+      "badge": "Build surface",
+      "headline": "Publish prompts without rebuilding auth and billing.",
+      "description": "Use the starter to ship a premium content library fast, then add browsing, search, and unlock states.",
+      "bullets": [
+        "Create tables for prompt packs, authors, and release notes",
+        "Map paid members to content entitlements",
+        "Replace placeholder sections with searchable library pages"
+      ]
+    }
+  },
+  {
+    "id": "business-internal-dashboard",
+    "slug": "internal-dashboard",
+    "category": "business",
+    "name": "Internal Dashboard",
+    "repositoryName": "internal-dashboard-template",
+    "packageName": "d1v-internal-dashboard-template",
+    "appTitle": "OpsCanvas",
+    "description": "Internal operations dashboard starter with auth, database connectivity, and monetization-ready account rails.",
+    "siteDescription": "Operations dashboard starter for internal teams, retainers, and premium access accounts.",
+    "prompt": "Create an internal dashboard product with database support, secure login, and a paid admin access plan.",
+    "home": {
+      "badge": "Business ops",
+      "headline": "Run internal operations on a paid, permission-aware shell.",
+      "description": "OpsCanvas is for teams that want a solid internal dashboard base with auth, data, and optional paid admin access.",
+      "proofPoints": [
+        "Passwordless staff login out of the box",
+        "Neon-backed data layer for pipeline and KPI models",
+        "Hosted checkout for paid admin seats or retainers"
+      ]
+    },
+    "pricing": {
+      "badge": "Admin seats",
+      "headline": "Activate the dashboard for",
+      "description": "Secure access for the operators who need it most.",
+      "featuredLabel": "Operator access",
+      "accessLabel": "Admin seats, reporting, and shared dashboards",
+      "defaultProductName": "Operations Access",
+      "defaultProductDescription": "Enable secure dashboard access for your team."
+    },
+    "templateSurface": {
+      "templateId": "internal-dashboard-template",
+      "badge": "Operator setup",
+      "headline": "Replace the hero with your real reporting surface.",
+      "description": "The starter already handles auth and billing. Focus your next pass on metrics, tables, workflows, and team permissions.",
+      "bullets": [
+        "Add KPI, task, and audit models to the database",
+        "Protect routes by staff role or paid workspace access",
+        "Turn the placeholder surface into your live dashboard"
+      ]
+    }
+  },
+  {
+    "id": "business-client-portal",
+    "slug": "client-portal",
+    "category": "business",
+    "name": "Client Portal",
+    "repositoryName": "client-portal-template",
+    "packageName": "d1v-client-portal-template",
+    "appTitle": "ClientRoom",
+    "description": "Client portal starter with passwordless login, Neon persistence, and hosted portal access checkout.",
+    "siteDescription": "Client portal for agencies and service businesses with member access and project data.",
+    "prompt": "Create a client portal product with database support, project updates, and paid portal access.",
+    "home": {
+      "badge": "Client delivery",
+      "headline": "Give every client a portal that feels like part of the service.",
+      "description": "ClientRoom combines login, data, and payments so agencies can sell premium access, retainers, and delivery visibility.",
+      "proofPoints": [
+        "Passwordless client login for project access",
+        "Checkout flow for retainers or premium portal plans",
+        "Database foundation for files, milestones, and updates"
+      ]
+    },
+    "pricing": {
+      "badge": "Portal plan",
+      "headline": "Open your client portal for",
+      "description": "One portal. Shared files. Clear delivery visibility.",
+      "featuredLabel": "Portal access",
+      "accessLabel": "Milestones, files, and account updates",
+      "defaultProductName": "Client Portal Access",
+      "defaultProductDescription": "Secure client access to projects, files, and updates."
+    },
+    "templateSurface": {
+      "templateId": "client-portal-template",
+      "badge": "Delivery setup",
+      "headline": "Ship the service layer your clients actually log into.",
+      "description": "Use the starter as the base for project rooms, deliverables, and account history without rebuilding account access.",
+      "bullets": [
+        "Model clients, projects, milestones, and uploads",
+        "Map successful payments to active portal accounts",
+        "Replace placeholder blocks with project dashboards"
+      ]
+    }
+  },
+  {
+    "id": "commerce-digital-downloads",
+    "slug": "digital-downloads",
+    "category": "commerce",
+    "name": "Digital Downloads",
+    "repositoryName": "digital-downloads-template",
+    "packageName": "d1v-digital-downloads-template",
+    "appTitle": "DownloadPort",
+    "description": "Digital download starter with auth, Neon data, and hosted checkout.",
+    "siteDescription": "Digital product storefront starter with paid access and downloadable fulfillment.",
+    "prompt": "Create a digital downloads storefront with database support, member login, and hosted checkout.",
+    "home": {
+      "badge": "Digital commerce",
+      "headline": "Sell files, kits, and templates on rails that are already wired.",
+      "description": "DownloadPort gives digital products a faster route to launch by starting with auth, data, and checkout already in place.",
+      "proofPoints": [
+        "Secure login for buyers and download history",
+        "Checkout for one-off or recurring digital offers",
+        "Database models ready for files, orders, and unlocks"
+      ]
+    },
+    "pricing": {
+      "badge": "Digital access",
+      "headline": "Buy instant access for",
+      "description": "Fast checkout. Clean delivery. No storefront rebuild required.",
+      "featuredLabel": "Download access",
+      "accessLabel": "Files, updates, and buyer history",
+      "defaultProductName": "Digital Access",
+      "defaultProductDescription": "Unlock your files and future product updates."
+    },
+    "templateSurface": {
+      "templateId": "digital-downloads-template",
+      "badge": "Fulfillment setup",
+      "headline": "Connect checkout to files and entitlements.",
+      "description": "The starter already handles the transaction path. Your next layer is file storage, order records, and download delivery.",
+      "bullets": [
+        "Create order, file, and entitlement tables",
+        "Deliver secure links after successful payment",
+        "Replace placeholder sections with product galleries"
+      ]
+    }
+  },
+  {
+    "id": "commerce-preorder-launch",
+    "slug": "preorder-launch",
+    "category": "commerce",
+    "name": "Preorder Launch",
+    "repositoryName": "preorder-launch-template",
+    "packageName": "d1v-preorder-launch-template",
+    "appTitle": "FirstDrop",
+    "description": "Focused preorder launch starter with hosted checkout, auth, and Neon-backed lead capture.",
+    "siteDescription": "Single-offer preorder starter with checkout, login, and launch-day data.",
+    "prompt": "Create a preorder launch page with database support, email login, and hosted checkout.",
+    "home": {
+      "badge": "Launch commerce",
+      "headline": "Turn a launch page into a preorder machine.",
+      "description": "FirstDrop is for focused offers: one hero product, one clear price, one route to checkout.",
+      "proofPoints": [
+        "Email login for customers and launch followers",
+        "Hosted checkout for preorder deposits or full payments",
+        "Database base for waitlists, preorders, and fulfillment status"
+      ]
+    },
+    "pricing": {
+      "badge": "Preorder",
+      "headline": "Reserve the drop for",
+      "description": "One offer. One decision. A direct path to launch revenue.",
+      "featuredLabel": "Launch access",
+      "accessLabel": "Preorder confirmation and launch updates",
+      "defaultProductName": "Preorder Access",
+      "defaultProductDescription": "Reserve the launch and stay first in line."
+    },
+    "templateSurface": {
+      "templateId": "preorder-launch-template",
+      "badge": "Launch flow",
+      "headline": "Keep the launch page tight and the fulfillment clear.",
+      "description": "Use this starter to collect payments early, then connect launch status, stock, or updates behind the scenes.",
+      "bullets": [
+        "Add preorder, shipment, and customer update models",
+        "Trigger launch emails after checkout or release milestones",
+        "Replace placeholder sections with your hero offer and timeline"
+      ]
+    }
+  },
+  {
+    "id": "creator-community-membership",
+    "slug": "community-membership",
+    "category": "creator",
+    "name": "Creator Community Membership",
+    "repositoryName": "community-membership-template",
+    "packageName": "d1v-community-membership-template",
+    "appTitle": "InnerCircle",
+    "description": "Creator membership starter with login, payments, and Neon-backed member records.",
+    "siteDescription": "Creator membership app for private communities, perks, and paid access.",
+    "prompt": "Create a creator community membership product with login, database support, and hosted checkout.",
+    "home": {
+      "badge": "Creator membership",
+      "headline": "Sell belonging, not just content.",
+      "description": "InnerCircle is a clean base for creators who want paid community access, member updates, and premium perks.",
+      "proofPoints": [
+        "Passwordless member login",
+        "Recurring checkout for private community plans",
+        "Database base for perks, member tiers, and updates"
+      ]
+    },
+    "pricing": {
+      "badge": "Community access",
+      "headline": "Join the circle for",
+      "description": "Members-only access, drops, and private updates in one plan.",
+      "featuredLabel": "Member access",
+      "accessLabel": "Private community, drops, and member perks",
+      "defaultProductName": "InnerCircle Membership",
+      "defaultProductDescription": "Join the private community and unlock member perks."
+    },
+    "templateSurface": {
+      "templateId": "community-membership-template",
+      "badge": "Membership build",
+      "headline": "Map checkout to perks, tiers, and member-only areas.",
+      "description": "Start with the rails, then layer in posts, perks, events, and protected community surfaces.",
+      "bullets": [
+        "Model members, tiers, perks, and activity history",
+        "Grant community access after successful payment",
+        "Replace the starter surface with your member hub"
+      ]
+    }
+  },
+  {
+    "id": "creator-paid-newsletter",
+    "slug": "paid-newsletter",
+    "category": "creator",
+    "name": "Paid Newsletter",
+    "repositoryName": "paid-newsletter-template",
+    "packageName": "d1v-paid-newsletter-template",
+    "appTitle": "BriefClub",
+    "description": "Paid newsletter starter with authentication, checkout, and Neon-backed subscriber data.",
+    "siteDescription": "Paid newsletter product for premium posts, member access, and subscriber billing.",
+    "prompt": "Create a paid newsletter membership product with database support and hosted checkout.",
+    "home": {
+      "badge": "Creator publishing",
+      "headline": "Turn premium writing into a product with real access control.",
+      "description": "BriefClub is a paid newsletter shell built for gated archives, premium issues, and member-only updates.",
+      "proofPoints": [
+        "Subscriber login for archive access",
+        "Checkout for premium subscription plans",
+        "Database foundation for posts, issues, and member status"
+      ]
+    },
+    "pricing": {
+      "badge": "Premium issues",
+      "headline": "Subscribe for",
+      "description": "One membership. Every premium issue. Full archive access.",
+      "featuredLabel": "Subscriber access",
+      "accessLabel": "Premium posts and archive access",
+      "defaultProductName": "Premium Newsletter",
+      "defaultProductDescription": "Unlock premium issues and the full member archive."
+    },
+    "templateSurface": {
+      "templateId": "paid-newsletter-template",
+      "badge": "Publishing setup",
+      "headline": "Connect billing to archives, issues, and access windows.",
+      "description": "The starter handles the sensitive parts already. Your work is now about posts, archives, and subscriber experience.",
+      "bullets": [
+        "Create issue, archive, and release models",
+        "Gate premium content by subscriber state",
+        "Replace the starter surface with archive and issue routes"
+      ]
+    }
+  },
+  {
+    "id": "education-cohort-course",
+    "slug": "cohort-course",
+    "category": "education",
+    "name": "Cohort Course",
+    "repositoryName": "cohort-course-template",
+    "packageName": "d1v-cohort-course-template",
+    "appTitle": "CohortOS",
+    "description": "Cohort course starter with payments, auth, and Neon-backed enrollment data.",
+    "siteDescription": "Paid cohort course starter for enrollment, session access, and student onboarding.",
+    "prompt": "Create a cohort course product with database support, email login, and hosted checkout.",
+    "home": {
+      "badge": "Education",
+      "headline": "Sell the cohort before you build the full course backend.",
+      "description": "CohortOS gives you enrollment-ready rails for applications, paid access, and student onboarding.",
+      "proofPoints": [
+        "Email login for enrolled students",
+        "Hosted checkout for tuition or deposits",
+        "Database starter for cohorts, sessions, and onboarding"
+      ]
+    },
+    "pricing": {
+      "badge": "Enrollment",
+      "headline": "Reserve your seat for",
+      "description": "Fixed dates. Clear pricing. A direct route into enrollment.",
+      "featuredLabel": "Student access",
+      "accessLabel": "Enrollment, onboarding, and cohort updates",
+      "defaultProductName": "Cohort Enrollment",
+      "defaultProductDescription": "Reserve your cohort seat and access the student area."
+    },
+    "templateSurface": {
+      "templateId": "cohort-course-template",
+      "badge": "Enrollment build",
+      "headline": "Map checkout to seats, sessions, and student records.",
+      "description": "Start with the revenue and auth layers, then build applications, class calendars, and cohort dashboards.",
+      "bullets": [
+        "Create cohort, lesson, and enrollment tables",
+        "Grant student access after successful payment",
+        "Replace placeholder content with curriculum and session views"
+      ]
+    }
+  },
+  {
+    "id": "education-online-course-membership",
+    "slug": "online-course-membership",
+    "category": "education",
+    "name": "Online Course Membership",
+    "repositoryName": "online-course-membership-template",
+    "packageName": "d1v-online-course-membership-template",
+    "appTitle": "LessonLoop",
+    "description": "Course membership starter with auth, billing, and Neon-backed student progress data.",
+    "siteDescription": "Online course membership app with paid access, login, and student data.",
+    "prompt": "Create an online course membership product with database support and hosted checkout.",
+    "home": {
+      "badge": "Course membership",
+      "headline": "Bundle lessons, progress, and recurring revenue in one starter.",
+      "description": "LessonLoop is built for evergreen education products that need member login, billing, and a durable data layer.",
+      "proofPoints": [
+        "Student login for course access",
+        "Recurring checkout for learning memberships",
+        "Database base for lessons, progress, and unlock states"
+      ]
+    },
+    "pricing": {
+      "badge": "Course access",
+      "headline": "Start learning for",
+      "description": "Join once. Access every lesson. Keep progress synced.",
+      "featuredLabel": "Student membership",
+      "accessLabel": "Lessons, progress tracking, and member updates",
+      "defaultProductName": "Course Membership",
+      "defaultProductDescription": "Unlock every lesson and track progress in one place."
+    },
+    "templateSurface": {
+      "templateId": "online-course-membership-template",
+      "badge": "Learning stack",
+      "headline": "Connect billing to courses, modules, and progress states.",
+      "description": "This starter is ready for curriculum structures, member dashboards, and recurring learning access.",
+      "bullets": [
+        "Create course, module, and lesson progress models",
+        "Gate learning routes by active membership",
+        "Replace placeholder content with student dashboard surfaces"
+      ]
+    }
+  },
+  {
+    "id": "local-clinic-booking",
+    "slug": "clinic-booking",
+    "category": "local",
+    "name": "Clinic Booking",
+    "repositoryName": "clinic-booking-template",
+    "packageName": "d1v-clinic-booking-template",
+    "appTitle": "ClinicFlow",
+    "description": "Clinic booking starter with secure login, deposits, and Neon-backed patient records.",
+    "siteDescription": "Clinic booking and patient portal starter with protected access and hosted checkout.",
+    "prompt": "Create a clinic booking product with database support, secure login, and hosted payment for deposits.",
+    "home": {
+      "badge": "Local services",
+      "headline": "Handle appointments and deposits on infrastructure that is already live.",
+      "description": "ClinicFlow gives local care providers a fast base for patient login, appointment data, and booking payments.",
+      "proofPoints": [
+        "Secure login for patients and staff",
+        "Hosted checkout for booking deposits or service plans",
+        "Database starter for appointments, intake, and records"
+      ]
+    },
+    "pricing": {
+      "badge": "Booking deposit",
+      "headline": "Reserve your visit for",
+      "description": "Book quickly, collect deposits, and keep visit data organized.",
+      "featuredLabel": "Patient access",
+      "accessLabel": "Appointments, intake, and booking confirmations",
+      "defaultProductName": "Visit Deposit",
+      "defaultProductDescription": "Reserve a visit and confirm patient access in one flow."
+    },
+    "templateSurface": {
+      "templateId": "clinic-booking-template",
+      "badge": "Care workflow",
+      "headline": "Use the rails for booking, then add your care flow.",
+      "description": "Focus the next layer on appointments, provider availability, intake forms, and post-booking follow-up.",
+      "bullets": [
+        "Create appointment, provider, and intake models",
+        "Map deposits to confirmed bookings",
+        "Replace placeholder content with scheduling and patient portal views"
+      ]
+    }
+  },
+  {
+    "id": "local-gym-membership",
+    "slug": "gym-membership",
+    "category": "local",
+    "name": "Gym Membership",
+    "repositoryName": "gym-membership-template",
+    "packageName": "d1v-gym-membership-template",
+    "appTitle": "FlexPass",
+    "description": "Gym membership starter with auth, hosted checkout, and Neon-backed member records.",
+    "siteDescription": "Gym membership app with paid access, login, and recurring member management.",
+    "prompt": "Create a gym membership product with database support, member login, and hosted checkout.",
+    "home": {
+      "badge": "Membership business",
+      "headline": "Sell memberships with a stack that is already ready to collect them.",
+      "description": "FlexPass is a clean base for gyms, studios, and local fitness memberships with login and billing built in.",
+      "proofPoints": [
+        "Member login for account and renewal access",
+        "Hosted checkout for passes, memberships, or drop-ins",
+        "Database foundation for plans, visits, and member status"
+      ]
+    },
+    "pricing": {
+      "badge": "Membership pass",
+      "headline": "Join the gym for",
+      "description": "Simple signup. Fast checkout. A membership account from day one.",
+      "featuredLabel": "Member pass",
+      "accessLabel": "Membership status, plans, and visit history",
+      "defaultProductName": "Gym Membership",
+      "defaultProductDescription": "Start your membership and unlock member access."
+    },
+    "templateSurface": {
+      "templateId": "gym-membership-template",
+      "badge": "Studio setup",
+      "headline": "Connect checkout to plans, visits, and renewals.",
+      "description": "You already have auth and billing. Next, add plan logic, facility updates, and member self-service routes.",
+      "bullets": [
+        "Create plan, check-in, and renewal models",
+        "Map successful checkout to active memberships",
+        "Replace placeholder content with class, plan, and account views"
+      ]
+    }
+  }
+]

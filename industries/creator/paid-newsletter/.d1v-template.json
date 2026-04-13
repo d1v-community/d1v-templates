@@ -1,0 +1,7 @@
+{
+  "templateId": "creator-paid-newsletter",
+  "templateRepo": "d1v-community/paid-newsletter-template",
+  "prompt": "Create a paid newsletter membership product with database support and hosted checkout.",
+  "category": "creator",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

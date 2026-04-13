@@ -1,0 +1,7 @@
+{
+  "templateId": "commerce-preorder-launch",
+  "templateRepo": "d1v-community/preorder-launch-template",
+  "prompt": "Create a preorder launch page with database support, email login, and hosted checkout.",
+  "category": "commerce",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

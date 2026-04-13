@@ -1,0 +1,7 @@
+{
+  "templateId": "local-gym-membership",
+  "templateRepo": "d1v-community/gym-membership-template",
+  "prompt": "Create a gym membership product with database support, member login, and hosted checkout.",
+  "category": "local",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

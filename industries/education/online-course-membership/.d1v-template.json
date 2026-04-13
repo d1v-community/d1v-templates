@@ -1,0 +1,7 @@
+{
+  "templateId": "education-online-course-membership",
+  "templateRepo": "d1v-community/online-course-membership-template",
+  "prompt": "Create an online course membership product with database support and hosted checkout.",
+  "category": "education",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

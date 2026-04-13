@@ -13,13 +13,17 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 
 - The repository now separates `foundations/` from `industries/`.
 - `remix-neon-auth` and `remix-neon-auth-pay` are the two foundation templates.
-- Industry templates should derive from one of those foundations rather than becoming independent bases.
+- The current promotion phase treats `remix-neon-auth-pay` as the canonical base for all new runnable industry templates.
+- Existing industry blueprint metadata that still points to `remix-neon-auth` must be normalized to `remix-neon-auth-pay` as part of promotion.
 - The registry metadata now uses repo-aware fields such as repository URL, ref, path, category, kind, and `baseTemplateId`.
+- Local end-to-end verification should reuse the existing `d1v-server` project creation + env export chain instead of inventing a parallel environment system.
 - The current execution order is:
   1. align root and template-level workflow files
   2. publish the root registry repo to `d1v-community`
   3. publish each existing template repo safely and set it as a GitHub template
   4. continue the structural `foundations/` + `industries/` migration on top of the published baseline
+  5. promote blueprint directories into runnable industry templates based on `remix-neon-auth-pay`
+  6. wire local env bootstrap helpers and backend template-catalog support for the promoted repos
 - Foundations remain nested git repositories inside the root registry repository. This is an accepted interim constraint after the path migration.
 
 ## Sub-Agent Registry
@@ -160,6 +164,41 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - Evidence: added 12 industry blueprint directories across `ai-tools`, `business`, `commerce`, `creator`, `education`, and `local`; each blueprint now documents its base foundation, product surface, and follow-up work
   - Risk / Notes: these are blueprint templates rather than standalone repos today, so the next promotion decision should focus on which blueprints deserve their own published repositories
 
+- [ ] Update registry planning and metadata for the runnable-template promotion phase
+  - Owner: main agent, validated by `@entry-shell-qa`
+  - Verification: `PLAN.md`, `README.md`, and `templates.json` all describe industry templates as `remix-neon-auth-pay` derivatives with a clear published-vs-generated distinction
+  - Status: done
+  - Evidence: updated `PLAN.md`; rewrote root `README.md`; converted `templates.json` industry records from blueprint metadata to runnable `industry-template` records with `status: generated` and `baseTemplateId: foundation-remix-neon-auth-pay`
+  - Risk / Notes: this is the control point for the remaining work and must be kept current as templates graduate
+
+- [ ] Add reusable industry-template scaffolding and local env bootstrap tooling
+  - Owner: main agent, validated by `@ux-quality-qa`
+  - Verification: scripts exist under `d1v-templates/scripts/`, can generate runnable industry directories from `foundations/remix-neon-auth-pay`, and can fetch/export project env vars into a local `.env` without hardcoding secrets
+  - Status: done
+  - Evidence: added `scripts/industry-templates.config.json` and `scripts/generate-industry-templates.mjs`; added `scripts/bootstrap-local-env.mjs` to the foundation and generated templates; added `.d1v-template.json` metadata files so bootstrap can infer template repo and default prompt
+  - Risk / Notes: the helper should lean on `POST /api/projects/create-with-integrations` and `GET /api/projects/{project_id}/env-vars/export` with `Authorization: Bearer <token>`
+
+- [ ] Expand backend template selection to support payment-first industry templates
+  - Owner: main agent, validated by `@entry-shell-qa` and `@commerce-flow-qa`
+  - Verification: `backend_admin` template catalog includes `d1v-community/remix-neon-auth-pay` plus promoted industry repos; tests for `/api/projects/templates` and explicit template creation pass
+  - Status: in_progress
+  - Evidence: updated `backend_admin/utils/quickly_llm/project_meta_generator.py` to include the payment foundation plus 12 industry repos; changed `DEFAULT_TEMPLATE_REPO` to `d1v-community/remix-neon-auth-pay`; updated the template-list API tests to compare against `TEMPLATE_CATALOG`
+  - Risk / Notes: `python3 -m pytest ...` could not be completed in the current shell because `pytest` is unavailable, so automated backend verification is still incomplete even though the code changes are in place
+
+- [ ] Promote the first batch of industry blueprints into runnable templates
+  - Owner: main agent, validated by `@ui-consistency-qa`, `@commerce-flow-qa`, and `@desktop-adaptive-qa`
+  - Verification: each current industry directory contains a runnable Remix app, template-local `AGENTS.md`, industry-specific copy, and passes `pnpm run typecheck`
+  - Status: in_progress
+  - Evidence: generated 12 runnable directories under `industries/`; each now contains app code, docs, `AGENTS.md`, `.d1v-template.json`, and package metadata; `pnpm run typecheck` passed in representative generated templates `industries/ai-tools/assistant-saas` and `industries/local/clinic-booking`
+  - Risk / Notes: generated templates remain publication-safe by inherited ignore rules, but full per-template typecheck coverage is still partial until dependencies are installed and checks are run in every directory
+
+- [ ] Verify local database-backed setup flow for promoted templates
+  - Owner: main agent, validated by `@context-auth-qa` and `@ux-quality-qa`
+  - Verification: at least one promoted template completes the documented flow of project creation, env export to local `.env`, migration, seed, and app startup without manual secret editing beyond user auth token and server base URL
+  - Status: pending
+  - Evidence: sub-agent review confirmed the minimal live path is `POST /api/projects/create-with-integrations` -> `GET /api/projects/{project_id}/env-vars/export` -> local `.env` write, and the bootstrap script now implements that protocol
+  - Risk / Notes: live verification still requires a valid user bearer token with positive balance plus a reachable backend API, so this step remains open until an end-to-end run is executed
+
 ## Immediate Next Step
 
-Decide which industry blueprints should be promoted into standalone published template repositories and which should remain registry-only blueprints.
+Implement the generator/bootstrap toolchain first so the 12 industry directories can be promoted consistently instead of being hand-maintained copies.

@@ -1,0 +1,7 @@
+{
+  "templateId": "business-client-portal",
+  "templateRepo": "d1v-community/client-portal-template",
+  "prompt": "Create a client portal product with database support, project updates, and paid portal access.",
+  "category": "business",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

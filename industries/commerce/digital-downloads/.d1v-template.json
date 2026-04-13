@@ -1,0 +1,7 @@
+{
+  "templateId": "commerce-digital-downloads",
+  "templateRepo": "d1v-community/digital-downloads-template",
+  "prompt": "Create a digital downloads storefront with database support, member login, and hosted checkout.",
+  "category": "commerce",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

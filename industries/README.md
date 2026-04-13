@@ -1,12 +1,12 @@
-# Industry Blueprints
+# Industry Templates
 
-Industry blueprints capture product-specific structure on top of the published foundations.
+The `industries/` tree now contains runnable application templates generated from `foundations/remix-neon-auth-pay`.
 
-They are not all standalone repositories yet. At this stage they act as:
+These directories are intended to be:
 
-- documented starting points
-- business-model overlays
-- planning surfaces for future promoted templates
+- locally runnable
+- ready for database-backed verification
+- ready to be promoted into standalone GitHub template repositories after review
 
 ## Categories
 
@@ -17,9 +17,19 @@ They are not all standalone repositories yet. At this stage they act as:
 - `education`
 - `local`
 
-## How To Use A Blueprint
+## What Every Industry Template Includes
 
-1. Choose the closest matching blueprint directory.
-2. Start from the blueprint's declared base foundation.
-3. Apply the product-specific pages, copy, schema, and fulfillment notes from the blueprint README.
-4. Promote the blueprint into a standalone repository only after the business shape is stable enough to justify a separate template.
+- passwordless auth
+- Neon / PostgreSQL + Drizzle
+- hosted checkout and `/pricing`
+- local env bootstrap via `scripts/bootstrap-local-env.mjs`
+- template-local `AGENTS.md`
+- industry copy in `app/constants/site.ts`
+
+## Promotion Workflow
+
+1. Generate the industry directory from `remix-neon-auth-pay`.
+2. Pull a real `.env` from `d1v-server` into the template.
+3. Run migrations, typecheck, and targeted app verification.
+4. Push the verified directory to `d1v-community/<name>-template`.
+5. Enable GitHub template mode for that repository.

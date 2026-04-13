@@ -1,0 +1,7 @@
+{
+  "templateId": "ai-assistant-saas",
+  "templateRepo": "d1v-community/assistant-saas-template",
+  "prompt": "Create an AI assistant SaaS with database support, member login, and hosted checkout.",
+  "category": "ai-tools",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

@@ -1,0 +1,7 @@
+{
+  "templateId": "education-cohort-course",
+  "templateRepo": "d1v-community/cohort-course-template",
+  "prompt": "Create a cohort course product with database support, email login, and hosted checkout.",
+  "category": "education",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

@@ -1,0 +1,7 @@
+{
+  "templateId": "business-internal-dashboard",
+  "templateRepo": "d1v-community/internal-dashboard-template",
+  "prompt": "Create an internal dashboard product with database support, secure login, and a paid admin access plan.",
+  "category": "business",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

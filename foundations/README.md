@@ -8,6 +8,8 @@ They are designed to be:
 - stable enough to support multiple industry variants
 - opinionated about infrastructure, but generic about business logic
 
+The current industry promotion phase standardizes new runnable templates on top of `remix-neon-auth-pay`.
+
 ## Current Foundations
 
 - `remix-neon-auth-pay`

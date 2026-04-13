@@ -1,0 +1,7 @@
+{
+  "templateId": "ai-prompt-library-membership",
+  "templateRepo": "d1v-community/prompt-library-membership-template",
+  "prompt": "Create a paid prompt library membership product with database support and hosted checkout.",
+  "category": "ai-tools",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

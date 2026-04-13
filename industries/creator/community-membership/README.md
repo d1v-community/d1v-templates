@@ -1,25 +1,42 @@
 # Creator Community Membership
 
-- Base foundation: `foundation-remix-neon-auth-pay`
+Creator membership starter with login, payments, and Neon-backed member records.
+
+## What You Start With
+
+- Remix + Tailwind application based on `remix-neon-auth-pay`
+- Passwordless email login
+- Neon / PostgreSQL + Drizzle ORM
+- Hosted checkout and pricing page
+- Local bootstrap script for pulling project env vars into `.env`
+
+## Product Direction
+
+- App title: `InnerCircle`
 - Category: `creator`
-- Status: blueprint
+- Repository template path: `d1v-community/community-membership-template`
+- Default prompt: `Create a creator community membership product with login, database support, and hosted checkout.`
 
-## Best For
+## Local Setup
 
-- paid communities
-- creator clubs
-- member-only resources
+```bash
+pnpm install
+pnpm run env:bootstrap -- --template-repo d1v-community/community-membership-template --write-path .env
+pnpm run db:migrate
+pnpm run dev
+```
 
-## Recommended Product Surface
+You can also export env vars into this repository manually:
 
-- brand landing page
-- pricing page
-- member welcome area
-- gated posts/resources
+```bash
+AUTH_TOKEN=your_token \
+BACKEND_ADMIN_API_BASE=http://localhost:8999 \
+node scripts/bootstrap-local-env.mjs --template-repo d1v-community/community-membership-template --write-path .env
+```
 
-## Follow-Up Work
+## Suggested Next Build Steps
 
-- member directory
-- content publishing
-- renewal messaging
-- onboarding automations
+- Replace the starter landing sections with the real creator community membership workflow
+- Extend the Drizzle schema for your product entities
+- Map successful checkout to entitlements, seats, bookings, or premium access
+- Add success-state fulfillment beyond the hosted checkout return pages

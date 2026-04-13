@@ -1,0 +1,7 @@
+{
+  "templateId": "local-clinic-booking",
+  "templateRepo": "d1v-community/clinic-booking-template",
+  "prompt": "Create a clinic booking product with database support, secure login, and hosted payment for deposits.",
+  "category": "local",
+  "foundation": "d1v-community/remix-neon-auth-pay"
+}

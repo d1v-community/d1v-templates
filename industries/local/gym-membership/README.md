@@ -1,25 +1,42 @@
 # Gym Membership
 
-- Base foundation: `foundation-remix-neon-auth-pay`
+Gym membership starter with auth, hosted checkout, and Neon-backed member records.
+
+## What You Start With
+
+- Remix + Tailwind application based on `remix-neon-auth-pay`
+- Passwordless email login
+- Neon / PostgreSQL + Drizzle ORM
+- Hosted checkout and pricing page
+- Local bootstrap script for pulling project env vars into `.env`
+
+## Product Direction
+
+- App title: `FlexPass`
 - Category: `local`
-- Status: blueprint
+- Repository template path: `d1v-community/gym-membership-template`
+- Default prompt: `Create a gym membership product with database support, member login, and hosted checkout.`
 
-## Best For
+## Local Setup
 
-- gyms
-- studios
-- local recurring memberships
+```bash
+pnpm install
+pnpm run env:bootstrap -- --template-repo d1v-community/gym-membership-template --write-path .env
+pnpm run db:migrate
+pnpm run dev
+```
 
-## Recommended Product Surface
+You can also export env vars into this repository manually:
 
-- plan comparison page
-- pricing / checkout entry
-- member dashboard
-- renewal / billing area
+```bash
+AUTH_TOKEN=your_token \
+BACKEND_ADMIN_API_BASE=http://localhost:8999 \
+node scripts/bootstrap-local-env.mjs --template-repo d1v-community/gym-membership-template --write-path .env
+```
 
-## Follow-Up Work
+## Suggested Next Build Steps
 
-- recurring membership state
-- attendance tracking
-- member tiers
-- retention automations
+- Replace the starter landing sections with the real gym membership workflow
+- Extend the Drizzle schema for your product entities
+- Map successful checkout to entitlements, seats, bookings, or premium access
+- Add success-state fulfillment beyond the hosted checkout return pages

@@ -1,0 +1,63 @@
+{
+  "type": "module",
+  "sideEffects": false,
+  "name": "d1v-internal-dashboard-template",
+  "private": true,
+  "description": "Internal operations dashboard starter with auth, database connectivity, and monetization-ready account rails.",
+  "scripts": {
+    "build": "remix vite:build",
+    "dev": "remix vite:dev",
+    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "start": "remix-serve ./build/server/index.js",
+    "typecheck": "tsc --noEmit --pretty",
+    "typecheck:watch": "tsc --noEmit --watch",
+    "env:bootstrap": "node scripts/bootstrap-local-env.mjs",
+    "db:migrate": "node scripts/migrate.mjs",
+    "db:migrate:api": "node scripts/migrate_via_api.mjs",
+    "db:seed": "node scripts/seed.mjs",
+    "db:seed:api": "node scripts/seed_via_api.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
+    "@remix-run/node": "^2.17.4",
+    "@remix-run/react": "^2.17.4",
+    "@remix-run/serve": "^2.17.4",
+    "drizzle-orm": "^0.31.0",
+    "isbot": "^4.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "pino": "^9.3.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "resend": "^4.0.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^2.17.4",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.14.12",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^8.55.0",
+    "@typescript-eslint/parser": "^8.55.0",
+    "autoprefixer": "^10.4.24",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.38.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "postcss": "^8.5.6",
+    "prettier": "^3.8.1",
+    "tailwindcss": "^3.4.18",
+    "typescript": "~5.9.3",
+    "vite": "^5.1.0",
+    "vite-tsconfig-paths": "^4.2.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

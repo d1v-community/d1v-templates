@@ -1,25 +1,42 @@
 # Digital Downloads
 
-- Base foundation: `foundation-remix-neon-auth-pay`
+Digital download starter with auth, Neon data, and hosted checkout.
+
+## What You Start With
+
+- Remix + Tailwind application based on `remix-neon-auth-pay`
+- Passwordless email login
+- Neon / PostgreSQL + Drizzle ORM
+- Hosted checkout and pricing page
+- Local bootstrap script for pulling project env vars into `.env`
+
+## Product Direction
+
+- App title: `DownloadPort`
 - Category: `commerce`
-- Status: blueprint
+- Repository template path: `d1v-community/digital-downloads-template`
+- Default prompt: `Create a digital downloads storefront with database support, member login, and hosted checkout.`
 
-## Best For
+## Local Setup
 
-- e-books
-- design assets
-- templates and kits
+```bash
+pnpm install
+pnpm run env:bootstrap -- --template-repo d1v-community/digital-downloads-template --write-path .env
+pnpm run db:migrate
+pnpm run dev
+```
 
-## Recommended Product Surface
+You can also export env vars into this repository manually:
 
-- product landing page
-- pricing / checkout entry
-- purchase confirmation
-- download library
+```bash
+AUTH_TOKEN=your_token \
+BACKEND_ADMIN_API_BASE=http://localhost:8999 \
+node scripts/bootstrap-local-env.mjs --template-repo d1v-community/digital-downloads-template --write-path .env
+```
 
-## Follow-Up Work
+## Suggested Next Build Steps
 
-- order records
-- entitlement delivery
-- download limits
-- post-purchase email flow
+- Replace the starter landing sections with the real digital downloads workflow
+- Extend the Drizzle schema for your product entities
+- Map successful checkout to entitlements, seats, bookings, or premium access
+- Add success-state fulfillment beyond the hosted checkout return pages
