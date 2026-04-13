@@ -132,13 +132,13 @@
       "slug": "assistant-saas",
       "category": "ai-tools",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/assistant-saas-template",
         "ref": "main",
-        "path": "industries/ai-tools/assistant-saas",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Subscription AI assistant starter with passwordless auth, Neon data, and hosted checkout.",
       "features": [
@@ -168,13 +168,13 @@
       "slug": "prompt-library-membership",
       "category": "ai-tools",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/prompt-library-membership-template",
         "ref": "main",
-        "path": "industries/ai-tools/prompt-library-membership",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Paid prompt library starter with auth, Neon persistence, and member checkout.",
       "features": [
@@ -204,13 +204,13 @@
       "slug": "internal-dashboard",
       "category": "business",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/internal-dashboard-template",
         "ref": "main",
-        "path": "industries/business/internal-dashboard",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Internal operations dashboard starter with auth, database connectivity, and monetization-ready account rails.",
       "features": [
@@ -238,13 +238,13 @@
       "slug": "client-portal",
       "category": "business",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/client-portal-template",
         "ref": "main",
-        "path": "industries/business/client-portal",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Client portal starter with passwordless login, Neon persistence, and hosted portal access checkout.",
       "features": [
@@ -273,13 +273,13 @@
       "slug": "digital-downloads",
       "category": "commerce",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/digital-downloads-template",
         "ref": "main",
-        "path": "industries/commerce/digital-downloads",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Digital download starter with auth, Neon data, and hosted checkout.",
       "features": [
@@ -307,13 +307,13 @@
       "slug": "preorder-launch",
       "category": "commerce",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/preorder-launch-template",
         "ref": "main",
-        "path": "industries/commerce/preorder-launch",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Focused preorder launch starter with hosted checkout, auth, and Neon-backed lead capture.",
       "features": [
@@ -341,13 +341,13 @@
       "slug": "community-membership",
       "category": "creator",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/community-membership-template",
         "ref": "main",
-        "path": "industries/creator/community-membership",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Creator membership starter with login, payments, and Neon-backed member records.",
       "features": [
@@ -376,13 +376,13 @@
       "slug": "paid-newsletter",
       "category": "creator",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/paid-newsletter-template",
         "ref": "main",
-        "path": "industries/creator/paid-newsletter",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Paid newsletter starter with authentication, checkout, and Neon-backed subscriber data.",
       "features": [
@@ -411,13 +411,13 @@
       "slug": "cohort-course",
       "category": "education",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/cohort-course-template",
         "ref": "main",
-        "path": "industries/education/cohort-course",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Cohort course starter with payments, auth, and Neon-backed enrollment data.",
       "features": [
@@ -445,13 +445,13 @@
       "slug": "online-course-membership",
       "category": "education",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/online-course-membership-template",
         "ref": "main",
-        "path": "industries/education/online-course-membership",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Course membership starter with auth, billing, and Neon-backed student progress data.",
       "features": [
@@ -480,13 +480,13 @@
       "slug": "clinic-booking",
       "category": "local",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/clinic-booking-template",
         "ref": "main",
-        "path": "industries/local/clinic-booking",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Clinic booking starter with secure login, deposits, and Neon-backed patient records.",
       "features": [
@@ -515,13 +515,13 @@
       "slug": "gym-membership",
       "category": "local",
       "framework": "Remix",
-      "status": "generated",
+      "status": "published",
       "baseTemplateId": "foundation-remix-neon-auth-pay",
       "repository": {
-        "url": "https://github.com/d1v-community/d1v-templates",
+        "url": "https://github.com/d1v-community/gym-membership-template",
         "ref": "main",
-        "path": "industries/local/gym-membership",
-        "isTemplateRepository": false
+        "path": ".",
+        "isTemplateRepository": true
       },
       "description": "Gym membership starter with auth, hosted checkout, and Neon-backed member records.",
       "features": [

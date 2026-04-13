@@ -6,7 +6,7 @@ These directories are intended to be:
 
 - locally runnable
 - ready for database-backed verification
-- ready to be promoted into standalone GitHub template repositories after review
+- kept in sync with standalone GitHub template repositories after review
 
 ## Categories
 
@@ -26,10 +26,11 @@ These directories are intended to be:
 - template-local `AGENTS.md`
 - industry copy in `app/constants/site.ts`
 
-## Promotion Workflow
+## Publication Workflow
 
 1. Generate the industry directory from `remix-neon-auth-pay`.
 2. Pull a real `.env` from `d1v-server` into the template.
 3. Run migrations, typecheck, and targeted app verification.
 4. Push the verified directory to `d1v-community/<name>-template`.
 5. Enable GitHub template mode for that repository.
+6. Update the root registry metadata so `templates.json` points to the published repo URL.

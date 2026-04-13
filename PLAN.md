@@ -188,9 +188,9 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 - [ ] Promote the first batch of industry blueprints into runnable templates
   - Owner: main agent, validated by `@ui-consistency-qa`, `@commerce-flow-qa`, and `@desktop-adaptive-qa`
   - Verification: each current industry directory contains a runnable Remix app, template-local `AGENTS.md`, industry-specific copy, and passes `pnpm run typecheck`
-  - Status: in_progress
-  - Evidence: generated 12 runnable directories under `industries/`; each now contains app code, docs, `AGENTS.md`, `.d1v-template.json`, and package metadata; `pnpm run typecheck` passed in representative generated templates `industries/ai-tools/assistant-saas` and `industries/local/clinic-booking`
-  - Risk / Notes: generated templates remain publication-safe by inherited ignore rules, but full per-template typecheck coverage is still partial until dependencies are installed and checks are run in every directory
+  - Status: done
+  - Evidence: generated 12 runnable directories under `industries/`; each now contains app code, docs, `AGENTS.md`, `.d1v-template.json`, and package metadata; `pnpm install --frozen-lockfile` + `pnpm run typecheck` passed in all 12 industry directories; each directory was published to `d1v-community/<name>-template` and GitHub template mode was enabled
+  - Risk / Notes: local directory copies and published repos must be kept in sync on future updates, so follow-up automation should treat the root registry as the source of truth for regeneration
 
 - [ ] Verify local database-backed setup flow for promoted templates
   - Owner: main agent, validated by `@context-auth-qa` and `@ux-quality-qa`

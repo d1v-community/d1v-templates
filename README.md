@@ -6,7 +6,7 @@ It now serves three practical roles:
 
 - a catalog of published foundation repositories
 - a machine-readable registry through [`templates.json`](/Users/apple/project/d1v_sever/d1v-templates/templates.json)
-- a workspace for generating runnable industry templates before they are promoted into standalone GitHub template repositories
+- a workspace that still keeps local copies of the industry templates that have now been promoted into standalone GitHub template repositories
 
 ## Repository Structure
 
@@ -33,9 +33,9 @@ Foundation templates are the stable base layer in the D1V catalog.
 
 The current promotion track uses `remix-neon-auth-pay` as the canonical base for all new industry templates so that auth, Neon, pricing, checkout, and local env bootstrap are consistent across categories.
 
-## Runnable Industry Templates
+## Industry Templates
 
-The `industries/` tree now contains runnable Remix applications, not README-only blueprints.
+The `industries/` tree now contains runnable Remix applications, and each one is also published as its own GitHub template repository in `d1v-community`.
 
 Each directory includes:
 
@@ -45,20 +45,20 @@ Each directory includes:
 - a `.d1v-template.json` metadata file
 - `scripts/bootstrap-local-env.mjs` for creating a D1V project and writing the exported env vars into local `.env`
 
-| Template | Category | Product Shape | Directory |
+| Template | Category | Product Shape | GitHub Template Repository |
 | --- | --- | --- | --- |
-| `assistant-saas` | AI tools | paid AI assistant subscription | `industries/ai-tools/assistant-saas` |
-| `prompt-library-membership` | AI tools | gated prompt/content membership | `industries/ai-tools/prompt-library-membership` |
-| `internal-dashboard` | Business | operations dashboard with paid admin access | `industries/business/internal-dashboard` |
-| `client-portal` | Business | client portal with account access and delivery visibility | `industries/business/client-portal` |
-| `digital-downloads` | Commerce | digital goods checkout and entitlement flow | `industries/commerce/digital-downloads` |
-| `preorder-launch` | Commerce | focused preorder launch funnel | `industries/commerce/preorder-launch` |
-| `community-membership` | Creator | paid creator community access | `industries/creator/community-membership` |
-| `paid-newsletter` | Creator | premium newsletter membership | `industries/creator/paid-newsletter` |
-| `cohort-course` | Education | fixed-window cohort enrollment | `industries/education/cohort-course` |
-| `online-course-membership` | Education | recurring course membership | `industries/education/online-course-membership` |
-| `clinic-booking` | Local | appointment booking with hosted deposits | `industries/local/clinic-booking` |
-| `gym-membership` | Local | recurring gym or studio membership | `industries/local/gym-membership` |
+| `assistant-saas` | AI tools | paid AI assistant subscription | `d1v-community/assistant-saas-template` |
+| `prompt-library-membership` | AI tools | gated prompt/content membership | `d1v-community/prompt-library-membership-template` |
+| `internal-dashboard` | Business | operations dashboard with paid admin access | `d1v-community/internal-dashboard-template` |
+| `client-portal` | Business | client portal with account access and delivery visibility | `d1v-community/client-portal-template` |
+| `digital-downloads` | Commerce | digital goods checkout and entitlement flow | `d1v-community/digital-downloads-template` |
+| `preorder-launch` | Commerce | focused preorder launch funnel | `d1v-community/preorder-launch-template` |
+| `community-membership` | Creator | paid creator community access | `d1v-community/community-membership-template` |
+| `paid-newsletter` | Creator | premium newsletter membership | `d1v-community/paid-newsletter-template` |
+| `cohort-course` | Education | fixed-window cohort enrollment | `d1v-community/cohort-course-template` |
+| `online-course-membership` | Education | recurring course membership | `d1v-community/online-course-membership-template` |
+| `clinic-booking` | Local | appointment booking with hosted deposits | `d1v-community/clinic-booking-template` |
+| `gym-membership` | Local | recurring gym or studio membership | `d1v-community/gym-membership-template` |
 
 ## Local Verification Flow
 
@@ -102,9 +102,9 @@ Each record includes:
 
 ## Publishing Model
 
-- Foundation templates are already published as standalone GitHub template repositories.
-- Industry templates are generated locally inside this registry first.
-- After verification, each industry template can be pushed to `d1v-community/<name>-template` and promoted into its own GitHub template repository.
+- Foundation templates are published as standalone GitHub template repositories.
+- The first 12 industry templates are also published as standalone GitHub template repositories.
+- The root registry continues to keep a local mirror of those industry templates for documentation, generation, and future bulk updates.
 
 ## Related Files
 
