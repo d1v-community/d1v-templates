@@ -1,11 +1,10 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { z } from "zod";
 import {
-	createPaymentHubPaymentLink,
 	type PaymentHubApiError,
 	type PaymentHubConfigError,
-	toPaymentHubUserId,
 } from "~/services/payment.server";
+import { createManagedPaymentCheckout } from "~/services/payment-fulfillment.server";
 import { requireUser } from "~/utils/auth.server";
 import { getPaymentCancelUrl, getPaymentSuccessUrl } from "~/utils/env.server";
 
@@ -46,15 +45,15 @@ export async function action({ request }: ActionFunctionArgs) {
 		const body = await request.json();
 		const input = requestSchema.parse(body);
 
-		const paymentLink = await createPaymentHubPaymentLink({
+		const checkout = await createManagedPaymentCheckout({
+			user,
 			productId: input.productId,
-			userId: toPaymentHubUserId(user.id),
-			buyerEmail: user.email ?? undefined,
 			successUrl: input.successUrl ?? getPaymentSuccessUrl(),
 			cancelUrl: input.cancelUrl ?? getPaymentCancelUrl(),
 			requireBuyerEmail: input.requireBuyerEmail ?? true,
 			requireBuyerName: input.requireBuyerName ?? false,
 		});
+		const paymentLink = checkout.paymentLink;
 
 		if (!paymentLink.url) {
 			return Response.json(
@@ -70,6 +69,7 @@ export async function action({ request }: ActionFunctionArgs) {
 			{
 				success: true,
 				checkoutUrl: paymentLink.url,
+				checkoutRequestId: checkout.checkoutRequestId,
 				paymentLink,
 			},
 			{ status: 200 },

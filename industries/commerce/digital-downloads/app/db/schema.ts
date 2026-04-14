@@ -29,5 +29,101 @@ export const verificationCodes = pgTable(
   })
 );
 
+// Payment checkout requests
+export const paymentCheckoutRequests = pgTable("payment_checkout_requests", {
+  id: text("id").primaryKey(),
+  appUserId: text("app_user_id").notNull().references(() => users.id),
+  externalBuyerUserId: text("external_buyer_user_id").notNull(),
+  productId: text("product_id").notNull(),
+  checkoutStatus: text("checkout_status").notNull(),
+  paymentLinkUrl: text("payment_link_url"),
+  successUrl: text("success_url").notNull(),
+  cancelUrl: text("cancel_url").notNull(),
+  lastTransactionId: text("last_transaction_id"),
+  lastError: text("last_error"),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Payment webhook events
+export const paymentWebhookEvents = pgTable("payment_webhook_events", {
+  id: text("id").primaryKey(),
+  eventType: text("event_type").notNull(),
+  transactionId: text("transaction_id"),
+  signature: text("signature"),
+  payloadJson: text("payload_json").notNull(),
+  processingStatus: text("processing_status").notNull(),
+  errorMessage: text("error_message"),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Payment entitlements
+export const paymentEntitlements = pgTable("payment_entitlements", {
+  id: text("id").primaryKey(),
+  appUserId: text("app_user_id").notNull().references(() => users.id),
+  productId: text("product_id").notNull(),
+  entitlementStatus: text("entitlement_status").notNull(),
+  accessLabel: text("access_label").notNull(),
+  source: text("source").notNull(),
+  lastTransactionId: text("last_transaction_id"),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Payment fulfillment records
+export const paymentFulfillments = pgTable("payment_fulfillments", {
+  id: text("id").primaryKey(),
+  appUserId: text("app_user_id").notNull().references(() => users.id),
+  productId: text("product_id").notNull(),
+  transactionId: text("transaction_id").notNull(),
+  businessEntity: text("business_entity").notNull(),
+  businessRecordId: text("business_record_id").notNull(),
+  fulfillmentStatus: text("fulfillment_status").notNull(),
+  fulfillmentSource: text("fulfillment_source").notNull(),
+  summaryLabel: text("summary_label").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Products
+export const downloadProducts = pgTable("download_products", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  categoryLabel: text("category_label").notNull(),
+  status: text("status").notNull(),
+  deliveryLabel: text("delivery_label").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Orders
+export const downloadOrders = pgTable("download_orders", {
+  id: text("id").primaryKey(),
+  productId: text("product_id").notNull(),
+  buyerEmail: text("buyer_email").notNull(),
+  status: text("status").notNull(),
+  fulfillmentLabel: text("fulfillment_label").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Entitlements
+export const downloadEntitlements = pgTable("download_entitlements", {
+  id: text("id").primaryKey(),
+  productId: text("product_id").notNull(),
+  buyerEmail: text("buyer_email").notNull(),
+  accessState: text("access_state").notNull(),
+  downloadLabel: text("download_label").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
+export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
+export type PaymentWebhookEvent = typeof paymentWebhookEvents.$inferSelect;
+export type PaymentEntitlement = typeof paymentEntitlements.$inferSelect;
+export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
+export type DownloadProductsRecord = typeof downloadProducts.$inferSelect;
+export type DownloadOrdersRecord = typeof downloadOrders.$inferSelect;
+export type DownloadEntitlementsRecord = typeof downloadEntitlements.$inferSelect;

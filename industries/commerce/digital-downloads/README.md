@@ -8,6 +8,7 @@ Digital download starter with auth, Neon data, and hosted checkout.
 - Passwordless email login
 - Neon / PostgreSQL + Drizzle ORM
 - Hosted checkout and pricing page
+- Live database snapshot route at `/api/template/snapshot`
 - Local bootstrap script for pulling project env vars into `.env`
 
 ## Product Direction
@@ -48,6 +49,7 @@ Digital download starter with auth, Neon data, and hosted checkout.
 pnpm install
 pnpm run env:bootstrap -- --template-repo d1v-community/digital-downloads-template --write-path .env
 pnpm run db:migrate
+pnpm run db:seed
 pnpm run dev
 ```
 
@@ -63,6 +65,6 @@ node scripts/bootstrap-local-env.mjs --template-repo d1v-community/digital-downl
 ## Suggested Next Build Steps
 
 - Replace the starter landing sections with the real digital downloads workflow
-- Extend the Drizzle schema for your product entities
+- Extend the seeded industry schema with your production entities
 - Map successful checkout to entitlements, seats, bookings, or premium access
 - Add success-state fulfillment beyond the hosted checkout return pages

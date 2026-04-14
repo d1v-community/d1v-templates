@@ -1,9 +1,12 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Link, useSearchParams } from "@remix-run/react";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 import { AppFooter } from "~/components/AppFooter";
 import { AppHeader } from "~/components/AppHeader";
 import { APP_TITLE } from "~/constants/app";
 import { SITE_CONFIG } from "~/constants/site";
+import { reconcilePaymentSuccess } from "~/services/payment-fulfillment.server";
+import { getUserFromRequest } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -14,6 +17,29 @@ export const meta: MetaFunction = () => {
 		},
 	];
 };
+
+export async function loader({ request }: LoaderFunctionArgs) {
+	const user = await getUserFromRequest(request);
+	const url = new URL(request.url);
+	const result = await reconcilePaymentSuccess({ request, user });
+
+	return json({
+		user,
+		query: {
+			checkoutRequestId: url.searchParams.get("checkout_request_id"),
+			paymentLinkId:
+				url.searchParams.get("id") ||
+				url.searchParams.get("payment_link_id") ||
+				url.searchParams.get("paymentLinkId"),
+			productId:
+				url.searchParams.get("productId") || url.searchParams.get("product_id"),
+			sessionId:
+				url.searchParams.get("session_id") || url.searchParams.get("sessionId"),
+			userId: url.searchParams.get("userId") || url.searchParams.get("user_id"),
+		},
+		result,
+	});
+}
 
 function DetailRow({ label, value }: { label: string; value: string | null }) {
 	if (!value) return null;
@@ -28,21 +54,62 @@ function DetailRow({ label, value }: { label: string; value: string | null }) {
 	);
 }
 
+function FulfillmentStateCard({
+	status,
+	summary,
+	reason,
+	accessLabel,
+}: {
+	status: string;
+	summary?: string | null;
+	reason?: string;
+	accessLabel?: string | null;
+}) {
+	const isFulfilled = status === "fulfilled" || status === "duplicate";
+
+	return (
+		<div
+			className={`mt-8 rounded-2xl border p-5 ${
+				isFulfilled
+					? "border-emerald-200 bg-emerald-50 dark:border-emerald-900/60 dark:bg-emerald-950/20"
+					: "border-amber-200 bg-amber-50 dark:border-amber-900/60 dark:bg-amber-950/20"
+			}`}
+		>
+			<h2
+				className={`text-sm font-semibold ${
+					isFulfilled
+						? "text-emerald-900 dark:text-emerald-200"
+						: "text-amber-900 dark:text-amber-200"
+				}`}
+			>
+				{isFulfilled ? "Fulfillment completed" : "Fulfillment pending"}
+			</h2>
+			<p
+				className={`mt-2 text-sm leading-6 ${
+					isFulfilled
+						? "text-emerald-800 dark:text-emerald-300"
+						: "text-amber-800 dark:text-amber-300"
+				}`}
+			>
+				{summary || reason || "We are still reconciling your payment status."}
+			</p>
+			{accessLabel ? (
+				<p
+					className={`mt-3 text-xs font-medium uppercase tracking-[0.18em] ${
+						isFulfilled
+							? "text-emerald-700 dark:text-emerald-300"
+							: "text-amber-700 dark:text-amber-300"
+					}`}
+				>
+					{accessLabel}
+				</p>
+			) : null}
+		</div>
+	);
+}
+
 export default function PaySuccessPage() {
-	const [searchParams] = useSearchParams();
-
-	const paymentLinkId =
-		searchParams.get("id") ||
-		searchParams.get("payment_link_id") ||
-		searchParams.get("paymentLinkId");
-
-	const productId =
-		searchParams.get("productId") || searchParams.get("product_id");
-
-	const sessionId =
-		searchParams.get("session_id") || searchParams.get("sessionId");
-
-	const userId = searchParams.get("userId") || searchParams.get("user_id");
+	const { query, result, user } = useLoaderData<typeof loader>();
 
 	const handleLogout = async () => {
 		try {
@@ -59,7 +126,7 @@ export default function PaySuccessPage() {
 
 	return (
 		<div className="min-h-screen bg-slate-50 dark:bg-slate-950">
-			<AppHeader user={null} onLogout={handleLogout} />
+			<AppHeader user={user} onLogout={handleLogout} />
 
 			<main className="mx-auto flex max-w-3xl flex-1 items-center px-4 py-12 sm:px-6 lg:px-8">
 				<div className="w-full rounded-3xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-10">
@@ -90,11 +157,22 @@ export default function PaySuccessPage() {
 						</p>
 					</div>
 
+					<FulfillmentStateCard
+						status={result.status}
+						summary={result.summary}
+						reason={result.reason}
+						accessLabel={result.accessLabel}
+					/>
+
 					<div className="mt-8 space-y-3">
-						<DetailRow label="Payment Link ID" value={paymentLinkId} />
-						<DetailRow label="Product ID" value={productId} />
-						<DetailRow label="Session ID" value={sessionId} />
-						<DetailRow label="User ID" value={userId} />
+						<DetailRow label="Checkout Request ID" value={query.checkoutRequestId} />
+						<DetailRow label="Payment Link ID" value={query.paymentLinkId} />
+						<DetailRow label="Product ID" value={query.productId} />
+						<DetailRow label="Session ID" value={query.sessionId} />
+						<DetailRow label="User ID" value={query.userId} />
+						<DetailRow label="Transaction ID" value={result.transactionId ?? null} />
+						<DetailRow label="Business Entity" value={result.businessEntity ?? null} />
+						<DetailRow label="Business Record ID" value={result.businessRecordId ?? null} />
 					</div>
 
 					<div className="mt-8 rounded-2xl border border-blue-200 bg-blue-50 p-5 dark:border-sky-900 dark:bg-sky-950/30">

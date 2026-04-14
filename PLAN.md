@@ -9,6 +9,50 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 - machine-readable metadata
 - plan-driven, verification-first execution rules
 
+## Current Execution
+
+- Goal: upgrade all 12 generated industry templates from auth-only starter schemas to industry-specific schemas, then re-run real-env local startup and API verification for each template.
+- Background: every `industries/*/*/drizzle/0000_init.sql` still matches the auth-only foundation schema, so the generated apps are runnable but not actually integrated with industry data models.
+- Extension: close the real payment loop so successful checkout is not just a redirect, but a signed webhook + entitlement + fulfillment write into each template's industry table.
+- Selected validators:
+  - `@data-schema-qa`
+  - `@api-backend-qa`
+  - `@frontend-ui-qa`
+  - `@checkout-monetization-qa`
+  - `@auth-state-qa`
+- Active todos:
+  - [x] Add reusable industry data-model definitions plus generator support for schema, migration, seed, and live snapshot files
+    - Owner: main agent
+    - Verification: regenerate all 12 industry templates and confirm each now has non-auth domain tables in `app/db/schema.ts` and `drizzle/0000_init.sql`
+    - Status: done
+    - Evidence: added `scripts/industry-template.data-models.mjs`; rewrote `scripts/generate-industry-templates.mjs` to generate per-template `app/db/schema.ts`, `drizzle/0000_init.sql`, `scripts/seed.mjs`, and `app/services/template-data.server.ts`; regenerated all 12 `industries/*/*` directories while preserving existing `.env` files
+  - [x] Wire homepage and API snapshot routes to live database-backed industry data
+    - Owner: main agent
+    - Verification: `pnpm run typecheck` passes in the foundation and regenerated templates; `GET /api/template/snapshot` returns domain data after migration + seed
+    - Status: done
+    - Evidence: added foundation `app/routes/api.template.snapshot.ts`; added foundation `app/services/template-data.server.ts`; patched foundation `_index.tsx` and `DevLoadingCard.tsx` so the homepage loads and renders the live snapshot; `pnpm run typecheck` passed in `foundations/remix-neon-auth-pay`
+  - [x] Re-run local DB and runtime verification with real template `.env` files across all 12 industry templates
+    - Owner: main agent
+    - Verification: each template passes `pnpm run db:migrate`, `pnpm run db:seed`, `pnpm run build`, runtime `GET /`, `GET /pricing`, `GET /api/openapi.json`, `GET /api/template/snapshot`, login verification flow, and payment-link/API smoke where applicable
+    - Status: done
+    - Evidence: added `scripts/verify-industry-runtime.mjs`; real `.env` files already present under all 12 `industries/*/*/.env`; `node scripts/verify-industry-runtime.mjs` completed successfully with `verifiedTemplates: 12`; every template returned `HOME=200`, `PRICING=200`, `snapshotSections=3`; payment-link creation succeeded in all 12; AI-enabled templates (`assistant-saas`, `prompt-library-membership`, `client-portal`, `cohort-course`, `online-course-membership`, `clinic-booking`) also returned successful `/api/ai/chat` responses with model `kimi-k2.5`
+  - [x] Record evidence and residual risk after the 12-template verification sweep
+    - Owner: main agent
+    - Verification: `PLAN.md` updated with commands run, pass/fail coverage, and blockers if any
+    - Status: done
+    - Evidence: this section now records the generation changes plus the successful 12-template runtime sweep
+    - Risk / Notes: the runtime verifier currently relies on pre-existing real `.env` files in each template directory because no fresh `AUTH_TOKEN` was available in the shell to re-export env vars during this turn; upstream payment links are live Stripe checkout URLs and may vary per run
+  - [x] Implement a real payment webhook + entitlement + fulfillment loop across the payment foundation and generated industry templates
+    - Owner: main agent
+    - Verification: foundation `pnpm run typecheck` passes; generated templates expose `/api/pay/webhook`; signed webhook smoke writes `payment_checkout_requests`, `payment_webhook_events`, `payment_entitlements`, `payment_fulfillments`, and the target industry business table
+    - Status: done
+    - Evidence: added shared fulfillment logic in `foundations/remix-neon-auth-pay/app/services/payment-fulfillment.server.ts`; added `app/routes/api.pay.webhook.ts`; upgraded `pay.success` to reconcile and show fulfillment state; added generator-backed `app/services/template-fulfillment.server.ts` for all 12 industry templates; expanded the generated schema/SQL with shared payment closure tables
+  - [x] Re-run real-env payment-closure verification across all 12 industry templates
+    - Owner: main agent
+    - Verification: `node scripts/verify-industry-runtime.mjs` completes with all 12 templates returning `webhookStatus: fulfilled`
+    - Status: done
+    - Evidence: the runtime verifier now creates a temporary Payment Hub webhook per template, signs a synthetic `payment.succeeded` event, posts it to the local `/api/pay/webhook`, confirms the success page reflects fulfillment, and checks that entitlement / fulfillment / webhook tables plus the template business table were written; full 12-template sweep completed successfully with `verifiedTemplates: 12`
+
 ## Current Decisions
 
 - The repository now separates `foundations/` from `industries/`.

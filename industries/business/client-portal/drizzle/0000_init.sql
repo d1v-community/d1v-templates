@@ -21,3 +21,93 @@ create table if not exists verification_codes (
 );
 create index if not exists verification_codes_email_idx on verification_codes(email);
 create index if not exists verification_codes_email_purpose_idx on verification_codes(email, purpose);
+
+-- Payment checkout requests
+create table if not exists payment_checkout_requests (
+  id text primary key,
+  app_user_id text not null references users(id),
+  external_buyer_user_id text not null,
+  product_id text not null,
+  checkout_status text not null,
+  payment_link_url text,
+  success_url text not null,
+  cancel_url text not null,
+  last_transaction_id text,
+  last_error text,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Payment webhook events
+create table if not exists payment_webhook_events (
+  id text primary key,
+  event_type text not null,
+  transaction_id text,
+  signature text,
+  payload_json text not null,
+  processing_status text not null,
+  error_message text,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Payment entitlements
+create table if not exists payment_entitlements (
+  id text primary key,
+  app_user_id text not null references users(id),
+  product_id text not null,
+  entitlement_status text not null,
+  access_label text not null,
+  source text not null,
+  last_transaction_id text,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Payment fulfillment records
+create table if not exists payment_fulfillments (
+  id text primary key,
+  app_user_id text not null references users(id),
+  product_id text not null,
+  transaction_id text not null,
+  business_entity text not null,
+  business_record_id text not null,
+  fulfillment_status text not null,
+  fulfillment_source text not null,
+  summary_label text not null,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Clients
+create table if not exists portal_clients (
+  id text primary key,
+  name text not null,
+  account_lead text not null,
+  status text not null,
+  plan_label text not null,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Projects
+create table if not exists portal_projects (
+  id text primary key,
+  client_id text not null,
+  title text not null,
+  stage_label text not null,
+  milestone_label text not null,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Uploads
+create table if not exists portal_uploads (
+  id text primary key,
+  project_id text not null,
+  file_name text not null,
+  file_type text not null,
+  status text not null,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);

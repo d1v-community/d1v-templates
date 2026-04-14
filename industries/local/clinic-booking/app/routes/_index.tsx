@@ -11,6 +11,7 @@ import { AppFooter } from "~/components/AppFooter";
 import { DevLoadingCard } from "~/components/DevLoadingCard";
 import { AiAssistantPanel } from "~/components/AiAssistantPanel";
 import { SITE_CONFIG } from "~/constants/site";
+import { getTemplateSnapshot } from "~/services/template-data.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -25,20 +26,32 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const aiAssistantWarning = getAiAssistantConfigWarningMessage(
     Boolean(SITE_CONFIG.aiAssistant?.enabled),
   );
+  let snapshot = null;
+  let snapshotWarning = null;
+
+  try {
+    snapshot = await getTemplateSnapshot();
+  } catch (error) {
+    snapshotWarning =
+      error instanceof Error
+        ? error.message
+        : "Failed to load template snapshot.";
+  }
 
   return json({
     user,
-    warnings: [envWarning, aiAssistantWarning].filter(
+    warnings: [envWarning, aiAssistantWarning, snapshotWarning].filter(
       (warning): warning is string => Boolean(warning),
     ),
     aiAssistantWarning,
+    snapshot,
   });
 };
 
 type LoaderData = SerializeFrom<typeof loader>;
 
 export default function Index() {
-  const { user, warnings, aiAssistantWarning } = useLoaderData<typeof loader>();
+  const { user, warnings, aiAssistantWarning, snapshot } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
   const [clientUser, setClientUser] = useState<LoaderData["user"]>(user);
 
@@ -84,7 +97,7 @@ export default function Index() {
       <AppHeader user={effectiveUser} onLogout={handleLogout} />
 
       <main className="flex-1 min-h-0">
-        <DevLoadingCard />
+        <DevLoadingCard snapshot={snapshot} />
         <AiAssistantPanel warningMessage={aiAssistantWarning} />
       </main>
 

@@ -21,3 +21,93 @@ create table if not exists verification_codes (
 );
 create index if not exists verification_codes_email_idx on verification_codes(email);
 create index if not exists verification_codes_email_purpose_idx on verification_codes(email, purpose);
+
+-- Payment checkout requests
+create table if not exists payment_checkout_requests (
+  id text primary key,
+  app_user_id text not null references users(id),
+  external_buyer_user_id text not null,
+  product_id text not null,
+  checkout_status text not null,
+  payment_link_url text,
+  success_url text not null,
+  cancel_url text not null,
+  last_transaction_id text,
+  last_error text,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Payment webhook events
+create table if not exists payment_webhook_events (
+  id text primary key,
+  event_type text not null,
+  transaction_id text,
+  signature text,
+  payload_json text not null,
+  processing_status text not null,
+  error_message text,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Payment entitlements
+create table if not exists payment_entitlements (
+  id text primary key,
+  app_user_id text not null references users(id),
+  product_id text not null,
+  entitlement_status text not null,
+  access_label text not null,
+  source text not null,
+  last_transaction_id text,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Payment fulfillment records
+create table if not exists payment_fulfillments (
+  id text primary key,
+  app_user_id text not null references users(id),
+  product_id text not null,
+  transaction_id text not null,
+  business_entity text not null,
+  business_record_id text not null,
+  fulfillment_status text not null,
+  fulfillment_source text not null,
+  summary_label text not null,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Providers
+create table if not exists clinic_providers (
+  id text primary key,
+  name text not null,
+  specialty_label text not null,
+  availability_state text not null,
+  schedule_label text not null,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Appointments
+create table if not exists clinic_appointments (
+  id text primary key,
+  provider_id text not null,
+  patient_email text not null,
+  appointment_state text not null,
+  visit_label text not null,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+
+-- Intake forms
+create table if not exists clinic_intake_forms (
+  id text primary key,
+  appointment_id text not null,
+  patient_email text not null,
+  form_state text not null,
+  completion_label text not null,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);

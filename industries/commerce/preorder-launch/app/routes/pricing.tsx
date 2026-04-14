@@ -12,14 +12,13 @@ import { AppHeader } from "~/components/AppHeader";
 import { APP_TITLE } from "~/constants/app";
 import { SITE_CONFIG } from "~/constants/site";
 import {
-	createPaymentHubPaymentLink,
-	listPaymentHubProducts,
 	type PaymentHubApiError,
 	type PaymentHubConfigError,
+	listPaymentHubProducts,
 	type PaymentHubProduct,
 	type PaymentHubProductPrice,
-	toPaymentHubUserId,
 } from "~/services/payment.server";
+import { createManagedPaymentCheckout } from "~/services/payment-fulfillment.server";
 import { getUserFromRequest, requireUser } from "~/utils/auth.server";
 import {
 	getEnvWarningMessage,
@@ -91,15 +90,15 @@ export async function action({ request }: ActionFunctionArgs) {
 	}
 
 	try {
-		const paymentLink = await createPaymentHubPaymentLink({
+		const checkout = await createManagedPaymentCheckout({
+			user,
 			productId,
-			userId: toPaymentHubUserId(user.id),
-			buyerEmail: user.email ?? undefined,
 			successUrl: getPaymentSuccessUrl(),
 			cancelUrl: getPaymentCancelUrl(),
 			requireBuyerEmail: true,
 			requireBuyerName: false,
 		});
+		const paymentLink = checkout.paymentLink;
 
 		if (!paymentLink.url) {
 			return json(

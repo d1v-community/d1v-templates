@@ -5,6 +5,7 @@ import {
   type SiteMetric,
 } from "~/constants/site";
 import { getSiteThemeClasses } from "~/constants/site-theme";
+import type { TemplateSnapshot } from "~/services/template-data.server";
 
 function MetricRow({
   metrics,
@@ -214,7 +215,11 @@ function renderShowcasePanels(layout: string, panels: SiteExperiencePanel[]) {
   );
 }
 
-export function DevLoadingCard() {
+export function DevLoadingCard({
+  snapshot,
+}: {
+  snapshot?: TemplateSnapshot | null;
+}) {
   const theme = getSiteThemeClasses(SITE_CONFIG.theme.family);
   const surface = SITE_CONFIG.templateSurface;
   const fulfillmentSteps = SITE_CONFIG.paymentSuccess.nextSteps.slice(0, 3);
@@ -425,6 +430,78 @@ export function DevLoadingCard() {
             </section>
           </div>
         </div>
+
+        {snapshot ? (
+          <section className={`mt-16 rounded-[2rem] p-6 lg:p-8 ${theme.sectionShell}`}>
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div className="max-w-3xl">
+                <p className={`text-xs uppercase tracking-[0.24em] ${theme.sectionLabel}`}>
+                  Live snapshot
+                </p>
+                <h2 className={`mt-4 text-3xl font-semibold tracking-tight ${theme.emphasis}`}>
+                  {snapshot.title}
+                </h2>
+                <p className={`mt-4 text-sm leading-7 ${theme.sectionText}`}>
+                  {snapshot.description}
+                </p>
+              </div>
+              <div className={`rounded-full px-4 py-2 text-xs uppercase tracking-[0.24em] ${theme.eyebrow}`}>
+                {new Date(snapshot.generatedAt).toLocaleString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  hour: "numeric",
+                  minute: "2-digit",
+                })}
+              </div>
+            </div>
+
+            <div className="mt-8 grid gap-4 lg:grid-cols-3">
+              {snapshot.sections.map((section) => (
+                <div
+                  key={section.key}
+                  className={`rounded-[1.5rem] p-4 ${theme.listItemShell}`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className={`text-base font-semibold ${theme.emphasis}`}>
+                        {section.title}
+                      </p>
+                      <p className={`mt-2 text-sm leading-6 ${theme.sectionText}`}>
+                        {section.description}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <p className={`text-xl font-semibold ${theme.emphasis}`}>
+                        {section.total}
+                      </p>
+                      <p className={`mt-1 text-[11px] uppercase tracking-[0.18em] ${theme.sectionLabel}`}>
+                        {section.totalLabel}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 space-y-3">
+                    {section.items.map((item) => (
+                      <div key={`${section.key}-${item.title}-${item.meta}`} className="border-t border-current/10 pt-3 first:border-t-0 first:pt-0">
+                        <div className="flex items-center justify-between gap-3">
+                          <p className={`text-sm font-semibold ${theme.emphasis}`}>
+                            {item.title}
+                          </p>
+                          <p className={`text-[11px] uppercase tracking-[0.18em] ${theme.sectionLabel}`}>
+                            {item.meta}
+                          </p>
+                        </div>
+                        <p className={`mt-2 text-sm leading-6 ${theme.sectionText}`}>
+                          {item.detail}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
 
         <section className={`mt-16 rounded-[2.2rem] p-6 lg:p-8 ${theme.closingShell}`}>
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">

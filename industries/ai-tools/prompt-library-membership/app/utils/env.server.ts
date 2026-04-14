@@ -83,6 +83,19 @@ export const env = {
 
 export const isProd = env.NODE_ENV === "production";
 
+function normalizeAppUrl(value: string): string {
+	return value.replace(/\/+$/, "");
+}
+
+function isLocalHostname(hostname: string): boolean {
+	return (
+		hostname === "localhost" ||
+		hostname === "127.0.0.1" ||
+		hostname === "0.0.0.0" ||
+		hostname.endsWith(".local")
+	);
+}
+
 // Returns a human-readable warning for missing/invalid env vars so
 // the UI can show a banner instead of crashing the function.
 export function getEnvWarningMessage(): string | null {
@@ -121,11 +134,24 @@ export function getPaymentHubConfigWarningMessage(): string | null {
 }
 
 export function getPaymentSuccessUrl(): string {
-	return env.PAY_SUCCESS_URL ?? `${env.APP_URL}/pay/success`;
+	return env.PAY_SUCCESS_URL ?? `${normalizeAppUrl(env.APP_URL)}/pay/success`;
 }
 
 export function getPaymentCancelUrl(): string {
-	return env.PAY_CANCEL_URL ?? `${env.APP_URL}/pay/cancel`;
+	return env.PAY_CANCEL_URL ?? `${normalizeAppUrl(env.APP_URL)}/pay/cancel`;
+}
+
+export function getPaymentWebhookUrl(): string {
+	return `${normalizeAppUrl(env.APP_URL)}/api/pay/webhook`;
+}
+
+export function isPublicAppUrl(): boolean {
+	try {
+		const url = new URL(env.APP_URL);
+		return url.protocol === "https:" && !isLocalHostname(url.hostname);
+	} catch {
+		return false;
+	}
 }
 
 export function hasAiAssistantConfig(): boolean {

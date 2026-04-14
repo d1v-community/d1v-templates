@@ -1,80 +1,53 @@
 # Agent Guide (AGENTS.md)
 
-These instructions apply to the entire `internal-dashboard-template` template repository.
+Use this file as the execution contract for work in this template.
 
-Repository-level workflow guidance also exists at the parent `d1v-templates/AGENTS.md`. If the two guides disagree, record the conflict in a local `PLAN.md` or in the root `d1v-templates/PLAN.md` before proceeding.
+## Planning First
 
-## Default Database Workflow
+- Every non-trivial task must start by pruning stale or already-compressed completed items from `PLAN.md`, then writing the current goal, background, selected validators, and todo list before editing.
+- `PLAN.md` is the source of truth for scope, order, verification, evidence, and residual risk.
+- Keep at most one todo `in_progress` per execution thread unless work was intentionally delegated in parallel.
 
-Use direct database scripts by default:
+## Checkoff Rule
+
+- Do not check off a todo until its assigned validators have passed and the evidence is written into `PLAN.md`.
+- If verification fails, keep the todo open, record the failure, and add the corrective next step.
+- Never mark work done based on implementation alone.
+
+## Minimum Verification Before Checkoff
+
+- `@api-backend-qa`: before checking off an API or backend todo, run at least one local smoke request that proves the happy path works, auth/error handling is correct, and returned data matches the expected shape.
+- `@frontend-ui-qa`: before checking off a UI or interaction todo, relevant loading, empty, and error states must exist, the layout and motion must fit the target user, and `pnpm run lint` must pass.
+- `@cro-copy-qa`: before checking off a copy todo, rewrite against the CRO-copy standard: ICP + pain + desire, feature-to-benefit framing, and Promise / Proof / Push with short, scannable CTAs.
+
+## Default Commands
 
 - `pnpm run db:migrate`
 - `pnpm run db:seed`
-
-These scripts require `DATABASE_URL` in `.env`.
-
-The `:api` variants still exist for platform-managed workflows, but they are exceptions rather than the default.
-
-## Type Checking (Mandatory)
-
-After every code change, run TypeScript checks and fix all reported issues:
-
 - `pnpm run typecheck`
-- `pnpm run typecheck:watch`
+- `pnpm run lint`
 
-Treat type errors as build blockers and resolve them before handoff.
+Treat failing `typecheck` or `lint` as blockers and record any environment blocker in `PLAN.md`.
 
-## Coding & Tooling
+## Validator Registry
 
-- Keep diffs minimal and focused on the task. Avoid unrelated refactors.
-- Match the existing code style. Use `pnpm run lint` / `pnpm run format` if needed.
-- Do not add dependencies unless strictly necessary and approved by the user.
+- `@api-backend-qa`: routes, server logic, DTOs, auth gating, error handling, response shape
+- `@frontend-ui-qa`: page structure, forms, interaction quality, loading/empty/error states
+- `@cro-copy-qa`: hero copy, proof blocks, CTA hierarchy, onboarding copy, risk-reversal copy
+- `@auth-state-qa`: signed-out, signed-in, session expiry, protected routes, account-state edges
+- `@data-schema-qa`: schema, migrations, seeds, env assumptions, data integrity
+- `@checkout-monetization-qa`: pricing, checkout, entitlements, success/cancel, paywall messaging
+- `@responsive-accessibility-qa`: desktop/mobile layout, keyboard reachability, contrast, hierarchy clarity
+- `@performance-seo-qa`: metadata, above-the-fold clarity, asset discipline, landing-page scanability
+
+## Working Rules
+
+- Keep diffs focused. Avoid unrelated refactors.
+- Prefer existing scripts and patterns over new tooling.
+- Do not hardcode secrets or commit `.env`, build output, caches, or deployment metadata.
 - Prefer `rg` for search and read files in small chunks.
+- If a route needs a special auth or header exception, record it in `PLAN.md` before relying on it.
 
-## Auth Conventions (Client)
+## Handoff Format
 
-- Frontend API calls are same-origin and should prefer the existing auth conventions for `/api/*` routes.
-- Do not manually append `Authorization` headers unless a concrete route requires a documented exception.
-- Documented exception: the built-in `/pricing` flow currently restores auth from local `auth-token` and explicitly sends `Authorization: Bearer <token>` to `/api/auth/me`, `/api/auth/sync-cookie`, and `/api/pay/create`.
-
-## Security
-
-- Do not print or hardcode secrets.
-- Respect HTTP-only cookies for SSR, and use localStorage token only for client-side concerns.
-- Do not commit `.env`, build output, or local deployment caches.
-
-## Plan-Driven Execution
-
-- For any non-trivial task, create or update a written plan before editing code.
-- Treat the plan as the source of truth for execution order, verification state, and remaining risks.
-- Every meaningful todo should include:
-  - target outcome
-  - owner, including any sub-agent
-  - verification method
-  - current status
-- Do not mark a todo complete until required verification has passed.
-
-## Sub-Agent Construction
-
-- Define sub-agents by responsibility rather than vague role names.
-- Each sub-agent assignment should state:
-  - scope and boundaries
-  - owned files, routes, or modules
-  - expected output
-  - required checks
-  - handoff format
-- Sub-agents must report what passed, what failed, what was not checked, and remaining risk.
-
-## Operational
-
-- Do not run `git commit` or create branches unless explicitly asked.
-- When environment-specific values are unclear, ask instead of guessing.
-
----
-
-中文提示（简要）：
-
-- 默认使用 `db:migrate` / `db:seed`。
-- 每次改代码后必须跑 `pnpm run typecheck`。
-- `/pricing` 相关客户端请求目前是一个明确的 Bearer token 例外。
-- 非简单任务先写计划，再执行。
+- Each validator handoff must include `Result`, `Checked`, `Passed`, `Failed`, `Not checked`, `Risk`, and `Plan update`.

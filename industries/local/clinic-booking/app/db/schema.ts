@@ -29,5 +29,101 @@ export const verificationCodes = pgTable(
   })
 );
 
+// Payment checkout requests
+export const paymentCheckoutRequests = pgTable("payment_checkout_requests", {
+  id: text("id").primaryKey(),
+  appUserId: text("app_user_id").notNull().references(() => users.id),
+  externalBuyerUserId: text("external_buyer_user_id").notNull(),
+  productId: text("product_id").notNull(),
+  checkoutStatus: text("checkout_status").notNull(),
+  paymentLinkUrl: text("payment_link_url"),
+  successUrl: text("success_url").notNull(),
+  cancelUrl: text("cancel_url").notNull(),
+  lastTransactionId: text("last_transaction_id"),
+  lastError: text("last_error"),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Payment webhook events
+export const paymentWebhookEvents = pgTable("payment_webhook_events", {
+  id: text("id").primaryKey(),
+  eventType: text("event_type").notNull(),
+  transactionId: text("transaction_id"),
+  signature: text("signature"),
+  payloadJson: text("payload_json").notNull(),
+  processingStatus: text("processing_status").notNull(),
+  errorMessage: text("error_message"),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Payment entitlements
+export const paymentEntitlements = pgTable("payment_entitlements", {
+  id: text("id").primaryKey(),
+  appUserId: text("app_user_id").notNull().references(() => users.id),
+  productId: text("product_id").notNull(),
+  entitlementStatus: text("entitlement_status").notNull(),
+  accessLabel: text("access_label").notNull(),
+  source: text("source").notNull(),
+  lastTransactionId: text("last_transaction_id"),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Payment fulfillment records
+export const paymentFulfillments = pgTable("payment_fulfillments", {
+  id: text("id").primaryKey(),
+  appUserId: text("app_user_id").notNull().references(() => users.id),
+  productId: text("product_id").notNull(),
+  transactionId: text("transaction_id").notNull(),
+  businessEntity: text("business_entity").notNull(),
+  businessRecordId: text("business_record_id").notNull(),
+  fulfillmentStatus: text("fulfillment_status").notNull(),
+  fulfillmentSource: text("fulfillment_source").notNull(),
+  summaryLabel: text("summary_label").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Providers
+export const clinicProviders = pgTable("clinic_providers", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  specialtyLabel: text("specialty_label").notNull(),
+  availabilityState: text("availability_state").notNull(),
+  scheduleLabel: text("schedule_label").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Appointments
+export const clinicAppointments = pgTable("clinic_appointments", {
+  id: text("id").primaryKey(),
+  providerId: text("provider_id").notNull(),
+  patientEmail: text("patient_email").notNull(),
+  appointmentState: text("appointment_state").notNull(),
+  visitLabel: text("visit_label").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+// Intake forms
+export const clinicIntakeForms = pgTable("clinic_intake_forms", {
+  id: text("id").primaryKey(),
+  appointmentId: text("appointment_id").notNull(),
+  patientEmail: text("patient_email").notNull(),
+  formState: text("form_state").notNull(),
+  completionLabel: text("completion_label").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+});
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
+export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
+export type PaymentWebhookEvent = typeof paymentWebhookEvents.$inferSelect;
+export type PaymentEntitlement = typeof paymentEntitlements.$inferSelect;
+export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
+export type ClinicProvidersRecord = typeof clinicProviders.$inferSelect;
+export type ClinicAppointmentsRecord = typeof clinicAppointments.$inferSelect;
+export type ClinicIntakeFormsRecord = typeof clinicIntakeForms.$inferSelect;

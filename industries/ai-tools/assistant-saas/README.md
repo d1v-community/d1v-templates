@@ -8,6 +8,7 @@ Subscription AI assistant starter with passwordless auth, Neon data, and hosted 
 - Passwordless email login
 - Neon / PostgreSQL + Drizzle ORM
 - Hosted checkout and pricing page
+- Live database snapshot route at `/api/template/snapshot`
 - Optional on-page AI concierge powered by `D1V_PAI_*`
 - Local bootstrap script for pulling project env vars into `.env`
 
@@ -49,6 +50,7 @@ Subscription AI assistant starter with passwordless auth, Neon data, and hosted 
 pnpm install
 pnpm run env:bootstrap -- --template-repo d1v-community/assistant-saas-template --write-path .env
 pnpm run db:migrate
+pnpm run db:seed
 pnpm run dev
 ```
 
@@ -71,7 +73,7 @@ D1V_PAI_API_KEY=your_project_level_pai_api_key
 ## Suggested Next Build Steps
 
 - Replace the starter landing sections with the real ai assistant saas workflow
-- Extend the Drizzle schema for your product entities
+- Extend the seeded industry schema with your production entities
 - Map successful checkout to entitlements, seats, bookings, or premium access
 - Add success-state fulfillment beyond the hosted checkout return pages
 - Tune the built-in AI concierge prompt and connect it to your product workflow
