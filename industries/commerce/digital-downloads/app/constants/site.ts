@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "DownloadPort",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Digital product storefront starter with paid access and downloadable fulfillment.",
   "theme": {
     "family": "commerce",
@@ -173,7 +173,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Digital commerce",
     "headline": "Sell files, kits, and templates on rails that are already wired.",
-    "description": "DownloadPort gives digital products a faster route to launch by starting with auth, data, and checkout already in place.",
+    "description": "D1V DEMO gives digital products a faster route to launch by starting with auth, data, and checkout already in place.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -199,7 +199,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Digital Access",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Unlock your files and future product updates.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"

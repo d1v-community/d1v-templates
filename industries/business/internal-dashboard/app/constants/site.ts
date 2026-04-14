@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "OpsCanvas",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Operations dashboard starter for internal teams, retainers, and premium access accounts.",
   "theme": {
     "family": "business",
@@ -173,7 +173,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Business ops",
     "headline": "Run internal operations on a paid, permission-aware shell.",
-    "description": "OpsCanvas is for teams that want a solid internal dashboard base with auth, data, and optional paid admin access.",
+    "description": "D1V DEMO is for teams that want a solid internal dashboard base with auth, data, and optional paid admin access.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -199,7 +199,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Operations Access",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Enable secure dashboard access for your team.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"

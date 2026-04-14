@@ -21,6 +21,11 @@ Convert `d1v-templates` into an open-source-ready template registry with:
   - `@checkout-monetization-qa`
   - `@auth-state-qa`
 - Active todos:
+  - [x] Rebrand template-visible product names to `D1V DEMO` across foundation and industry templates, and seed follow-up naming work in every template-local `PLAN.md`
+    - Owner: main agent
+    - Verification: targeted search confirms template UI config no longer exposes prior product names; every template `PLAN.md` includes a todo to ideate a short creative name and replace `D1V DEMO`; relevant modified templates pass lightweight validation
+    - Status: done
+    - Evidence: updated `appTitle`, `defaultProductName`, and related visible brand strings in `foundations/remix-neon-auth-pay`, all 12 `industries/*/*/app/constants/site.ts`, `foundations/remix-neon-auth/app/constants/app.ts`, `foundations/html-template/index.html`, and `foundations/sui-nextjs-auth-template/packages/frontend/src/app/config/main.ts`; inserted the follow-up naming todo into all 16 template-local `PLAN.md` files; targeted `rg` search found no old visible product-name strings in app code; `pnpm run typecheck` passed in the 2 Remix foundations plus all 12 industry templates; `pnpm frontend:build` passed in `foundations/sui-nextjs-auth-template`
   - [x] Add reusable industry data-model definitions plus generator support for schema, migration, seed, and live snapshot files
     - Owner: main agent
     - Verification: regenerate all 12 industry templates and confirm each now has non-auth domain tables in `app/db/schema.ts` and `drizzle/0000_init.sql`

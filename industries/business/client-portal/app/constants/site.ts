@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "ClientRoom",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Client portal for agencies and service businesses with member access and project data.",
   "theme": {
     "family": "business",
@@ -174,7 +174,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Client delivery",
     "headline": "Give every client a portal that feels like part of the service.",
-    "description": "ClientRoom combines login, data, and payments so agencies can sell premium access, retainers, and delivery visibility.",
+    "description": "D1V DEMO combines login, data, and payments so agencies can sell premium access, retainers, and delivery visibility.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -200,7 +200,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Client Portal Access",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Secure client access to projects, files, and updates.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -376,7 +376,7 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Client support",
     "title": "Add a smart support desk to the client experience.",
     "description": "Use the built-in assistant to answer project questions, route common support requests, and reduce manual client handoffs.",
-    "assistantName": "ClientRoom Support",
+    "assistantName": "D1V DEMO",
     "welcomeMessage": "I can help with portal access, project updates, and common delivery questions.",
     "placeholder": "Ask about portal access, milestones, files, or support requests...",
     "submitLabel": "Ask support",
@@ -386,7 +386,7 @@ export const SITE_CONFIG: SiteConfig = {
       "What support questions should be automated first?",
       "How do I map payment to portal access?"
     ],
-    "systemPrompt": "You are ClientRoom Support, a concise assistant for a premium client portal. Focus on client access, delivery visibility, and support triage. Offer practical guidance and keep answers aligned with the current starter's capabilities.",
+    "systemPrompt": "You are D1V DEMO, a concise assistant for a premium client portal. Focus on client access, delivery visibility, and support triage. Offer practical guidance and keep answers aligned with the current starter's capabilities.",
     "model": "kimi-k2.5"
   }
 };

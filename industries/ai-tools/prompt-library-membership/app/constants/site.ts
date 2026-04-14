@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "PromptVault",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Prompt membership app with gated content access and recurring billing.",
   "theme": {
     "family": "ai",
@@ -174,7 +174,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "AI library",
     "headline": "Package your best prompts like a premium product.",
-    "description": "PromptVault gives creators a clean paid-access shell for prompt packs, workflows, and member-only resources.",
+    "description": "D1V DEMO gives creators a clean paid-access shell for prompt packs, workflows, and member-only resources.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -200,7 +200,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "PromptVault Membership",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Get every prompt pack and member-only update.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -376,7 +376,7 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Member guide",
     "title": "Turn your prompt catalog into a guided buying experience.",
     "description": "Give visitors a short, strong assistant that recommends packs, explains access, and helps members find the right workflows.",
-    "assistantName": "PromptVault Guide",
+    "assistantName": "D1V DEMO",
     "welcomeMessage": "I can help visitors understand the library, recommend prompt packs, and explain membership access.",
     "placeholder": "Ask which prompts fit your workflow or what membership includes...",
     "submitLabel": "Ask guide",
@@ -386,7 +386,7 @@ export const SITE_CONFIG: SiteConfig = {
       "How can I explain membership value quickly?",
       "What content should be free vs members-only?"
     ],
-    "systemPrompt": "You are PromptVault Guide, a concise assistant for a paid prompt library. Help users understand pack structure, membership value, and discovery strategy. Keep answers practical, concise, and grounded in the visible template.",
+    "systemPrompt": "You are D1V DEMO, a concise assistant for a paid prompt library. Help users understand pack structure, membership value, and discovery strategy. Keep answers practical, concise, and grounded in the visible template.",
     "model": "kimi-k2.5"
   }
 };

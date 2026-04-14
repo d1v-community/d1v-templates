@@ -14,6 +14,13 @@
 
 ## Todo List
 
+- [ ] Ideate a short, creative product name and replace `D1V DEMO` globally.
+  - Owner: main agent
+  - Verification: choose a final name, run `rg -n "D1V DEMO" .`, and confirm only intentional planning references remain
+  - Status: pending
+  - Evidence: pending
+  - Notes: update header, metadata, pricing/product labels, and any other user-visible brand references together.
+
 - [ ] Rewrite the original landing-page, pricing, and risk-reversal copy so the foundation sells outcomes instead of feature lists. `@cro-copy-qa` `@frontend-ui-qa` `@checkout-monetization-qa`
   - Owner: main agent
   - Verification: `pnpm run lint`; manual review of hero, pricing, proof, CTA, FAQ, and trust copy

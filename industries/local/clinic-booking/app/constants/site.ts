@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "ClinicFlow",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Clinic booking and patient portal starter with protected access and hosted checkout.",
   "theme": {
     "family": "local",
@@ -174,7 +174,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Local services",
     "headline": "Handle appointments and deposits on infrastructure that is already live.",
-    "description": "ClinicFlow gives local care providers a fast base for patient login, appointment data, and booking payments.",
+    "description": "D1V DEMO gives local care providers a fast base for patient login, appointment data, and booking payments.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -200,7 +200,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Visit Deposit",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Reserve a visit and confirm patient access in one flow.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -376,7 +376,7 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Patient concierge",
     "title": "Use AI to answer booking questions before the front desk does.",
     "description": "Give patients a fast booking concierge for deposits, appointment prep, and portal access while keeping your API key server-side.",
-    "assistantName": "ClinicFlow Concierge",
+    "assistantName": "D1V DEMO",
     "welcomeMessage": "I can help with booking steps, deposits, intake expectations, and common patient access questions.",
     "placeholder": "Ask about appointments, deposits, intake, or patient portal access...",
     "submitLabel": "Ask concierge",
@@ -386,7 +386,7 @@ export const SITE_CONFIG: SiteConfig = {
       "What should patients see after they book?",
       "Which questions can AI answer before a visit?"
     ],
-    "systemPrompt": "You are ClinicFlow Concierge, a concise booking and support assistant for a clinic booking product. Help with scheduling flow, deposits, intake expectations, and patient portal questions. Avoid medical advice and keep answers operational.",
+    "systemPrompt": "You are D1V DEMO, a concise booking and support assistant for a clinic booking product. Help with scheduling flow, deposits, intake expectations, and patient portal questions. Avoid medical advice and keep answers operational.",
     "model": "kimi-k2.5"
   }
 };

@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "FirstDrop",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Single-offer preorder starter with checkout, login, and launch-day data.",
   "theme": {
     "family": "commerce",
@@ -173,7 +173,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Launch commerce",
     "headline": "Turn a launch page into a preorder machine.",
-    "description": "FirstDrop is for focused offers: one hero product, one clear price, one route to checkout.",
+    "description": "D1V DEMO is for focused offers: one hero product, one clear price, one route to checkout.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -199,7 +199,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Preorder Access",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Reserve the launch and stay first in line.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"

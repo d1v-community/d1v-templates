@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "FlexPass",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Gym membership app with paid access, login, and recurring member management.",
   "theme": {
     "family": "local",
@@ -173,7 +173,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Membership business",
     "headline": "Sell memberships with a stack that is already ready to collect them.",
-    "description": "FlexPass is a clean base for gyms, studios, and local fitness memberships with login and billing built in.",
+    "description": "D1V DEMO is a clean base for gyms, studios, and local fitness memberships with login and billing built in.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -199,7 +199,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Gym Membership",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Start your membership and unlock member access.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"

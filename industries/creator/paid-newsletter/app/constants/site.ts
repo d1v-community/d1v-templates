@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "BriefClub",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Paid newsletter product for premium posts, member access, and subscriber billing.",
   "theme": {
     "family": "creator",
@@ -173,7 +173,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Creator publishing",
     "headline": "Turn premium writing into a product with real access control.",
-    "description": "BriefClub is a paid newsletter shell built for gated archives, premium issues, and member-only updates.",
+    "description": "D1V DEMO is a paid newsletter shell built for gated archives, premium issues, and member-only updates.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -199,7 +199,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Premium Newsletter",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Unlock premium issues and the full member archive.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"

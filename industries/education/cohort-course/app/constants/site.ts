@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "CohortOS",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Paid cohort course starter for enrollment, session access, and student onboarding.",
   "theme": {
     "family": "education",
@@ -174,7 +174,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Education",
     "headline": "Sell the cohort before you build the full course backend.",
-    "description": "CohortOS gives you enrollment-ready rails for applications, paid access, and student onboarding.",
+    "description": "D1V DEMO gives you enrollment-ready rails for applications, paid access, and student onboarding.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -200,7 +200,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Cohort Enrollment",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Reserve your cohort seat and access the student area.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -376,7 +376,7 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Enrollment AI",
     "title": "Answer enrollment questions before a human has to.",
     "description": "Use the assistant to handle curriculum fit, session timing, and payment questions so interested students move faster.",
-    "assistantName": "CohortOS Advisor",
+    "assistantName": "D1V DEMO",
     "welcomeMessage": "I can help students understand cohort fit, enrollment steps, and what happens after payment.",
     "placeholder": "Ask about enrollment, curriculum fit, sessions, or onboarding...",
     "submitLabel": "Ask advisor",
@@ -386,7 +386,7 @@ export const SITE_CONFIG: SiteConfig = {
       "How do I present cohort dates and seat limits?",
       "What student onboarding data should I store?"
     ],
-    "systemPrompt": "You are CohortOS Advisor, a concise enrollment assistant for a cohort-based course business. Help with seat reservation, onboarding, curriculum questions, and payment flow expectations. Do not invent unsupported operational details.",
+    "systemPrompt": "You are D1V DEMO, a concise enrollment assistant for a cohort-based course business. Help with seat reservation, onboarding, curriculum questions, and payment flow expectations. Do not invent unsupported operational details.",
     "model": "kimi-k2.5"
   }
 };

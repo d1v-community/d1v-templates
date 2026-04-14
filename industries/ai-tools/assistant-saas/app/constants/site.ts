@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "SignalDesk AI",
+  "appTitle": "D1V DEMO",
   "siteDescription": "AI assistant membership app with login, workspace billing, and paid access.",
   "theme": {
     "family": "ai",
@@ -174,7 +174,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "AI tools",
     "headline": "Charge for your assistant before you scale your agent stack.",
-    "description": "SignalDesk AI is a payment-ready SaaS shell for private assistants, premium copilots, and member-only workflows.",
+    "description": "D1V DEMO is a payment-ready SaaS shell for private assistants, premium copilots, and member-only workflows.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -200,7 +200,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Pro Assistant",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Unlimited assistant access for your team.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -376,7 +376,7 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Embedded AI",
     "title": "Offer a live assistant from day one.",
     "description": "Use the built-in concierge to demo your product, qualify buyers, or answer member questions without exposing upstream secrets.",
-    "assistantName": "SignalDesk Copilot",
+    "assistantName": "D1V DEMO",
     "welcomeMessage": "I can explain plans, demo workflows, or answer product questions. Ask me anything about your assistant offer.",
     "placeholder": "Ask about plans, workflows, or how this assistant product works...",
     "submitLabel": "Send message",

@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "LessonLoop",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Online course membership app with paid access, login, and student data.",
   "theme": {
     "family": "education",
@@ -174,7 +174,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Course membership",
     "headline": "Bundle lessons, progress, and recurring revenue in one starter.",
-    "description": "LessonLoop is built for evergreen education products that need member login, billing, and a durable data layer.",
+    "description": "D1V DEMO is built for evergreen education products that need member login, billing, and a durable data layer.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -200,7 +200,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "Course Membership",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Unlock every lesson and track progress in one place.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -376,7 +376,7 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Learning concierge",
     "title": "Add an AI coach to your course membership template.",
     "description": "Use a built-in assistant to guide students to the right lessons, answer access questions, and keep the product feeling active.",
-    "assistantName": "LessonLoop Coach",
+    "assistantName": "D1V DEMO",
     "welcomeMessage": "I can recommend lessons, explain membership access, and help students understand how to use this course product.",
     "placeholder": "Ask about lessons, student access, progress, or course structure...",
     "submitLabel": "Ask coach",
@@ -386,7 +386,7 @@ export const SITE_CONFIG: SiteConfig = {
       "What should members see after checkout?",
       "How can an AI coach improve retention?"
     ],
-    "systemPrompt": "You are LessonLoop Coach, a concise assistant for an online course membership product. Help with lesson discovery, access questions, onboarding, and retention-oriented product guidance. Stay grounded in the current template surface.",
+    "systemPrompt": "You are D1V DEMO, a concise assistant for an online course membership product. Help with lesson discovery, access questions, onboarding, and retention-oriented product guidance. Stay grounded in the current template surface.",
     "model": "kimi-k2.5"
   }
 };

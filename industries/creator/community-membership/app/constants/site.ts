@@ -145,7 +145,7 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "InnerCircle",
+  "appTitle": "D1V DEMO",
   "siteDescription": "Creator membership app for private communities, perks, and paid access.",
   "theme": {
     "family": "creator",
@@ -173,7 +173,7 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Creator membership",
     "headline": "Sell belonging, not just content.",
-    "description": "InnerCircle is a clean base for creators who want paid community access, member updates, and premium perks.",
+    "description": "D1V DEMO is a clean base for creators who want paid community access, member updates, and premium perks.",
     "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
@@ -199,7 +199,7 @@ export const SITE_CONFIG: SiteConfig = {
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "InnerCircle Membership",
+    "defaultProductName": "D1V DEMO",
     "defaultProductDescription": "Join the private community and unlock member perks.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
