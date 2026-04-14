@@ -146,7 +146,7 @@ export type SiteConfig = {
 
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "D1V DEMO",
-  "siteDescription": "Paid cohort course starter for enrollment, session access, and student onboarding.",
+  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
   "theme": {
     "family": "education",
     "layout": "academy",
@@ -166,7 +166,7 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Advisor"
+    "assistantLabel": "Demo AI"
   },
   "footer": {
     "line": "Built with D1V"
@@ -175,9 +175,9 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Education",
     "headline": "Sell the cohort before you build the full course backend.",
     "description": "D1V DEMO gives you enrollment-ready rails for applications, paid access, and student onboarding.",
-    "primaryCtaLabel": "Open pricing",
+    "primaryCtaLabel": "View demo pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Login",
+    "secondaryCtaLabel": "Enter demo",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Email login for enrolled students",
@@ -194,8 +194,8 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Buy now",
-    "loginButtonLabel": "Login to purchase",
+    "buyButtonLabel": "Get demo access",
+    "loginButtonLabel": "Login for demo access",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
@@ -374,19 +374,19 @@ export const SITE_CONFIG: SiteConfig = {
   "aiAssistant": {
     "enabled": true,
     "badge": "Enrollment AI",
-    "title": "Answer enrollment questions before a human has to.",
+    "title": "Explore D1V DEMO with the built-in guide.",
     "description": "Use the assistant to handle curriculum fit, session timing, and payment questions so interested students move faster.",
     "assistantName": "D1V DEMO",
-    "welcomeMessage": "I can help students understand cohort fit, enrollment steps, and what happens after payment.",
-    "placeholder": "Ask about enrollment, curriculum fit, sessions, or onboarding...",
-    "submitLabel": "Ask advisor",
-    "resetLabel": "Reset advisor",
+    "welcomeMessage": "I can walk you through D1V DEMO, pricing, access, and what this template includes.",
+    "placeholder": "Ask about D1V DEMO, pricing, access, or included flows...",
+    "submitLabel": "Ask D1V DEMO",
+    "resetLabel": "Reset demo chat",
     "suggestedPrompts": [
       "What should happen after a student pays?",
       "How do I present cohort dates and seat limits?",
       "What student onboarding data should I store?"
     ],
-    "systemPrompt": "You are D1V DEMO, a concise enrollment assistant for a cohort-based course business. Help with seat reservation, onboarding, curriculum questions, and payment flow expectations. Do not invent unsupported operational details.",
+    "systemPrompt": "You are D1V DEMO, the built-in guide for this demo site. Answer using only visible template capabilities, explain pricing, access, and onboarding clearly, and do not invent unsupported features.",
     "model": "kimi-k2.5"
   }
 };

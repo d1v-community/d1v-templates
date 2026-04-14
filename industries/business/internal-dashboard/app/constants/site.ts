@@ -146,7 +146,7 @@ export type SiteConfig = {
 
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "D1V DEMO",
-  "siteDescription": "Operations dashboard starter for internal teams, retainers, and premium access accounts.",
+  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
   "theme": {
     "family": "business",
     "layout": "operations",
@@ -174,9 +174,9 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Business ops",
     "headline": "Run internal operations on a paid, permission-aware shell.",
     "description": "D1V DEMO is for teams that want a solid internal dashboard base with auth, data, and optional paid admin access.",
-    "primaryCtaLabel": "Open pricing",
+    "primaryCtaLabel": "View demo pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Login",
+    "secondaryCtaLabel": "Enter demo",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Passwordless staff login out of the box",
@@ -193,8 +193,8 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Buy now",
-    "loginButtonLabel": "Login to purchase",
+    "buyButtonLabel": "Get demo access",
+    "loginButtonLabel": "Login for demo access",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",

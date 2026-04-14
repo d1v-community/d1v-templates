@@ -146,7 +146,7 @@ export type SiteConfig = {
 
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "D1V DEMO",
-  "siteDescription": "Digital product storefront starter with paid access and downloadable fulfillment.",
+  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
   "theme": {
     "family": "commerce",
     "layout": "editorial",
@@ -174,9 +174,9 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Digital commerce",
     "headline": "Sell files, kits, and templates on rails that are already wired.",
     "description": "D1V DEMO gives digital products a faster route to launch by starting with auth, data, and checkout already in place.",
-    "primaryCtaLabel": "Open pricing",
+    "primaryCtaLabel": "View demo pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Login",
+    "secondaryCtaLabel": "Enter demo",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Secure login for buyers and download history",
@@ -193,8 +193,8 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Buy now",
-    "loginButtonLabel": "Login to purchase",
+    "buyButtonLabel": "Get demo access",
+    "loginButtonLabel": "Login for demo access",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",

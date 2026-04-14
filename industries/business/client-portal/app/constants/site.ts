@@ -146,7 +146,7 @@ export type SiteConfig = {
 
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "D1V DEMO",
-  "siteDescription": "Client portal for agencies and service businesses with member access and project data.",
+  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
   "theme": {
     "family": "business",
     "layout": "operations",
@@ -166,7 +166,7 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Support"
+    "assistantLabel": "Demo AI"
   },
   "footer": {
     "line": "Built with D1V"
@@ -175,9 +175,9 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "Client delivery",
     "headline": "Give every client a portal that feels like part of the service.",
     "description": "D1V DEMO combines login, data, and payments so agencies can sell premium access, retainers, and delivery visibility.",
-    "primaryCtaLabel": "Open pricing",
+    "primaryCtaLabel": "View demo pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Login",
+    "secondaryCtaLabel": "Enter demo",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Passwordless client login for project access",
@@ -194,8 +194,8 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Buy now",
-    "loginButtonLabel": "Login to purchase",
+    "buyButtonLabel": "Get demo access",
+    "loginButtonLabel": "Login for demo access",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
@@ -374,19 +374,19 @@ export const SITE_CONFIG: SiteConfig = {
   "aiAssistant": {
     "enabled": true,
     "badge": "Client support",
-    "title": "Add a smart support desk to the client experience.",
+    "title": "Explore D1V DEMO with the built-in guide.",
     "description": "Use the built-in assistant to answer project questions, route common support requests, and reduce manual client handoffs.",
     "assistantName": "D1V DEMO",
-    "welcomeMessage": "I can help with portal access, project updates, and common delivery questions.",
-    "placeholder": "Ask about portal access, milestones, files, or support requests...",
-    "submitLabel": "Ask support",
-    "resetLabel": "New thread",
+    "welcomeMessage": "I can walk you through D1V DEMO, pricing, access, and what this template includes.",
+    "placeholder": "Ask about D1V DEMO, pricing, access, or included flows...",
+    "submitLabel": "Ask D1V DEMO",
+    "resetLabel": "Reset demo chat",
     "suggestedPrompts": [
       "How should a client portal handle milestones and files?",
       "What support questions should be automated first?",
       "How do I map payment to portal access?"
     ],
-    "systemPrompt": "You are D1V DEMO, a concise assistant for a premium client portal. Focus on client access, delivery visibility, and support triage. Offer practical guidance and keep answers aligned with the current starter's capabilities.",
+    "systemPrompt": "You are D1V DEMO, the built-in guide for this demo site. Answer using only visible template capabilities, explain pricing, access, and onboarding clearly, and do not invent unsupported features.",
     "model": "kimi-k2.5"
   }
 };

@@ -146,7 +146,7 @@ export type SiteConfig = {
 
 export const SITE_CONFIG: SiteConfig = {
   "appTitle": "D1V DEMO",
-  "siteDescription": "AI assistant membership app with login, workspace billing, and paid access.",
+  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
   "theme": {
     "family": "ai",
     "layout": "command",
@@ -166,7 +166,7 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Assistant"
+    "assistantLabel": "Demo AI"
   },
   "footer": {
     "line": "Built with D1V"
@@ -175,9 +175,9 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "AI tools",
     "headline": "Charge for your assistant before you scale your agent stack.",
     "description": "D1V DEMO is a payment-ready SaaS shell for private assistants, premium copilots, and member-only workflows.",
-    "primaryCtaLabel": "Open pricing",
+    "primaryCtaLabel": "View demo pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Login",
+    "secondaryCtaLabel": "Enter demo",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Email login for paid assistant accounts",
@@ -194,8 +194,8 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Buy now",
-    "loginButtonLabel": "Login to purchase",
+    "buyButtonLabel": "Get demo access",
+    "loginButtonLabel": "Login for demo access",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
@@ -374,19 +374,19 @@ export const SITE_CONFIG: SiteConfig = {
   "aiAssistant": {
     "enabled": true,
     "badge": "Embedded AI",
-    "title": "Offer a live assistant from day one.",
+    "title": "Explore D1V DEMO with the built-in guide.",
     "description": "Use the built-in concierge to demo your product, qualify buyers, or answer member questions without exposing upstream secrets.",
     "assistantName": "D1V DEMO",
-    "welcomeMessage": "I can explain plans, demo workflows, or answer product questions. Ask me anything about your assistant offer.",
-    "placeholder": "Ask about plans, workflows, or how this assistant product works...",
-    "submitLabel": "Send message",
-    "resetLabel": "Reset chat",
+    "welcomeMessage": "I can walk you through D1V DEMO, pricing, access, and what this template includes.",
+    "placeholder": "Ask about D1V DEMO, pricing, access, or included flows...",
+    "submitLabel": "Ask D1V DEMO",
+    "resetLabel": "Reset demo chat",
     "suggestedPrompts": [
       "What does the Pro Assistant plan include?",
       "How should I structure credits and seats?",
       "What should happen after a successful checkout?"
     ],
-    "systemPrompt": "You are SignalDesk Copilot, a concise presales and onboarding assistant for an AI assistant SaaS. Answer in clear product language, focus on pricing, setup, and workflow design, and avoid making claims about features that are not visible in the current template.",
+    "systemPrompt": "You are D1V DEMO, the built-in guide for this demo site. Answer using only visible template capabilities, explain pricing, access, and onboarding clearly, and do not invent unsupported features.",
     "model": "kimi-k2.5"
   }
 };
