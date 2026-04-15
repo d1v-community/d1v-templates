@@ -103,6 +103,190 @@ export const CATEGORY_DESIGN_MATRIX = {
   },
 };
 
+export const LOGIN_EXPERIENCES = {
+  "ai-assistant-saas": {
+    eyebrow: "Operator login",
+    title: "Enter the assistant workspace without losing the workflow context.",
+    description:
+      "Sign in to review conversations, seat access, and premium tool usage from one command surface.",
+    audience: "Founders, operators, and paid workspace members",
+    emailLabel: "Work email",
+    emailPlaceholder: "operator@team.com",
+    emailHint:
+      "Use the email tied to your assistant workspace or billing seat.",
+    trustPoints: [
+      "Passwordless access keeps the workspace fast for paid teams.",
+      "Seat, credit, and support state stay attached to one identity.",
+      "Buyers can move from pricing into activation without a second onboarding path.",
+    ],
+  },
+  "ai-prompt-library-membership": {
+    eyebrow: "Member login",
+    title: "Open the prompt vault and keep discovery, access, and releases in one place.",
+    description:
+      "Sign in to reach saved packs, member-only drops, and the guided library experience.",
+    audience: "Creators, teams, and members buying reusable AI workflows",
+    emailLabel: "Membership email",
+    emailPlaceholder: "member@studio.com",
+    emailHint: "Use the email linked to your prompt-library membership.",
+    trustPoints: [
+      "Members reach saved packs and new drops from one clean account surface.",
+      "Search, unlock state, and release cadence stay connected to the same login.",
+      "Support questions can route into the guide instead of a crowded help inbox.",
+    ],
+  },
+  "business-internal-dashboard": {
+    eyebrow: "Staff access",
+    title: "Enter the operations surface with the context your team actually uses.",
+    description:
+      "Sign in to review KPIs, approvals, and fresh operational states without a generic marketing detour.",
+    audience: "Ops leads, finance admins, and internal decision-makers",
+    emailLabel: "Work email",
+    emailPlaceholder: "ops@company.com",
+    emailHint: "Use the email tied to your staff seat or internal dashboard account.",
+    trustPoints: [
+      "Internal users land on one secure entry instead of scattered admin routes.",
+      "Approval state, freshness, and role-aware access stay aligned to the same account.",
+      "The login surface already fits paid seats, managed reporting, or partner access.",
+    ],
+  },
+  "business-client-portal": {
+    eyebrow: "Client portal access",
+    title: "Let clients enter a service workspace that feels tied to the engagement.",
+    description:
+      "Sign in to review milestones, files, approvals, and support updates from one secure room.",
+    audience: "Agencies, service teams, and paying client accounts",
+    emailLabel: "Client email",
+    emailPlaceholder: "client@company.com",
+    emailHint: "Use the email attached to your portal account or active retainer.",
+    trustPoints: [
+      "Project visibility, file delivery, and approvals stay in one client-facing login.",
+      "The account entry can reflect premium tiers, retainers, and seat access cleanly.",
+      "Clients move from payment into active project rooms without email sprawl.",
+    ],
+  },
+  "commerce-digital-downloads": {
+    eyebrow: "Buyer access",
+    title: "Turn purchase into instant access to files, kits, and download history.",
+    description:
+      "Sign in to unlock digital goods, licenses, and repeat retrieval without sending buyers back through support.",
+    audience: "Buyers of templates, kits, assets, and premium downloads",
+    emailLabel: "Purchase email",
+    emailPlaceholder: "buyer@example.com",
+    emailHint: "Use the same email you used for access, checkout, or your existing account.",
+    trustPoints: [
+      "Buyers get one clear path from checkout into licensed files and updates.",
+      "Download history and entitlement state stay tied to the same identity.",
+      "The login page can reassure buyers before they ever ask for manual file delivery.",
+    ],
+  },
+  "commerce-preorder-launch": {
+    eyebrow: "Launch access",
+    title: "Give preorder buyers a clean way to track their reservation and next steps.",
+    description:
+      "Sign in to review preorder status, launch updates, and fulfillment timing from one focused surface.",
+    audience: "Early buyers, launch customers, and limited-drop members",
+    emailLabel: "Preorder email",
+    emailPlaceholder: "buyer@launch.com",
+    emailHint: "Use the email tied to your reservation, deposit, or launch access.",
+    trustPoints: [
+      "Reservation status and launch updates stay visible after the first payment.",
+      "Scarcity messaging can transition into fulfillment clarity instead of support debt.",
+      "The same account can later expand from preorder tracking into full order access.",
+    ],
+  },
+  "creator-community-membership": {
+    eyebrow: "Member circle login",
+    title: "Make joining the private community feel like entering the product, not a utility step.",
+    description:
+      "Sign in to reach member posts, events, perks, and the weekly rhythm that keeps the subscription valuable.",
+    audience: "Creators and members paying for belonging, perks, and archive access",
+    emailLabel: "Member email",
+    emailPlaceholder: "member@community.com",
+    emailHint: "Use the email linked to your community membership or paid tier.",
+    trustPoints: [
+      "The login page can reinforce belonging before members even enter the archive.",
+      "Private posts, live sessions, and perks stay tied to one recurring membership account.",
+      "New buyers can move from checkout into welcome rituals without a separate onboarding tool.",
+    ],
+  },
+  "creator-paid-newsletter": {
+    eyebrow: "Subscriber login",
+    title: "Bring premium readers straight into the archive, not another generic auth page.",
+    description:
+      "Sign in to access premium issues, saved reading history, and member-only editorial updates.",
+    audience: "Subscribers paying for premium issues and full archive access",
+    emailLabel: "Subscriber email",
+    emailPlaceholder: "reader@publication.com",
+    emailHint: "Use the email connected to your newsletter membership.",
+    trustPoints: [
+      "Readers reach the archive and newest issue from one composed, publication-first entry.",
+      "Access state, membership value, and editorial rhythm stay connected to the same account.",
+      "Support stays lighter because subscribers can self-serve archive access immediately.",
+    ],
+  },
+  "education-cohort-course": {
+    eyebrow: "Student login",
+    title: "Turn enrollment into a structured student entry, not a dead-end confirmation page.",
+    description:
+      "Sign in to access cohort schedules, prep work, and the learner dashboard tied to your seat.",
+    audience: "Applicants, enrolled students, and cohort operators",
+    emailLabel: "Student email",
+    emailPlaceholder: "student@course.com",
+    emailHint: "Use the email linked to your cohort seat, application, or enrollment payment.",
+    trustPoints: [
+      "Students can move from payment into onboarding and schedule clarity immediately.",
+      "Seat status, live-session timing, and prep work stay attached to one learner account.",
+      "The login entry sets the tone for a guided course instead of a bare utility flow.",
+    ],
+  },
+  "education-online-course-membership": {
+    eyebrow: "Learner login",
+    title: "Move students directly into lessons, progress, and the next learning action.",
+    description:
+      "Sign in to resume modules, downloads, and member-only tracks from one calm learning surface.",
+    audience: "Learners paying for evergreen courses and lesson libraries",
+    emailLabel: "Learning email",
+    emailPlaceholder: "learner@academy.com",
+    emailHint: "Use the email attached to your course membership or lesson library access.",
+    trustPoints: [
+      "Members can return to progress, next lessons, and resources without friction.",
+      "Course access and recurring billing stay connected to the same learner identity.",
+      "The entry surface can reassure buyers that structure and continuity are already built in.",
+    ],
+  },
+  "local-clinic-booking": {
+    eyebrow: "Patient access",
+    title: "Make appointment access feel calm, trustworthy, and ready for the next visit.",
+    description:
+      "Sign in to review bookings, intake steps, deposits, and practice messages without calling the front desk.",
+    audience: "Patients, care teams, and booked local-service customers",
+    emailLabel: "Patient email",
+    emailPlaceholder: "patient@example.com",
+    emailHint: "Use the email linked to your booking, intake form, or care plan.",
+    trustPoints: [
+      "Patients can confirm bookings, visit details, and follow-up without extra phone traffic.",
+      "Deposits, appointment status, and provider communication stay under one identity.",
+      "The login page can build trust before visitors ever reach the booking workflow.",
+    ],
+  },
+  "local-gym-membership": {
+    eyebrow: "Member check-in",
+    title: "Bring new and returning members into plans, classes, and habit-building fast.",
+    description:
+      "Sign in to manage membership access, upcoming sessions, and onboarding from one fitness account surface.",
+    audience: "Gym members, coaches, and local fitness operators",
+    emailLabel: "Membership email",
+    emailPlaceholder: "member@gym.com",
+    emailHint: "Use the email attached to your gym plan, class booking, or member account.",
+    trustPoints: [
+      "Members can move from signup into schedules, coach updates, and renewals smoothly.",
+      "Plan access, attendance, and first-week onboarding stay tied to one account.",
+      "The same entry can support monthly memberships, premium coaching, and class packs.",
+    ],
+  },
+};
+
 export const TEMPLATE_EXPERIENCES = {
   "ai-assistant-saas": {
     heroMetrics: [

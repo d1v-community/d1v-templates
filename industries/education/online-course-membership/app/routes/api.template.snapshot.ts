@@ -1,13 +1,16 @@
 import { getTemplateSnapshot } from "~/services/template-data.server";
+import { getUserFromRequest } from "~/utils/auth.server";
+import { toPublicTemplateSnapshot } from "~/utils/template-snapshot";
 
-export async function loader() {
+export async function loader({ request }: { request: Request }) {
   try {
+    const user = await getUserFromRequest(request);
     const snapshot = await getTemplateSnapshot();
 
     return Response.json(
       {
         success: true,
-        snapshot,
+        snapshot: user ? snapshot : toPublicTemplateSnapshot(snapshot),
       },
       {
         headers: {

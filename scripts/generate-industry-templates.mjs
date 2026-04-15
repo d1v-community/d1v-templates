@@ -11,6 +11,7 @@ import {
 } from "./industry-template.fulfillment-models.mjs";
 import {
   CATEGORY_DESIGN_MATRIX,
+  LOGIN_EXPERIENCES,
   TEMPLATE_EXPERIENCES,
 } from "./industry-template.presets.mjs";
 
@@ -227,6 +228,7 @@ function buildSiteConfig(template) {
   const pricingLabel = template.pricing?.badge || "Membership";
   const aiAssistant = template.aiAssistant ?? null;
   const categoryTheme = CATEGORY_DESIGN_MATRIX[template.category];
+  const loginExperience = LOGIN_EXPERIENCES[template.id];
   const templateExperience = TEMPLATE_EXPERIENCES[template.id];
 
   if (!categoryTheme) {
@@ -235,6 +237,10 @@ function buildSiteConfig(template) {
 
   if (!templateExperience) {
     throw new Error(`Missing template experience preset for ${template.id}.`);
+  }
+
+  if (!loginExperience) {
+    throw new Error(`Missing login experience preset for ${template.id}.`);
   }
 
   return deepMerge(
@@ -300,6 +306,7 @@ function buildSiteConfig(template) {
           "Replace placeholder sections with your core workflow",
         ],
       },
+      login: loginExperience,
       heroMetrics: templateExperience.heroMetrics,
       showcase: templateExperience.showcase,
       workflow: templateExperience.workflow,
@@ -342,6 +349,7 @@ function buildSiteConfig(template) {
       home: template.home,
       pricing: template.pricing,
       templateSurface: template.templateSurface,
+      login: template.login,
       heroMetrics: template.heroMetrics,
       showcase: template.showcase,
       workflow: template.workflow,

@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "BriefClub",
+  "siteDescription": "Paid newsletter product for premium posts, member access, and subscriber billing.",
   "theme": {
     "family": "creator",
     "layout": "editorial",
@@ -173,10 +183,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Creator publishing",
     "headline": "Turn premium writing into a product with real access control.",
-    "description": "D1V DEMO is a paid newsletter shell built for gated archives, premium issues, and member-only updates.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "BriefClub is a paid newsletter shell built for gated archives, premium issues, and member-only updates.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Subscriber login for archive access",
@@ -193,13 +203,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "Premium Newsletter",
     "defaultProductDescription": "Unlock premium issues and the full member archive.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -213,6 +223,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Create issue, archive, and release models",
       "Gate premium content by subscriber state",
       "Replace the starter surface with archive and issue routes"
+    ]
+  },
+  "login": {
+    "eyebrow": "Subscriber login",
+    "title": "Bring premium readers straight into the archive, not another generic auth page.",
+    "description": "Sign in to access premium issues, saved reading history, and member-only editorial updates.",
+    "audience": "Subscribers paying for premium issues and full archive access",
+    "emailLabel": "Subscriber email",
+    "emailPlaceholder": "reader@publication.com",
+    "emailHint": "Use the email connected to your newsletter membership.",
+    "trustPoints": [
+      "Readers reach the archive and newest issue from one composed, publication-first entry.",
+      "Access state, membership value, and editorial rhythm stay connected to the same account.",
+      "Support stays lighter because subscribers can self-serve archive access immediately."
     ]
   },
   "heroMetrics": [

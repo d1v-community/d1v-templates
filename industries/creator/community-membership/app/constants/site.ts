@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "InnerCircle",
+  "siteDescription": "Creator membership app for private communities, perks, and paid access.",
   "theme": {
     "family": "creator",
     "layout": "editorial",
@@ -173,10 +183,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Creator membership",
     "headline": "Sell belonging, not just content.",
-    "description": "D1V DEMO is a clean base for creators who want paid community access, member updates, and premium perks.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "InnerCircle is a clean base for creators who want paid community access, member updates, and premium perks.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Passwordless member login",
@@ -193,13 +203,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "InnerCircle Membership",
     "defaultProductDescription": "Join the private community and unlock member perks.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -213,6 +223,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Model members, tiers, perks, and activity history",
       "Grant community access after successful payment",
       "Replace the starter surface with your member hub"
+    ]
+  },
+  "login": {
+    "eyebrow": "Member circle login",
+    "title": "Make joining the private community feel like entering the product, not a utility step.",
+    "description": "Sign in to reach member posts, events, perks, and the weekly rhythm that keeps the subscription valuable.",
+    "audience": "Creators and members paying for belonging, perks, and archive access",
+    "emailLabel": "Member email",
+    "emailPlaceholder": "member@community.com",
+    "emailHint": "Use the email linked to your community membership or paid tier.",
+    "trustPoints": [
+      "The login page can reinforce belonging before members even enter the archive.",
+      "Private posts, live sessions, and perks stay tied to one recurring membership account.",
+      "New buyers can move from checkout into welcome rituals without a separate onboarding tool."
     ]
   },
   "heroMetrics": [

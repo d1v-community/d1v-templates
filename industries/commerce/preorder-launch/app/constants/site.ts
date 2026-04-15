@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "FirstDrop",
+  "siteDescription": "Single-offer preorder starter with checkout, login, and launch-day data.",
   "theme": {
     "family": "commerce",
     "layout": "editorial",
@@ -173,10 +183,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Launch commerce",
     "headline": "Turn a launch page into a preorder machine.",
-    "description": "D1V DEMO is for focused offers: one hero product, one clear price, one route to checkout.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "FirstDrop is for focused offers: one hero product, one clear price, one route to checkout.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Email login for customers and launch followers",
@@ -193,13 +203,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "Preorder Access",
     "defaultProductDescription": "Reserve the launch and stay first in line.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -213,6 +223,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Add preorder, shipment, and customer update models",
       "Trigger launch emails after checkout or release milestones",
       "Replace placeholder sections with your hero offer and timeline"
+    ]
+  },
+  "login": {
+    "eyebrow": "Launch access",
+    "title": "Give preorder buyers a clean way to track their reservation and next steps.",
+    "description": "Sign in to review preorder status, launch updates, and fulfillment timing from one focused surface.",
+    "audience": "Early buyers, launch customers, and limited-drop members",
+    "emailLabel": "Preorder email",
+    "emailPlaceholder": "buyer@launch.com",
+    "emailHint": "Use the email tied to your reservation, deposit, or launch access.",
+    "trustPoints": [
+      "Reservation status and launch updates stay visible after the first payment.",
+      "Scarcity messaging can transition into fulfillment clarity instead of support debt.",
+      "The same account can later expand from preorder tracking into full order access."
     ]
   },
   "heroMetrics": [

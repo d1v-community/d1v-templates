@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "DownloadPort",
+  "siteDescription": "Digital product storefront starter with paid access and downloadable fulfillment.",
   "theme": {
     "family": "commerce",
     "layout": "editorial",
@@ -173,10 +183,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Digital commerce",
     "headline": "Sell files, kits, and templates on rails that are already wired.",
-    "description": "D1V DEMO gives digital products a faster route to launch by starting with auth, data, and checkout already in place.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "DownloadPort gives digital products a faster route to launch by starting with auth, data, and checkout already in place.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Secure login for buyers and download history",
@@ -193,13 +203,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "Digital Access",
     "defaultProductDescription": "Unlock your files and future product updates.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -213,6 +223,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Create order, file, and entitlement tables",
       "Deliver secure links after successful payment",
       "Replace placeholder sections with product galleries"
+    ]
+  },
+  "login": {
+    "eyebrow": "Buyer access",
+    "title": "Turn purchase into instant access to files, kits, and download history.",
+    "description": "Sign in to unlock digital goods, licenses, and repeat retrieval without sending buyers back through support.",
+    "audience": "Buyers of templates, kits, assets, and premium downloads",
+    "emailLabel": "Purchase email",
+    "emailPlaceholder": "buyer@example.com",
+    "emailHint": "Use the same email you used for access, checkout, or your existing account.",
+    "trustPoints": [
+      "Buyers get one clear path from checkout into licensed files and updates.",
+      "Download history and entitlement state stay tied to the same identity.",
+      "The login page can reassure buyers before they ever ask for manual file delivery."
     ]
   },
   "heroMetrics": [

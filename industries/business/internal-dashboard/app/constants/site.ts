@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "OpsCanvas",
+  "siteDescription": "Operations dashboard starter for internal teams, retainers, and premium access accounts.",
   "theme": {
     "family": "business",
     "layout": "operations",
@@ -173,10 +183,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Business ops",
     "headline": "Run internal operations on a paid, permission-aware shell.",
-    "description": "D1V DEMO is for teams that want a solid internal dashboard base with auth, data, and optional paid admin access.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "OpsCanvas is for teams that want a solid internal dashboard base with auth, data, and optional paid admin access.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Passwordless staff login out of the box",
@@ -193,13 +203,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "Operations Access",
     "defaultProductDescription": "Enable secure dashboard access for your team.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -213,6 +223,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Add KPI, task, and audit models to the database",
       "Protect routes by staff role or paid workspace access",
       "Turn the placeholder surface into your live dashboard"
+    ]
+  },
+  "login": {
+    "eyebrow": "Staff access",
+    "title": "Enter the operations surface with the context your team actually uses.",
+    "description": "Sign in to review KPIs, approvals, and fresh operational states without a generic marketing detour.",
+    "audience": "Ops leads, finance admins, and internal decision-makers",
+    "emailLabel": "Work email",
+    "emailPlaceholder": "ops@company.com",
+    "emailHint": "Use the email tied to your staff seat or internal dashboard account.",
+    "trustPoints": [
+      "Internal users land on one secure entry instead of scattered admin routes.",
+      "Approval state, freshness, and role-aware access stay aligned to the same account.",
+      "The login surface already fits paid seats, managed reporting, or partner access."
     ]
   },
   "heroMetrics": [

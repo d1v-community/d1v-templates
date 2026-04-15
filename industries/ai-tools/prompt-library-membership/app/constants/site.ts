@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "PromptVault",
+  "siteDescription": "Prompt membership app with gated content access and recurring billing.",
   "theme": {
     "family": "ai",
     "layout": "command",
@@ -166,7 +176,7 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Demo AI"
+    "assistantLabel": "Guide"
   },
   "footer": {
     "line": "Built with D1V"
@@ -174,10 +184,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "AI library",
     "headline": "Package your best prompts like a premium product.",
-    "description": "D1V DEMO gives creators a clean paid-access shell for prompt packs, workflows, and member-only resources.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "PromptVault gives creators a clean paid-access shell for prompt packs, workflows, and member-only resources.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Member login for gated prompt access",
@@ -194,13 +204,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "PromptVault Membership",
     "defaultProductDescription": "Get every prompt pack and member-only update.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -214,6 +224,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Create tables for prompt packs, authors, and release notes",
       "Map paid members to content entitlements",
       "Replace placeholder sections with searchable library pages"
+    ]
+  },
+  "login": {
+    "eyebrow": "Member login",
+    "title": "Open the prompt vault and keep discovery, access, and releases in one place.",
+    "description": "Sign in to reach saved packs, member-only drops, and the guided library experience.",
+    "audience": "Creators, teams, and members buying reusable AI workflows",
+    "emailLabel": "Membership email",
+    "emailPlaceholder": "member@studio.com",
+    "emailHint": "Use the email linked to your prompt-library membership.",
+    "trustPoints": [
+      "Members reach saved packs and new drops from one clean account surface.",
+      "Search, unlock state, and release cadence stay connected to the same login.",
+      "Support questions can route into the guide instead of a crowded help inbox."
     ]
   },
   "heroMetrics": [
@@ -374,19 +398,19 @@ export const SITE_CONFIG: SiteConfig = {
   "aiAssistant": {
     "enabled": true,
     "badge": "Member guide",
-    "title": "Explore D1V DEMO with the built-in guide.",
+    "title": "Turn your prompt catalog into a guided buying experience.",
     "description": "Give visitors a short, strong assistant that recommends packs, explains access, and helps members find the right workflows.",
-    "assistantName": "D1V DEMO",
-    "welcomeMessage": "I can walk you through D1V DEMO, pricing, access, and what this template includes.",
-    "placeholder": "Ask about D1V DEMO, pricing, access, or included flows...",
-    "submitLabel": "Ask D1V DEMO",
-    "resetLabel": "Reset demo chat",
+    "assistantName": "PromptVault Guide",
+    "welcomeMessage": "I can help visitors understand the library, recommend prompt packs, and explain membership access.",
+    "placeholder": "Ask which prompts fit your workflow or what membership includes...",
+    "submitLabel": "Ask guide",
+    "resetLabel": "Clear thread",
     "suggestedPrompts": [
       "What kinds of prompt packs should I launch first?",
       "How can I explain membership value quickly?",
       "What content should be free vs members-only?"
     ],
-    "systemPrompt": "You are D1V DEMO, the built-in guide for this demo site. Answer using only visible template capabilities, explain pricing, access, and onboarding clearly, and do not invent unsupported features.",
+    "systemPrompt": "You are PromptVault Guide, a concise assistant for a paid prompt library. Help users understand pack structure, membership value, and discovery strategy. Keep answers practical, concise, and grounded in the visible template.",
     "model": "kimi-k2.5"
   }
 };

@@ -14,13 +14,31 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 - Goal: upgrade all 12 generated industry templates from auth-only starter schemas to industry-specific schemas, then re-run real-env local startup and API verification for each template.
 - Background: every `industries/*/*/drizzle/0000_init.sql` still matches the auth-only foundation schema, so the generated apps are runnable but not actually integrated with industry data models.
 - Extension: close the real payment loop so successful checkout is not just a redirect, but a signed webhook + entitlement + fulfillment write into each template's industry table.
-- Selected validators:
+  - Selected validators:
   - `@data-schema-qa`
   - `@api-backend-qa`
   - `@frontend-ui-qa`
   - `@checkout-monetization-qa`
   - `@auth-state-qa`
 - Active todos:
+  - [x] Create a first template-specific UI direction for `industries/ai-tools/assistant-saas` so it no longer inherits the shared cross-template visual language
+    - Owner: main agent
+    - Verification: `assistant-saas` homepage, header, and core AI-facing surfaces use a bespoke art direction rather than the shared default; `pnpm run typecheck` passes in `industries/ai-tools/assistant-saas`
+    - Status: done
+    - Evidence: rewrote `industries/ai-tools/assistant-saas/app/components/HomeExperience.tsx` into a command-center landing page with a telemetry hero, snapshot rail, signed-in workspace deck, and AI-specific conversion modules; replaced `industries/ai-tools/assistant-saas/app/components/AppHeader.tsx` with a sticky operator-console header; replaced `industries/ai-tools/assistant-saas/app/components/AiAssistantPanel.tsx` with a terminal-like copilot surface; `pnpm run typecheck` passed in `industries/ai-tools/assistant-saas`
+    - Risk / Notes: auth and pricing flows were preserved; pricing and payment return pages still use the broader shared visual system and can be specialized in the next pass if this direction is approved
+  - [x] Rebuild all industry template homepages around real feature navigation so public visitors see limited functional previews and signed-in users get a usable feature workspace instead of copy-only sections
+    - Owner: main agent
+    - Verification: foundation homepage and regenerated `industries/*/*/app/routes/_index.tsx` render snapshot-backed feature navigation; unauthenticated state limits detail to public preview data; authenticated state exposes a sectioned workspace with tabs or sidebar tied to live snapshot sections; `pnpm run typecheck` passes in the foundation and all 12 industry templates after regeneration
+    - Status: done
+    - Evidence: added `foundations/remix-neon-auth-pay/app/components/HomeExperience.tsx` and replaced `DevLoadingCard` with a wrapper so the homepage now renders a snapshot-backed public preview plus a signed-in workspace with section tabs/sidebar; updated `foundations/remix-neon-auth-pay/app/routes/_index.tsx` to pass the current user into the homepage surface; added `foundations/remix-neon-auth-pay/app/utils/template-snapshot.ts` and updated `app/routes/api.template.snapshot.ts` so unauthenticated visitors only receive redacted preview records while signed-in users receive the full snapshot; added a `/#workspace` header entry; re-ran `node scripts/generate-industry-templates.mjs` so all 12 industry templates inherited the new homepage shell; targeted `rg` confirms every industry homepage now renders `<DevLoadingCard snapshot={snapshot} user={effectiveUser} />` and every industry snapshot route/index loader applies `toPublicTemplateSnapshot(...)`; `pnpm run typecheck` passed in `foundations/remix-neon-auth-pay` plus all 12 industry templates after reinstalling local dependencies in the regenerated directories
+    - Risk / Notes: auth, pricing, and AI assistant flows were preserved; public snapshot responses still expose section counts and top-level labels by design, but record detail is now intentionally redacted until login
+  - [x] Redesign all industry-template login pages so the auth entry matches each template's market and target user instead of reusing the old generic starter card
+    - Owner: main agent
+    - Verification: every `industries/*/*/app/routes/login.tsx` consumes `SITE_CONFIG` + `getSiteThemeClasses(...)`; each `industries/*/*/app/constants/site.ts` defines industry-specific `login` copy; `pnpm run typecheck` passes in all 12 industry templates after the rollout
+    - Status: done
+    - Evidence: rebuilt `foundations/remix-neon-auth-pay/app/routes/login.tsx` into a theme-aware two-column auth surface, added `login` config typing/defaults in `foundations/remix-neon-auth-pay/app/constants/site.ts`, added per-template login copy presets in `scripts/industry-template.presets.mjs`, updated `scripts/generate-industry-templates.mjs`, and re-ran `node scripts/generate-industry-templates.mjs` so all 12 industry templates received the new route + config; targeted `rg` confirms every industry login route now reads `const loginConfig = SITE_CONFIG.login;` and every industry `site.ts` defines a `login` block; `pnpm run typecheck` passed in `foundations/remix-neon-auth-pay` plus all 12 industry templates after restoring missing local dependencies with `pnpm install` in the regenerated template directories
+    - Risk / Notes: auth behavior was kept intact while the entry surface, audience copy, and fallback back-navigation were upgraded; regenerated template directories now have fresh local `node_modules` again for verification
   - [x] Rebrand template-visible product names to `D1V DEMO` across foundation and industry templates, and seed follow-up naming work in every template-local `PLAN.md`
     - Owner: main agent
     - Verification: targeted search confirms template UI config no longer exposes prior product names; every template `PLAN.md` includes a todo to ideate a short creative name and replace `D1V DEMO`; relevant modified templates pass lightweight validation
@@ -316,6 +334,86 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 ## Immediate Next Step
 
 Start a third-wave pass that adds real route-level product surfaces on top of the new design matrix, beginning with account-area dashboards, entitlement-aware post-purchase screens, and domain data schemas for each category.
+
+## Design & UI Optimization Plan (Template-Specific)
+
+Based on the visual review, the current templates rely on a single-page scrolling architecture that mixes marketing copy with private "Live Snapshot" data. To improve commercial viability and user experience, we will refactor them into a split architecture:
+1. **Public View (Unauthenticated):** Only display marketing copy, visually appealing layouts, and public/aggregated data (no private database rows or user emails). 
+2. **App View (Authenticated):** Separate core functions into distinct routes using Top Tabs or a Sidebar navigation to create a real product feel.
+
+Here are the specific UI optimization and layout division plans based on currently implemented functional data for each template:
+
+### 1. AI Tools
+
+**Assistant SaaS (`assistant-saas`)**
+- **Public View:** Showcase product mockups, chat interface previews, and pricing. Remove live database views of user sessions/threads.
+- **App Layout:** Use a **Sidebar** to separate functions.
+- **Proposed Navigation:** `Chat Interface` | `Knowledge Base (Documents)` | `Settings & Billing`.
+
+**Prompt Library Membership (`prompt-library-membership`)**
+- **Public View:** Display blurred out or teaser prompts, category tags, and pricing.
+- **App Layout:** Use a **Top Tab** navigation for browsing simplicity.
+- **Proposed Navigation:** `Discover` | `My Vault` | `Usage Stats`.
+
+### 2. Business & Service
+
+**Client Portal (`client-portal`)**
+- **Public View:** Overview of agency services, testimonials, and contact/login portal. Hide specific client project states and files.
+- **App Layout:** Use a **Sidebar** for secure client administration.
+- **Proposed Navigation:** `Active Projects` | `Deliverables (Uploads)` | `Invoices`.
+
+**Internal Dashboard (`internal-dashboard`)**
+- **Public View:** As an internal tool, the public view should be a strict, secure login screen. No marketing needed.
+- **App Layout:** Use a **Sidebar** for dense data management.
+- **Proposed Navigation:** `KPI Overview` | `Ops Tasks` | `Audit Logs`.
+
+### 3. Commerce
+
+**Digital Downloads (`digital-downloads`)**
+- **Public View:** A storefront grid with product covers, descriptions, and checkout buttons.
+- **App Layout:** Use **Top Tabs** for a consumer-friendly catalog feel.
+- **Proposed Navigation:** `Storefront` | `My Library (Entitlements)` | `Order History`.
+
+**Preorder Launch (`preorder-launch`)**
+- **Public View:** High-urgency hero section, product 3D mockup, countdown timer, and public waitlist count (hide specific emails).
+- **App Layout:** Use a **Top Tab** or simple nav.
+- **Proposed Navigation:** `Launch Status` | `My Preorder` | `Shipping Updates`.
+
+### 4. Creator
+
+**Community Membership (`community-membership`)**
+- **Public View:** Creator introduction, benefits, public event schedule, and pricing.
+- **App Layout:** Use a **Sidebar** to mimic a community forum/Discord feel.
+- **Proposed Navigation:** `Home` | `Members Directory` | `Events` | `Perks`.
+
+**Paid Newsletter (`paid-newsletter`)**
+- **Public View:** Opt-in form, recent free article snippets, and premium subscription pitch.
+- **App Layout:** Use **Top Tabs** focusing on content reading and management.
+- **Proposed Navigation:** `Latest Issues` | `Archive` | `Manage Subscription`.
+
+### 5. Education
+
+**Cohort Course (`cohort-course`)**
+- **Public View:** Syllabus overview, instructor bio, cohort countdown, and pricing.
+- **App Layout:** Use a **Sidebar** for deep curriculum navigation.
+- **Proposed Navigation:** `Current Module (Lessons)` | `Cohort Directory` | `Assignments`.
+
+**Online Course Membership (`online-course-membership`)**
+- **Public View:** Course catalog, preview videos, and pricing.
+- **App Layout:** Use a **Sidebar** to track progress across multiple courses.
+- **Proposed Navigation:** `My Learning` | `Course Catalog` | `Certificates`.
+
+### 6. Local Business
+
+**Clinic Booking (`clinic-booking`)**
+- **Public View:** Services offered, available slots (calendar widget), and staff bios.
+- **App Layout:** Use **Top Tabs** for simple consumer booking and management.
+- **Proposed Navigation:** `Book Appointment` | `My Visits` | `Intake Forms`.
+
+**Gym Membership (`gym-membership`)**
+- **Public View:** Facility photos, class schedules, and membership tiers.
+- **App Layout:** Use **Top Tabs** or mobile-friendly bottom nav.
+- **Proposed Navigation:** `Class Schedule` | `My Pass` | `Billing`.
 
 ## Product-System Expansion Roadmap
 

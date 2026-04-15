@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "ClinicFlow",
+  "siteDescription": "Clinic booking and patient portal starter with protected access and hosted checkout.",
   "theme": {
     "family": "local",
     "layout": "service",
@@ -166,7 +176,7 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Demo AI"
+    "assistantLabel": "Assistant"
   },
   "footer": {
     "line": "Built with D1V"
@@ -174,10 +184,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Local services",
     "headline": "Handle appointments and deposits on infrastructure that is already live.",
-    "description": "D1V DEMO gives local care providers a fast base for patient login, appointment data, and booking payments.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "ClinicFlow gives local care providers a fast base for patient login, appointment data, and booking payments.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Secure login for patients and staff",
@@ -194,13 +204,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "Visit Deposit",
     "defaultProductDescription": "Reserve a visit and confirm patient access in one flow.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -214,6 +224,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Create appointment, provider, and intake models",
       "Map deposits to confirmed bookings",
       "Replace placeholder content with scheduling and patient portal views"
+    ]
+  },
+  "login": {
+    "eyebrow": "Patient access",
+    "title": "Make appointment access feel calm, trustworthy, and ready for the next visit.",
+    "description": "Sign in to review bookings, intake steps, deposits, and practice messages without calling the front desk.",
+    "audience": "Patients, care teams, and booked local-service customers",
+    "emailLabel": "Patient email",
+    "emailPlaceholder": "patient@example.com",
+    "emailHint": "Use the email linked to your booking, intake form, or care plan.",
+    "trustPoints": [
+      "Patients can confirm bookings, visit details, and follow-up without extra phone traffic.",
+      "Deposits, appointment status, and provider communication stay under one identity.",
+      "The login page can build trust before visitors ever reach the booking workflow."
     ]
   },
   "heroMetrics": [
@@ -374,19 +398,19 @@ export const SITE_CONFIG: SiteConfig = {
   "aiAssistant": {
     "enabled": true,
     "badge": "Patient concierge",
-    "title": "Explore D1V DEMO with the built-in guide.",
+    "title": "Use AI to answer booking questions before the front desk does.",
     "description": "Give patients a fast booking concierge for deposits, appointment prep, and portal access while keeping your API key server-side.",
-    "assistantName": "D1V DEMO",
-    "welcomeMessage": "I can walk you through D1V DEMO, pricing, access, and what this template includes.",
-    "placeholder": "Ask about D1V DEMO, pricing, access, or included flows...",
-    "submitLabel": "Ask D1V DEMO",
-    "resetLabel": "Reset demo chat",
+    "assistantName": "ClinicFlow Concierge",
+    "welcomeMessage": "I can help with booking steps, deposits, intake expectations, and common patient access questions.",
+    "placeholder": "Ask about appointments, deposits, intake, or patient portal access...",
+    "submitLabel": "Ask concierge",
+    "resetLabel": "Reset chat",
     "suggestedPrompts": [
       "How should I handle booking deposits?",
       "What should patients see after they book?",
       "Which questions can AI answer before a visit?"
     ],
-    "systemPrompt": "You are D1V DEMO, the built-in guide for this demo site. Answer using only visible template capabilities, explain pricing, access, and onboarding clearly, and do not invent unsupported features.",
+    "systemPrompt": "You are ClinicFlow Concierge, a concise booking and support assistant for a clinic booking product. Help with scheduling flow, deposits, intake expectations, and patient portal questions. Avoid medical advice and keep answers operational.",
     "model": "kimi-k2.5"
   }
 };

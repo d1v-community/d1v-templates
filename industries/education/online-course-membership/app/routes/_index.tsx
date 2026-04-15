@@ -12,6 +12,7 @@ import { DevLoadingCard } from "~/components/DevLoadingCard";
 import { AiAssistantPanel } from "~/components/AiAssistantPanel";
 import { SITE_CONFIG } from "~/constants/site";
 import { getTemplateSnapshot } from "~/services/template-data.server";
+import { toPublicTemplateSnapshot } from "~/utils/template-snapshot";
 
 export const meta: MetaFunction = () => {
   return [
@@ -30,7 +31,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   let snapshotWarning = null;
 
   try {
-    snapshot = await getTemplateSnapshot();
+    const liveSnapshot = await getTemplateSnapshot();
+    snapshot = user ? liveSnapshot : toPublicTemplateSnapshot(liveSnapshot);
   } catch (error) {
     snapshotWarning =
       error instanceof Error
@@ -97,7 +99,7 @@ export default function Index() {
       <AppHeader user={effectiveUser} onLogout={handleLogout} />
 
       <main className="flex-1 min-h-0">
-        <DevLoadingCard snapshot={snapshot} />
+        <DevLoadingCard snapshot={snapshot} user={effectiveUser} />
         <AiAssistantPanel warningMessage={aiAssistantWarning} />
       </main>
 

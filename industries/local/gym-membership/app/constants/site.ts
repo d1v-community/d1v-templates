@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "FlexPass",
+  "siteDescription": "Gym membership app with paid access, login, and recurring member management.",
   "theme": {
     "family": "local",
     "layout": "service",
@@ -173,10 +183,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Membership business",
     "headline": "Sell memberships with a stack that is already ready to collect them.",
-    "description": "D1V DEMO is a clean base for gyms, studios, and local fitness memberships with login and billing built in.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "FlexPass is a clean base for gyms, studios, and local fitness memberships with login and billing built in.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Member login for account and renewal access",
@@ -193,13 +203,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "Gym Membership",
     "defaultProductDescription": "Start your membership and unlock member access.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -213,6 +223,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Create plan, check-in, and renewal models",
       "Map successful checkout to active memberships",
       "Replace placeholder content with class, plan, and account views"
+    ]
+  },
+  "login": {
+    "eyebrow": "Member check-in",
+    "title": "Bring new and returning members into plans, classes, and habit-building fast.",
+    "description": "Sign in to manage membership access, upcoming sessions, and onboarding from one fitness account surface.",
+    "audience": "Gym members, coaches, and local fitness operators",
+    "emailLabel": "Membership email",
+    "emailPlaceholder": "member@gym.com",
+    "emailHint": "Use the email attached to your gym plan, class booking, or member account.",
+    "trustPoints": [
+      "Members can move from signup into schedules, coach updates, and renewals smoothly.",
+      "Plan access, attendance, and first-week onboarding stay tied to one account.",
+      "The same entry can support monthly memberships, premium coaching, and class packs."
     ]
   },
   "heroMetrics": [

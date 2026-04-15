@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "ClientRoom",
+  "siteDescription": "Client portal for agencies and service businesses with member access and project data.",
   "theme": {
     "family": "business",
     "layout": "operations",
@@ -166,7 +176,7 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Demo AI"
+    "assistantLabel": "Support"
   },
   "footer": {
     "line": "Built with D1V"
@@ -174,10 +184,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Client delivery",
     "headline": "Give every client a portal that feels like part of the service.",
-    "description": "D1V DEMO combines login, data, and payments so agencies can sell premium access, retainers, and delivery visibility.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "ClientRoom combines login, data, and payments so agencies can sell premium access, retainers, and delivery visibility.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Passwordless client login for project access",
@@ -194,13 +204,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "Client Portal Access",
     "defaultProductDescription": "Secure client access to projects, files, and updates.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -214,6 +224,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Model clients, projects, milestones, and uploads",
       "Map successful payments to active portal accounts",
       "Replace placeholder blocks with project dashboards"
+    ]
+  },
+  "login": {
+    "eyebrow": "Client portal access",
+    "title": "Let clients enter a service workspace that feels tied to the engagement.",
+    "description": "Sign in to review milestones, files, approvals, and support updates from one secure room.",
+    "audience": "Agencies, service teams, and paying client accounts",
+    "emailLabel": "Client email",
+    "emailPlaceholder": "client@company.com",
+    "emailHint": "Use the email attached to your portal account or active retainer.",
+    "trustPoints": [
+      "Project visibility, file delivery, and approvals stay in one client-facing login.",
+      "The account entry can reflect premium tiers, retainers, and seat access cleanly.",
+      "Clients move from payment into active project rooms without email sprawl."
     ]
   },
   "heroMetrics": [
@@ -374,19 +398,19 @@ export const SITE_CONFIG: SiteConfig = {
   "aiAssistant": {
     "enabled": true,
     "badge": "Client support",
-    "title": "Explore D1V DEMO with the built-in guide.",
+    "title": "Add a smart support desk to the client experience.",
     "description": "Use the built-in assistant to answer project questions, route common support requests, and reduce manual client handoffs.",
-    "assistantName": "D1V DEMO",
-    "welcomeMessage": "I can walk you through D1V DEMO, pricing, access, and what this template includes.",
-    "placeholder": "Ask about D1V DEMO, pricing, access, or included flows...",
-    "submitLabel": "Ask D1V DEMO",
-    "resetLabel": "Reset demo chat",
+    "assistantName": "ClientRoom Support",
+    "welcomeMessage": "I can help with portal access, project updates, and common delivery questions.",
+    "placeholder": "Ask about portal access, milestones, files, or support requests...",
+    "submitLabel": "Ask support",
+    "resetLabel": "New thread",
     "suggestedPrompts": [
       "How should a client portal handle milestones and files?",
       "What support questions should be automated first?",
       "How do I map payment to portal access?"
     ],
-    "systemPrompt": "You are D1V DEMO, the built-in guide for this demo site. Answer using only visible template capabilities, explain pricing, access, and onboarding clearly, and do not invent unsupported features.",
+    "systemPrompt": "You are ClientRoom Support, a concise assistant for a premium client portal. Focus on client access, delivery visibility, and support triage. Offer practical guidance and keep answers aligned with the current starter's capabilities.",
     "model": "kimi-k2.5"
   }
 };

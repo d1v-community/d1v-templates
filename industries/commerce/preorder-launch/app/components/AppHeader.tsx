@@ -32,6 +32,12 @@ export function AppHeader({ user, onLogout }: AppHeaderProps) {
 
           <div className="flex items-center gap-5">
             <nav className="hidden items-center gap-4 sm:flex">
+              <Link
+                to="/#workspace"
+                className={`text-sm font-medium transition-colors ${theme.navLink}`}
+              >
+                {user ? "Workspace" : "Preview"}
+              </Link>
               {SITE_CONFIG.aiAssistant?.enabled ? (
                 <Link
                   to="/#assistant"

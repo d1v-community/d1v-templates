@@ -48,12 +48,12 @@ export async function requireUser(request: Request): Promise<User> {
 
 export function createAuthHeaders(token: string): HeadersInit {
   return {
-    "Set-Cookie": `auth-token=${token}; HttpOnly; Path=/; SameSite=None; Max-Age=${7 * 24 * 60 * 60}; ${process.env.NODE_ENV === "production" ? "Secure;" : ""}`,
+    "Set-Cookie": `auth-token=${token}; HttpOnly; Path=/; SameSite=Lax; Max-Age=${7 * 24 * 60 * 60}; ${process.env.NODE_ENV === "production" ? "Secure;" : ""}`,
   };
 }
 
 export function createLogoutHeaders(): HeadersInit {
   return {
-    "Set-Cookie": `auth-token=; HttpOnly; Path=/; SameSite=None; Max-Age=0; ${process.env.NODE_ENV === "production" ? "Secure;" : ""}`,
+    "Set-Cookie": `auth-token=; HttpOnly; Path=/; SameSite=Lax; Max-Age=0; ${process.env.NODE_ENV === "production" ? "Secure;" : ""}`,
   };
 }

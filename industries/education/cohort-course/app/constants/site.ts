@@ -87,6 +87,16 @@ export type SiteConfig = {
     description: string;
     bullets: string[];
   };
+  login: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    audience: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    emailHint: string;
+    trustPoints: string[];
+  };
   heroMetrics: SiteMetric[];
   showcase: {
     eyebrow: string;
@@ -145,8 +155,8 @@ export type SiteConfig = {
 };
 
 export const SITE_CONFIG: SiteConfig = {
-  "appTitle": "D1V DEMO",
-  "siteDescription": "D1V DEMO showcase with login, data, pricing, and checkout-ready product flows.",
+  "appTitle": "CohortOS",
+  "siteDescription": "Paid cohort course starter for enrollment, session access, and student onboarding.",
   "theme": {
     "family": "education",
     "layout": "academy",
@@ -166,7 +176,7 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Demo AI"
+    "assistantLabel": "Advisor"
   },
   "footer": {
     "line": "Built with D1V"
@@ -174,10 +184,10 @@ export const SITE_CONFIG: SiteConfig = {
   "home": {
     "badge": "Education",
     "headline": "Sell the cohort before you build the full course backend.",
-    "description": "D1V DEMO gives you enrollment-ready rails for applications, paid access, and student onboarding.",
-    "primaryCtaLabel": "View demo pricing",
+    "description": "CohortOS gives you enrollment-ready rails for applications, paid access, and student onboarding.",
+    "primaryCtaLabel": "Open pricing",
     "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Enter demo",
+    "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
     "proofPoints": [
       "Email login for enrolled students",
@@ -194,13 +204,13 @@ export const SITE_CONFIG: SiteConfig = {
     "checkoutLabel": "Checkout",
     "checkoutUserDescription": "Checkout opens instantly for your signed-in account.",
     "checkoutGuestDescription": "Login first, then return here to create a checkout link instantly.",
-    "buyButtonLabel": "Get demo access",
-    "loginButtonLabel": "Login for demo access",
+    "buyButtonLabel": "Buy now",
+    "loginButtonLabel": "Login to purchase",
     "readyLabelPrefix": "Ready to checkout as",
     "loadErrorHint": "Check your Payment Hub API token and make sure your account already has at least one active product.",
     "emptyStateTitle": "No active products yet",
     "emptyStateDescription": "Create products in Payment Hub, then refresh this page to turn checkout on.",
-    "defaultProductName": "D1V DEMO",
+    "defaultProductName": "Cohort Enrollment",
     "defaultProductDescription": "Reserve your cohort seat and access the student area.",
     "viewDetailsLabel": "View details",
     "viewingDetailsLabel": "Viewing details"
@@ -214,6 +224,20 @@ export const SITE_CONFIG: SiteConfig = {
       "Create cohort, lesson, and enrollment tables",
       "Grant student access after successful payment",
       "Replace placeholder content with curriculum and session views"
+    ]
+  },
+  "login": {
+    "eyebrow": "Student login",
+    "title": "Turn enrollment into a structured student entry, not a dead-end confirmation page.",
+    "description": "Sign in to access cohort schedules, prep work, and the learner dashboard tied to your seat.",
+    "audience": "Applicants, enrolled students, and cohort operators",
+    "emailLabel": "Student email",
+    "emailPlaceholder": "student@course.com",
+    "emailHint": "Use the email linked to your cohort seat, application, or enrollment payment.",
+    "trustPoints": [
+      "Students can move from payment into onboarding and schedule clarity immediately.",
+      "Seat status, live-session timing, and prep work stay attached to one learner account.",
+      "The login entry sets the tone for a guided course instead of a bare utility flow."
     ]
   },
   "heroMetrics": [
@@ -374,19 +398,19 @@ export const SITE_CONFIG: SiteConfig = {
   "aiAssistant": {
     "enabled": true,
     "badge": "Enrollment AI",
-    "title": "Explore D1V DEMO with the built-in guide.",
+    "title": "Answer enrollment questions before a human has to.",
     "description": "Use the assistant to handle curriculum fit, session timing, and payment questions so interested students move faster.",
-    "assistantName": "D1V DEMO",
-    "welcomeMessage": "I can walk you through D1V DEMO, pricing, access, and what this template includes.",
-    "placeholder": "Ask about D1V DEMO, pricing, access, or included flows...",
-    "submitLabel": "Ask D1V DEMO",
-    "resetLabel": "Reset demo chat",
+    "assistantName": "CohortOS Advisor",
+    "welcomeMessage": "I can help students understand cohort fit, enrollment steps, and what happens after payment.",
+    "placeholder": "Ask about enrollment, curriculum fit, sessions, or onboarding...",
+    "submitLabel": "Ask advisor",
+    "resetLabel": "Reset advisor",
     "suggestedPrompts": [
       "What should happen after a student pays?",
       "How do I present cohort dates and seat limits?",
       "What student onboarding data should I store?"
     ],
-    "systemPrompt": "You are D1V DEMO, the built-in guide for this demo site. Answer using only visible template capabilities, explain pricing, access, and onboarding clearly, and do not invent unsupported features.",
+    "systemPrompt": "You are CohortOS Advisor, a concise enrollment assistant for a cohort-based course business. Help with seat reservation, onboarding, curriculum questions, and payment flow expectations. Do not invent unsupported operational details.",
     "model": "kimi-k2.5"
   }
 };
