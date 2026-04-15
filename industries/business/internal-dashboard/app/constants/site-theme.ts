@@ -33,43 +33,43 @@ export type SiteThemeClasses = {
 const SITE_THEME_CLASSES: Record<SiteThemeFamily, SiteThemeClasses> = {
   ai: {
     headerShell:
-      "border-b border-cyan-400/20 bg-slate-950/88 text-white backdrop-blur supports-[backdrop-filter]:bg-slate-950/70",
-    logo: "text-cyan-100 hover:text-white",
-    navLink: "text-slate-300 hover:text-cyan-100",
-    heroShell: "bg-slate-950 text-white",
+      "border-b border-cyan-200/60 bg-[#f0f9ff]/92 text-slate-950 backdrop-blur supports-[backdrop-filter]:bg-[#f0f9ff]/76 dark:border-cyan-400/20 dark:bg-slate-950/88 dark:text-white dark:supports-[backdrop-filter]:bg-slate-950/70",
+    logo: "text-slate-950 hover:text-cyan-700 dark:text-cyan-100 dark:hover:text-white",
+    navLink: "text-slate-600 hover:text-cyan-700 dark:text-slate-300 dark:hover:text-cyan-100",
+    heroShell: "bg-[#f0f9ff] text-slate-950 dark:bg-slate-950 dark:text-white",
     heroGlow:
-      "bg-[radial-gradient(circle_at_18%_18%,_rgba(34,211,238,0.24),_transparent_28%),radial-gradient(circle_at_82%_22%,_rgba(14,165,233,0.16),_transparent_24%),linear-gradient(180deg,_rgba(15,23,42,0.5),_rgba(2,6,23,0.96))]",
+      "bg-[radial-gradient(circle_at_18%_18%,_rgba(6,182,212,0.12),_transparent_28%),radial-gradient(circle_at_82%_22%,_rgba(14,165,233,0.08),_transparent_24%),linear-gradient(180deg,_rgba(240,249,255,1),_rgba(248,250,252,0.96))] dark:bg-[radial-gradient(circle_at_18%_18%,_rgba(34,211,238,0.24),_transparent_28%),radial-gradient(circle_at_82%_22%,_rgba(14,165,233,0.16),_transparent_24%),linear-gradient(180deg,_rgba(15,23,42,0.5),_rgba(2,6,23,0.96))]",
     heroGrid: "lg:grid-cols-[0.94fr_1.06fr]",
     eyebrow:
-      "border border-cyan-300/20 bg-cyan-400/10 text-cyan-100",
-    subEyebrow: "text-cyan-200",
-    body: "text-slate-300",
+      "border border-cyan-300/50 bg-white text-cyan-700 dark:border-cyan-300/20 dark:bg-cyan-400/10 dark:text-cyan-100",
+    subEyebrow: "text-cyan-700 dark:text-cyan-200",
+    body: "text-slate-600 dark:text-slate-300",
     primaryButton:
-      "bg-cyan-300 text-slate-950 hover:bg-cyan-200",
+      "bg-cyan-600 text-white hover:bg-cyan-500 dark:bg-cyan-300 dark:text-slate-950 dark:hover:bg-cyan-200",
     secondaryButton:
-      "border border-white/15 bg-white/5 text-white hover:bg-white/10",
-    metricShell: "border border-white/10 bg-white/5",
-    metricValue: "text-cyan-100",
+      "border border-slate-300 bg-white/70 text-slate-700 hover:bg-white dark:border-white/15 dark:bg-white/5 dark:text-white dark:hover:bg-white/10",
+    metricShell: "border border-slate-200 bg-white dark:border-white/10 dark:bg-white/5",
+    metricValue: "text-slate-950 dark:text-cyan-100",
     showcaseShell:
-      "border border-white/12 bg-white/6 shadow-[0_32px_120px_rgba(14,165,233,0.16)] backdrop-blur",
-    sectionShell: "border border-white/10 bg-white/5",
-    sectionLabel: "text-cyan-200",
-    sectionText: "text-slate-300",
-    emphasis: "text-white",
-    listItemShell: "border border-white/10 bg-slate-950/60",
-    faqShell: "border border-white/10 bg-slate-950/70",
+      "border border-cyan-100 bg-white/60 shadow-[0_32px_120px_rgba(14,165,233,0.06)] backdrop-blur dark:border-white/12 dark:bg-white/6 dark:shadow-[0_32px_120px_rgba(14,165,233,0.16)]",
+    sectionShell: "border border-slate-200 bg-white dark:border-white/10 dark:bg-white/5",
+    sectionLabel: "text-cyan-700 dark:text-cyan-200",
+    sectionText: "text-slate-600 dark:text-slate-300",
+    emphasis: "text-slate-950 dark:text-white",
+    listItemShell: "border border-slate-200 bg-slate-50 dark:border-white/10 dark:bg-slate-950/60",
+    faqShell: "border border-slate-200 bg-white dark:border-white/10 dark:bg-slate-950/70",
     closingShell:
-      "border border-cyan-300/16 bg-[linear-gradient(135deg,_rgba(8,47,73,0.88),_rgba(15,23,42,0.92))]",
+      "border border-cyan-200/50 bg-[linear-gradient(135deg,_rgba(236,254,255,0.88),_rgba(240,249,255,0.92))] dark:border-cyan-300/16 dark:bg-[linear-gradient(135deg,_rgba(8,47,73,0.88),_rgba(15,23,42,0.92))]",
     assistantSection:
-      "border-t border-cyan-400/10 bg-[linear-gradient(180deg,_#06131f,_#020617)]",
+      "border-t border-cyan-200/60 bg-[#ebf8ff] dark:border-cyan-400/10 dark:bg-[linear-gradient(180deg,_#06131f,_#020617)]",
     assistantBadge:
-      "border border-cyan-300/20 bg-cyan-400/10 text-cyan-100",
+      "border border-cyan-300/50 bg-white text-cyan-700 dark:border-cyan-300/20 dark:bg-cyan-400/10 dark:text-cyan-100",
     assistantShell:
-      "border border-cyan-400/12 bg-slate-950/92 shadow-[0_24px_100px_rgba(8,145,178,0.18)]",
-    assistantUserBubble: "bg-cyan-300 text-slate-950",
-    assistantAction: "bg-cyan-300 text-slate-950 hover:bg-cyan-200",
+      "border border-slate-200 bg-white shadow-[0_24px_100px_rgba(8,145,178,0.06)] dark:border-cyan-400/12 dark:bg-slate-950/92 dark:shadow-[0_24px_100px_rgba(8,145,178,0.18)]",
+    assistantUserBubble: "bg-cyan-600 text-white dark:bg-cyan-300 dark:text-slate-950",
+    assistantAction: "bg-cyan-600 text-white hover:bg-cyan-500 dark:bg-cyan-300 dark:text-slate-950 dark:hover:bg-cyan-200",
     assistantInput:
-      "border-slate-700 bg-slate-950 text-slate-100 focus:border-cyan-400 focus:bg-slate-900 focus:ring-cyan-500/20",
+      "border-slate-300 bg-slate-50 text-slate-900 focus:border-cyan-500 focus:bg-white focus:ring-cyan-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:focus:border-cyan-400 dark:focus:bg-slate-900 dark:focus:ring-cyan-500/20",
   },
   business: {
     headerShell:

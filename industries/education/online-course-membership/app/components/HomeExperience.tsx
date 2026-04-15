@@ -34,22 +34,22 @@ function renderShowcasePanels(layout: string, panels: SiteExperiencePanel[]) {
 
   if (!leadPanel) return null;
 
-  if (layout === "command") {
+    if (layout === "command") {
     return (
       <div className="space-y-4">
-        <div className="rounded-[2rem] border border-white/12 bg-slate-950/75 p-6">
+        <div className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6 dark:border-white/12 dark:bg-slate-950/75">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/80">
+            <p className="text-xs uppercase tracking-[0.24em] text-cyan-700 dark:text-cyan-200/80">
               {leadPanel.meta}
             </p>
-            <div className="rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-cyan-100">
+            <div className="rounded-full border border-cyan-500/20 bg-cyan-100 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-cyan-800 dark:border-cyan-300/20 dark:bg-cyan-400/10 dark:text-cyan-100">
               {leadPanel.value}
             </div>
           </div>
-          <h3 className="mt-6 text-3xl font-semibold tracking-tight text-white">
+          <h3 className="mt-6 text-3xl font-semibold tracking-tight text-slate-900 dark:text-white">
             {leadPanel.title}
           </h3>
-          <p className="mt-3 max-w-xl text-sm leading-7 text-slate-300">
+          <p className="mt-3 max-w-xl text-sm leading-7 text-slate-600 dark:text-slate-300">
             {leadPanel.detail}
           </p>
         </div>
@@ -58,14 +58,14 @@ function renderShowcasePanels(layout: string, panels: SiteExperiencePanel[]) {
           {restPanels.map((panel) => (
             <div
               key={panel.title}
-              className="rounded-[1.5rem] border border-white/10 bg-white/6 p-4"
+              className="rounded-[1.5rem] border border-slate-200 bg-white p-4 dark:border-white/10 dark:bg-white/6"
             >
-              <p className="text-[11px] uppercase tracking-[0.22em] text-slate-400">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
                 {panel.meta}
               </p>
-              <p className="mt-4 text-lg font-semibold text-white">{panel.title}</p>
-              <p className="mt-2 text-sm text-cyan-100">{panel.value}</p>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{panel.detail}</p>
+              <p className="mt-4 text-lg font-semibold text-slate-900 dark:text-white">{panel.title}</p>
+              <p className="mt-2 text-sm text-cyan-700 dark:text-cyan-100">{panel.value}</p>
+              <p className="mt-3 text-sm leading-6 text-slate-600 dark:text-slate-300">{panel.detail}</p>
             </div>
           ))}
         </div>

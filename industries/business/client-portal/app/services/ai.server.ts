@@ -75,7 +75,7 @@ function buildPaiUrl(path: string): string {
 	return `${normalizedBase}${normalizedPath}`;
 }
 
-async function parseJsonSafely(response: Response): Promise<unknown> {
+async function _parseJsonSafely(response: Response): Promise<unknown> {
 	const text = await response.text();
 
 	if (!text) return null;

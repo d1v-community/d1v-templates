@@ -27,6 +27,11 @@ export default function Login() {
   const [error, setError] = useState("");
   const [devCode, setDevCode] = useState<string | null>(null);
   const [info, setInfo] = useState("");
+  const loginSignals = [
+    { label: "Audience", value: loginConfig.audience },
+    { label: "Surface", value: SITE_CONFIG.templateSurface.badge },
+  ];
+  const loginMetrics = SITE_CONFIG.heroMetrics.slice(0, 3);
 
   // Client-side guard: if token exists and is valid, redirect
   useEffect(() => {
@@ -175,75 +180,69 @@ export default function Login() {
           <span>Back</span>
         </button>
 
-        <div className="relative mx-auto flex min-h-screen w-full max-w-7xl items-center px-4 py-20 sm:px-6 lg:px-8">
-          <div className={`grid w-full gap-6 lg:items-center xl:gap-8 ${theme.heroGrid}`}>
-            <section className={`relative overflow-hidden rounded-[32px] p-8 sm:p-10 lg:p-12 ${theme.showcaseShell}`}>
+        <div className="relative mx-auto flex min-h-screen w-full max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8">
+          <div className={`grid w-full gap-5 lg:items-center xl:gap-7 ${theme.heroGrid}`}>
+            <section className={`relative overflow-hidden rounded-[32px] p-7 sm:p-8 lg:min-h-[520px] lg:p-10 ${theme.showcaseShell}`}>
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.18),_transparent_30%)] dark:bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.08),_transparent_30%)]" />
-              <div className="relative space-y-8">
-                <div className="space-y-4">
+              <div className="absolute -right-12 top-10 h-40 w-40 rounded-full bg-white/12 blur-3xl motion-safe:animate-pulse" />
+              <div
+                className="absolute -left-10 bottom-8 h-28 w-28 rounded-full bg-white/8 blur-3xl motion-safe:animate-pulse"
+                style={{ animationDelay: "700ms" }}
+              />
+              <div className="relative flex h-full flex-col justify-between gap-8">
+                <div className="space-y-5">
                   <div className={`inline-flex rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] ${theme.eyebrow}`}>
                     {loginConfig.eyebrow}
                   </div>
-                  <div className="space-y-3">
-                    <p className={`text-xs font-medium uppercase tracking-[0.28em] ${theme.subEyebrow}`}>
-                      {SITE_CONFIG.navigation.loginLabel}
-                    </p>
-                    <h1 className="max-w-xl text-4xl font-semibold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+                  <div className="space-y-4">
+                    <p className={`text-[11px] font-medium uppercase tracking-[0.28em] ${theme.subEyebrow}`}>
                       {SITE_CONFIG.appTitle}
-                    </h1>
-                    <h2 className="max-w-2xl text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">
+                    </p>
+                    <h1 className="max-w-2xl text-3xl font-semibold tracking-[-0.04em] sm:text-4xl lg:text-[2.85rem] lg:leading-[1.02]">
                       {loginConfig.title}
-                    </h2>
-                    <p className={`max-w-2xl text-base leading-7 sm:text-lg ${theme.body}`}>
+                    </h1>
+                    <p className={`max-w-2xl text-sm leading-6 sm:text-base ${theme.body}`}>
                       {loginConfig.description}
                     </p>
-                  </div>
-                </div>
-
-                <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(240px,0.8fr)]">
-                  <div className="space-y-3">
-                    {loginConfig.trustPoints.map((point) => (
-                      <div
-                        key={point}
-                        className={`flex items-start gap-3 rounded-2xl p-4 ${theme.metricShell}`}
-                      >
-                        <span
-                          className={`mt-1 h-2.5 w-2.5 rounded-full bg-current ${theme.metricValue}`}
-                        />
-                        <p className={`text-sm leading-6 ${theme.body}`}>{point}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className={`rounded-[28px] p-5 sm:p-6 ${theme.metricShell}`}>
-                    <p className="text-xs font-medium uppercase tracking-[0.22em] opacity-60">
-                      Built for
-                    </p>
-                    <p className={`mt-3 text-lg font-semibold leading-7 ${theme.metricValue}`}>
-                      {loginConfig.audience}
-                    </p>
-                    <p className={`mt-4 text-sm leading-6 ${theme.body}`}>
+                    <p className={`max-w-2xl text-sm leading-6 ${theme.body}`}>
                       {SITE_CONFIG.templateSurface.headline}
                     </p>
-                    <div className="mt-5 space-y-2">
-                      {SITE_CONFIG.templateSurface.bullets.slice(0, 2).map((bullet) => (
-                        <p key={bullet} className={`text-sm leading-6 ${theme.body}`}>
-                          {bullet}
+                  </div>
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {loginSignals.map((signal) => (
+                      <div
+                        key={signal.label}
+                        className={`rounded-2xl p-4 transition duration-300 motion-safe:hover:-translate-y-1 ${theme.metricShell}`}
+                      >
+                        <p className="text-[11px] font-medium uppercase tracking-[0.22em] opacity-60">
+                          {signal.label}
                         </p>
-                      ))}
-                    </div>
+                        <p className={`mt-3 text-sm font-semibold leading-6 ${theme.metricValue}`}>
+                          {signal.value}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 <div className="grid gap-3 sm:grid-cols-3">
-                  {SITE_CONFIG.heroMetrics.slice(0, 3).map((metric) => (
-                    <div key={metric.label} className={`rounded-2xl p-4 ${theme.metricShell}`}>
-                      <p className={`text-2xl font-semibold tracking-[-0.04em] ${theme.metricValue}`}>
+                  {loginMetrics.map((metric, index) => (
+                    <div
+                      key={metric.label}
+                      className={`rounded-2xl p-4 transition duration-300 motion-safe:hover:-translate-y-1 ${theme.metricShell}`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={`h-2 w-2 rounded-full bg-current ${theme.metricValue} motion-safe:animate-pulse`}
+                          style={{ animationDelay: `${index * 180}ms` }}
+                        />
+                        <p className="text-[11px] font-medium uppercase tracking-[0.22em] opacity-60">
+                          {metric.label}
+                        </p>
+                      </div>
+                      <p className={`mt-4 text-2xl font-semibold tracking-[-0.04em] ${theme.metricValue}`}>
                         {metric.value}
-                      </p>
-                      <p className="mt-2 text-sm font-medium">{metric.label}</p>
-                      <p className={`mt-2 text-sm leading-6 ${theme.body}`}>
-                        {metric.detail}
                       </p>
                     </div>
                   ))}

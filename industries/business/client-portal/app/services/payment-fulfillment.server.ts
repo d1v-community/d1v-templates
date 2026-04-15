@@ -839,7 +839,7 @@ export async function reconcilePaymentSuccess(input: {
 					.from(paymentCheckoutRequests)
 					.where(eq(paymentCheckoutRequests.id, checkoutRequestId))
 					.limit(1)
-		  )[0] ?? null
+				)[0] ?? null
 		: null;
 
 	const localResult = await readLocalFulfillmentForRequest(checkoutRequest);
