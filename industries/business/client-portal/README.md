@@ -58,7 +58,6 @@ You can also export env vars into this repository manually:
 
 ```bash
 AUTH_TOKEN=your_token \
-BACKEND_ADMIN_API_BASE=http://localhost:8999 \
 node scripts/bootstrap-local-env.mjs --template-repo d1v-community/client-portal-template --write-path .env
 ```
 
@@ -68,7 +67,6 @@ Optional AI assistant env:
 D1V_PAI_BASE_URL=https://pai.d1v.ai/v1
 D1V_PAI_API_KEY=your_project_level_pai_api_key
 ```
-
 
 ## Suggested Next Build Steps
 

@@ -80,7 +80,7 @@ The bootstrap script calls:
 Required inputs:
 
 - `AUTH_TOKEN`
-- `BACKEND_ADMIN_API_BASE` or `D1V_API_BASE`
+- `BACKEND_ADMIN_API_BASE` or `D1V_API_BASE` for `env:bootstrap`
 - optional `--template-repo` override
 
 ## Registry Model

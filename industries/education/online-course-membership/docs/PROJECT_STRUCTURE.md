@@ -124,9 +124,7 @@ remix-neon-auth-pay/
 ├── public/                             # Static assets
 ├── scripts/                            # Operational scripts
 │   ├── migrate.mjs                     # Direct database migration script
-│   ├── migrate_via_api.mjs             # API-based migration script
 │   ├── seed.mjs                        # Direct database seed script
-│   └── seed_via_api.mjs                # API-based seed script
 │
 ├── .env.example                        # Example environment variables
 ├── AGENTS.md                           # Rules and workflow guidance for automated agents
@@ -725,11 +723,7 @@ These are useful in environments where direct DB credentials are intentionally a
 
 ---
 
-#### `scripts/migrate_via_api.mjs`
-
 API-based migration workflow.
-
-#### `scripts/seed_via_api.mjs`
 
 API-based seed workflow.
 
@@ -809,8 +803,6 @@ Start with:
 
 - `app/db/schema.ts`
 - `drizzle/`
-- `scripts/migrate_via_api.mjs`
-- `scripts/seed_via_api.mjs`
 
 Good next additions for a production product:
 

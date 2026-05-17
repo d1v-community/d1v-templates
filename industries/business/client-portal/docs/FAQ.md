@@ -92,7 +92,7 @@ Example:
 ```bash
 pnpm install
 cp .env.example .env
-pnpm run db:migrate:api
+pnpm run db:migrate
 pnpm run dev
 ```
 
@@ -528,8 +528,8 @@ Neon is the recommended path because it aligns with the template defaults and do
 
 By default, use the **API-based workflow**:
 
-- `pnpm run db:migrate:api`
-- `pnpm run db:seed:api`
+- `pnpm run db:migrate`
+- `pnpm run db:seed`
 
 This is the preferred mode because it avoids unnecessarily exposing direct database credentials to local Node processes.
 
@@ -542,7 +542,6 @@ Only use direct DB scripts if you intentionally want that workflow.
 You typically need:
 
 - `PROJECT_ID`
-- `OPCODE_API_BASE` or `BACKEND_ADMIN_API_BASE`
 - `AUTH_TOKEN`
 
 Optional:

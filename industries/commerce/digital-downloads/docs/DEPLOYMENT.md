@@ -82,7 +82,7 @@ At minimum, configure:
 
 Prefer the API-based migration flow:
 
-- `pnpm run db:migrate:api`
+- `pnpm run db:migrate`
 
 Do not default to direct database migration scripts unless your workflow explicitly requires direct database access.
 
@@ -90,7 +90,7 @@ Do not default to direct database migration scripts unless your workflow explici
 
 If your generated app needs default data, run:
 
-- `pnpm run db:seed:api`
+- `pnpm run db:seed`
 
 ### Step 4: Build the Remix app
 
@@ -303,13 +303,12 @@ Preferred for automated deployments.
 
 Use:
 
-- `pnpm run db:migrate:api`
-- `pnpm run db:seed:api`
+- `pnpm run db:migrate`
+- `pnpm run db:seed`
 
 Required environment for API mode:
 
 - `PROJECT_ID`
-- `OPCODE_API_BASE` or `BACKEND_ADMIN_API_BASE`
 - `AUTH_TOKEN`
 
 Optional:
@@ -337,8 +336,8 @@ For your one-click deployment platform, prefer this sequence:
 1. provision `PROJECT_ID`
 2. provision backend admin/API endpoint
 3. provision auth token securely
-4. run `db:migrate:api`
-5. optionally run `db:seed:api`
+4. run `db:migrate`
+5. optionally run `db:seed`
 
 This keeps the workflow safer and more consistent with the template conventions.
 
