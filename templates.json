@@ -126,6 +126,35 @@
       ]
     },
     {
+      "id": "foundation-empty-only-env-template",
+      "kind": "foundation",
+      "name": "Empty Only Env Template",
+      "slug": "empty-only-env-template",
+      "category": "foundation",
+      "framework": "Docs",
+      "status": "published",
+      "baseTemplateId": null,
+      "repository": {
+        "url": "https://github.com/d1v-community/empty-only-env-template",
+        "ref": "main",
+        "path": ".",
+        "isTemplateRepository": true
+      },
+      "description": "Minimal template for creating a repository plus project-scoped environment variables and integration credentials without app starter code.",
+      "features": [
+        "env-only",
+        "integration-bootstrap",
+        "documentation"
+      ],
+      "tags": [
+        "env",
+        "integrations",
+        "documentation",
+        "minimal",
+        "foundation"
+      ]
+    },
+    {
       "id": "ai-assistant-saas",
       "kind": "industry-template",
       "name": "AI Assistant SaaS",

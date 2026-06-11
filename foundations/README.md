@@ -32,6 +32,11 @@ The current industry promotion phase standardizes new runnable templates on top 
   - Stack: static HTML
   - Best for: marketing pages, launch pages, and ultra-light prototypes
 
+- `empty-only-env-template`
+  - Type: published foundation
+  - Stack: documentation-only starter
+  - Best for: projects that want D1V-managed integrations and environment variables without bootstrapping app code
+
 ## Current Constraint
 
 These foundations are currently tracked in the root registry repository as nested git repositories. That is acceptable for the current publication model, but it is a deliberate constraint that should be considered before future layout consolidation work.
