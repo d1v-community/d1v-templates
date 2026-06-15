@@ -1,0 +1,9 @@
+{
+  "extends": ["taro/react"],
+  "ignorePatterns": ["babel.config.js", "postcss.config.js"],
+  "rules": {
+    "jsx-quotes": ["error", "prefer-double"],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}

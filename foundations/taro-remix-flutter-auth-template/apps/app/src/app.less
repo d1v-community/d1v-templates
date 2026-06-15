@@ -1,0 +1,66 @@
+/* Global H5/weapp typography normalization.
+ * Keep input font-size >= 16px to avoid iOS Safari zooming on focus.
+ */
+
+/* Taro H5 uses rem-based px transform + a runtime script to scale `html` font-size by viewport.
+ * For this project we prefer a stable visual scale on mobile (closer to desktop proportions).
+ */
+html {
+  /* NOTE: We intentionally override Taro's responsive rem root-size to keep a consistent,
+   * readable scale across desktop/mobile in H5. The rest of the UI uses rem (pxtransform),
+   * so bumping the root size scales the whole app.
+   */
+  font-size: 100px !important;
+}
+
+input,
+textarea {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+button {
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 999px;
+}
+
+button[size='mini'] {
+  font-size: 12px;
+  line-height: 18px;
+  border-radius: 12px;
+}
+
+/* Press feedback (Calm, soft, meaningful) */
+.fc-pressed {
+  transform: translateZ(0) scale(0.985);
+  filter: brightness(0.985);
+}
+
+@keyframes fc-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.fc-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-top-color: rgba(255, 255, 255, 0.95);
+  animation: fc-spin 0.8s linear infinite;
+}
+
+.fc-spinnerDark {
+  border-color: rgba(0, 0, 0, 0.18);
+  border-top-color: rgba(0, 0, 0, 0.55);
+}
+
+@keyframes fc-fade-up {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+.fc-appear {
+  animation: fc-fade-up 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}

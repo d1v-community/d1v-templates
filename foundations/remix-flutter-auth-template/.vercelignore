@@ -1,0 +1,10 @@
+apps/flutter_app
+**/build
+**/.dart_tool
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/Pods
+**/.symlinks
+**/DerivedData
+**/.idea
+**/.DS_Store
