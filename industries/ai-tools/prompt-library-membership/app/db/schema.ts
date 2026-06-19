@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, index } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, index, integer } from "drizzle-orm/pg-core";
 
 // Users table
 export const users = pgTable("users", {
@@ -118,6 +118,32 @@ export const memberUnlocks = pgTable("member_unlocks", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
+
+// UGC tables
+export const ugcReviews = pgTable("ugc_reviews", {
+  id: text("id").primaryKey(),
+  appUserId: text("app_user_id").notNull().references(() => users.id),
+  authorName: text("author_name").notNull(),
+  authorInitials: text("author_initials").notNull(),
+  contextKind: text("context_kind").notNull(),
+  contextSlug: text("context_slug").notNull(),
+  rating: integer("rating").notNull(),
+  body: text("body").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+export const ugcPackSubmissions = pgTable("ugc_pack_submissions", {
+  id: text("id").primaryKey(),
+  appUserId: text("app_user_id").notNull().references(() => users.id),
+  authorName: text("author_name").notNull(),
+  authorInitials: text("author_initials").notNull(),
+  name: text("name").notNull(),
+  workflow: text("workflow").notNull(),
+  content: text("content").notNull(),
+  status: text("status").notNull().default("pending"),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -127,3 +153,5 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type PromptPacksRecord = typeof promptPacks.$inferSelect;
 export type PromptEntriesRecord = typeof promptEntries.$inferSelect;
 export type MemberUnlocksRecord = typeof memberUnlocks.$inferSelect;
+export type UgcReview = typeof ugcReviews.$inferSelect;
+export type UgcPackSubmission = typeof ugcPackSubmissions.$inferSelect;

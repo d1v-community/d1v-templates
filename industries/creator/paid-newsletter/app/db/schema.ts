@@ -118,6 +118,57 @@ export const archiveReleases = pgTable("archive_releases", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
+
+// UGC: posts (newsletter issues are virtual posts; we materialize entries lazily
+// so foreign keys from ugc_comments and ugc_reactions stay valid).
+export const ugcPosts = pgTable(
+  "ugc_posts",
+  {
+    id: text("id").primaryKey(),
+    appUserId: text("app_user_id").references(() => users.id),
+    authorName: text("author_name").notNull(),
+    authorInitials: text("author_initials").notNull(),
+    body: text("body").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  },
+  (table) => ({
+    createdIdx: index("ugc_posts_created_idx").on(table.createdAt),
+  })
+);
+
+// UGC: comments on a post (or virtual issue post)
+export const ugcComments = pgTable(
+  "ugc_comments",
+  {
+    id: text("id").primaryKey(),
+    postId: text("post_id").notNull().references(() => ugcPosts.id, { onDelete: "cascade" }),
+    appUserId: text("app_user_id").references(() => users.id),
+    authorName: text("author_name").notNull(),
+    authorInitials: text("author_initials").notNull(),
+    body: text("body").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  },
+  (table) => ({
+    postIdx: index("ugc_comments_post_idx").on(table.postId),
+  })
+);
+
+// UGC: reactions (emoji) on a post (or virtual issue post)
+export const ugcReactions = pgTable(
+  "ugc_reactions",
+  {
+    id: text("id").primaryKey(),
+    postId: text("post_id").notNull().references(() => ugcPosts.id, { onDelete: "cascade" }),
+    appUserId: text("app_user_id").references(() => users.id),
+    emoji: text("emoji").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  },
+  (table) => ({
+    postIdx: index("ugc_reactions_post_idx").on(table.postId),
+    userEmojiIdx: index("ugc_reactions_user_emoji_idx").on(table.appUserId, table.emoji),
+  })
+);
+
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -127,3 +178,6 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type NewsletterIssuesRecord = typeof newsletterIssues.$inferSelect;
 export type SubscriberMembershipsRecord = typeof subscriberMemberships.$inferSelect;
 export type ArchiveReleasesRecord = typeof archiveReleases.$inferSelect;
+export type UgcPost = typeof ugcPosts.$inferSelect;
+export type UgcComment = typeof ugcComments.$inferSelect;
+export type UgcReaction = typeof ugcReactions.$inferSelect;

@@ -8,7 +8,7 @@ import {
 import { Link, useLoaderData, useNavigation } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { AppFooter } from "~/components/AppFooter";
-import { AppHeader } from "~/components/AppHeader";
+import { AppHeader, type AppHeaderUser } from '~/components/AppHeader';
 import { APP_TITLE } from "~/constants/app";
 import { SITE_CONFIG } from "~/constants/site";
 import {
@@ -278,7 +278,7 @@ export default function PricingPage() {
 	} = useLoaderData<typeof loader>();
 	const navigation = useNavigation();
 	const isSubmitting = navigation.state === "submitting";
-	const [clientUser, setClientUser] = useState(user);
+	const [clientUser, setClientUser] = useState<AppHeaderUser | null>(user);
 	const [checkoutLoading, setCheckoutLoading] = useState(false);
 	const [checkoutError, setCheckoutError] = useState("");
 	const featuredProduct =
@@ -326,14 +326,14 @@ export default function PricingPage() {
 			} catch {
 				// noop
 			}
-			window.location.href = "/login";
+			window.location.href = '/?signedOut=1';
 		}
 	};
 
 	const handleCheckout = async (productId: string) => {
 		const token = localStorage.getItem("auth-token");
 		if (!token) {
-			window.location.href = "/login";
+			window.location.href = '/?signedOut=1';
 			return;
 		}
 
@@ -413,7 +413,9 @@ export default function PricingPage() {
 							</span>
 						) : (
 							<Link
-								to="/login"
+								to={`/login?returnTo=${encodeURIComponent(
+									`/pricing${typeof window !== "undefined" ? window.location.search : ""}`
+								)}`}
 								className="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700 dark:bg-sky-500 dark:hover:bg-sky-600"
 							>
 								{SITE_CONFIG.pricing.loginButtonLabel}
@@ -509,7 +511,9 @@ export default function PricingPage() {
 										</button>
 									) : (
 										<Link
-											to="/login"
+											to={`/login?returnTo=${encodeURIComponent(
+												`/pricing${featuredProduct ? `?productId=${encodeURIComponent(featuredProduct.id)}` : ""}`
+											)}`}
 											className="inline-flex w-full items-center justify-center rounded-2xl bg-white px-4 py-3 text-sm font-medium text-slate-950 transition hover:bg-slate-100 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-800"
 										>
 											{SITE_CONFIG.pricing.loginButtonLabel}

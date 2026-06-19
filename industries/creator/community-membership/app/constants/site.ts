@@ -46,7 +46,8 @@ export type SiteConfig = {
     pricingLabel: string;
     loginLabel: string;
     assistantLabel?: string;
-  };
+  industryLinks?: Array<{ label: string; href: string }>;
+};
   footer: {
     line: string;
   };
@@ -59,6 +60,16 @@ export type SiteConfig = {
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
     proofPoints: string[];
+    industry: {
+      sceneKind: 'console' | 'catalog' | 'kanban' | 'metrics' | 'storefront' | 'countdown' | 'club' | 'issue' | 'cohort' | 'library' | 'schedule' | 'fitness';
+      tagline: string;
+      quickStats: Array<{ label: string; value: string }>;
+      heroTone?: 'command' | 'editorial' | 'operations' | 'academy' | 'service';
+      homeHref: string;
+      workspaceName: string;
+      greeting: string;
+      firstRunHint: Array<{ id: string; label: string; detail: string }>;
+    };
   };
   pricing: {
     badge: string;
@@ -192,7 +203,9 @@ export const SITE_CONFIG: SiteConfig = {
       "Passwordless member login",
       "Recurring checkout for private community plans",
       "Database base for perks, member tiers, and updates"
-    ]
+    ],
+    "industry": {"sceneKind": "club",
+      "tagline": "","quickStats":[{"label":"Active members","value":"412"},{"label":"Live rooms","value":"3"},{"label":"This week's drop","value":"Tue"}],"homeHref":"/rooms","workspaceName":"Member rooms","greeting":"Today's room is open. See who's in.","firstRunHint":[{"id":"find-room","label":"Find your first room","detail":"Pick a topic that matches your week."},{"id":"introduce","label":"Introduce yourself","detail":"Drop a one-line intro in orientation."},{"id":"set-rhythm","label":"Set your monthly rhythm","detail":"Block the recurring rooms on your calendar."},{"id":"share-perk","label":"Share a perk with a member","detail":"Pass along what helped you most."}]}
   },
   "pricing": {
     "badge": "Community access",

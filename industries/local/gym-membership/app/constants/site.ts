@@ -46,7 +46,8 @@ export type SiteConfig = {
     pricingLabel: string;
     loginLabel: string;
     assistantLabel?: string;
-  };
+  industryLinks?: Array<{ label: string; href: string }>;
+};
   footer: {
     line: string;
   };
@@ -59,6 +60,16 @@ export type SiteConfig = {
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
     proofPoints: string[];
+    industry: {
+      sceneKind: 'console' | 'catalog' | 'kanban' | 'metrics' | 'storefront' | 'countdown' | 'club' | 'issue' | 'cohort' | 'library' | 'schedule' | 'fitness';
+      tagline: string;
+      quickStats: Array<{ label: string; value: string }>;
+      heroTone?: 'command' | 'editorial' | 'operations' | 'academy' | 'service';
+      homeHref: string;
+      workspaceName: string;
+      greeting: string;
+      firstRunHint: Array<{ id: string; label: string; detail: string }>;
+    };
   };
   pricing: {
     badge: string;
@@ -192,7 +203,9 @@ export const SITE_CONFIG: SiteConfig = {
       "Member login for account and renewal access",
       "Hosted checkout for passes, memberships, or drop-ins",
       "Database foundation for plans, visits, and member status"
-    ]
+    ],
+    "industry": {"sceneKind": "fitness",
+      "tagline": "","quickStats":[{"label":"Plans","value":"3"},{"label":"Classes / wk","value":"42"},{"label":"Members","value":"880"}],"homeHref":"/plans","workspaceName":"Membership","greeting":"Your weekly plan is ready.","firstRunHint":[{"id":"pick-plan","label":"Pick the plan that matches your week","detail":"Off-peak vs. peak vs. all-access."},{"id":"reserve-class","label":"Reserve a class","detail":"Block your week with a recurring class."},{"id":"set-goal","label":"Set a weekly goal","detail":"Pick the number of sessions that feels real."},{"id":"check-progress","label":"Check this week's progress","detail":"See how many sessions are already on the books."}]}
   },
   "pricing": {
     "badge": "Membership pass",

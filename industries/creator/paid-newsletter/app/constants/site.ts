@@ -46,7 +46,8 @@ export type SiteConfig = {
     pricingLabel: string;
     loginLabel: string;
     assistantLabel?: string;
-  };
+  industryLinks?: Array<{ label: string; href: string }>;
+};
   footer: {
     line: string;
   };
@@ -59,6 +60,16 @@ export type SiteConfig = {
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
     proofPoints: string[];
+    industry: {
+      sceneKind: 'console' | 'catalog' | 'kanban' | 'metrics' | 'storefront' | 'countdown' | 'club' | 'issue' | 'cohort' | 'library' | 'schedule' | 'fitness';
+      tagline: string;
+      quickStats: Array<{ label: string; value: string }>;
+      heroTone?: 'command' | 'editorial' | 'operations' | 'academy' | 'service';
+      homeHref: string;
+      workspaceName: string;
+      greeting: string;
+      firstRunHint: Array<{ id: string; label: string; detail: string }>;
+    };
   };
   pricing: {
     badge: string;
@@ -192,7 +203,9 @@ export const SITE_CONFIG: SiteConfig = {
       "Subscriber login for archive access",
       "Checkout for premium subscription plans",
       "Database foundation for posts, issues, and member status"
-    ]
+    ],
+    "industry": {"sceneKind": "issue",
+      "tagline": "","quickStats":[{"label":"Latest issue","value":"#042"},{"label":"Subscribers","value":"5.6k"},{"label":"Archive depth","value":"4y"}],"homeHref":"/issues","workspaceName":"Newsletter archive","greeting":"Catch up on the latest issue.","firstRunHint":[{"id":"read-latest","label":"Read the latest issue","detail":"Catch up before the next one lands."},{"id":"browse-archive","label":"Browse the archive","detail":"Skim the best of the back catalog."},{"id":"set-cadence","label":"Set the digest cadence","detail":"Pick a rhythm that matches your reading window."},{"id":"share-issue","label":"Share an issue with a friend","detail":"Pass along the most useful one."}]}
   },
   "pricing": {
     "badge": "Premium issues",

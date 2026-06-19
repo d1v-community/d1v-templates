@@ -1,26 +1,40 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
-import { redirect } from '@remix-run/node';
-import { Link, useNavigate } from '@remix-run/react';
+import { json, redirect } from '@remix-run/node';
+import { Link, useLoaderData, useNavigate, useSearchParams } from '@remix-run/react';
 import { useEffect, useState } from 'react';
+
+import { SceneBackground } from '~/components/sections/SceneBackground';
 import { ThemeToggleButton } from '~/components/ThemeToggleButton';
 import { APP_TITLE } from '~/constants/app';
 import { SITE_CONFIG } from '~/constants/site';
 import { getSiteThemeClasses } from '~/constants/site-theme';
+import { getIndustryHome, safeReturnTo } from '~/lib/auth-flow';
 import { getUserFromRequest } from '~/utils/auth.server';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const user = await getUserFromRequest(request);
   if (user) {
-    return redirect('/');
+    const url = new URL(request.url);
+    const returnTo = safeReturnTo(url.searchParams.get('returnTo'), getIndustryHome());
+    return redirect(returnTo);
   }
-  return null;
+  const url = new URL(request.url);
+  const industryHome = getIndustryHome();
+  return json({
+    returnTo: safeReturnTo(url.searchParams.get('returnTo'), industryHome),
+    industryHome,
+  });
 }
+
+type LoaderData = ReturnType<typeof useLoaderData<typeof loader>>;
 
 export default function Login() {
   const navigate = useNavigate();
   const theme = getSiteThemeClasses(SITE_CONFIG.theme.family);
   const loginConfig = SITE_CONFIG.login;
-  const [step, setStep] = useState<'email' | 'code'>('email');
+  const { returnTo, industryHome } = useLoaderData<typeof loader>();
+  const [searchParams] = useSearchParams();
+  const [step, setStep] = useState<'email' | 'code' | 'done'>('email');
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
@@ -28,29 +42,29 @@ export default function Login() {
   const [devCode, setDevCode] = useState<string | null>(null);
   const [info, setInfo] = useState('');
 
+  // If we're already authenticated client-side (token in localStorage), bounce.
   useEffect(() => {
     try {
       const token = localStorage.getItem('auth-token');
       if (!token) return;
-
       fetch('/api/auth/me')
-        .then(response => response.json())
+        .then(response => (response.ok ? response.json() : null))
         .then(data => {
           if (data?.authenticated) {
-            navigate('/', { replace: true });
+            const target = safeReturnTo(searchParams.get('returnTo'), industryHome);
+            navigate(target, { replace: true });
           }
         })
-        .catch(() => {
-          // noop: 静默处理网络错误
-        });
+        .catch(() => undefined);
     } catch {
-      // noop: 静默处理初始化错误
+      // ignore
     }
-  }, [navigate]);
+  }, [navigate, searchParams, industryHome]);
 
   const handleSendCode = async (event: React.FormEvent) => {
     event.preventDefault();
     setError('');
+    setInfo('');
     setLoading(true);
 
     try {
@@ -59,20 +73,16 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
-
       const data = await response.json();
-      if (!data.success) {
-        throw new Error(data.error || 'Failed to send code');
-      }
+      if (!data.success) throw new Error(data.error || 'Failed to send code');
 
       if (data.dev && data.code) {
         setDevCode(String(data.code));
-        setInfo('Development mode');
+        setInfo('Development mode — code shown below.');
       } else {
         setDevCode(null);
-        setInfo('Code sent');
+        setInfo('Code sent. Check your inbox.');
       }
-
       setStep('code');
     } catch (sendError) {
       setError(sendError instanceof Error ? sendError.message : 'Failed to send code');
@@ -84,6 +94,7 @@ export default function Login() {
   const handleVerifyCode = async (event: React.FormEvent) => {
     event.preventDefault();
     setError('');
+    setInfo('');
     setLoading(true);
 
     try {
@@ -92,11 +103,8 @@ export default function Login() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, code }),
       });
-
       const data = await response.json();
-      if (!data.success) {
-        throw new Error(data.error || 'Invalid code');
-      }
+      if (!data.success) throw new Error(data.error || 'Invalid code');
 
       localStorage.setItem('auth-token', data.token);
 
@@ -114,10 +122,24 @@ export default function Login() {
       try {
         await fetch('/api/auth/sync-cookie', { method: 'POST' });
       } catch {
-        // noop: 静默处理同步 cookie 失败
+        // noop
       }
 
-      navigate('/');
+      // Brief "✓ Welcome back" state before redirect, so the transition doesn't feel like a jump.
+      setStep('done');
+      const target = safeReturnTo(searchParams.get('returnTo'), industryHome);
+      // First-time login: route through /?welcome=1 so _index can hand the user off to /onboarding.
+      let isFirstLogin = false;
+      try {
+        isFirstLogin = localStorage.getItem('d1v-first-login') === '1';
+        if (isFirstLogin) localStorage.removeItem('d1v-first-login');
+      } catch {
+        // ignore
+      }
+      const finalTarget = isFirstLogin && !returnTo ? `/?welcome=1` : target;
+      window.setTimeout(() => {
+        navigate(finalTarget, { replace: true });
+      }, 480);
     } catch (verifyError) {
       setError(verifyError instanceof Error ? verifyError.message : 'Verification failed');
     } finally {
@@ -133,25 +155,25 @@ export default function Login() {
     setDevCode(null);
   };
 
+  // First-time login hints go through onboarding; the entry flag is set right before we leave.
+  useEffect(() => {
+    if (step === 'done') return;
+    // If the URL didn't include a returnTo, the user is likely a first-time signup.
+    // We flag that here so the destination page can offer onboarding.
+    if (!returnTo) {
+      try { localStorage.setItem('d1v-first-login', '1'); } catch { /* ignore */ }
+    }
+  }, [step, returnTo]);
+
   return (
     <div className={`relative min-h-screen overflow-hidden ${theme.heroShell}`}>
-      <div className={`absolute inset-0 ${theme.heroGlow}`} />
-      <div className="absolute inset-x-0 top-0 h-36 bg-white/10 blur-3xl dark:bg-white/5" />
-      <div className="absolute -left-20 top-20 h-44 w-44 rounded-full bg-white/12 blur-3xl motion-safe:animate-pulse dark:bg-white/8" />
-      <div
-        className="absolute -right-10 bottom-16 h-52 w-52 rounded-full bg-white/12 blur-3xl motion-safe:animate-pulse dark:bg-white/8"
-        style={{ animationDelay: '1000ms' }}
-      />
+      <SceneBackground kind={SITE_CONFIG.home.industry.sceneKind} />
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4 py-2">
-          <Link
-            to="/"
-            className={`text-base font-semibold tracking-tight transition-colors ${theme.logo}`}
-          >
+          <Link to="/" className={`text-base font-semibold tracking-tight transition-colors ${theme.logo}`}>
             {APP_TITLE}
           </Link>
-
           <div className="flex items-center gap-4">
             <Link to="/pricing" className={`text-sm font-medium transition ${theme.navLink}`}>
               {SITE_CONFIG.navigation.pricingLabel}
@@ -163,67 +185,73 @@ export default function Login() {
         <div className="flex flex-1 items-center py-6 sm:py-8">
           <div className="grid w-full gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(320px,420px)] lg:items-end">
             <section className="max-w-3xl space-y-6">
-              <div
-                className={`inline-flex rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] ${theme.eyebrow}`}
-              >
+              <div className={`inline-flex rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] ${theme.eyebrow}`}>
                 {loginConfig.eyebrow}
               </div>
 
               <div className="space-y-3">
-                <p
-                  className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${theme.subEyebrow}`}
-                >
-                  {APP_TITLE}
+                <p className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${theme.subEyebrow}`}>
+                  {APP_TITLE} · {SITE_CONFIG.home.industry.workspaceName}
                 </p>
-                <h1 className="max-w-4xl text-4xl font-semibold tracking-[-0.06em] sm:text-5xl lg:text-[4.2rem] lg:leading-[0.94]">
-                  {loginConfig.title}
+                <h1 className="max-w-4xl text-4xl font-semibold tracking-[-0.06em] sm:text-5xl lg:text-[3.4rem] lg:leading-[1]">
+                  {returnTo ? 'Continue where you were.' : loginConfig.title}
                 </h1>
+                <p className={`max-w-xl text-sm leading-relaxed sm:text-base ${theme.body}`}>
+                  {returnTo
+                    ? 'Sign in to keep the workflow you started.'
+                    : SITE_CONFIG.home.industry.greeting}
+                </p>
               </div>
 
-              <div className="flex flex-wrap gap-3 text-[11px] font-semibold uppercase tracking-[0.22em]">
-                <span className={`rounded-full px-3 py-1.5 ${theme.metricShell}`}>
-                  {loginConfig.audience}
-                </span>
-                <span className={`rounded-full px-3 py-1.5 ${theme.metricShell}`}>
-                  {SITE_CONFIG.templateSurface.badge}
-                </span>
-              </div>
-
-              <div className="grid gap-3 sm:grid-cols-3">
-                {SITE_CONFIG.heroMetrics.slice(0, 3).map(metric => (
-                  <div
-                    key={metric.label}
-                    className={`rounded-[1.6rem] p-4 transition duration-300 motion-safe:hover:-translate-y-1 ${theme.metricShell}`}
+              <ul className="grid gap-2 sm:grid-cols-2">
+                {loginConfig.trustPoints.map(point => (
+                  <li
+                    key={point}
+                    className={`flex items-start gap-2 rounded-2xl px-3 py-2.5 text-[13px] leading-relaxed ${theme.metricShell}`}
                   >
-                    <p className="text-[11px] font-medium uppercase tracking-[0.22em] opacity-60">
-                      {metric.label}
-                    </p>
-                    <p
-                      className={`mt-3 text-2xl font-semibold tracking-[-0.05em] ${theme.metricValue}`}
-                    >
-                      {metric.value}
-                    </p>
-                  </div>
+                    <span className={`mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full text-[10px] font-semibold ${theme.eyebrow}`}>
+                      ✓
+                    </span>
+                    <span>{point}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </section>
 
-            <section className={`rounded-[2rem] p-6 sm:p-7 ${theme.showcaseShell}`}>
+            <section className={`relative rounded-[2rem] p-6 sm:p-7 ${theme.showcaseShell}`}>
               <div className="space-y-2">
-                <div
-                  className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${theme.eyebrow}`}
-                >
+                <div className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${theme.eyebrow}`}>
                   Secure login
                 </div>
-                <h2 className="text-2xl font-semibold tracking-[-0.04em]">Continue</h2>
+                <h2 className="text-2xl font-semibold tracking-[-0.04em]">
+                  {step === 'done' ? 'Welcome back' : 'Continue'}
+                </h2>
                 <p className={`text-sm uppercase tracking-[0.2em] ${theme.body}`}>
-                  {step === 'email' ? 'Email' : 'Verification code'}
+                  {step === 'email'
+                    ? 'Email'
+                    : step === 'code'
+                      ? 'Verification code'
+                      : 'Signing you in…'}
                 </p>
               </div>
 
               {error ? (
-                <div className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300">
+                <div
+                  role="alert"
+                  className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300 motion-safe:animate-[shake_0.3s_ease-in-out]"
+                >
                   {error}
+                </div>
+              ) : null}
+
+              {step === 'done' ? (
+                <div className="mt-6 flex flex-col items-center gap-3 py-6 text-center">
+                  <span className={`inline-flex h-12 w-12 items-center justify-center rounded-full text-lg font-semibold ${theme.eyebrow}`}>
+                    ✓
+                  </span>
+                  <p className={`text-sm leading-relaxed ${theme.sectionText}`}>
+                    {`Taking you back${returnTo ? '' : ` to ${SITE_CONFIG.home.industry.workspaceName.toLowerCase()}`}…`}
+                  </p>
                 </div>
               ) : null}
 
@@ -242,6 +270,7 @@ export default function Login() {
                       value={email}
                       onChange={event => setEmail(event.target.value)}
                       required
+                      autoFocus
                       placeholder={loginConfig.emailPlaceholder}
                       className={`w-full rounded-2xl border px-4 py-3 text-base outline-none transition ${theme.assistantInput}`}
                     />
@@ -252,15 +281,17 @@ export default function Login() {
                     disabled={loading}
                     className={`inline-flex w-full items-center justify-center rounded-full px-4 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 ${theme.assistantAction}`}
                   >
-                    {loading ? 'Sending...' : 'Send code'}
+                    {loading ? 'Sending…' : 'Send code'}
                   </button>
+
+                  <p className={`text-[12px] leading-relaxed ${theme.body}`}>{loginConfig.emailHint}</p>
                 </form>
-              ) : (
+              ) : null}
+
+              {step === 'code' ? (
                 <form onSubmit={handleVerifyCode} className="mt-6 space-y-4">
                   <div className={`rounded-[1.5rem] p-4 ${theme.metricShell}`}>
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] opacity-60">
-                      Inbox
-                    </p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] opacity-60">Inbox</p>
                     <p className="mt-2 text-sm font-semibold">{email}</p>
                   </div>
 
@@ -289,6 +320,7 @@ export default function Login() {
                       value={code}
                       onChange={event => setCode(event.target.value)}
                       required
+                      autoFocus
                       placeholder="123456"
                       maxLength={6}
                       className={`w-full rounded-2xl border px-4 py-3 text-center font-mono text-2xl tracking-[0.45em] outline-none transition ${theme.assistantInput}`}
@@ -308,7 +340,7 @@ export default function Login() {
                       disabled={loading}
                       className={`inline-flex items-center justify-center rounded-full px-4 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 ${theme.assistantAction}`}
                     >
-                      {loading ? 'Verifying...' : 'Verify'}
+                      {loading ? 'Verifying…' : 'Verify'}
                     </button>
                   </div>
 
@@ -320,15 +352,20 @@ export default function Login() {
                     Send again
                   </button>
                 </form>
-              )}
+              ) : null}
 
               <div className="mt-6 flex flex-wrap items-center gap-4 text-sm">
                 <Link to="/" className={`transition ${theme.navLink}`}>
                   Home
                 </Link>
                 <Link to="/pricing" className={`transition ${theme.navLink}`}>
-                  Pricing
+                  {SITE_CONFIG.navigation.pricingLabel}
                 </Link>
+                {returnTo ? (
+                  <span className={`ml-auto inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] ${theme.subEyebrow}`}>
+                    <span aria-hidden>↩</span> returning to {returnTo}
+                  </span>
+                ) : null}
               </div>
             </section>
           </div>

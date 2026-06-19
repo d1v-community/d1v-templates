@@ -1,3 +1,73 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ---------------------------------------------------------------------------
+   UGC Interaction Animations
+   - All animations are gated behind `motion-safe:` in the components, so users
+     with `prefers-reduced-motion: reduce` get the instant-render fallback.
+   - Durations are kept short (≤400ms) to feel responsive, not theatrical.
+   --------------------------------------------------------------------------- */
+
+@layer base {
+  /* Soft pulse for "success" feedback. Used by Composer when post succeeds. */
+  @keyframes ugc-success-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); border-color: rgba(16, 185, 129, 0.4); }
+    30% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.18); border-color: rgba(16, 185, 129, 0.6); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); border-color: rgba(16, 185, 129, 0.4); }
+  }
+
+  /* Stagger entrance for list items. Each card slides up + fades in. */
+  @keyframes ugc-slide-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Soft fade-in for first-paint of any element (e.g. empty states). */
+  @keyframes ugc-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Toast slide-in from top. */
+  @keyframes ugc-toast-in {
+    from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Reaction button "pop" — quick scale up + back. Triggers on click. */
+  @keyframes ugc-pulse-soft {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+  }
+
+  /* Star "pop" — bigger bounce for ratings. */
+  @keyframes ugc-scale-pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+
+  /* Count "bounce" — for the number after a reaction click. */
+  @keyframes ugc-count-bounce {
+    0% { transform: translateY(0); opacity: 1; }
+    40% { transform: translateY(-3px); opacity: 0.6; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Spinner — used by submit buttons while submitting. */
+  @keyframes ugc-spin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+/* Honor OS-level reduce-motion for users who set it. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

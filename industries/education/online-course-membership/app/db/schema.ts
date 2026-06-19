@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, index } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, index, integer } from "drizzle-orm/pg-core";
 
 // Users table
 export const users = pgTable("users", {
@@ -118,6 +118,42 @@ export const lessonProgress = pgTable("lesson_progress", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
+
+// UGC tables
+export const ugcNotes = pgTable("ugc_notes", {
+  id: text("id").primaryKey(),
+  courseSlug: text("course_slug").notNull(),
+  lessonId: text("lesson_id").notNull(),
+  appUserId: text("app_user_id").notNull().references(() => users.id),
+  authorName: text("author_name").notNull(),
+  authorInitials: text("author_initials").notNull(),
+  body: text("body").notNull(),
+  lastEdited: text("last_edited").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+export const ugcQuestions = pgTable("ugc_questions", {
+  id: text("id").primaryKey(),
+  courseSlug: text("course_slug").notNull(),
+  lessonId: text("lesson_id"),
+  askerName: text("asker_name").notNull(),
+  askerInitials: text("asker_initials").notNull(),
+  body: text("body").notNull(),
+  answerCount: integer("answer_count").notNull().default(0),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
+export const ugcAnswers = pgTable("ugc_answers", {
+  id: text("id").primaryKey(),
+  questionId: text("question_id").notNull().references(() => ugcQuestions.id, { onDelete: "cascade" }),
+  authorName: text("author_name").notNull(),
+  authorInitials: text("author_initials").notNull(),
+  body: text("body").notNull(),
+  upvotes: integer("upvotes").notNull().default(0),
+  isAccepted: text("is_accepted").notNull().default("false"),
+  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+});
+
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -127,3 +163,6 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type LearningCoursesRecord = typeof learningCourses.$inferSelect;
 export type CourseModulesRecord = typeof courseModules.$inferSelect;
 export type LessonProgressRecord = typeof lessonProgress.$inferSelect;
+export type UgcNote = typeof ugcNotes.$inferSelect;
+export type UgcQuestion = typeof ugcQuestions.$inferSelect;
+export type UgcAnswer = typeof ugcAnswers.$inferSelect;

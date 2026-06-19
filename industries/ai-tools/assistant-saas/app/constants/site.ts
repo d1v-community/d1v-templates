@@ -46,6 +46,10 @@ export type SiteConfig = {
     pricingLabel: string;
     loginLabel: string;
     assistantLabel?: string;
+    industryLinks?: Array<{
+      label: string;
+      href: string;
+    }>;
   };
   footer: {
     line: string;
@@ -59,6 +63,22 @@ export type SiteConfig = {
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
     proofPoints: string[];
+    industry: {
+    sceneKind: 'console' | 'catalog' | 'kanban' | 'metrics' | 'storefront' | 'countdown' | 'club' | 'issue' | 'cohort' | 'library' | 'schedule' | 'fitness';
+    tagline: string;
+    quickStats: Array<{ label: string; value: string }>;
+    heroTone?: 'command' | 'editorial' | 'operations' | 'academy' | 'service';
+    homeHref: string;
+    workspaceName: string;
+    greeting: string;
+    firstRunHint: Array<{ id: string; label: string; detail: string }>;
+  };
+  };
+  workspace: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    tabs: Array<{ label: string; to: string; end?: boolean; badgeHint?: string }>;
   };
   pricing: {
     badge: string;
@@ -176,7 +196,10 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Assistant"
+    "assistantLabel": "Assistant",
+    "industryLinks": [
+      { "label": "Console", "href": "/console" }
+    ]
   },
   "footer": {
     "line": "Built with D1V"
@@ -185,16 +208,31 @@ export const SITE_CONFIG: SiteConfig = {
     "badge": "AI tools",
     "headline": "Charge for your assistant before you scale your agent stack.",
     "description": "SignalDesk AI is a payment-ready SaaS shell for private assistants, premium copilots, and member-only workflows.",
-    "primaryCtaLabel": "Open pricing",
-    "primaryCtaHref": "/pricing",
-    "secondaryCtaLabel": "Login",
-    "secondaryCtaHref": "/login",
+    "primaryCtaLabel": "Open console",
+    "primaryCtaHref": "/console",
+    "secondaryCtaLabel": "View threads",
+    "secondaryCtaHref": "/threads",
     "proofPoints": [
       "Email login for paid assistant accounts",
       "Hosted checkout for monthly or annual access",
       "Neon-backed schema layer for threads, credits, and seats"
-    ]
+    ],
+    "industry": {
+      "sceneKind": "console",
+      "tagline": "Live command surface for paid copilots",
+      "heroTone": "command",
+      "quickStats": [
+        { "label": "Active threads", "value": "128" },
+        { "label": "Seats covered", "value": "41" },
+        { "label": "Avg first response", "value": "1.8s" }
+      ],
+      "homeHref": "/console",
+      "workspaceName": "Operator console",
+      "greeting": "Back to your threads and prompts.",
+      "firstRunHint": [{"id":"build-playbook","label":"Build your first thread playbook","detail":"Sequence 3 starter prompts and a credit policy."},{"id":"wire-billing","label":"Wire billing to seats & credits","detail":"Map checkout success to workspace entitlements."},{"id":"set-policy","label":"Set the seat + credit policy","detail":"Decide caps and escalation rules before launch."},{"id":"prep-launch","label":"Prep a launch runbook","detail":"Outline onboarding, support, and renewal scripts."}]
+    }
   },
+  "workspace": {"eyebrow":"Operator console","title":"Live signal for the assistant workspace.","description":"Burn, seats, and prompt activity in one surface.","tabs":[{"label":"Overview","to":"/console","end":true},{"label":"Threads","to":"/console/threads"},{"label":"Prompts","to":"/console/prompts"},{"label":"Billing","to":"/console/billing"}]},
   "pricing": {
     "badge": "Pro assistant",
     "headline": "Unlock the assistant for",

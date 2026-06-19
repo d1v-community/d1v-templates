@@ -46,7 +46,8 @@ export type SiteConfig = {
     pricingLabel: string;
     loginLabel: string;
     assistantLabel?: string;
-  };
+  industryLinks?: Array<{ label: string; href: string }>;
+};
   footer: {
     line: string;
   };
@@ -59,6 +60,16 @@ export type SiteConfig = {
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
     proofPoints: string[];
+    industry: {
+      sceneKind: 'console' | 'catalog' | 'kanban' | 'metrics' | 'storefront' | 'countdown' | 'club' | 'issue' | 'cohort' | 'library' | 'schedule' | 'fitness';
+      tagline: string;
+      quickStats: Array<{ label: string; value: string }>;
+      heroTone?: 'command' | 'editorial' | 'operations' | 'academy' | 'service';
+      homeHref: string;
+      workspaceName: string;
+      greeting: string;
+      firstRunHint: Array<{ id: string; label: string; detail: string }>;
+    };
   };
   pricing: {
     badge: string;
@@ -192,7 +203,9 @@ export const SITE_CONFIG: SiteConfig = {
       "Passwordless staff login out of the box",
       "Neon-backed data layer for pipeline and KPI models",
       "Hosted checkout for paid admin seats or retainers"
-    ]
+    ],
+    "industry": {"sceneKind": "metrics",
+      "tagline": "","quickStats":[{"label":"Pipeline","value":"$184k"},{"label":"Active queues","value":"9"},{"label":"On-call alerts","value":"0"}],"homeHref":"/dashboard","workspaceName":"Operator shell","greeting":"Live numbers for the team are waiting.","firstRunHint":[{"id":"pin-kpi","label":"Pin the KPIs you watch","detail":"Start with pipeline, queues, and conversion."},{"id":"wire-report","label":"Wire a report to the dashboard","detail":"Connect one weekly review first."},{"id":"set-alert","label":"Set an on-call alert","detail":"Pick the threshold that should page a human."},{"id":"draft-brief","label":"Draft the week-one brief","detail":"Open the workspace with a written plan."}]}
   },
   "pricing": {
     "badge": "Admin seats",

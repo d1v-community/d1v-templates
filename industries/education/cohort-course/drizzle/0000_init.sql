@@ -111,3 +111,30 @@ create table if not exists cohort_enrollments (
   created_at timestamp not null default now(),
   updated_at timestamp not null default now()
 );
+
+-- UGC tables
+create table if not exists ugc_submissions (
+  id text primary key,
+  week_n integer not null,
+  app_user_id text not null references users(id),
+  author_name text not null,
+  author_initials text not null,
+  body text not null,
+  status text not null default 'draft',
+  review_count integer not null default 0,
+  created_at timestamp not null default now(),
+  updated_at timestamp not null default now()
+);
+create index if not exists ugc_submissions_week_idx on ugc_submissions(week_n);;
+
+-- UGC tables
+create table if not exists ugc_peer_reviews (
+  id text primary key,
+  submission_id text not null references ugc_submissions(id) on delete cascade,
+  reviewer_name text not null,
+  reviewer_initials text not null,
+  rating integer not null,
+  body text not null,
+  created_at timestamp not null default now()
+);
+create index if not exists ugc_peer_reviews_submission_idx on ugc_peer_reviews(submission_id);;

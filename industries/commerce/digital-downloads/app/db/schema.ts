@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, index } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, index, integer } from "drizzle-orm/pg-core";
 
 // Users table
 export const users = pgTable("users", {
@@ -118,6 +118,62 @@ export const downloadEntitlements = pgTable("download_entitlements", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
+
+// UGC: bundle reviews
+export const ugcReviews = pgTable(
+  "ugc_reviews",
+  {
+    id: text("id").primaryKey(),
+    appUserId: text("app_user_id").references(() => users.id),
+    authorName: text("author_name").notNull(),
+    authorInitials: text("author_initials").notNull(),
+    contextKind: text("context_kind").notNull(),
+    contextSlug: text("context_slug").notNull(),
+    rating: integer("rating").notNull(),
+    body: text("body").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  },
+  (table) => ({
+    contextIdx: index("ugc_reviews_context_idx").on(table.contextKind, table.contextSlug),
+  })
+);
+
+// UGC: bundle Q&A questions
+export const ugcQuestions = pgTable(
+  "ugc_questions",
+  {
+    id: text("id").primaryKey(),
+    courseSlug: text("course_slug").notNull(),
+    lessonId: text("lesson_id"),
+    askerName: text("asker_name").notNull(),
+    askerInitials: text("asker_initials").notNull(),
+    body: text("body").notNull(),
+    answerCount: integer("answer_count").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  },
+  (table) => ({
+    courseIdx: index("ugc_questions_course_idx").on(table.courseSlug),
+  })
+);
+
+// UGC: answers to bundle questions
+export const ugcAnswers = pgTable(
+  "ugc_answers",
+  {
+    id: text("id").primaryKey(),
+    questionId: text("question_id").notNull().references(() => ugcQuestions.id, { onDelete: "cascade" }),
+    authorName: text("author_name").notNull(),
+    authorInitials: text("author_initials").notNull(),
+    body: text("body").notNull(),
+    upvotes: integer("upvotes").notNull().default(0),
+    isAccepted: text("is_accepted").notNull().default("false"),
+    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  },
+  (table) => ({
+    questionIdx: index("ugc_answers_question_idx").on(table.questionId),
+  })
+);
+
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -127,3 +183,6 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type DownloadProductsRecord = typeof downloadProducts.$inferSelect;
 export type DownloadOrdersRecord = typeof downloadOrders.$inferSelect;
 export type DownloadEntitlementsRecord = typeof downloadEntitlements.$inferSelect;
+export type UgcReview = typeof ugcReviews.$inferSelect;
+export type UgcQuestion = typeof ugcQuestions.$inferSelect;
+export type UgcAnswer = typeof ugcAnswers.$inferSelect;

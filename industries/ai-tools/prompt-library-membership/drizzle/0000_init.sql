@@ -111,3 +111,30 @@ create table if not exists member_unlocks (
   created_at timestamp not null default now(),
   updated_at timestamp not null default now()
 );
+
+-- UGC tables
+create table if not exists ugc_reviews (
+  id text primary key,
+  app_user_id text not null references users(id),
+  author_name text not null,
+  author_initials text not null,
+  context_kind text not null,
+  context_slug text not null,
+  rating integer not null,
+  body text not null,
+  created_at timestamp not null default now()
+);
+create index if not exists ugc_reviews_context_idx on ugc_reviews(context_kind, context_slug);;
+
+-- UGC tables
+create table if not exists ugc_pack_submissions (
+  id text primary key,
+  app_user_id text not null references users(id),
+  author_name text not null,
+  author_initials text not null,
+  name text not null,
+  workflow text not null,
+  content text not null,
+  status text not null default 'pending',
+  created_at timestamp not null default now()
+);;

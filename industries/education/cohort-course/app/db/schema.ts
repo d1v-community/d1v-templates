@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, index } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, index, integer } from "drizzle-orm/pg-core";
 
 // Users table
 export const users = pgTable("users", {
@@ -118,6 +118,44 @@ export const cohortEnrollments = pgTable("cohort_enrollments", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
+
+// UGC: weekly submissions
+export const ugcSubmissions = pgTable(
+  "ugc_submissions",
+  {
+    id: text("id").primaryKey(),
+    weekN: integer("week_n").notNull(),
+    appUserId: text("app_user_id").notNull().references(() => users.id),
+    authorName: text("author_name").notNull(),
+    authorInitials: text("author_initials").notNull(),
+    body: text("body").notNull(),
+    status: text("status").notNull().default("draft"),
+    reviewCount: integer("review_count").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
+  },
+  (table) => ({
+    weekIdx: index("ugc_submissions_week_idx").on(table.weekN),
+  })
+);
+
+// UGC: peer reviews
+export const ugcPeerReviews = pgTable(
+  "ugc_peer_reviews",
+  {
+    id: text("id").primaryKey(),
+    submissionId: text("submission_id").notNull().references(() => ugcSubmissions.id, { onDelete: "cascade" }),
+    reviewerName: text("reviewer_name").notNull(),
+    reviewerInitials: text("reviewer_initials").notNull(),
+    rating: integer("rating").notNull(),
+    body: text("body").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
+  },
+  (table) => ({
+    submissionIdx: index("ugc_peer_reviews_submission_idx").on(table.submissionId),
+  })
+);
+
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -127,3 +165,5 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type CourseCohortsRecord = typeof courseCohorts.$inferSelect;
 export type CohortLessonsRecord = typeof cohortLessons.$inferSelect;
 export type CohortEnrollmentsRecord = typeof cohortEnrollments.$inferSelect;
+export type UgcSubmission = typeof ugcSubmissions.$inferSelect;
+export type UgcPeerReview = typeof ugcPeerReviews.$inferSelect;

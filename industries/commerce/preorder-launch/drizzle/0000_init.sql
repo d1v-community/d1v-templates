@@ -111,3 +111,29 @@ create table if not exists shipment_updates (
   created_at timestamp not null default now(),
   updated_at timestamp not null default now()
 );
+
+-- UGC tables
+create table if not exists ugc_reviews (
+  id text primary key,
+  app_user_id text not null references users(id),
+  author_name text not null,
+  author_initials text not null,
+  context_kind text not null,
+  context_slug text not null,
+  rating integer not null,
+  body text not null,
+  created_at timestamp not null default now()
+);
+create index if not exists ugc_reviews_context_idx on ugc_reviews(context_kind, context_slug);;
+
+-- UGC tables
+create table if not exists ugc_shares (
+  id text primary key,
+  drop_id text not null,
+  app_user_id text not null references users(id),
+  author_name text not null,
+  author_initials text not null,
+  channel text not null,
+  created_at timestamp not null default now()
+);
+create index if not exists ugc_shares_drop_idx on ugc_shares(drop_id);;
