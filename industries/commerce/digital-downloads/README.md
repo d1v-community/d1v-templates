@@ -1,49 +1,45 @@
-# Digital Downloads
+<div align="center">
 
-Digital download starter with auth, Neon data, and hosted checkout.
+<img src="https://img.shields.io/badge/category-commerce-f59e0b?style=for-the-badge&logo=shopify&logoColor=white" alt="category"/>
+<img src="https://img.shields.io/badge/foundation-remix--neon--auth--pay-1e1b4b?style=for-the-badge&logo=remix&logoColor=white" alt="foundation"/>
+<img src="https://img.shields.io/badge/storefront-downloads-facc15?style=for-the-badge" alt="storefront"/>
 
-## What You Start With
+<br/><br/>
 
-- Remix + Tailwind application based on `remix-neon-auth-pay`
-- Passwordless email login
-- Neon / PostgreSQL + Drizzle ORM
-- Hosted checkout and pricing page
-- Live database snapshot route at `/api/template/snapshot`
-- Local bootstrap script for pulling project env vars into `.env`
+# 🎁 DownloadPort
 
-## Product Direction
+<h3>Stage digital goods like a premium catalog, then deliver them cleanly after checkout —<br/>the product page matters, but the download experience closes the trust loop.</h3>
 
-- App title: `DownloadPort`
-- Category: `commerce`
-- Repository template path: `d1v-community/digital-downloads-template`
-- Default prompt: `Create a digital downloads storefront with database support, member login, and hosted checkout.`
+<br/>
 
-## Design Direction
+[**Install**](#-install) · [**Catalog sections**](#-catalog-sections) · [**Editorial direction**](#-editorial-direction) · [**Repository**](https://github.com/d1v-community/digital-downloads-template)
 
-- Visual thesis: An editorial product drop surface with strong merchandising, tighter copy, and entitlement-aware fulfillment cues.
-- Content plan:
-  - Hero: the offer and why it deserves attention now
-  - Support: product framing, packaging, and drop mechanics
-  - Detail: what the buyer gets after checkout
-  - Final CTA: convert with one clear purchase path
-- Interaction thesis:
-  - The first viewport should feel like a campaign poster with utility underneath.
-  - Merchandising details should read like product direction, not filler bullets.
-  - Fulfillment language should reassure the buyer immediately.
+</div>
 
-## Product Modules
+---
 
-- Showcase headline: Stage digital goods like a premium catalog, then deliver them cleanly after checkout.
-- Workflow headline: The product page matters, but the download experience closes the trust loop.
-- Starter modules:
-  - Flagship bundle: Use one dominant product story to anchor the page.
-  - What is included: Spell out file types, templates, and bonus assets clearly.
-  - Usage rights: Make licensing simple to scan before purchase.
-  - Download locker: Give buyers a clean history of purchases and files.
-  - Update feed: Ship revised files or new bonus assets without manual support.
-  - Cross-sell logic: Suggest bundles or memberships after a successful purchase.
+<br/>
 
-## Local Setup
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://images.unsplash.com/photo-1561070791-2526d30994b8?w=1600&q=80&auto=format&fit=crop"/>
+    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b8?w=1600&q=80&auto=format&fit=crop" alt="Premium digital product drop" width="100%" style="border-radius: 12px; box-shadow: 0 24px 48px -12px rgba(250, 204, 21, 0.35);"/>
+  </picture>
+</p>
+
+<p align="center"><sub><i>🎨 The first viewport should feel like a campaign poster with utility underneath.</i></sub></p>
+
+<br/>
+
+## ◆ What this template is
+
+A **digital downloads storefront** built on `remix-neon-auth-pay`. The landing page reads like an editorial product drop, not a generic pricing screen: one flagship bundle, clear packaging, and a download locker waiting after checkout.
+
+> **Merchandising details should read like product direction, not filler bullets.** The buyer wants a reason to commit, not a feature checklist.
+
+<br/>
+
+## ▶ Install
 
 ```bash
 pnpm install
@@ -53,16 +49,96 @@ pnpm run db:seed
 pnpm run dev
 ```
 
-You can also export env vars into this repository manually:
+<br/>
 
-```bash
-AUTH_TOKEN=your_token \
-node scripts/bootstrap-local-env.mjs --template-repo d1v-community/digital-downloads-template --write-path .env
+## 🎁 Catalog sections
+
+<table>
+<tr>
+<td width="33%" valign="top" align="center">
+
+### 🏆
+**Flagship bundle**
+Use one dominant product story to anchor the page. The bundle is the headline, not the price.
+
+</td>
+<td width="33%" valign="top" align="center">
+
+### 📦
+**What is included**
+Spell out file types, templates, and bonus assets clearly. Surprise is for gifts, not for orders.
+
+</td>
+<td width="33%" valign="top" align="center">
+
+### 📜
+**Usage rights**
+Make licensing simple to scan before purchase. Ambiguity is the most expensive support ticket.
+
+</td>
+</tr>
+<tr>
+<td width="33%" valign="top" align="center">
+
+### 🔐
+**Download locker**
+Give buyers a clean history of purchases and files. The "where is my file?" moment should not exist.
+
+</td>
+<td width="33%" valign="top" align="center">
+
+### 🆕
+**Update feed**
+Ship revised files or new bonus assets without manual support. Versioning belongs to the seller, not the buyer.
+
+</td>
+<td width="33%" valign="top" align="center">
+
+### 🔁
+**Cross-sell logic**
+Suggest bundles or memberships after a successful purchase. The next offer is part of the same order, not a popup.
+
+</td>
+</tr>
+</table>
+
+<br/>
+
+## ◆ Editorial direction
+
+> **Visual thesis:** An editorial product drop surface with strong merchandising, tighter copy, and entitlement-aware fulfillment cues. Fulfillment language should reassure the buyer immediately.
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                                                          │
+│  CAMPAIGN POSTER     →     PRODUCT COPY     →    FILES   │
+│  (hero)                   (what + rights)       (locker) │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
 ```
 
-## Suggested Next Build Steps
+<br/>
 
-- Replace the starter landing sections with the real digital downloads workflow
-- Extend the seeded industry schema with your production entities
-- Map successful checkout to entitlements, seats, bookings, or premium access
-- Add success-state fulfillment beyond the hosted checkout return pages
+## ◆ What's already wired
+
+```
+✔ passwordless email auth         ✔ hosted checkout + /pricing
+✔ Neon / PostgreSQL + Drizzle      ✔ live snapshot at /api/template/snapshot
+✔ local env bootstrap script       ✔ download-aware copy in site.ts
+```
+
+<br/>
+
+## ◆ Make it yours
+
+- [ ] Replace the starter bundle with your real flagship product
+- [ ] Map checkout success to a per-buyer download entitlement
+- [ ] Build the download locker: history, files, and re-download links
+- [ ] Add an update feed so revised files reach previous buyers
+- [ ] Define cross-sell rules for bundles and membership upsell
+
+---
+
+<div align="center">
+  <sub>DownloadPort · digital downloads starter · <code>remix-neon-auth-pay</code> foundation</sub>
+</div>
