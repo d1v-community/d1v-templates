@@ -1,45 +1,50 @@
-<div align="center">
+# Online Course Membership
 
-<img src="https://img.shields.io/badge/category-education-0ea5e9?style=for-the-badge&logo=udemy&logoColor=white" alt="category"/>
-<img src="https://img.shields.io/badge/foundation-remix--neon--auth--pay-0c1e3e?style=for-the-badge&logo=remix&logoColor=white" alt="foundation"/>
-<img src="https://img.shields.io/badge/format-membership%20library-38bdf8?style=for-the-badge" alt="format"/>
+Course membership starter with auth, billing, and Neon-backed student progress data.
 
-<br/><br/>
+## What You Start With
 
-# 📘 LessonLoop
+- Remix + Tailwind application based on `remix-neon-auth-pay`
+- Passwordless email login
+- Neon / PostgreSQL + Drizzle ORM
+- Hosted checkout and pricing page
+- Live database snapshot route at `/api/template/snapshot`
+- Optional on-page AI concierge powered by `D1V_PAI_*`
+- Local bootstrap script for pulling project env vars into `.env`
 
-<h3>Package lessons, progress, and member access like a real learning product —<br/>build for progression, not just content storage.</h3>
+## Product Direction
 
-<br/>
+- App title: `LessonLoop`
+- Category: `education`
+- Repository template path: `d1v-community/online-course-membership-template`
+- Default prompt: `Create an online course membership product with database support and hosted checkout.`
 
-[**Install**](#-install) · [**Library sections**](#-library-sections) · [**Learning principles**](#-learning-principles) · [**Repository**](https://github.com/d1v-community/online-course-membership-template)
+## Design Direction
 
-</div>
+- Visual thesis: A structured learning experience that emphasizes progression, schedules, and instructional trust.
+- Content plan:
+  - Hero: outcome, cadence, and access path
+  - Support: curriculum, milestones, and learner guidance
+  - Detail: show how the student moves through the product
+  - Final CTA: enroll, log in, or review pricing
+- Interaction thesis:
+  - Progress surfaces should feel calm and instructional.
+  - Sequence and milestones should be more visible than visual effects.
+  - Trust comes from structure and clarity, not hype.
 
----
+## Product Modules
 
-<br/>
+- Showcase headline: Package lessons, progress, and member access like a real learning product.
+- Workflow headline: Build for progression, not just content storage.
+- Starter modules:
+  - Learning tracks: Group lessons by outcome, difficulty, or role.
+  - Progress state: Persist watched, completed, and next-up lesson states.
+  - Resource shelf: Bundle worksheets, links, or downloads into each track.
+  - Core library: Use the archive as the main reason to subscribe.
+  - New lesson drops: Signal freshness with a predictable release rhythm.
+  - Upgrade ladder: Add coaching or cohort layers later without rebuilding the foundation.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80&auto=format&fit=crop"/>
-    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&q=80&auto=format&fit=crop" alt="Online learning library" width="100%" style="border-radius: 12px; box-shadow: 0 24px 48px -12px rgba(56, 189, 248, 0.30);"/>
-  </picture>
-</p>
-
-<p align="center"><sub><i>📚 A library with a progress bar beats a library with a star rating.</i></sub></p>
-
-<br/>
-
-## ◆ What this template is
-
-An **online course membership** starter built on `remix-neon-auth-pay`. The page reads like a learning library, not a video dump. Tracks, progress, and member access are visible in the first viewport so the value of the membership is obvious before the price.
-
-> **Use the archive as the main reason to subscribe.** Members stay because the next lesson is reachable, not because the first lesson was great.
-
-<br/>
-
-## ▶ Install
+## Local Setup
 
 ```bash
 pnpm install
@@ -49,119 +54,26 @@ pnpm run db:seed
 pnpm run dev
 ```
 
-> Optional concierge wiring:
-> ```bash
-> D1V_PAI_BASE_URL=https://pai.d1v.ai/v1
-> D1V_PAI_API_KEY=your_project_level_pai_api_key
-> ```
+You can also export env vars into this repository manually:
 
-<br/>
-
-## 📘 Library sections
-
-<table>
-<tr>
-<td width="33%" valign="top" align="center">
-
-### 🛤
-**Learning tracks**
-Group lessons by outcome, difficulty, or role.
-A member opens the library looking for a path, not a video.
-
-</td>
-<td width="33%" valign="top" align="center">
-
-### ✅
-**Progress state**
-Persist watched, completed, and next-up lesson states.
-Progress is the most underrated member benefit.
-
-</td>
-<td width="33%" valign="top" align="center">
-
-### 📎
-**Resource shelf**
-Bundle worksheets, links, or downloads into each track.
-A lesson without a worksheet is a TED talk with a paywall.
-
-</td>
-</tr>
-<tr>
-<td width="33%" valign="top" align="center">
-
-### 🏛
-**Core library**
-Use the archive as the main reason to subscribe.
-The deeper the library, the longer the membership.
-
-</td>
-<td width="33%" valign="top" align="center">
-
-### 🆕
-**New lesson drops**
-Signal freshness with a predictable release rhythm.
-Cadence beats surprise for retention.
-
-</td>
-<td width="33%" valign="top" align="center">
-
-### 🪜
-**Upgrade ladder**
-Add coaching or cohort layers later without rebuilding the foundation.
-Build the ladder shape first — even if only two rungs exist today.
-
-</td>
-</tr>
-</table>
-
-<br/>
-
-## ◆ Learning principles
-
-> **Visual thesis:** A structured learning experience that emphasizes progression, schedules, and instructional trust. Progress surfaces should feel calm and instructional.
-
-```
-   Onboard
-     │
-     ▼
-   Pick a track
-     │
-     ├─── Beginners
-     ├─── Practitioners
-     └─── Operators
-              │
-              ▼
-         Watch lesson ──▶ Mark complete ──▶ Next lesson
-                                                       │
-                                                       ▼
-                                              Next-up surfaced
-                                                       │
-                                                       ▼
-                                              Drop notification
+```bash
+AUTH_TOKEN=your_token \
+BACKEND_ADMIN_API_BASE=http://localhost:8999 \
+node scripts/bootstrap-local-env.mjs --template-repo d1v-community/online-course-membership-template --write-path .env
 ```
 
-<br/>
+Optional AI assistant env:
 
-## ◆ What's already wired
-
-```
-✔ passwordless email auth         ✔ hosted checkout + /pricing
-✔ Neon / PostgreSQL + Drizzle      ✔ live snapshot at /api/template/snapshot
-✔ concierge hooks (D1V_PAI_*)      ✔ library-aware copy in site.ts
+```bash
+D1V_PAI_BASE_URL=https://pai.d1v.ai/v1
+D1V_PAI_API_KEY=your_project_level_pai_api_key
 ```
 
-<br/>
 
-## ◆ Make it yours
+## Suggested Next Build Steps
 
-- [ ] Replace the starter tracks with the real curriculum map
-- [ ] Model lesson progress: watched, completed, next-up per member
-- [ ] Build the resource shelf per track
-- [ ] Define the drop cadence and the next-up notification
-- [ ] Plan the upgrade ladder (coaching, cohort, certification) early
-
----
-
-<div align="center">
-  <sub>LessonLoop · online course membership starter · <code>remix-neon-auth-pay</code> foundation</sub>
-</div>
+- Replace the starter landing sections with the real online course membership workflow
+- Extend the seeded industry schema with your production entities
+- Map successful checkout to entitlements, seats, bookings, or premium access
+- Add success-state fulfillment beyond the hosted checkout return pages
+- Tune the built-in AI concierge prompt and connect it to your product workflow

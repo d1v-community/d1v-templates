@@ -1,32 +1,27 @@
-import { useLoaderData, useNavigate, useSearchParams } from '@remix-run/react';
-import { useEffect, useRef, useState } from 'react';
+import { useLoaderData, useNavigate } from "@remix-run/react";
+import { useEffect, useState } from "react";
+import { json, type MetaFunction, type LoaderFunctionArgs, type SerializeFrom } from "@remix-run/node";
+import { getUserFromRequest } from "~/utils/auth.server";
 import {
-  json,
-  type MetaFunction,
-  type LoaderFunctionArgs,
-  type SerializeFrom,
-} from '@remix-run/node';
-import { getUserFromRequest } from '~/utils/auth.server';
-import { getEnvWarningMessage } from '~/utils/env.server';
-import { SiteHome } from '~/components/SiteHome';
-import { SITE_CONFIG } from '~/constants/site';
-import { getIndustryHome } from '~/lib/auth-flow';
-import { getTemplateSnapshot } from '~/services/template-data.server';
-import { toPublicTemplateSnapshot } from '~/utils/template-snapshot';
+  getEnvWarningMessage,
+} from "~/utils/env.server";
+import { AppHeader } from "~/components/AppHeader";
+import { AppFooter } from "~/components/AppFooter";
+import { DevLoadingCard } from "~/components/DevLoadingCard";
+import { SITE_CONFIG } from "~/constants/site";
+import { getTemplateSnapshot } from "~/services/template-data.server";
+import { toPublicTemplateSnapshot } from "~/utils/template-snapshot";
 
 export const meta: MetaFunction = () => {
   return [
     { title: `Home - ${SITE_CONFIG.appTitle}` },
-    { name: 'description', content: SITE_CONFIG.siteDescription },
+    { name: "description", content: SITE_CONFIG.siteDescription },
   ];
 };
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const user = await getUserFromRequest(request);
   const envWarning = getEnvWarningMessage();
-  const url = new URL(request.url);
-  const signedOut = url.searchParams.get('signedOut') === '1';
-  const firstLogin = url.searchParams.get('welcome') === '1';
   let snapshot = null;
   let snapshotWarning = null;
 
@@ -34,88 +29,74 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     const liveSnapshot = await getTemplateSnapshot();
     snapshot = user ? liveSnapshot : toPublicTemplateSnapshot(liveSnapshot);
   } catch (error) {
-    snapshotWarning = error instanceof Error ? error.message : 'Failed to load template snapshot.';
+    snapshotWarning =
+      error instanceof Error
+        ? error.message
+        : "Failed to load template snapshot.";
   }
 
   return json({
     user,
-    warnings: [envWarning, snapshotWarning].filter((warning): warning is string =>
-      Boolean(warning)
+    warnings: [envWarning, snapshotWarning].filter(
+      (warning): warning is string => Boolean(warning),
     ),
     snapshot,
-    signedOut,
-    firstLogin,
-    industryHome: getIndustryHome(),
   });
 };
 
 type LoaderData = SerializeFrom<typeof loader>;
 
 export default function Index() {
-  const { user, warnings, snapshot, signedOut, firstLogin, industryHome } = useLoaderData<typeof loader>();
+  const { user, warnings, snapshot } = useLoaderData<typeof loader>();
   const navigate = useNavigate();
-  const [clientUser, setClientUser] = useState<LoaderData['user']>(user);
-  const lastSyncedTokenRef = useRef<string | null>(null);
+  const [clientUser, setClientUser] = useState<LoaderData["user"]>(user);
 
   useEffect(() => {
-    // Only sync when the local token actually changes. Otherwise the server-rendered
-    // user is the source of truth and we avoid a one-frame "logged-out → logged-in" flicker.
-    let token: string | null = null;
-    try {
-      token = localStorage.getItem('auth-token');
-    } catch {
-      // ignore
-    }
-    if (!token || token === lastSyncedTokenRef.current) return;
-    lastSyncedTokenRef.current = token;
-
-    fetch('/api/auth/me')
-      .then(r => (r.ok ? r.json() : null))
-      .then(d => {
+    // Ensure client reflects latest auth state (token/cookie changes)
+    fetch("/api/auth/me")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
         if (d && d.authenticated) setClientUser(d.user);
         else setClientUser(null);
       })
-      .catch(() => undefined);
+      .catch(() => {
+        // noop: 静默处理网络错误
+      });
   }, []);
-
-  // Welcome handshake: if the user just completed first login, offer onboarding exactly once.
-  useEffect(() => {
-    if (!firstLogin) return;
-    try {
-      const seen = localStorage.getItem('d1v-onboarded');
-      if (seen) return;
-    } catch {
-      // ignore
-    }
-    // Send first-time users through onboarding before landing on the workspace.
-    navigate('/onboarding', { replace: true });
-  }, [firstLogin, navigate]);
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await fetch("/api/auth/logout", { method: "POST" });
     } finally {
       try {
-        localStorage.removeItem('auth-token');
-        localStorage.removeItem('d1v-onboarded');
-        localStorage.removeItem('d1v-display-name');
-        localStorage.removeItem('d1v-goal');
+        localStorage.removeItem("auth-token");
       } catch {
-        // noop
+        // noop: 静默处理清理 token 失败
       }
-      navigate('/?signedOut=1', { replace: true });
+      navigate("/login", { replace: true });
     }
   };
 
   const effectiveUser = clientUser ?? user;
 
   return (
-    <SiteHome
-      snapshot={snapshot}
-      user={effectiveUser ?? undefined}
-      onLogout={handleLogout}
-      warnings={warnings}
-      showSignedOutToast={signedOut}
-    />
+    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950">
+      {warnings.map((warning) => (
+        <div
+          key={warning}
+          className="w-full bg-red-50 border-b border-red-200 text-red-700 text-sm text-center py-2 px-4 dark:bg-red-950/40 dark:border-red-900 dark:text-red-200"
+        >
+          {warning}
+        </div>
+      ))}
+
+      <AppHeader user={effectiveUser} onLogout={handleLogout} />
+
+      <main className="flex-1 min-h-0">
+        <DevLoadingCard snapshot={snapshot} user={effectiveUser} />
+      </main>
+
+      <AppFooter />
+    </div>
   );
 }

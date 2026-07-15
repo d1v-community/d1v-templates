@@ -46,8 +46,7 @@ export type SiteConfig = {
     pricingLabel: string;
     loginLabel: string;
     assistantLabel?: string;
-  industryLinks?: Array<{ label: string; href: string }>;
-};
+  };
   footer: {
     line: string;
   };
@@ -60,16 +59,6 @@ export type SiteConfig = {
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
     proofPoints: string[];
-    industry: {
-      sceneKind: "console" | "catalog" | "kanban" | "metrics" | "storefront" | "countdown" | "club" | "issue" | "cohort" | "library" | "schedule" | "fitness";
-      tagline: string;
-      quickStats: Array<{ label: string; value: string }>;
-      heroTone?: "command" | "editorial" | "operations" | "academy" | "service";
-      homeHref: string;
-      workspaceName: string;
-      greeting: string;
-      firstRunHint: Array<{ id: string; label: string; detail: string }>;
-    };
   };
   pricing: {
     badge: string;
@@ -187,8 +176,7 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Support",
-    "industryLinks": [{"label":"Requests","href":"/requests"},{"label":"All requests","href":"/requests"}]
+    "assistantLabel": "Support"
   },
   "footer": {
     "line": "Built with D1V"
@@ -205,9 +193,7 @@ export const SITE_CONFIG: SiteConfig = {
       "Passwordless client login for project access",
       "Checkout flow for retainers or premium portal plans",
       "Database foundation for files, milestones, and updates"
-    ],
-    "industry": {"sceneKind": "kanban",
-      "tagline": "","quickStats":[{"label":"Open requests","value":"12"},{"label":"Avg first reply","value":"3h 12m"},{"label":"Closed this week","value":"28"}],"homeHref":"/requests","workspaceName":"Client portal","greeting":"Back to your service requests.","firstRunHint":[{"id":"open-request","label":"Open your first request","detail":"Try the kanban from the client side."},{"id":"set-routing","label":"Set service routing","detail":"Map services to the right team and SLA."},{"id":"share-welcome","label":"Share the welcome doc","detail":"Drop the workspace welcome into the portal."},{"id":"draft-update","label":"Draft a status update","detail":"Use the timeline format for weekly updates."}]}
+    ]
   },
   "pricing": {
     "badge": "Portal plan",

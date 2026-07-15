@@ -3,7 +3,6 @@ import { Link } from "@remix-run/react";
 import { AppFooter } from "~/components/AppFooter";
 import { APP_TITLE } from "~/constants/app";
 import { SITE_CONFIG } from "~/constants/site";
-import { getIndustryHome } from "~/lib/auth-flow";
 
 export const meta: MetaFunction = () => {
 	return [
@@ -16,7 +15,6 @@ export const meta: MetaFunction = () => {
 };
 
 export default function PayCancelPage() {
-	const industryHome = getIndustryHome();
 	return (
 		<div className="min-h-screen bg-slate-50 dark:bg-slate-950">
 			<main className="mx-auto flex min-h-screen max-w-3xl items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
@@ -69,10 +67,10 @@ export default function PayCancelPage() {
 							{SITE_CONFIG.paymentCancel.primaryButtonLabel}
 						</Link>
 						<Link
-							to={industryHome}
+							to="/"
 							className="inline-flex flex-1 items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
 						>
-							{`Back to ${SITE_CONFIG.home.industry.workspaceName.toLowerCase()}`}
+							{SITE_CONFIG.paymentCancel.secondaryButtonLabel}
 						</Link>
 					</div>
 				</div>

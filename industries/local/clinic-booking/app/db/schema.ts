@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, index, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, index } from "drizzle-orm/pg-core";
 
 // Users table
 export const users = pgTable("users", {
@@ -118,30 +118,6 @@ export const clinicIntakeForms = pgTable("clinic_intake_forms", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
-
-// UGC tables
-export const ugcReviews = pgTable("ugc_reviews", {
-  id: text("id").primaryKey(),
-  appUserId: text("app_user_id").notNull().references(() => users.id),
-  authorName: text("author_name").notNull(),
-  authorInitials: text("author_initials").notNull(),
-  contextKind: text("context_kind").notNull(),
-  contextSlug: text("context_slug").notNull(),
-  rating: integer("rating").notNull(),
-  body: text("body").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-});
-
-export const ugcMessages = pgTable("ugc_messages", {
-  id: text("id").primaryKey(),
-  doctorId: text("doctor_id").notNull(),
-  appUserId: text("app_user_id").references(() => users.id),
-  authorName: text("author_name").notNull(),
-  authorInitials: text("author_initials").notNull(),
-  body: text("body").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-});
-
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -151,5 +127,3 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type ClinicProvidersRecord = typeof clinicProviders.$inferSelect;
 export type ClinicAppointmentsRecord = typeof clinicAppointments.$inferSelect;
 export type ClinicIntakeFormsRecord = typeof clinicIntakeForms.$inferSelect;
-export type UgcReview = typeof ugcReviews.$inferSelect;
-export type UgcMessage = typeof ugcMessages.$inferSelect;

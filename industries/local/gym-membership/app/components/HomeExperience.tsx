@@ -1,187 +1,26 @@
-import { Link } from '@remix-run/react';
+import { Link } from "@remix-run/react";
+import { SITE_CONFIG } from "~/constants/site";
+import type { AppHeaderUser } from "~/components/AppHeader";
+import type { TemplateSnapshot } from "~/services/template-data.server";
 
-import { APP_TITLE } from '~/constants/app';
-import { SITE_CONFIG } from '~/constants/site';
-import { getSiteThemeClasses } from '~/constants/site-theme';
-import { SceneBackground } from '~/components/sections/SceneBackground';
-import type { AppHeaderUser } from '~/components/AppHeader';
-import type { TemplateSnapshot } from '~/services/template-data.server';
-
-type PreviewRow = {
-  label: string;
-  value: string;
-  meta: string;
-};
-
-function formatGeneratedAt(generatedAt?: string | null) {
-  if (!generatedAt) return null;
-  const date = new Date(generatedAt);
-  if (Number.isNaN(date.getTime())) return null;
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-  }).format(date);
-}
-
-function buildPreviewRows(snapshot?: TemplateSnapshot | null): PreviewRow[] {
-  if (snapshot?.sections.length) {
-    return snapshot.sections.slice(0, 3).map(section => ({
-      label: section.title,
-      value: `${section.total} ${section.totalLabel}`,
-      meta: section.items[0]?.title || section.items[0]?.meta || section.key,
-    }));
-  }
-  return SITE_CONFIG.heroMetrics.slice(0, 3).map(metric => ({
-    label: metric.label,
-    value: metric.value,
-    meta: APP_TITLE,
-  }));
-}
-
-export function HomeExperience({
-  snapshot,
-  user,
-}: {
-  snapshot?: TemplateSnapshot | null;
-  user?: AppHeaderUser;
-}) {
-  const theme = getSiteThemeClasses(SITE_CONFIG.theme.family);
-  const previewRows = buildPreviewRows(snapshot);
-  const generatedAt = formatGeneratedAt(snapshot?.generatedAt);
-  const industry = SITE_CONFIG.home.industry;
-  const secondaryCta = user
-    ? { href: SITE_CONFIG.home.secondaryCtaHref, label: SITE_CONFIG.home.secondaryCtaLabel }
-    : { href: SITE_CONFIG.home.secondaryCtaHref, label: SITE_CONFIG.home.secondaryCtaLabel };
+export function HomeExperience({ snapshot, user }: { snapshot?: TemplateSnapshot | null; user?: AppHeaderUser }) {
+  const sections = snapshot?.sections ?? [];
 
   return (
-    <section className={`relative overflow-hidden ${theme.heroShell}`}>
-      <SceneBackground kind={industry.sceneKind} />
-
-      <div className="relative mx-auto flex min-h-[calc(100svh-8.5rem)] max-w-7xl items-center px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid w-full gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-end">
-          <div className="max-w-3xl space-y-6">
-            <div className="space-y-4">
-              <div
-                className={`inline-flex rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] ${theme.eyebrow}`}
-              >
-                {SITE_CONFIG.home.badge}
-              </div>
-
-              <div className="space-y-3">
-                <p
-                  className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${theme.subEyebrow}`}
-                >
-                  {APP_TITLE} · {industry.tagline}
-                </p>
-                <h1 className="max-w-4xl text-4xl font-semibold tracking-[-0.06em] sm:text-5xl lg:text-[4.5rem] lg:leading-[0.92]">
-                  {SITE_CONFIG.home.headline}
-                </h1>
-                <p className={`max-w-2xl text-sm leading-relaxed sm:text-base ${theme.body}`}>
-                  {SITE_CONFIG.home.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Link
-                to={SITE_CONFIG.home.primaryCtaHref}
-                className={`inline-flex min-w-[10rem] items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition motion-safe:hover:-translate-y-0.5 ${theme.primaryButton}`}
-              >
-                {SITE_CONFIG.home.primaryCtaLabel}
-              </Link>
-              <Link
-                to={secondaryCta.href}
-                className={`inline-flex min-w-[10rem] items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition motion-safe:hover:-translate-y-0.5 ${theme.secondaryButton}`}
-              >
-                {secondaryCta.label}
-              </Link>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-3">
-              {industry.quickStats.map(stat => (
-                <div
-                  key={stat.label}
-                  className={`rounded-[1.6rem] p-4 transition duration-300 motion-safe:hover:-translate-y-1 ${theme.metricShell}`}
-                >
-                  <p className="text-[11px] font-medium uppercase tracking-[0.22em] opacity-60">
-                    {stat.label}
-                  </p>
-                  <p
-                    className={`mt-3 text-2xl font-semibold tracking-[-0.05em] ${theme.metricValue}`}
-                  >
-                    {stat.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <aside
-            id="workspace-preview"
-            className={`overflow-hidden rounded-[2rem] p-5 sm:p-6 ${theme.showcaseShell}`}
-          >
-            <div className="flex items-center justify-between gap-3">
-              <div
-                className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${theme.eyebrow}`}
-              >
-                {SITE_CONFIG.templateSurface.badge}
-              </div>
-              <div className={`text-[11px] font-medium uppercase tracking-[0.22em] ${theme.body}`}>
-                {user ? 'Signed in' : 'Public'}
-              </div>
-            </div>
-
-            <div className="mt-6 space-y-2">
-              <p
-                className={`text-[11px] font-medium uppercase tracking-[0.24em] ${theme.subEyebrow}`}
-              >
-                Workspace
-              </p>
-              <h2 className="text-2xl font-semibold tracking-[-0.05em] sm:text-[2rem]">
-                {SITE_CONFIG.templateSurface.headline}
-              </h2>
-              <p className={`text-sm leading-relaxed ${theme.sectionText}`}>
-                {SITE_CONFIG.templateSurface.description}
-              </p>
-            </div>
-
-            <div className="mt-6 space-y-3">
-              {previewRows.map(row => (
-                <div
-                  key={row.label}
-                  className={`grid gap-2 rounded-[1.5rem] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center ${theme.metricShell}`}
-                >
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-60">
-                      {row.label}
-                    </p>
-                    <p className="mt-2 truncate text-sm font-medium opacity-80">{row.meta}</p>
-                  </div>
-                  <p
-                    className={`text-sm font-semibold tracking-[-0.02em] sm:text-right ${theme.metricValue}`}
-                  >
-                    {row.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em]">
-              <span className={theme.subEyebrow}>{SITE_CONFIG.navigation.pricingLabel}</span>
-              <span className="opacity-30">/</span>
-              <span className={theme.body}>{secondaryCta.label}</span>
-              {generatedAt ? (
-                <>
-                  <span className="opacity-30">/</span>
-                  <span className={theme.body}>{generatedAt}</span>
-                </>
-              ) : null}
-            </div>
-          </aside>
+    <div data-template="flex-pass" className="bg-[#11110f] text-white">
+      <section className="relative min-h-[calc(100svh-4rem)] overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2000&q=90" alt="Athletes training in a modern strength gym" className="absolute inset-0 h-full w-full object-cover opacity-55" />
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] max-w-[1500px] flex-col justify-between px-6 py-10 sm:px-10 lg:px-14 lg:py-14">
+          <div className="flex items-center justify-between border-b border-white/50 pb-4 text-xs font-bold uppercase"><span>FlexPass / membership engine</span><span>{user ? "Member active" : "Join the floor"}</span></div>
+          <div className="my-16 max-w-5xl"><p className="inline-block bg-[#ff5a1f] px-3 py-1 text-sm font-black uppercase">Built for repeat visits</p><h1 className="mt-6 text-6xl font-black uppercase leading-[0.9] sm:text-8xl lg:text-9xl">{SITE_CONFIG.home.headline}</h1><p className="mt-7 max-w-2xl text-lg font-medium leading-7 text-white/85">{SITE_CONFIG.home.description}</p><div className="mt-9 flex flex-wrap gap-3"><Link to={SITE_CONFIG.home.primaryCtaHref} className="rounded-md bg-[#ff5a1f] px-5 py-3 text-sm font-black uppercase text-white">{SITE_CONFIG.home.primaryCtaLabel}</Link><Link to={SITE_CONFIG.home.secondaryCtaHref} className="rounded-md border-2 border-white px-5 py-3 text-sm font-black uppercase">{SITE_CONFIG.home.secondaryCtaLabel}</Link></div></div>
+          <div className="grid border-y border-white/50 bg-black/35 backdrop-blur-sm sm:grid-cols-3">{sections.slice(0, 3).map((section, index) => <div key={section.key} className="border-b border-white/40 p-5 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"><div className="flex items-end justify-between"><p className="text-xs font-bold uppercase">0{index + 1} / {section.title}</p><p className="text-4xl font-black text-[#ff7a42]">{section.total}</p></div><p className="mt-2 text-xs text-white/65">{section.totalLabel}</p></div>)}</div>
         </div>
-      </div>
-    </section>
+      </section>
+      <section id="workspace" className="mx-auto grid max-w-[1500px] border-b border-white/30 lg:grid-cols-[0.4fr_0.6fr]">
+        <div className="border-b border-white/30 p-7 sm:p-10 lg:border-b-0 lg:border-r"><p className="text-xs font-bold uppercase text-[#ff7a42]">Membership, operationalized</p><h2 className="mt-5 text-4xl font-black uppercase">From payment to check-in without friction.</h2><p className="mt-5 max-w-md text-sm leading-6 text-white/60">Plans, renewals, visits, and member identity stay connected so the front desk can focus on people.</p></div>
+        <div className="grid sm:grid-cols-3">{SITE_CONFIG.templateSurface.bullets.slice(0, 3).map((bullet, index) => <article key={bullet} className="border-b border-white/30 p-7 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"><p className="text-5xl font-black text-[#ff5a1f]">0{index + 1}</p><p className="mt-8 text-sm font-bold uppercase leading-6">{bullet}</p></article>)}</div>
+      </section>
+    </div>
   );
 }

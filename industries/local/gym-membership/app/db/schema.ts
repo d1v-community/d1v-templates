@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, index, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, index } from "drizzle-orm/pg-core";
 
 // Users table
 export const users = pgTable("users", {
@@ -118,44 +118,6 @@ export const renewalEvents = pgTable("renewal_events", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
-
-// UGC tables
-export const ugcWorkouts = pgTable("ugc_workouts", {
-  id: text("id").primaryKey(),
-  appUserId: text("app_user_id").notNull().references(() => users.id),
-  authorName: text("author_name").notNull(),
-  authorInitials: text("author_initials").notNull(),
-  type: text("type").notNull(),
-  durationMin: integer("duration_min").notNull(),
-  notes: text("notes").notNull().default(""),
-  pr: text("pr").notNull().default(""),
-  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-});
-
-export const ugcPrs = pgTable("ugc_prs", {
-  id: text("id").primaryKey(),
-  appUserId: text("app_user_id").notNull().references(() => users.id),
-  authorName: text("author_name").notNull(),
-  authorInitials: text("author_initials").notNull(),
-  movement: text("movement").notNull(),
-  weightKg: integer("weight_kg").notNull(),
-  reps: integer("reps").notNull(),
-  note: text("note").notNull().default(""),
-  achievedAt: text("achieved_at").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-});
-
-export const ugcCheckins = pgTable("ugc_checkins", {
-  id: text("id").primaryKey(),
-  classId: text("class_id").notNull(),
-  appUserId: text("app_user_id").notNull().references(() => users.id),
-  authorName: text("author_name").notNull(),
-  authorInitials: text("author_initials").notNull(),
-  rating: integer("rating").notNull(),
-  body: text("body").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-});
-
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -165,6 +127,3 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type GymMembershipPlansRecord = typeof gymMembershipPlans.$inferSelect;
 export type MemberCheckinsRecord = typeof memberCheckins.$inferSelect;
 export type RenewalEventsRecord = typeof renewalEvents.$inferSelect;
-export type UgcWorkout = typeof ugcWorkouts.$inferSelect;
-export type UgcPr = typeof ugcPrs.$inferSelect;
-export type UgcCheckin = typeof ugcCheckins.$inferSelect;

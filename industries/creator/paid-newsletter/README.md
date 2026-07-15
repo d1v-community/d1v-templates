@@ -1,45 +1,49 @@
-<div align="center">
+# Paid Newsletter
 
-<img src="https://img.shields.io/badge/category-creator-b91c1c?style=for-the-badge&logo=substack&logoColor=white" alt="category"/>
-<img src="https://img.shields.io/badge/foundation-remix--neon--auth--pay-1c1917?style=for-the-badge&logo=remix&logoColor=white" alt="foundation"/>
-<img src="https://img.shields.io/badge/format-paid%20newsletter-fef3c7?style=for-the-badge&color=fef3c7" alt="format"/>
+Paid newsletter starter with authentication, checkout, and Neon-backed subscriber data.
 
-<br/><br/>
+## What You Start With
 
-# 📰 BriefClub
+- Remix + Tailwind application based on `remix-neon-auth-pay`
+- Passwordless email login
+- Neon / PostgreSQL + Drizzle ORM
+- Hosted checkout and pricing page
+- Live database snapshot route at `/api/template/snapshot`
+- Local bootstrap script for pulling project env vars into `.env`
 
-<h3>Make the newsletter feel like a publication with a clean member archive and sharp offer —<br/>the archive is part of the product, not an afterthought.</h3>
+## Product Direction
 
-<br/>
+- App title: `BriefClub`
+- Category: `creator`
+- Repository template path: `d1v-community/paid-newsletter-template`
+- Default prompt: `Create a paid newsletter membership product with database support and hosted checkout.`
 
-[**Install**](#-install) · [**Edition sections**](#-edition-sections) · [**Editorial principles**](#-editorial-principles) · [**Repository**](https://github.com/d1v-community/paid-newsletter-template)
+## Design Direction
 
-</div>
+- Visual thesis: A creator-led publishing surface with stronger voice, membership cues, and media-led storytelling.
+- Content plan:
+  - Hero: creator promise and member access hook
+  - Support: show the cadence, archive, and premium perks
+  - Detail: make post-purchase community or content access tangible
+  - Final CTA: push the visitor into a simple paid join flow
+- Interaction thesis:
+  - Treat content and community as the product, not as filler around checkout.
+  - Visual rhythm should feel more like a publication than a dashboard.
+  - Use contrast and spacing to create taste instead of loud gradients.
 
----
+## Product Modules
 
-<br/>
+- Showcase headline: Make the newsletter feel like a publication with a clean member archive and sharp offer.
+- Workflow headline: The archive is part of the product, not an afterthought.
+- Starter modules:
+  - Lead issue: Feature one standout issue and one short reason to care.
+  - Archive browser: Browse by topic, date, or series once the member is inside.
+  - Format clarity: Tell readers whether they get text, audio, downloads, or all three.
+  - Paid-only archive: Position the archive as the compounding reason to stay subscribed.
+  - Member extras: Add occasional downloads, notes, or Q&A without bloating the core offer.
+  - Renewal signal: Show issue cadence and editorial consistency clearly.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600&q=80&auto=format&fit=crop"/>
-    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600&q=80&auto=format&fit=crop" alt="Editorial newspaper publication" width="100%" style="border-radius: 12px; box-shadow: 0 24px 48px -12px rgba(185, 28, 28, 0.30);"/>
-  </picture>
-</p>
-
-<p align="center"><sub><i>📰 Read like a publication. Subscribe like a member.</i></sub></p>
-
-<br/>
-
-## ◆ What this template is
-
-A **paid newsletter** starter built on `remix-neon-auth-pay`. The page reads like the masthead of a small publication, with one standout lead issue and a clearly framed archive.
-
-> **Position the archive as the compounding reason to stay subscribed.** A reader who finds three good past issues renews without a sales call.
-
-<br/>
-
-## ▶ Install
+## Local Setup
 
 ```bash
 pnpm install
@@ -49,66 +53,18 @@ pnpm run db:seed
 pnpm run dev
 ```
 
-<br/>
+You can also export env vars into this repository manually:
 
-## 📰 Edition sections
-
-| # | Section | What it does on the page |
-|:-:|---------|--------------------------|
-| `01` | **Lead issue** | Feature one standout issue and one short reason to care |
-| `02` | **Archive browser** | Browse by topic, date, or series once the member is inside |
-| `03` | **Format clarity** | Tell readers whether they get text, audio, downloads, or all three |
-| `04` | **Paid-only archive** | Position the archive as the compounding reason to stay subscribed |
-| `05` | **Member extras** | Add occasional downloads, notes, or Q&A without bloating the core offer |
-| `06` | **Renewal signal** | Show issue cadence and editorial consistency clearly |
-
-<br/>
-
-## ◆ Editorial principles
-
-> **Visual thesis:** A creator-led publishing surface — closer to a small magazine than a SaaS dashboard. Use contrast and spacing to create taste instead of loud gradients.
-
-```
-     Masthead
-        │
-        ▼
-   ┌────────────┐
-   │ Lead issue │ ◀── one reason to care this week
-   └────┬───────┘
-        │
-        ▼
-   ┌────────────┐
-   │  Archive   │ ◀── the compounding reason to stay
-   └────┬───────┘
-        │
-        ▼
-   ┌────────────┐
-   │  Cadence   │ ◀── weekly, biweekly, monthly
-   └────────────┘
+```bash
+AUTH_TOKEN=your_token \
+BACKEND_ADMIN_API_BASE=http://localhost:8999 \
+node scripts/bootstrap-local-env.mjs --template-repo d1v-community/paid-newsletter-template --write-path .env
 ```
 
-<br/>
 
-## ◆ What's already wired
+## Suggested Next Build Steps
 
-```
-✔ passwordless email auth         ✔ hosted checkout + /pricing
-✔ Neon / PostgreSQL + Drizzle      ✔ live snapshot at /api/template/snapshot
-✔ local env bootstrap script       ✔ publication-aware copy in site.ts
-```
-
-<br/>
-
-## ◆ Make it yours
-
-- [ ] Replace the starter lead issue with a real standout piece
-- [ ] Model the archive: issue, date, topic, and series
-- [ ] Build the browser so members can search by topic or series
-- [ ] Add member extras as occasional drops, not as a constant stream
-- [ ] Signal renewal with a clear cadence and recent-issue indicators
-
----
-
-<div align="center">
-  <sub>BriefClub · paid newsletter starter · <code>remix-neon-auth-pay</code> foundation</sub>
-</div>
+- Replace the starter landing sections with the real paid newsletter workflow
+- Extend the seeded industry schema with your production entities
+- Map successful checkout to entitlements, seats, bookings, or premium access
+- Add success-state fulfillment beyond the hosted checkout return pages

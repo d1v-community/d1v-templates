@@ -118,25 +118,6 @@ export const portalUploads = pgTable("portal_uploads", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
-
-// UGC: request message thread
-export const ugcRequestMessages = pgTable(
-  "ugc_request_messages",
-  {
-    id: text("id").primaryKey(),
-    requestId: text("request_id").notNull(),
-    appUserId: text("app_user_id").references(() => users.id),
-    authorName: text("author_name").notNull(),
-    authorInitials: text("author_initials").notNull(),
-    body: text("body").notNull(),
-    isInternal: text("is_internal").notNull().default("false"),
-    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-  },
-  (table) => ({
-    requestIdx: index("ugc_request_messages_request_idx").on(table.requestId),
-  })
-);
-
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -146,4 +127,3 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type PortalClientsRecord = typeof portalClients.$inferSelect;
 export type PortalProjectsRecord = typeof portalProjects.$inferSelect;
 export type PortalUploadsRecord = typeof portalUploads.$inferSelect;
-export type UgcRequestMessage = typeof ugcRequestMessages.$inferSelect;

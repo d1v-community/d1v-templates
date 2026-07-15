@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, index, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, index } from "drizzle-orm/pg-core";
 
 // Users table
 export const users = pgTable("users", {
@@ -118,43 +118,6 @@ export const shipmentUpdates = pgTable("shipment_updates", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
-
-// UGC: drop reviews
-export const ugcReviews = pgTable(
-  "ugc_reviews",
-  {
-    id: text("id").primaryKey(),
-    appUserId: text("app_user_id").references(() => users.id),
-    authorName: text("author_name").notNull(),
-    authorInitials: text("author_initials").notNull(),
-    contextKind: text("context_kind").notNull(),
-    contextSlug: text("context_slug").notNull(),
-    rating: integer("rating").notNull(),
-    body: text("body").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-  },
-  (table) => ({
-    contextIdx: index("ugc_reviews_context_idx").on(table.contextKind, table.contextSlug),
-  })
-);
-
-// UGC: drop shares (e.g. social channels)
-export const ugcShares = pgTable(
-  "ugc_shares",
-  {
-    id: text("id").primaryKey(),
-    dropId: text("drop_id").notNull(),
-    appUserId: text("app_user_id").references(() => users.id),
-    authorName: text("author_name").notNull(),
-    authorInitials: text("author_initials").notNull(),
-    channel: text("channel").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-  },
-  (table) => ({
-    dropIdx: index("ugc_shares_drop_idx").on(table.dropId),
-  })
-);
-
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -164,5 +127,3 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type LaunchOffersRecord = typeof launchOffers.$inferSelect;
 export type PreordersRecord = typeof preorders.$inferSelect;
 export type ShipmentUpdatesRecord = typeof shipmentUpdates.$inferSelect;
-export type UgcReview = typeof ugcReviews.$inferSelect;
-export type UgcShare = typeof ugcShares.$inferSelect;

@@ -5,7 +5,6 @@ import { AppFooter } from "~/components/AppFooter";
 import { AppHeader } from "~/components/AppHeader";
 import { APP_TITLE } from "~/constants/app";
 import { SITE_CONFIG } from "~/constants/site";
-import { getIndustryHome } from "~/lib/auth-flow";
 import { reconcilePaymentSuccess } from "~/services/payment-fulfillment.server";
 import { getUserFromRequest } from "~/utils/auth.server";
 
@@ -39,8 +38,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 			userId: url.searchParams.get("userId") || url.searchParams.get("user_id"),
 		},
 		result,
-		industryHome: getIndustryHome(),
-		workspaceName: SITE_CONFIG.home.industry.workspaceName,
 	});
 }
 
@@ -112,7 +109,7 @@ function FulfillmentStateCard({
 }
 
 export default function PaySuccessPage() {
-	const { query, result, user, industryHome, workspaceName } = useLoaderData<typeof loader>();
+	const { query, result, user } = useLoaderData<typeof loader>();
 
 	const handleLogout = async () => {
 		try {
@@ -123,7 +120,7 @@ export default function PaySuccessPage() {
 			} catch {
 				// noop
 			}
-			window.location.href = "/?signedOut=1";
+			window.location.href = "/login";
 		}
 	};
 
@@ -191,14 +188,14 @@ export default function PaySuccessPage() {
 
 					<div className="mt-8 flex flex-col gap-3 sm:flex-row">
 						<Link
-							to={industryHome}
-							className="inline-flex flex-1 items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700 dark:bg-sky-500 dark:hover:bg-sky-600"
+							to="/pricing"
+							className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700 dark:bg-sky-500 dark:hover:bg-sky-600"
 						>
-							{`Open my ${workspaceName.toLowerCase()}`}
+							{SITE_CONFIG.paymentSuccess.primaryButtonLabel}
 						</Link>
 						<Link
 							to="/"
-							className="inline-flex flex-1 items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+							className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
 						>
 							{SITE_CONFIG.paymentSuccess.secondaryButtonLabel}
 						</Link>

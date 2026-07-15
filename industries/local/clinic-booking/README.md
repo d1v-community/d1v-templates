@@ -1,45 +1,50 @@
-<div align="center">
+# Clinic Booking
 
-<img src="https://img.shields.io/badge/category-local-0ea5e9?style=for-the-badge&logo=health&logoColor=white" alt="category"/>
-<img src="https://img.shields.io/badge/foundation-remix--neon--auth--pay-0c4a6e?style=for-the-badge&logo=remix&logoColor=white" alt="foundation"/>
-<img src="https://img.shields.io/badge/surface-booking%20%2B%20records-38bdf8?style=for-the-badge" alt="surface"/>
+Clinic booking starter with secure login, deposits, and Neon-backed patient records.
 
-<br/><br/>
+## What You Start With
 
-# 🏥 ClinicFlow
+- Remix + Tailwind application based on `remix-neon-auth-pay`
+- Passwordless email login
+- Neon / PostgreSQL + Drizzle ORM
+- Hosted checkout and pricing page
+- Live database snapshot route at `/api/template/snapshot`
+- Optional on-page AI concierge powered by `D1V_PAI_*`
+- Local bootstrap script for pulling project env vars into `.env`
 
-<h3>Handle appointments and deposits on a healthcare surface that is already live —<br/>trust is built through timing, clarity, and follow-through.</h3>
+## Product Direction
 
-<br/>
+- App title: `ClinicFlow`
+- Category: `local`
+- Repository template path: `d1v-community/clinic-booking-template`
+- Default prompt: `Create a clinic booking product with database support, secure login, and hosted payment for deposits.`
 
-[**Install**](#-install) · [**Booking modules**](#-booking-modules) · [**Service discipline**](#-service-discipline) · [**Repository**](https://github.com/d1v-community/clinic-booking-template)
+## Design Direction
 
-</div>
+- Visual thesis: A service-first booking and membership surface focused on trust, availability, and action on mobile.
+- Content plan:
+  - Hero: trust signal, service promise, and immediate booking or plan CTA
+  - Support: hours, plans, availability, and common next actions
+  - Detail: explain what happens before and after a booking or signup
+  - Final CTA: move the visitor into a clear service transaction
+- Interaction thesis:
+  - Make time, staff, and capacity easy to scan.
+  - Trust should come from clarity, not from decorative polish alone.
+  - Primary actions should always feel one tap away.
 
----
+## Product Modules
 
-<br/>
+- Showcase headline: Make appointments, plans, and patient questions feel clear from the first tap.
+- Workflow headline: Trust is built through timing, clarity, and follow-through.
+- Starter modules:
+  - Availability board: Show upcoming slots and provider availability clearly.
+  - Visit type selector: Differentiate consultations, follow-ups, and memberships.
+  - Preparation notes: Explain arrival time, required documents, and visit expectations.
+  - Patient portal: Show bookings, history, and post-visit guidance in one place.
+  - Reminder flow: Connect upcoming visits to simple reminder and prep messaging.
+  - Plan management: Use recurring payment rails for premium care or membership plans.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80&auto=format&fit=crop"/>
-    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=80&auto=format&fit=crop" alt="Healthcare and clinic surface" width="100%" style="border-radius: 12px; box-shadow: 0 24px 48px -12px rgba(14, 165, 233, 0.30);"/>
-  </picture>
-</p>
-
-<p align="center"><sub><i>🏥 Time, staff, and capacity should be readable at a glance. Trust is clarity.</i></sub></p>
-
-<br/>
-
-## ◆ What this template is
-
-A **clinic booking** starter built on `remix-neon-auth-pay`. The landing page is a service surface, not a marketing page. Upcoming availability, visit types, and patient reminders are visible in the first viewport.
-
-> **Make time, staff, and capacity easy to scan.** A booking page that hides the next slot behind a form loses the patient at the first tap.
-
-<br/>
-
-## ▶ Install
+## Local Setup
 
 ```bash
 pnpm install
@@ -49,103 +54,26 @@ pnpm run db:seed
 pnpm run dev
 ```
 
-> Optional concierge wiring:
-> ```bash
-> D1V_PAI_BASE_URL=https://pai.d1v.ai/v1
-> D1V_PAI_API_KEY=your_project_level_pai_api_key
-> ```
+You can also export env vars into this repository manually:
 
-<br/>
-
-## 🏥 Booking modules
-
-<table>
-<tr>
-<td width="50%" valign="top">
-
-### `01` Availability board
-Show upcoming slots and provider availability clearly.
-The next available slot is the most important fact on the page.
-
-</td>
-<td width="50%" valign="top">
-
-### `02` Visit type selector
-Differentiate consultations, follow-ups, and memberships.
-Patients should not have to guess which option to pick.
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### `03` Preparation notes
-Explain arrival time, required documents, and visit expectations.
-Preparation notes reduce no-shows more than reminders do.
-
-</td>
-<td width="50%" valign="top">
-
-### `04` Patient portal
-Show bookings, history, and post-visit guidance in one place.
-The portal replaces the printed handout and the call-back.
-
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### `05` Reminder flow
-Connect upcoming visits to simple reminder and prep messaging.
-A reminder two hours before the visit is the most-used feature.
-
-</td>
-<td width="50%" valign="top">
-
-### `06` Plan management
-Use recurring payment rails for premium care or membership plans.
-Continuity of care deserves a recurring rail, not a new checkout.
-
-</td>
-</tr>
-</table>
-
-<br/>
-
-## ◆ Service discipline
-
-> **Visual thesis:** A service-first booking and membership surface focused on trust, availability, and action on mobile. Trust should come from clarity, not from decorative polish alone.
-
-```
-   Today          Tomorrow         This week        This month
-   ─────          ────────         ─────────        ──────────
-   Open slots     Open slots       Open slots       Open slots
-   ████░░         ██████░          ██████░          ████░░
-   4 left         6 left           5 left           4 left
+```bash
+AUTH_TOKEN=your_token \
+BACKEND_ADMIN_API_BASE=http://localhost:8999 \
+node scripts/bootstrap-local-env.mjs --template-repo d1v-community/clinic-booking-template --write-path .env
 ```
 
-<br/>
+Optional AI assistant env:
 
-## ◆ What's already wired
-
-```
-✔ passwordless email auth         ✔ hosted checkout + /pricing
-✔ Neon / PostgreSQL + Drizzle      ✔ live snapshot at /api/template/snapshot
-✔ concierge hooks (D1V_PAI_*)      ✔ booking-aware copy in site.ts
+```bash
+D1V_PAI_BASE_URL=https://pai.d1v.ai/v1
+D1V_PAI_API_KEY=your_project_level_pai_api_key
 ```
 
-<br/>
 
-## ◆ Make it yours
+## Suggested Next Build Steps
 
-- [ ] Replace the starter visit types with the real service catalog
-- [ ] Model availability: provider, slot, capacity, and visit type
-- [ ] Build the patient portal: bookings, history, and post-visit notes
-- [ ] Wire the reminder flow before the launch date, not after
-- [ ] Define recurring plans for continuity care or premium services
-
----
-
-<div align="center">
-  <sub>ClinicFlow · clinic booking starter · <code>remix-neon-auth-pay</code> foundation</sub>
-</div>
+- Replace the starter landing sections with the real clinic booking workflow
+- Extend the seeded industry schema with your production entities
+- Map successful checkout to entitlements, seats, bookings, or premium access
+- Add success-state fulfillment beyond the hosted checkout return pages
+- Tune the built-in AI concierge prompt and connect it to your product workflow

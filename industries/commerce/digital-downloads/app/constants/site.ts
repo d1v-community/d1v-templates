@@ -46,8 +46,7 @@ export type SiteConfig = {
     pricingLabel: string;
     loginLabel: string;
     assistantLabel?: string;
-  industryLinks?: Array<{ label: string; href: string }>;
-};
+  };
   footer: {
     line: string;
   };
@@ -60,16 +59,6 @@ export type SiteConfig = {
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
     proofPoints: string[];
-    industry: {
-      sceneKind: 'console' | 'catalog' | 'kanban' | 'metrics' | 'storefront' | 'countdown' | 'club' | 'issue' | 'cohort' | 'library' | 'schedule' | 'fitness';
-      tagline: string;
-      quickStats: Array<{ label: string; value: string }>;
-      heroTone?: 'command' | 'editorial' | 'operations' | 'academy' | 'service';
-      homeHref: string;
-      workspaceName: string;
-      greeting: string;
-      firstRunHint: Array<{ id: string; label: string; detail: string }>;
-    };
   };
   pricing: {
     badge: string;
@@ -203,9 +192,7 @@ export const SITE_CONFIG: SiteConfig = {
       "Secure login for buyers and download history",
       "Checkout for one-off or recurring digital offers",
       "Database models ready for files, orders, and unlocks"
-    ],
-    "industry": {"sceneKind": "storefront",
-      "tagline": "","quickStats":[{"label":"Bundle price","value":"$48"},{"label":"Formats","value":"PDF / ZIP / Notion"},{"label":"License","value":"Commercial"}],"homeHref":"/library","workspaceName":"Buyer vault","greeting":"Re-download your bundles anytime.","firstRunHint":[{"id":"stage-flagship","label":"Stage the flagship bundle","detail":"Lead the catalog with one strong bundle."},{"id":"clarify-license","label":"Clarify the license","detail":"Write commercial vs. single-team in plain words."},{"id":"wire-locker","label":"Wire the buyer locker","detail":"Make re-download and update flow obvious."},{"id":"draft-changelog","label":"Draft a changelog entry","detail":"Tell buyers what changed in v1.1."}]}
+    ]
   },
   "pricing": {
     "badge": "Digital access",

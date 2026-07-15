@@ -46,8 +46,7 @@ export type SiteConfig = {
     pricingLabel: string;
     loginLabel: string;
     assistantLabel?: string;
-  industryLinks?: Array<{ label: string; href: string }>;
-};
+  };
   footer: {
     line: string;
   };
@@ -60,16 +59,6 @@ export type SiteConfig = {
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
     proofPoints: string[];
-    industry: {
-      sceneKind: 'console' | 'catalog' | 'kanban' | 'metrics' | 'storefront' | 'countdown' | 'club' | 'issue' | 'cohort' | 'library' | 'schedule' | 'fitness';
-      tagline: string;
-      quickStats: Array<{ label: string; value: string }>;
-      heroTone?: 'command' | 'editorial' | 'operations' | 'academy' | 'service';
-      homeHref: string;
-      workspaceName: string;
-      greeting: string;
-      firstRunHint: Array<{ id: string; label: string; detail: string }>;
-    };
   };
   pricing: {
     badge: string;
@@ -203,9 +192,7 @@ export const SITE_CONFIG: SiteConfig = {
       "Email login for customers and launch followers",
       "Hosted checkout for preorder deposits or full payments",
       "Database base for waitlists, preorders, and fulfillment status"
-    ],
-    "industry": {"sceneKind": "countdown",
-      "tagline": "","quickStats":[{"label":"Drops in","value":"07:14:22"},{"label":"Tiers unlocked","value":"1 / 3"},{"label":"Pre-orders","value":"318"}],"homeHref":"/drops","workspaceName":"Drop vault","greeting":"Your reserved copies and tier ladder.","firstRunHint":[{"id":"reserve-tier-1","label":"Reserve tier 1","detail":"Lock in the lowest price before tier 2 unlocks."},{"id":"plan-tier-2","label":"Plan tier 2 unlock","detail":"Outline what tier 2 should add."},{"id":"share-lineup","label":"Share the lineup","detail":"Tell friends about the drop before launch."},{"id":"set-drop-reminder","label":"Set the drop reminder","detail":"Get notified when each tier unlocks."}]}
+    ]
   },
   "pricing": {
     "badge": "Preorder",

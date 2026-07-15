@@ -1,190 +1,37 @@
-import { Link } from '@remix-run/react';
-import { APP_TITLE } from '~/constants/app';
-import { SITE_CONFIG } from '~/constants/site';
-import { getSiteThemeClasses } from '~/constants/site-theme';
-import type { TemplateSnapshot } from '~/services/template-data.server';
-import type { AppHeaderUser } from '~/components/AppHeader';
+import { Link } from "@remix-run/react";
+import { SITE_CONFIG } from "~/constants/site";
+import type { AppHeaderUser } from "~/components/AppHeader";
+import type { TemplateSnapshot } from "~/services/template-data.server";
 
-type PreviewRow = {
-  label: string;
-  value: string;
-  meta: string;
-};
-
-function formatGeneratedAt(generatedAt?: string | null) {
-  if (!generatedAt) return null;
-
-  const date = new Date(generatedAt);
-  if (Number.isNaN(date.getTime())) return null;
-
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-  }).format(date);
-}
-
-function buildPreviewRows(snapshot?: TemplateSnapshot | null): PreviewRow[] {
-  if (snapshot?.sections.length) {
-    return snapshot.sections.slice(0, 3).map(section => ({
-      label: section.title,
-      value: `${section.total} ${section.totalLabel}`,
-      meta: section.items[0]?.title || section.items[0]?.meta || section.key,
-    }));
-  }
-
-  return SITE_CONFIG.heroMetrics.slice(0, 3).map(metric => ({
-    label: metric.label,
-    value: metric.value,
-    meta: APP_TITLE,
-  }));
-}
-
-export function HomeExperience({
-  snapshot,
-  user,
-}: {
-  snapshot?: TemplateSnapshot | null;
-  user?: AppHeaderUser;
-}) {
-  const theme = getSiteThemeClasses(SITE_CONFIG.theme.family);
-  const previewRows = buildPreviewRows(snapshot);
-  const generatedAt = formatGeneratedAt(snapshot?.generatedAt);
-  const secondaryCta = user
-    ? { href: '#workspace-preview', label: 'Preview' }
-    : {
-        href: SITE_CONFIG.home.secondaryCtaHref,
-        label: SITE_CONFIG.home.secondaryCtaLabel,
-      };
+export function HomeExperience({ snapshot, user }: { snapshot?: TemplateSnapshot | null; user?: AppHeaderUser }) {
+  const sections = snapshot?.sections ?? [];
+  const entries = sections.flatMap(section => section.items.map(item => ({ ...item, section: section.title }))).slice(0, 5);
 
   return (
-    <section className={`relative overflow-hidden ${theme.heroShell}`}>
-      <div className={`absolute inset-0 ${theme.heroGlow}`} />
-      <div className="absolute inset-x-0 top-0 h-40 bg-white/10 blur-3xl dark:bg-white/5" />
-      <div className="absolute -left-16 top-24 h-40 w-40 rounded-full bg-white/14 blur-3xl motion-safe:animate-pulse dark:bg-white/8" />
-      <div
-        className="absolute -right-12 bottom-16 h-48 w-48 rounded-full bg-white/12 blur-3xl motion-safe:animate-pulse dark:bg-white/8"
-        style={{ animationDelay: '900ms' }}
-      />
-
-      <div className="relative mx-auto flex min-h-[calc(100svh-8.5rem)] max-w-7xl items-center px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid w-full gap-6 lg:grid-cols-[minmax(0,1.08fr)_minmax(320px,0.92fr)] lg:items-end">
-          <div className="max-w-3xl space-y-6">
-            <div className="space-y-4">
-              <div
-                className={`inline-flex rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] ${theme.eyebrow}`}
-              >
-                {SITE_CONFIG.home.badge}
-              </div>
-
-              <div className="space-y-3">
-                <p
-                  className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${theme.subEyebrow}`}
-                >
-                  {APP_TITLE}
-                </p>
-                <h1 className="max-w-4xl text-4xl font-semibold tracking-[-0.06em] sm:text-5xl lg:text-[4.5rem] lg:leading-[0.92]">
-                  {SITE_CONFIG.home.headline}
-                </h1>
-              </div>
+    <div data-template="prompt-vault" className="bg-[#f3efe7] text-[#281f25]">
+      <section className="mx-auto max-w-[1500px] px-5 py-10 sm:px-8 lg:px-12">
+        <div className="grid min-h-[calc(100svh-8rem)] border-y-2 border-[#281f25] lg:grid-cols-[0.42fr_0.58fr]">
+          <div className="flex flex-col justify-between border-b-2 border-[#281f25] py-8 lg:border-b-0 lg:border-r-2 lg:pr-10">
+            <div className="flex justify-between text-xs uppercase"><span>Prompt archive</span><span>Edition 01</span></div>
+            <div className="my-16">
+              <p className="font-serif text-lg italic text-[#b51f55]">Curated intelligence, kept useful.</p>
+              <h1 className="mt-5 max-w-2xl font-serif text-5xl leading-[1.03] sm:text-6xl">{SITE_CONFIG.home.headline}</h1>
+              <p className="mt-7 max-w-lg text-base leading-7 text-[#675a62]">{SITE_CONFIG.home.description}</p>
+              <div className="mt-9 flex flex-wrap gap-3"><Link to={SITE_CONFIG.home.primaryCtaHref} className="rounded-md bg-[#281f25] px-5 py-3 text-sm font-semibold text-white">{SITE_CONFIG.home.primaryCtaLabel}</Link><Link to={SITE_CONFIG.home.secondaryCtaHref} className="rounded-md border border-[#281f25] px-5 py-3 text-sm font-semibold">{SITE_CONFIG.home.secondaryCtaLabel}</Link></div>
             </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Link
-                to={SITE_CONFIG.home.primaryCtaHref}
-                className={`inline-flex min-w-[9rem] items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition motion-safe:hover:-translate-y-0.5 ${theme.primaryButton}`}
-              >
-                {SITE_CONFIG.home.primaryCtaLabel}
-              </Link>
-              <Link
-                to={secondaryCta.href}
-                className={`inline-flex min-w-[9rem] items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition motion-safe:hover:-translate-y-0.5 ${theme.secondaryButton}`}
-              >
-                {secondaryCta.label}
-              </Link>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-3">
-              {SITE_CONFIG.heroMetrics.slice(0, 3).map(metric => (
-                <div
-                  key={metric.label}
-                  className={`rounded-[1.6rem] p-4 transition duration-300 motion-safe:hover:-translate-y-1 ${theme.metricShell}`}
-                >
-                  <p className="text-[11px] font-medium uppercase tracking-[0.22em] opacity-60">
-                    {metric.label}
-                  </p>
-                  <p
-                    className={`mt-3 text-2xl font-semibold tracking-[-0.05em] ${theme.metricValue}`}
-                  >
-                    {metric.value}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <p className="max-w-sm text-sm leading-6 text-[#675a62]">{user ? "Your member shelf is open." : "Browse the shape of the collection before entering the vault."}</p>
           </div>
 
-          <aside
-            id="workspace-preview"
-            className={`overflow-hidden rounded-[2rem] p-5 sm:p-6 ${theme.showcaseShell}`}
-          >
-            <div className="flex items-center justify-between gap-3">
-              <div
-                className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${theme.eyebrow}`}
-              >
-                {SITE_CONFIG.templateSurface.badge}
-              </div>
-              <div className={`text-[11px] font-medium uppercase tracking-[0.22em] ${theme.body}`}>
-                {user ? 'Signed in' : 'Public'}
-              </div>
+          <div className="grid content-between gap-10 py-8 lg:pl-10">
+            <div className="grid grid-cols-[auto_1fr_auto] items-center border-b border-[#281f25] pb-4 text-xs uppercase"><span>Index</span><span className="text-center">PromptVault</span><span>{sections.length || 3} collections</span></div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="flex min-h-[22rem] flex-col justify-between bg-[#b51f55] p-6 text-white"><p className="text-xs uppercase">Member volume</p><div><p className="font-serif text-7xl">A</p><p className="mt-3 max-w-xs font-serif text-2xl">A working library for prompts worth returning to.</p></div><p className="text-xs">SEARCH / SAVE / APPLY</p></div>
+              <div className="border border-[#281f25] bg-[#e2c9d3] p-6"><p className="text-xs uppercase">Collection notes</p><div className="mt-10 space-y-5">{(entries.length ? entries : [{ title: "Curated prompt systems", meta: "Member access", detail: "Organized for repeated use.", section: "Archive" }]).slice(0, 4).map((item, index) => <div key={`${item.title}-${index}`} className="border-t border-[#281f25] pt-3"><div className="flex justify-between gap-4 text-xs"><span>{item.section}</span><span>0{index + 1}</span></div><p className="mt-2 font-serif text-lg">{item.title}</p></div>)}</div></div>
             </div>
-
-            <div className="mt-6 space-y-2">
-              <p
-                className={`text-[11px] font-medium uppercase tracking-[0.24em] ${theme.subEyebrow}`}
-              >
-                Workspace
-              </p>
-              <h2 className="text-2xl font-semibold tracking-[-0.05em] sm:text-[2rem]">
-                {SITE_CONFIG.templateSurface.headline}
-              </h2>
-            </div>
-
-            <div className="mt-6 space-y-3">
-              {previewRows.map(row => (
-                <div
-                  key={row.label}
-                  className={`grid gap-2 rounded-[1.5rem] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center ${theme.metricShell}`}
-                >
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-60">
-                      {row.label}
-                    </p>
-                    <p className="mt-2 truncate text-sm font-medium opacity-80">{row.meta}</p>
-                  </div>
-                  <p
-                    className={`text-sm font-semibold tracking-[-0.02em] sm:text-right ${theme.metricValue}`}
-                  >
-                    {row.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em]">
-              <span className={theme.subEyebrow}>{SITE_CONFIG.navigation.pricingLabel}</span>
-              <span className="opacity-30">/</span>
-              <span className={theme.body}>{secondaryCta.label}</span>
-              {generatedAt ? (
-                <>
-                  <span className="opacity-30">/</span>
-                  <span className={theme.body}>{generatedAt}</span>
-                </>
-              ) : null}
-            </div>
-          </aside>
+            <div className="grid gap-4 border-t border-[#281f25] pt-5 sm:grid-cols-3">{sections.slice(0, 3).map(section => <div key={section.key}><p className="font-serif text-3xl text-[#b51f55]">{section.total}</p><p className="mt-1 text-xs uppercase">{section.title}</p></div>)}</div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

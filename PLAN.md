@@ -11,6 +11,79 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 
 ## Current Execution
 
+- Goal: make every template complete login into a real authenticated product surface, then beautify those 12 functional workspaces.
+  - [x] Add and secure one domain-appropriate functional route per template
+    - Owner: main agent
+    - Verification: routes exist at `/console`, `/library`, `/dashboard`, `/portal`, `/downloads`, `/launch`, `/community`, `/issues`, `/cohort`, `/courses`, `/appointments`, and `/membership`; each redirects unauthenticated requests to `/login` and loads the template snapshot for authenticated users.
+    - Status: done
+    - Evidence: added `console.tsx`, `library.tsx`, `dashboard.tsx`, `portal.tsx`, `downloads.tsx`, `launch.tsx`, `community.tsx`, `issues.tsx`, `cohort.tsx`, `courses.tsx`, `appointments.tsx`, and `membership.tsx`; all 12 loaders redirect unauthenticated requests to `/login` and call `getTemplateSnapshot()` for authenticated data.
+  - [x] Point each login success flow at its real product route
+    - Owner: main agent
+    - Verification: each independent `login.tsx` navigates to its matching functional route after verification and when an existing token is already authenticated.
+    - Status: done
+    - Evidence: updated all three login-entry states in every template: server loader redirect for an existing cookie, client token revalidation redirect, and post-verification navigation. Destinations now match the 12 functional routes instead of `/`.
+  - [x] Design all 12 authenticated surfaces to match their homepage and login
+    - Owner: main agent
+    - Verification: each route has a distinct responsive information architecture, module navigation, snapshot-backed records, account context, and working logout action; no generic shared dashboard shell or synchronization script is introduced.
+    - Status: done
+    - Evidence: each surface has independent palette, type hierarchy, responsive layout, domain navigation, module switching, account identity, pricing link, snapshot-backed records, and logout control. Removed non-functional decorative buttons after review so visible controls have real behavior.
+  - [x] Verify route contracts, TypeScript, and representative browser flow
+    - Owner: main agent
+    - Verification: `pnpm run typecheck` and `pnpm run typecheck:watch` pass in all 12 templates; route map and source checks pass; representative local login-to-workspace navigation is exercised in browser if the existing dev runtime can start.
+    - Status: done
+    - Evidence: `pnpm run typecheck` passed in all 12 templates and all 12 `typecheck:watch` processes reached `Found 0 errors`. Static checks confirmed 12 protected loaders, 12 snapshot consumers, and 12 unique route hashes. A real SignalDesk runtime flow verified unauthenticated `/console` -> 302 `/login`, email-code verification success, authenticated `/login` -> 302 `/console`, authenticated `/console` -> 200, and logout restoring the `/console` -> `/login` guard.
+    - Risk / Notes: the session did not expose the Browser plugin's required `node_repl`, so verification used the live local HTTP runtime rather than in-app browser clicks; no screenshot claim is made.
+
+- Goal: redesign all 12 independent login routes as concise single-column extensions of their matching homepage art directions.
+  - [x] Replace the shared two-column login UI in all 12 templates
+    - Owner: main agent
+    - Verification: every `industries/*/*/app/routes/login.tsx` uses one centered authentication flow, preserves email-code behavior, and visually matches its template homepage palette, type treatment, and border language.
+    - Status: done
+    - Evidence: rewrote all 12 login routes independently as compact single-column flows. Removed the former shared hero grid, marketing metrics, dual panels, glow effects, and theme-driven generic shell; each route now carries the same visual vocabulary as its homepage, including SignalDesk terminal, PromptVault archive slip, OpsCanvas report access, ClientRoom invitation, DownloadPort retrieval ticket, FirstDrop reservation pass, InnerCircle member door, BriefClub subscriber desk, CohortOS student credential, LessonLoop study note, ClinicFlow patient access, and FlexPass checkpoint.
+  - [x] Verify login-route behavior contracts and TypeScript
+    - Owner: main agent
+    - Verification: targeted source review confirms send-code, verify-login, token persistence, cookie sync, authenticated redirect, resend, and email reset remain; `pnpm run typecheck` and `pnpm run typecheck:watch` pass in all 12 templates.
+    - Status: done
+    - Evidence: all 12 routes contain `/api/auth/send-code`, `/api/auth/verify-login`, `auth-token`, and `/api/auth/sync-cookie`; source search found no remaining `heroGrid`, login metric arrays, or responsive multi-column login classes. SHA-1 uniqueness check returned 12 distinct route files. `pnpm run typecheck` passed in every template after Prettier formatting, and all 12 watch processes reached `Found 0 errors` before termination.
+  - Constraint: keep these routes independent; do not recreate a generator or cross-template UI synchronization layer.
+
+- Goal: make the 12 industry templates independent products with distinct homepage art directions and remove code-generation synchronization.
+  - [x] Remove the cross-template synchronization entry point
+    - Owner: main agent
+    - Verification: `scripts/generate-industry-templates.mjs` no longer exists and repository docs do not instruct contributors to run it for UI changes.
+    - Status: done
+    - Evidence: deleted `scripts/generate-industry-templates.mjs` plus its central data-model, fulfillment-model, preset, and template-config inputs; targeted `rg` found no remaining contributor instruction outside historical plan records.
+  - [x] Rebuild all 12 homepages as independent designs
+    - Owner: main agent
+    - Verification: each `industries/*/*/app/components/HomeExperience.tsx` has a distinct layout, palette, typography treatment, content rhythm, and product preview appropriate to its domain.
+    - Status: done
+    - Design map: SignalDesk AI / Territory Studio command surface; PromptVault / Irma Boom editorial archive; OpsCanvas / Fathom analytical report; ClientRoom / Build luxury service brief; DownloadPort / Experimental Jetset Swiss catalog; FirstDrop / Sagmeister & Walsh launch poster; InnerCircle / Resn cultural magazine; BriefClub / Pentagram newspaper; CohortOS / Muller-Brockmann academy grid; LessonLoop / Kenya Hara quiet syllabus; ClinicFlow / Takram care service; FlexPass / Ash Thorp industrial sports editorial.
+    - Evidence: rewrote all 12 `HomeExperience.tsx` files independently; SHA-1 uniqueness check returned 12 distinct hashes. Each design consumes its own product copy and live snapshot sections instead of a shared hard-coded marketing shell; ClinicFlow and FlexPass additionally use verified domain photography with HTTP 200 asset responses.
+  - [x] Verify every independent TypeScript template
+    - Owner: main agent
+    - Verification: `pnpm run typecheck` and `pnpm run typecheck:watch` startup pass in all 12 industry templates; targeted search confirms no homepage files are identical.
+    - Status: done
+    - Evidence: `pnpm run typecheck` passed in all 12 industry templates; all 12 watch processes reached `Found 0 errors` before being terminated. ClinicFlow was rechecked in both normal and watch mode after replacing one unavailable image URL.
+  - Constraint: user explicitly requested no screenshot verification for this design pass.
+
+- Goal: rebuild every generated industry-template homepage into a concise, visual product introduction instead of the shared feature-heavy landing-page composition.
+  - [x] Replace the shared foundation homepage composition with an industry-aware visual story
+    - Owner: main agent
+    - Verification: review the foundation source and generated home components; homepage contains a product-focused hero, relevant raster imagery, and only concise explanatory content.
+    - Status: done
+    - Evidence: replaced `foundations/remix-neon-auth-pay/app/components/HomeExperience.tsx` with a short three-part product narrative: industry-family Unsplash hero, three product benefits, and a snapshot-backed inside-the-product view. Removed the old workspace, workflow, FAQ, feature-grid, and closing-CTA composition; the foundation route also no longer mounts the homepage AI panel.
+  - [x] Regenerate all 12 industry templates from the revised foundation
+    - Owner: main agent
+    - Verification: `node scripts/generate-industry-templates.mjs` completes and each generated homepage contains the new shared composition.
+    - Status: done
+    - Evidence: `node scripts/generate-industry-templates.mjs` reported 12 generated templates; `rg -l "What it gives you" industries -g 'HomeExperience.tsx'` returned 12, and no generated index route still imports `SiteHome` or `AiAssistantPanel`.
+  - [x] Type-check the homepage rollout
+    - Owner: main agent
+    - Verification: `pnpm run typecheck` passes in the foundation and every industry template.
+    - Status: done
+    - Evidence: `pnpm run typecheck` passed in `foundations/remix-neon-auth-pay` and all 12 directories under `industries/*/*`. Generated output excludes local dependencies, so checks used a local offline dependency restore in `assistant-saas` and temporary ignored symlinks for the matching dependency tree.
+    - Risk / Notes: browser-level visual verification remains blocked by the pre-existing foundation dev-server error `Remix Vite plugin not found in Vite config`; this should be repaired separately before a screenshot review.
+
 - Goal: upgrade all 12 generated industry templates from auth-only starter schemas to industry-specific schemas, then re-run real-env local startup and API verification for each template.
 - Background: every `industries/*/*/drizzle/0000_init.sql` still matches the auth-only foundation schema, so the generated apps are runnable but not actually integrated with industry data models.
 - Extension: close the real payment loop so successful checkout is not just a redirect, but a signed webhook + entitlement + fulfillment write into each template's industry table.

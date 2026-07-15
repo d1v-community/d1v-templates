@@ -46,8 +46,7 @@ export type SiteConfig = {
     pricingLabel: string;
     loginLabel: string;
     assistantLabel?: string;
-  industryLinks?: Array<{ label: string; href: string }>;
-};
+  };
   footer: {
     line: string;
   };
@@ -60,16 +59,6 @@ export type SiteConfig = {
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
     proofPoints: string[];
-    industry: {
-      sceneKind: "console" | "catalog" | "kanban" | "metrics" | "storefront" | "countdown" | "club" | "issue" | "cohort" | "library" | "schedule" | "fitness";
-      tagline: string;
-      quickStats: Array<{ label: string; value: string }>;
-      heroTone?: "command" | "editorial" | "operations" | "academy" | "service";
-      homeHref: string;
-      workspaceName: string;
-      greeting: string;
-      firstRunHint: Array<{ id: string; label: string; detail: string }>;
-    };
   };
   pricing: {
     badge: string;
@@ -187,8 +176,7 @@ export const SITE_CONFIG: SiteConfig = {
   "navigation": {
     "pricingLabel": "Pricing",
     "loginLabel": "Login",
-    "assistantLabel": "Advisor",
-    "industryLinks": [{"label":"Syllabus","href":"/weeks"},{"label":"Weeks","href":"/weeks"}]
+    "assistantLabel": "Advisor"
   },
   "footer": {
     "line": "Built with D1V"
@@ -201,7 +189,6 @@ export const SITE_CONFIG: SiteConfig = {
     "primaryCtaHref": "/pricing",
     "secondaryCtaLabel": "Login",
     "secondaryCtaHref": "/login",
-    "industry": { "sceneKind": "cohort", "tagline": "", "quickStats": [], "homeHref": "/weeks", "workspaceName": "Cohort syllabus", "greeting": "", "firstRunHint": [] },
     "proofPoints": [
       "Email login for enrolled students",
       "Hosted checkout for tuition or deposits",

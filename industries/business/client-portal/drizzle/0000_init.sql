@@ -111,16 +111,3 @@ create table if not exists portal_uploads (
   created_at timestamp not null default now(),
   updated_at timestamp not null default now()
 );
-
--- UGC tables
-create table if not exists ugc_request_messages (
-  id text primary key,
-  request_id text not null,
-  app_user_id text references users(id),
-  author_name text not null,
-  author_initials text not null,
-  body text not null,
-  is_internal text not null default 'false',
-  created_at timestamp not null default now()
-);
-create index if not exists ugc_request_messages_request_idx on ugc_request_messages(request_id);;

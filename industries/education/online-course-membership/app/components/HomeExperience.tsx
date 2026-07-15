@@ -1,187 +1,33 @@
-import { Link } from '@remix-run/react';
+import { Link } from "@remix-run/react";
+import { SITE_CONFIG } from "~/constants/site";
+import type { AppHeaderUser } from "~/components/AppHeader";
+import type { TemplateSnapshot } from "~/services/template-data.server";
 
-import { APP_TITLE } from '~/constants/app';
-import { SITE_CONFIG } from '~/constants/site';
-import { getSiteThemeClasses } from '~/constants/site-theme';
-import { SceneBackground } from '~/components/sections/SceneBackground';
-import type { AppHeaderUser } from '~/components/AppHeader';
-import type { TemplateSnapshot } from '~/services/template-data.server';
-
-type PreviewRow = {
-  label: string;
-  value: string;
-  meta: string;
-};
-
-function formatGeneratedAt(generatedAt?: string | null) {
-  if (!generatedAt) return null;
-  const date = new Date(generatedAt);
-  if (Number.isNaN(date.getTime())) return null;
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
-  }).format(date);
-}
-
-function buildPreviewRows(snapshot?: TemplateSnapshot | null): PreviewRow[] {
-  if (snapshot?.sections.length) {
-    return snapshot.sections.slice(0, 3).map(section => ({
-      label: section.title,
-      value: `${section.total} ${section.totalLabel}`,
-      meta: section.items[0]?.title || section.items[0]?.meta || section.key,
-    }));
-  }
-  return SITE_CONFIG.heroMetrics.slice(0, 3).map(metric => ({
-    label: metric.label,
-    value: metric.value,
-    meta: APP_TITLE,
-  }));
-}
-
-export function HomeExperience({
-  snapshot,
-  user,
-}: {
-  snapshot?: TemplateSnapshot | null;
-  user?: AppHeaderUser;
-}) {
-  const theme = getSiteThemeClasses(SITE_CONFIG.theme.family);
-  const previewRows = buildPreviewRows(snapshot);
-  const generatedAt = formatGeneratedAt(snapshot?.generatedAt);
-  const industry = SITE_CONFIG.home.industry;
-  const secondaryCta = user
-    ? { href: SITE_CONFIG.home.secondaryCtaHref, label: SITE_CONFIG.home.secondaryCtaLabel }
-    : { href: SITE_CONFIG.home.secondaryCtaHref, label: SITE_CONFIG.home.secondaryCtaLabel };
+export function HomeExperience({ snapshot, user }: { snapshot?: TemplateSnapshot | null; user?: AppHeaderUser }) {
+  const sections = snapshot?.sections ?? [];
+  const lessons = sections.flatMap(section => section.items.map(item => ({ ...item, section: section.title }))).slice(0, 3);
 
   return (
-    <section className={`relative overflow-hidden ${theme.heroShell}`}>
-      <SceneBackground kind={industry.sceneKind} />
-
-      <div className="relative mx-auto flex min-h-[calc(100svh-8.5rem)] max-w-7xl items-center px-4 py-10 sm:px-6 lg:px-8">
-        <div className="grid w-full gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] lg:items-end">
-          <div className="max-w-3xl space-y-6">
-            <div className="space-y-4">
-              <div
-                className={`inline-flex rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] ${theme.eyebrow}`}
-              >
-                {SITE_CONFIG.home.badge}
-              </div>
-
-              <div className="space-y-3">
-                <p
-                  className={`text-[11px] font-semibold uppercase tracking-[0.28em] ${theme.subEyebrow}`}
-                >
-                  {APP_TITLE} · {industry.tagline}
-                </p>
-                <h1 className="max-w-4xl text-4xl font-semibold tracking-[-0.06em] sm:text-5xl lg:text-[4.5rem] lg:leading-[0.92]">
-                  {SITE_CONFIG.home.headline}
-                </h1>
-                <p className={`max-w-2xl text-sm leading-relaxed sm:text-base ${theme.body}`}>
-                  {SITE_CONFIG.home.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Link
-                to={SITE_CONFIG.home.primaryCtaHref}
-                className={`inline-flex min-w-[10rem] items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition motion-safe:hover:-translate-y-0.5 ${theme.primaryButton}`}
-              >
-                {SITE_CONFIG.home.primaryCtaLabel}
-              </Link>
-              <Link
-                to={secondaryCta.href}
-                className={`inline-flex min-w-[10rem] items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition motion-safe:hover:-translate-y-0.5 ${theme.secondaryButton}`}
-              >
-                {secondaryCta.label}
-              </Link>
-            </div>
-
-            <div className="grid gap-3 sm:grid-cols-3">
-              {industry.quickStats.map(stat => (
-                <div
-                  key={stat.label}
-                  className={`rounded-[1.6rem] p-4 transition duration-300 motion-safe:hover:-translate-y-1 ${theme.metricShell}`}
-                >
-                  <p className="text-[11px] font-medium uppercase tracking-[0.22em] opacity-60">
-                    {stat.label}
-                  </p>
-                  <p
-                    className={`mt-3 text-2xl font-semibold tracking-[-0.05em] ${theme.metricValue}`}
-                  >
-                    {stat.value}
-                  </p>
-                </div>
-              ))}
-            </div>
+    <div data-template="lesson-loop" className="bg-[#fbfbf8] text-[#302f2b]">
+      <section className="mx-auto max-w-[1320px] px-5 py-14 sm:px-8 lg:px-12 lg:py-24">
+        <div className="grid min-h-[calc(100svh-10rem)] gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <p className="text-sm text-[#b44b34]">LessonLoop · A quiet place to keep learning</p>
+            <h1 className="mt-8 max-w-2xl font-serif text-5xl leading-[1.12] sm:text-6xl">{SITE_CONFIG.home.headline}</h1>
+            <p className="mt-7 max-w-lg text-base leading-8 text-[#77746d]">{SITE_CONFIG.home.description}</p>
+            <div className="mt-10 flex flex-wrap gap-3"><Link to={SITE_CONFIG.home.primaryCtaHref} className="rounded-md bg-[#302f2b] px-5 py-3 text-sm font-semibold text-white">{SITE_CONFIG.home.primaryCtaLabel}</Link><Link to={SITE_CONFIG.home.secondaryCtaHref} className="rounded-md border border-[#bcbab3] px-5 py-3 text-sm font-semibold">{SITE_CONFIG.home.secondaryCtaLabel}</Link></div>
+            <p className="mt-14 max-w-md border-l border-[#b44b34] pl-5 font-serif text-lg italic leading-8 text-[#625f59]">Progress should feel like understanding more, not managing another dashboard.</p>
           </div>
-
-          <aside
-            id="workspace-preview"
-            className={`overflow-hidden rounded-[2rem] p-5 sm:p-6 ${theme.showcaseShell}`}
-          >
-            <div className="flex items-center justify-between gap-3">
-              <div
-                className={`inline-flex rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] ${theme.eyebrow}`}
-              >
-                {SITE_CONFIG.templateSurface.badge}
-              </div>
-              <div className={`text-[11px] font-medium uppercase tracking-[0.22em] ${theme.body}`}>
-                {user ? 'Signed in' : 'Public'}
-              </div>
-            </div>
-
-            <div className="mt-6 space-y-2">
-              <p
-                className={`text-[11px] font-medium uppercase tracking-[0.24em] ${theme.subEyebrow}`}
-              >
-                Workspace
-              </p>
-              <h2 className="text-2xl font-semibold tracking-[-0.05em] sm:text-[2rem]">
-                {SITE_CONFIG.templateSurface.headline}
-              </h2>
-              <p className={`text-sm leading-relaxed ${theme.sectionText}`}>
-                {SITE_CONFIG.templateSurface.description}
-              </p>
-            </div>
-
-            <div className="mt-6 space-y-3">
-              {previewRows.map(row => (
-                <div
-                  key={row.label}
-                  className={`grid gap-2 rounded-[1.5rem] p-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center ${theme.metricShell}`}
-                >
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-60">
-                      {row.label}
-                    </p>
-                    <p className="mt-2 truncate text-sm font-medium opacity-80">{row.meta}</p>
-                  </div>
-                  <p
-                    className={`text-sm font-semibold tracking-[-0.02em] sm:text-right ${theme.metricValue}`}
-                  >
-                    {row.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em]">
-              <span className={theme.subEyebrow}>{SITE_CONFIG.navigation.pricingLabel}</span>
-              <span className="opacity-30">/</span>
-              <span className={theme.body}>{secondaryCta.label}</span>
-              {generatedAt ? (
-                <>
-                  <span className="opacity-30">/</span>
-                  <span className={theme.body}>{generatedAt}</span>
-                </>
-              ) : null}
-            </div>
-          </aside>
+          <div id="workspace" className="relative min-h-[34rem] border border-[#deddd8] bg-white p-7 sm:p-10">
+            <div className="absolute right-7 top-7 h-16 w-16 rounded-full border border-[#b44b34] sm:right-10 sm:top-10" />
+            <p className="text-xs text-[#9a978f]">STUDY NOTE / {user ? "MEMBER" : "PREVIEW"}</p>
+            <h2 className="mt-16 max-w-lg font-serif text-3xl">{snapshot?.title ?? "A course library with memory"}</h2>
+            <p className="mt-4 max-w-xl text-sm leading-7 text-[#77746d]">{snapshot?.description ?? SITE_CONFIG.templateSurface.description}</p>
+            <div className="mt-10 divide-y divide-[#deddd8] border-y border-[#deddd8]">{(lessons.length ? lessons : [{ title: "Begin with one considered lesson", meta: "Open", detail: "Structure the path before filling the library.", section: "Course" }]).map((item, index) => <article key={`${item.title}-${index}`} className="grid gap-3 py-5 sm:grid-cols-[auto_1fr_auto] sm:items-start"><span className="font-serif text-2xl text-[#b44b34]">{index + 1}</span><div><p className="font-serif text-xl">{item.title}</p><p className="mt-2 text-sm leading-6 text-[#77746d]">{item.detail}</p></div><span className="text-xs text-[#9a978f]">{item.section}</span></article>)}</div>
+            <div className="mt-8 grid grid-cols-3 gap-5">{sections.slice(0, 3).map(section => <div key={section.key}><p className="font-serif text-2xl text-[#b44b34]">{section.total}</p><p className="mt-1 text-xs text-[#9a978f]">{section.title}</p></div>)}</div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

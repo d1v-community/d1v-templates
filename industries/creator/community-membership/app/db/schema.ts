@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, index, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, index } from "drizzle-orm/pg-core";
 
 // Users table
 export const users = pgTable("users", {
@@ -118,62 +118,6 @@ export const communityEvents = pgTable("community_events", {
   createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
 });
-
-// UGC posts
-export const ugcPosts = pgTable(
-  "ugc_posts",
-  {
-    id: text("id").primaryKey(),
-    appUserId: text("app_user_id").notNull().references(() => users.id),
-    authorName: text("author_name").notNull(),
-    authorInitials: text("author_initials").notNull(),
-    body: text("body").notNull(),
-    contextKind: text("context_kind"),
-    contextSlug: text("context_slug"),
-    reactions: text("reactions").notNull().default("{}"),
-    commentCount: integer("comment_count").notNull().default(0),
-    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: false }).defaultNow().notNull(),
-  },
-  (table) => ({
-    contextIdx: index("ugc_posts_context_idx").on(table.contextKind, table.contextSlug),
-    userIdx: index("ugc_posts_user_idx").on(table.appUserId),
-  })
-);
-
-// UGC comments
-export const ugcComments = pgTable(
-  "ugc_comments",
-  {
-    id: text("id").primaryKey(),
-    postId: text("post_id").notNull().references(() => ugcPosts.id, { onDelete: "cascade" }),
-    appUserId: text("app_user_id").notNull().references(() => users.id),
-    authorName: text("author_name").notNull(),
-    authorInitials: text("author_initials").notNull(),
-    body: text("body").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-  },
-  (table) => ({
-    postIdx: index("ugc_comments_post_idx").on(table.postId),
-  })
-);
-
-// UGC reactions
-export const ugcReactions = pgTable(
-  "ugc_reactions",
-  {
-    id: text("id").primaryKey(),
-    postId: text("post_id").notNull().references(() => ugcPosts.id, { onDelete: "cascade" }),
-    appUserId: text("app_user_id").notNull().references(() => users.id),
-    emoji: text("emoji").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: false }).defaultNow().notNull(),
-  },
-  (table) => ({
-    postIdx: index("ugc_reactions_post_idx").on(table.postId),
-    userEmojiIdx: index("ugc_reactions_user_emoji_idx").on(table.appUserId, table.emoji),
-  })
-);
-
 export type User = typeof users.$inferSelect;
 export type VerificationCode = typeof verificationCodes.$inferSelect;
 export type PaymentCheckoutRequest = typeof paymentCheckoutRequests.$inferSelect;
@@ -183,6 +127,3 @@ export type PaymentFulfillment = typeof paymentFulfillments.$inferSelect;
 export type MembershipTiersRecord = typeof membershipTiers.$inferSelect;
 export type MemberProfilesRecord = typeof memberProfiles.$inferSelect;
 export type CommunityEventsRecord = typeof communityEvents.$inferSelect;
-export type UgcPost = typeof ugcPosts.$inferSelect;
-export type UgcComment = typeof ugcComments.$inferSelect;
-export type UgcReaction = typeof ugcReactions.$inferSelect;
