@@ -11,6 +11,18 @@ Convert `d1v-templates` into an open-source-ready template registry with:
 
 ## Current Execution
 
+- Goal: check and repair TypeScript errors in `foundations/taro-remix-flutter-auth-template`.
+  - [x] Run root and Taro TypeScript checks
+    - Owner: main agent
+    - Verification: `pnpm run typecheck` and `pnpm run typecheck:watch`
+    - Status: done
+    - Evidence: `pnpm run typecheck` passed for both `tsconfig.json` and `apps/app/tsconfig.json`; watch mode reported `Found 0 errors` before termination.
+  - [x] Fix reported type errors and re-run checks
+    - Owner: main agent
+    - Verification: both checks report zero errors
+    - Status: done
+    - Evidence: no type errors were reported, so no source changes were required.
+
 - Goal: make every template complete login into a real authenticated product surface, then beautify those 12 functional workspaces.
   - [x] Add and secure one domain-appropriate functional route per template
     - Owner: main agent
