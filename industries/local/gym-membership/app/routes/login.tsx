@@ -60,6 +60,16 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
+      try {
+        if (
+          typeof document.hasStorageAccess === 'function' &&
+          !(await document.hasStorageAccess()) &&
+          typeof document.requestStorageAccess === 'function'
+        )
+          await document.requestStorageAccess();
+      } catch {
+        /* optional */
+      }
       const r = await fetch('/api/auth/verify-login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -79,7 +89,7 @@ export default function Login() {
         /* optional */
       }
       try {
-        await fetch('/api/auth/sync-cookie', { method: 'POST' });
+        await fetch('/api/auth/sync-cookie', { method: 'POST', credentials: 'include' });
       } catch {
         /* best effort */
       }
