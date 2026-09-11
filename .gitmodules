@@ -1,0 +1,15 @@
+[submodule "foundations/empty-only-env-template"]
+	path = foundations/empty-only-env-template
+	url = https://github.com/d1v-community/empty-only-env-template.git
+[submodule "foundations/html-template"]
+	path = foundations/html-template
+	url = https://github.com/d1v-community/html-template.git
+[submodule "foundations/remix-neon-auth"]
+	path = foundations/remix-neon-auth
+	url = https://github.com/d1v-community/remix-neon-auth-template.git
+[submodule "foundations/remix-neon-auth-pay"]
+	path = foundations/remix-neon-auth-pay
+	url = https://github.com/d1v-community/remix-neon-auth-pay.git
+[submodule "foundations/sui-nextjs-auth-template"]
+	path = foundations/sui-nextjs-auth-template
+	url = https://github.com/d1v-community/sui-nextjs-auth-template.git
